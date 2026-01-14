@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proconnect/app/view/app.dart';
-import 'package:proconnect/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/app/view/app_providers.dart';
 import 'package:proconnect/bootstrap.dart';
 import 'package:proconnect/core/config/environment.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
@@ -16,11 +15,6 @@ Future<void> main() async {
   await DependencyInjector.instance.initialize(Environment.dev);
 
   await bootstrap(
-    () => BlocProvider(
-      create: (context) =>
-          DependencyInjector.instance.resolve<AuthBloc>()
-            ..add(const AuthEvent.checkAuthentication()),
-      child: const App(),
-    ),
+    () => const AppProviders(child: App()),
   );
 }

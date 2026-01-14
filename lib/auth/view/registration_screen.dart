@@ -4,12 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
 import 'package:proconnect/core/widgets/auth_header.dart';
 import 'package:proconnect/core/widgets/auth_redirect.dart';
 import 'package:proconnect/core/widgets/custom_auth_button.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
-import 'package:proconnect/l10n/gen/app_localizations.dart';
+import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/models/app_user.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = context.l10n;
 
     return AuthBackground(
       child: BlocConsumer<AuthBloc, AuthState>(
@@ -73,14 +74,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   title: l10n.createAccount,
                   subtitle: l10n.getStarted,
                 ),
-                const SizedBox(height: 48),
+                AppSpacing.gapH48,
                 CustomTextField(
                   controller: _fullNameController,
                   labelText: l10n.fullName,
                   validator: (value) =>
                       value!.isEmpty ? l10n.fullNameIsRequired : null,
                 ),
-                const SizedBox(height: 16),
+                AppSpacing.gapH16,
                 CustomTextField(
                   controller: _emailController,
                   labelText: l10n.email,
@@ -88,7 +89,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   validator: (value) =>
                       value!.isEmpty ? l10n.emailIsRequired : null,
                 ),
-                const SizedBox(height: 16),
+                AppSpacing.gapH16,
                 CustomTextField(
                   controller: _passwordController,
                   labelText: l10n.password,
@@ -96,7 +97,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   validator: (value) =>
                       value!.length < 6 ? l10n.passwordMinLength : null,
                 ),
-                const SizedBox(height: 16),
+                AppSpacing.gapH16,
                 DropdownButtonFormField<UserRole>(
                   initialValue: _selectedRole,
                   onChanged: (role) => setState(() => _selectedRole = role!),
@@ -134,7 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   style: GoogleFonts.poppins(color: Colors.black87),
                   dropdownColor: Colors.white,
                 ),
-                const SizedBox(height: 32),
+                AppSpacing.gapH32,
                 CustomAuthButton(
                   text: l10n.signUp,
                   isLoading: isLoading,
@@ -153,7 +154,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     }
                   },
                 ),
-                const SizedBox(height: 24),
+                AppSpacing.gapH24,
                 AuthRedirect(
                   text: l10n.alreadyHaveAnAccount,
                   buttonText: l10n.login,

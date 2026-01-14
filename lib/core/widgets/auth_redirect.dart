@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AuthRedirect extends StatelessWidget {
 
@@ -12,22 +11,19 @@ class AuthRedirect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          text,
-          style: GoogleFonts.poppins(color: Colors.white70),
-        ),
+        Text(text, style: theme.textTheme.bodyMedium),
         TextButton(
           onPressed: onPressed,
-          style: TextButton.styleFrom(foregroundColor: Colors.white),
           child: Text(
             buttonText,
-            style: GoogleFonts.poppins(
+            style: theme.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
-              color: Colors.white,
             ),
           ),
         ),

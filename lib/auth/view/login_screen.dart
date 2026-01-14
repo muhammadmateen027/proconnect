@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
 import 'package:proconnect/core/widgets/auth_header.dart';
 import 'package:proconnect/core/widgets/auth_redirect.dart';
 import 'package:proconnect/core/widgets/custom_auth_button.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
-import 'package:proconnect/l10n/gen/app_localizations.dart';
+import 'package:proconnect/l10n/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = context.l10n;
 
     return AuthBackground(
       child: BlocConsumer<AuthBloc, AuthState>(
@@ -76,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   title: l10n.welcomeBack,
                   subtitle: l10n.signInToContinue,
                 ),
-                const SizedBox(height: 48),
+                AppSpacing.gapH48,
                 CustomTextField(
                   controller: _emailController,
                   labelText: l10n.email,
@@ -84,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (value) =>
                       value!.isEmpty ? l10n.emailIsRequired : null,
                 ),
-                const SizedBox(height: 16),
+                AppSpacing.gapH16,
                 CustomTextField(
                   controller: _passwordController,
                   labelText: l10n.password,
@@ -92,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (value) =>
                       value!.isEmpty ? l10n.passwordIsRequired : null,
                 ),
-                const SizedBox(height: 32),
+                AppSpacing.gapH32,
                 CustomAuthButton(
                   text: l10n.login,
                   isLoading: isLoading,
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
-                const SizedBox(height: 24),
+                AppSpacing.gapH24,
                 AuthRedirect(
                   text: l10n.dontHaveAnAccount,
                   buttonText: l10n.signUp,

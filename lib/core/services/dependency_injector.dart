@@ -9,6 +9,8 @@ import 'package:proconnect/auth/domain/usecase/sign_in_use_case.dart';
 import 'package:proconnect/auth/domain/usecase/sign_out_use_case.dart';
 import 'package:proconnect/auth/domain/usecase/sign_up_use_case.dart';
 import 'package:proconnect/core/config/environment.dart';
+import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
+import 'package:proconnect/core/theme/repository/theme_repository.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -46,7 +48,8 @@ class DependencyInjector {
       )
       ..registerSingleton<AuthRepository>(
         (c) => AuthRepositoryImpl(c.resolve()),
-      );
+      )
+      ..registerSingleton<ThemeRepository>((c) => ThemeRepository());
   }
 
   void _setupUseCases() {
@@ -73,6 +76,9 @@ class DependencyInjector {
         getAuthStatusStreamUseCase: c.resolve(),
         signUpUseCase: c.resolve(),
       ),
+    );
+    _container.registerFactory<ThemeBloc>(
+      (c) => ThemeBloc(c.resolve()),
     );
   }
 }
