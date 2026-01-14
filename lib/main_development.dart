@@ -1,6 +1,26 @@
-import 'package:proconnect/app/app.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proconnect/app/view/app.dart';
+import 'package:proconnect/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/bootstrap.dart';
+import 'package:proconnect/core/config/environment.dart';
+import 'package:proconnect/core/services/dependency_injector.dart';
+import 'package:proconnect/firebase_options.dart';
 
 Future<void> main() async {
-  await bootstrap(() => const App());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await DependencyInjector.instance.initialize(Environment.dev);
+
+  await bootstrap(
+    () => BlocProvider(
+      create: (context) =>
+          DependencyInjector.instance.resolve<AuthBloc>()
+            ..add(const AuthEvent.checkAuthentication()),
+      child: const App(),
+    ),
+  );
 }

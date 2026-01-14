@@ -1,7 +1,99 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign Up button text"
+  },
+  "welcomeBack": "Welcome Back",
+  "@welcomeBack": {
+    "description": "Header title on the login screen"
+  },
+  "signInToContinue": "Sign in to continue to your ProConnect dashboard.",
+  "@signInToContinue": {
+    "description": "Header subtitle on the login screen"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Label for email text field"
+  },
+  "emailIsRequired": "Email is required",
+  "@emailIsRequired": {
+    "description": "Validation error for empty email field"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Label for password text field"
+  },
+  "passwordIsRequired": "Password is required",
+  "@passwordIsRequired": {
+    "description": "Validation error for empty password field"
+  },
+  "dontHaveAnAccount": "Don't have an account?",
+  "@dontHaveAnAccount": {
+    "description": "Text prompting user to sign up"
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Header title on the registration screen"
+  },
+  "getStarted": "Get started with your new ProConnect account.",
+  "@getStarted": {
+    "description": "Header subtitle on the registration screen"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Label for full name text field"
+  },
+  "fullNameIsRequired": "Full name is required",
+  "@fullNameIsRequired": {
+    "description": "Validation error for empty full name field"
+  },
+  "passwordMinLength": "Password must be at least 6 characters",
+  "@passwordMinLength": {
+    "description": "Validation error for short password"
+  },
+  "iAmA": "I am a...",
+  "@iAmA": {
+    "description": "Label for user role dropdown"
+  },
+  "alreadyHaveAnAccount": "Already have an account?",
+  "@alreadyHaveAnAccount": {
+    "description": "Text prompting user to login"
+  },
+  "guardDashboard": "Guard Dashboard",
+  "@guardDashboard": {
+    "description": "Title for the Guard Dashboard"
+  },
+  "ownerDashboard": "Owner Dashboard",
+  "@ownerDashboard": {
+    "description": "Title for the Owner Dashboard"
+  },
+  "tenantDashboard": "Tenant Dashboard",
+  "@tenantDashboard": {
+    "description": "Title for the Tenant Dashboard"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Title for the settings page"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "loginFailed": "Login Failed. Please check your credentials.",
+  "@loginFailed": {
+    "description": "Error message for failed login"
+  },
+  "signUpFailed": "Sign up failed. Please try again.",
+  "@signUpFailed": {
+    "description": "Error message for failed sign up"
+  },
+  "unknownError": "An unknown error occurred.",
+  "@unknownError": {
+    "description": "Generic error message"
+  }
 }
