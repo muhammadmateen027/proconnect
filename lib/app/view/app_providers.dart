@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proconnect/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
 class AppProviders extends StatelessWidget {
   const AppProviders({required this.child, super.key});

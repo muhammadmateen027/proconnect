@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proconnect/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/l10n/l10n.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -30,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
                       'Theme', // This should also be in your arb file
                       style: Theme.of(context).textTheme.titleLarge,

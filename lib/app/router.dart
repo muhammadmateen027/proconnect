@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/app/view/home_screen_wrapper.dart';
-import 'package:proconnect/auth/bloc/auth_bloc.dart';
-import 'package:proconnect/auth/view/login_screen.dart';
-import 'package:proconnect/auth/view/registration_screen.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
-import 'package:proconnect/settings/view/settings_screen.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/auth/view/login_screen.dart';
+import 'package:proconnect/pages/auth/view/registration_screen.dart';
+import 'package:proconnect/pages/settings/view/settings_screen.dart';
 
 // A helper class to make GoRouter listen to a BLoC stream
 class GoRouterRefreshStream extends ChangeNotifier {

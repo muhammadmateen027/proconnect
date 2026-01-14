@@ -1,11 +1,11 @@
-import 'package:proconnect/auth/data/datasource/auth_remote_data_source.dart';
-import 'package:proconnect/auth/domain/repository/auth_repository.dart';
-import 'package:proconnect/models/app_user.dart';
+import 'package:proconnect/data/auth/datasource/auth_remote_data_source.dart';
+import 'package:proconnect/domain/auth/repository/auth_repository.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteDataSource _authRemoteDataSource;
 
   AuthRepositoryImpl(this._authRemoteDataSource);
-  final AuthRemoteDataSource _authRemoteDataSource;
 
   @override
   Stream<AppUser?> get authStateChanges {

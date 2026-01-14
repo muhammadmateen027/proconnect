@@ -1,10 +1,10 @@
-import 'package:proconnect/auth/domain/repository/auth_repository.dart';
-import 'package:proconnect/models/app_user.dart';
+import 'package:proconnect/domain/auth/repository/auth_repository.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 
 class SignUpUseCase {
+  final AuthRepository _repository;
 
   SignUpUseCase(this._repository);
-  final AuthRepository _repository;
 
   Future<AppUser> call({
     required String email,

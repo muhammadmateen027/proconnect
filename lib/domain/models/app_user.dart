@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_user.freezed.dart';
-
 part 'app_user.g.dart';
 
 enum UserRole { guard, owner, tenant }

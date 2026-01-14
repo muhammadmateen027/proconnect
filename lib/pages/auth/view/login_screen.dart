@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proconnect/app/app_routes.dart';
-import 'package:proconnect/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
 import 'package:proconnect/core/widgets/auth_header.dart';
@@ -11,21 +9,26 @@ import 'package:proconnect/core/widgets/auth_redirect.dart';
 import 'package:proconnect/core/widgets/custom_auth_button.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/l10n/l10n.dart';
-import 'package:proconnect/models/app_user.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
-  final _formKey = GlobalKey<FormState>();
+class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _fullNameController = TextEditingController();
-  UserRole _selectedRole = UserRole.tenant;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   String _getErrorMessage(String? errorKey, AppLocalizations l10n) {
     switch (errorKey) {
@@ -71,17 +74,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AuthHeader(
-                  title: l10n.createAccount,
-                  subtitle: l10n.getStarted,
+                  title: l10n.welcomeBack,
+                  subtitle: l10n.signInToContinue,
                 ),
                 AppSpacing.gapH48,
-                CustomTextField(
-                  controller: _fullNameController,
-                  labelText: l10n.fullName,
-                  validator: (value) =>
-                      value!.isEmpty ? l10n.fullNameIsRequired : null,
-                ),
-                AppSpacing.gapH16,
                 CustomTextField(
                   controller: _emailController,
                   labelText: l10n.email,
@@ -95,60 +91,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   labelText: l10n.password,
                   obscureText: true,
                   validator: (value) =>
-                      value!.length < 6 ? l10n.passwordMinLength : null,
-                ),
-                AppSpacing.gapH16,
-                DropdownButtonFormField<UserRole>(
-                  initialValue: _selectedRole,
-                  onChanged: (role) => setState(() => _selectedRole = role!),
-                  items: UserRole.values
-                      .map(
-                        (role) => DropdownMenuItem(
-                          value: role,
-                          child: Text(role.name),
-                        ),
-                      )
-                      .toList(),
-                  decoration: InputDecoration(
-                    labelText: l10n.iAmA,
-                    labelStyle: GoogleFonts.poppins(
-                      color: Colors.grey.shade700,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Colors.blue.shade700,
-                        width: 2,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  style: GoogleFonts.poppins(color: Colors.black87),
-                  dropdownColor: Colors.white,
+                      value!.isEmpty ? l10n.passwordIsRequired : null,
                 ),
                 AppSpacing.gapH32,
                 CustomAuthButton(
-                  text: l10n.signUp,
+                  text: l10n.login,
                   isLoading: isLoading,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       context.read<AuthBloc>().add(
-                        AuthEvent.signUp(
+                        AuthEvent.login(
                           email: _emailController.text,
                           password: _passwordController.text,
-                          fullName: _fullNameController.text,
-                          role: _selectedRole,
-                          siteId: 'default-site',
-                          orgId: 'default-org',
                         ),
                       );
                     }
@@ -156,9 +110,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 AppSpacing.gapH24,
                 AuthRedirect(
-                  text: l10n.alreadyHaveAnAccount,
-                  buttonText: l10n.login,
-                  onPressed: () => context.go(AppRoutes.login),
+                  text: l10n.dontHaveAnAccount,
+                  buttonText: l10n.signUp,
+                  onPressed: () => context.go(AppRoutes.register),
                 ),
               ],
             ),

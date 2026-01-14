@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:proconnect/models/app_user.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 
 abstract class AuthRemoteDataSource {
   Stream<User?> get authStateChanges;
@@ -21,14 +21,14 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firestore;
 
   AuthRemoteDataSourceImpl({
     FirebaseAuth? firebaseAuth,
     FirebaseFirestore? firestore,
   }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
        _firestore = firestore ?? FirebaseFirestore.instance;
-  final FirebaseAuth _firebaseAuth;
-  final FirebaseFirestore _firestore;
 
   @override
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();

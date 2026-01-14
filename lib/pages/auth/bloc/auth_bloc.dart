@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:proconnect/auth/domain/usecase/get_auth_status_stream_use_case.dart';
-import 'package:proconnect/auth/domain/usecase/sign_in_use_case.dart';
-import 'package:proconnect/auth/domain/usecase/sign_out_use_case.dart';
-import 'package:proconnect/auth/domain/usecase/sign_up_use_case.dart';
-import 'package:proconnect/models/app_user.dart';
+import 'package:proconnect/domain/auth/usecase/get_auth_status_stream_use_case.dart';
+import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';
+import 'package:proconnect/domain/auth/usecase/sign_out_use_case.dart';
+import 'package:proconnect/domain/auth/usecase/sign_up_use_case.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';

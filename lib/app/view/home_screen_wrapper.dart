@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proconnect/auth/bloc/auth_bloc.dart';
-import 'package:proconnect/guard/view/guard_dashboard.dart';
-import 'package:proconnect/models/app_user.dart';
-import 'package:proconnect/owner/view/owner_dashboard.dart';
-import 'package:proconnect/tenant/view/tenant_dashboard.dart';
+import 'package:proconnect/domain/models/app_user.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/guard/view/guard_dashboard.dart';
+import 'package:proconnect/pages/owner/view/owner_dashboard.dart';
+import 'package:proconnect/pages/tenant/view/tenant_dashboard.dart';
 
 class HomeScreenWrapper extends StatelessWidget {
   const HomeScreenWrapper({super.key});
