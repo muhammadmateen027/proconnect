@@ -5,12 +5,19 @@ import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/core/theme/repository/theme_repository.dart';
 import 'package:proconnect/data/auth/datasource/auth_remote_data_source.dart';
 import 'package:proconnect/data/auth/repository/auth_repository_impl.dart';
+import 'package:proconnect/data/unit/datasource/unit_remote_data_source.dart';
+import 'package:proconnect/data/unit/repository/unit_repository_impl.dart';
 import 'package:proconnect/domain/auth/repository/auth_repository.dart';
 import 'package:proconnect/domain/auth/usecase/get_auth_status_stream_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_out_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_up_use_case.dart';
+import 'package:proconnect/domain/unit/repository/unit_repository.dart';
+import 'package:proconnect/domain/unit/usecase/add_unit_use_case.dart';
+import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
+import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -49,7 +56,13 @@ class DependencyInjector {
       ..registerSingleton<AuthRepository>(
         (c) => AuthRepositoryImpl(c.resolve()),
       )
-      ..registerSingleton<ThemeRepository>((c) => ThemeRepository());
+      ..registerSingleton<ThemeRepository>((c) => ThemeRepository())
+      ..registerSingleton<UnitRemoteDataSource>(
+        (c) => UnitRemoteDataSourceImpl(),
+      )
+      ..registerSingleton<UnitRepository>(
+        (c) => UnitRepositoryImpl(c.resolve()),
+      );
   }
 
   void _setupUseCases() {
@@ -65,6 +78,15 @@ class DependencyInjector {
       )
       ..registerSingleton<SignUpUseCase>(
         (c) => SignUpUseCase(c.resolve()),
+      )
+      ..registerSingleton<GetUnitsUseCase>(
+        (c) => GetUnitsUseCase(c.resolve()),
+      )
+      ..registerSingleton<AddUnitUseCase>(
+        (c) => AddUnitUseCase(c.resolve()),
+      )
+      ..registerSingleton<DeleteUnitUseCase>(
+        (c) => DeleteUnitUseCase(c.resolve()),
       );
   }
 
@@ -79,6 +101,9 @@ class DependencyInjector {
     );
     _container.registerFactory<ThemeBloc>(
       (c) => ThemeBloc(c.resolve()),
+    );
+    _container.registerFactory<UnitBloc>(
+      (c) => UnitBloc(c.resolve(), c.resolve(), c.resolve()),
     );
   }
 }

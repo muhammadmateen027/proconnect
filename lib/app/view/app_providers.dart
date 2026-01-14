@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 
 class AppProviders extends StatelessWidget {
   const AppProviders({required this.child, super.key});
@@ -22,6 +23,9 @@ class AppProviders extends StatelessWidget {
         BlocProvider<ThemeBloc>(
           create: (context) =>
               dependencyInjector.resolve<ThemeBloc>()..add(ThemeLoadStarted()),
+        ),
+        BlocProvider<UnitBloc>(
+          create: (context) => dependencyInjector.resolve<UnitBloc>(),
         ),
       ],
       child: child,

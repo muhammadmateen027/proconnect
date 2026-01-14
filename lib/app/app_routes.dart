@@ -4,4 +4,5 @@ class AppRoutes {
   static const String register = '/register';
   static const String settings = '/settings';
   static const String splash = '/splash';
+  static const String addUnit = '/add-unit';
 }

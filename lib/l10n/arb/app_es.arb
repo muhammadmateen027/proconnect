@@ -99,5 +99,17 @@
     "unknownError": "Ocurrió un error desconocido.",
     "@unknownError": {
         "description": "Mensaje de error genérico"
+    },
+    "ownerDashboardEmpty": "No tienes unidades. ¡Añade una!",
+    "@ownerDashboardEmpty": {
+        "description": "Texto que se muestra cuando el propietario no tiene unidades"
+    },
+    "errorPrefix": "Error: ",
+    "@errorPrefix": {
+        "description": "Prefijo para los mensajes de error"
+    },
+    "inviteGuest": "Invitar Huésped",
+    "@inviteGuest": {
+        "description": "Texto del botón de acción flotante para invitar a un huésped"
     }
 }
