@@ -82,7 +82,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           children: [
             // --- Basic Unit Details ---
             Text(
@@ -103,7 +103,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<RentStatus>(
-              value: _selectedStatus,
+              initialValue: _selectedStatus,
               onChanged: (status) => setState(() => _selectedStatus = status!),
               items: RentStatus.values
                   .map((s) => DropdownMenuItem(value: s, child: Text(s.name)))
@@ -150,7 +150,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<FurnishingStatus>(
-              value: _furnishingStatus,
+              initialValue: _furnishingStatus,
               onChanged: (status) =>
                   setState(() => _furnishingStatus = status!),
               items: FurnishingStatus.values
@@ -236,7 +236,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
                 value: _selectedUtilities.contains(utility),
                 onChanged: (bool? value) {
                   setState(() {
-                    if (value == true) {
+                    if (value ?? false) {
                       _selectedUtilities.add(utility);
                     } else {
                       _selectedUtilities.remove(utility);
@@ -244,7 +244,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
                   });
                 },
               );
-            }).toList(),
+            }),
 
             const SizedBox(height: 32),
             ElevatedButton(

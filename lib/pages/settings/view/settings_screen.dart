@@ -30,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16),
                     child: Text(
                       'Theme', // This should also be in your arb file
                       style: Theme.of(context).textTheme.titleLarge,

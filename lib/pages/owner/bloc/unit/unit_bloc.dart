@@ -14,10 +14,6 @@ part 'unit_event.dart';
 part 'unit_state.dart';
 
 class UnitBloc extends Bloc<UnitEvent, UnitState> {
-  final GetUnitsUseCase _getUnitsUseCase;
-  final AddUnitUseCase _addUnitUseCase;
-  final DeleteUnitUseCase _deleteUnitUseCase;
-  StreamSubscription<List<Unit>>? _unitSubscription;
 
   UnitBloc(
     this._getUnitsUseCase,
@@ -29,6 +25,10 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
     on<_DeleteUnit>(_onDeleteUnit);
     on<_UnitsUpdated>(_onUnitsUpdated);
   }
+  final GetUnitsUseCase _getUnitsUseCase;
+  final AddUnitUseCase _addUnitUseCase;
+  final DeleteUnitUseCase _deleteUnitUseCase;
+  StreamSubscription<List<Unit>>? _unitSubscription;
 
   void _onLoadUnits(_LoadUnits event, Emitter<UnitState> emit) {
     emit(const UnitState.loading());
@@ -39,7 +39,7 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
     );
   }
 
-  void _onAddUnit(_AddUnit event, Emitter<UnitState> emit) async {
+  Future<void> _onAddUnit(_AddUnit event, Emitter<UnitState> emit) async {
     try {
       await _addUnitUseCase(event.unit);
       // The stream will automatically emit the updated list
@@ -48,7 +48,7 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
     }
   }
 
-  void _onDeleteUnit(_DeleteUnit event, Emitter<UnitState> emit) async {
+  Future<void> _onDeleteUnit(_DeleteUnit event, Emitter<UnitState> emit) async {
     try {
       await _deleteUnitUseCase(event.unitId);
       // The stream will automatically emit the updated list

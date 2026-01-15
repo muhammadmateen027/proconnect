@@ -99,7 +99,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 AppSpacing.gapH16,
                 DropdownButtonFormField<UserRole>(
-                  value: _selectedRole,
+                  initialValue: _selectedRole,
                   onChanged: (role) => setState(() => _selectedRole = role!),
                   items: UserRole.values
                       .map(

@@ -8,10 +8,10 @@ abstract class UnitRemoteDataSource {
 }
 
 class UnitRemoteDataSourceImpl implements UnitRemoteDataSource {
-  final FirebaseFirestore _firestore;
 
   UnitRemoteDataSourceImpl({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore;
 
   @override
   Stream<List<Unit>> getUnits(String ownerId) {

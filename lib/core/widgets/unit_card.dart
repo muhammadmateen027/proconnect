@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:proconnect/domain/models/unit.dart';
 
 class UnitCard extends StatelessWidget {
+
+  const UnitCard({required this.unit, super.key, this.onTap, this.onDelete});
   final Unit unit;
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
-
-  const UnitCard({super.key, required this.unit, this.onTap, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
