@@ -21,6 +21,14 @@ mixin _$UnitEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String ownerId) loadUnits,
     required TResult Function(Unit unit) addUnit,
+    required TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )
+    updateUnitTenantInfo,
     required TResult Function(String unitId) deleteUnit,
     required TResult Function(List<Unit> units) unitsUpdated,
   }) => throw _privateConstructorUsedError;
@@ -28,6 +36,14 @@ mixin _$UnitEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String ownerId)? loadUnits,
     TResult? Function(Unit unit)? addUnit,
+    TResult? Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult? Function(String unitId)? deleteUnit,
     TResult? Function(List<Unit> units)? unitsUpdated,
   }) => throw _privateConstructorUsedError;
@@ -35,6 +51,14 @@ mixin _$UnitEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String ownerId)? loadUnits,
     TResult Function(Unit unit)? addUnit,
+    TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult Function(String unitId)? deleteUnit,
     TResult Function(List<Unit> units)? unitsUpdated,
     required TResult orElse(),
@@ -43,6 +67,7 @@ mixin _$UnitEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUnits value) loadUnits,
     required TResult Function(_AddUnit value) addUnit,
+    required TResult Function(UpdateTenantInfo value) updateUnitTenantInfo,
     required TResult Function(_DeleteUnit value) deleteUnit,
     required TResult Function(_UnitsUpdated value) unitsUpdated,
   }) => throw _privateConstructorUsedError;
@@ -50,6 +75,7 @@ mixin _$UnitEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadUnits value)? loadUnits,
     TResult? Function(_AddUnit value)? addUnit,
+    TResult? Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult? Function(_DeleteUnit value)? deleteUnit,
     TResult? Function(_UnitsUpdated value)? unitsUpdated,
   }) => throw _privateConstructorUsedError;
@@ -57,6 +83,7 @@ mixin _$UnitEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUnits value)? loadUnits,
     TResult Function(_AddUnit value)? addUnit,
+    TResult Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult Function(_DeleteUnit value)? deleteUnit,
     TResult Function(_UnitsUpdated value)? unitsUpdated,
     required TResult orElse(),
@@ -155,6 +182,14 @@ class _$LoadUnitsImpl implements _LoadUnits {
   TResult when<TResult extends Object?>({
     required TResult Function(String ownerId) loadUnits,
     required TResult Function(Unit unit) addUnit,
+    required TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )
+    updateUnitTenantInfo,
     required TResult Function(String unitId) deleteUnit,
     required TResult Function(List<Unit> units) unitsUpdated,
   }) {
@@ -166,6 +201,14 @@ class _$LoadUnitsImpl implements _LoadUnits {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String ownerId)? loadUnits,
     TResult? Function(Unit unit)? addUnit,
+    TResult? Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult? Function(String unitId)? deleteUnit,
     TResult? Function(List<Unit> units)? unitsUpdated,
   }) {
@@ -177,6 +220,14 @@ class _$LoadUnitsImpl implements _LoadUnits {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String ownerId)? loadUnits,
     TResult Function(Unit unit)? addUnit,
+    TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult Function(String unitId)? deleteUnit,
     TResult Function(List<Unit> units)? unitsUpdated,
     required TResult orElse(),
@@ -192,6 +243,7 @@ class _$LoadUnitsImpl implements _LoadUnits {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUnits value) loadUnits,
     required TResult Function(_AddUnit value) addUnit,
+    required TResult Function(UpdateTenantInfo value) updateUnitTenantInfo,
     required TResult Function(_DeleteUnit value) deleteUnit,
     required TResult Function(_UnitsUpdated value) unitsUpdated,
   }) {
@@ -203,6 +255,7 @@ class _$LoadUnitsImpl implements _LoadUnits {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadUnits value)? loadUnits,
     TResult? Function(_AddUnit value)? addUnit,
+    TResult? Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult? Function(_DeleteUnit value)? deleteUnit,
     TResult? Function(_UnitsUpdated value)? unitsUpdated,
   }) {
@@ -214,6 +267,7 @@ class _$LoadUnitsImpl implements _LoadUnits {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUnits value)? loadUnits,
     TResult Function(_AddUnit value)? addUnit,
+    TResult Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult Function(_DeleteUnit value)? deleteUnit,
     TResult Function(_UnitsUpdated value)? unitsUpdated,
     required TResult orElse(),
@@ -321,6 +375,14 @@ class _$AddUnitImpl implements _AddUnit {
   TResult when<TResult extends Object?>({
     required TResult Function(String ownerId) loadUnits,
     required TResult Function(Unit unit) addUnit,
+    required TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )
+    updateUnitTenantInfo,
     required TResult Function(String unitId) deleteUnit,
     required TResult Function(List<Unit> units) unitsUpdated,
   }) {
@@ -332,6 +394,14 @@ class _$AddUnitImpl implements _AddUnit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String ownerId)? loadUnits,
     TResult? Function(Unit unit)? addUnit,
+    TResult? Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult? Function(String unitId)? deleteUnit,
     TResult? Function(List<Unit> units)? unitsUpdated,
   }) {
@@ -343,6 +413,14 @@ class _$AddUnitImpl implements _AddUnit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String ownerId)? loadUnits,
     TResult Function(Unit unit)? addUnit,
+    TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult Function(String unitId)? deleteUnit,
     TResult Function(List<Unit> units)? unitsUpdated,
     required TResult orElse(),
@@ -358,6 +436,7 @@ class _$AddUnitImpl implements _AddUnit {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUnits value) loadUnits,
     required TResult Function(_AddUnit value) addUnit,
+    required TResult Function(UpdateTenantInfo value) updateUnitTenantInfo,
     required TResult Function(_DeleteUnit value) deleteUnit,
     required TResult Function(_UnitsUpdated value) unitsUpdated,
   }) {
@@ -369,6 +448,7 @@ class _$AddUnitImpl implements _AddUnit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadUnits value)? loadUnits,
     TResult? Function(_AddUnit value)? addUnit,
+    TResult? Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult? Function(_DeleteUnit value)? deleteUnit,
     TResult? Function(_UnitsUpdated value)? unitsUpdated,
   }) {
@@ -380,6 +460,7 @@ class _$AddUnitImpl implements _AddUnit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUnits value)? loadUnits,
     TResult Function(_AddUnit value)? addUnit,
+    TResult Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult Function(_DeleteUnit value)? deleteUnit,
     TResult Function(_UnitsUpdated value)? unitsUpdated,
     required TResult orElse(),
@@ -400,6 +481,275 @@ abstract class _AddUnit implements UnitEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddUnitImplCopyWith<_$AddUnitImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateTenantInfoImplCopyWith<$Res> {
+  factory _$$UpdateTenantInfoImplCopyWith(
+    _$UpdateTenantInfoImpl value,
+    $Res Function(_$UpdateTenantInfoImpl) then,
+  ) = __$$UpdateTenantInfoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({
+    String unitId,
+    String tenantName,
+    String tenantPhone,
+    String? tenantEmail,
+    double? monthlyRent,
+  });
+}
+
+/// @nodoc
+class __$$UpdateTenantInfoImplCopyWithImpl<$Res>
+    extends _$UnitEventCopyWithImpl<$Res, _$UpdateTenantInfoImpl>
+    implements _$$UpdateTenantInfoImplCopyWith<$Res> {
+  __$$UpdateTenantInfoImplCopyWithImpl(
+    _$UpdateTenantInfoImpl _value,
+    $Res Function(_$UpdateTenantInfoImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of UnitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? unitId = null,
+    Object? tenantName = null,
+    Object? tenantPhone = null,
+    Object? tenantEmail = freezed,
+    Object? monthlyRent = freezed,
+  }) {
+    return _then(
+      _$UpdateTenantInfoImpl(
+        unitId: null == unitId
+            ? _value.unitId
+            : unitId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        tenantName: null == tenantName
+            ? _value.tenantName
+            : tenantName // ignore: cast_nullable_to_non_nullable
+                  as String,
+        tenantPhone: null == tenantPhone
+            ? _value.tenantPhone
+            : tenantPhone // ignore: cast_nullable_to_non_nullable
+                  as String,
+        tenantEmail: freezed == tenantEmail
+            ? _value.tenantEmail
+            : tenantEmail // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        monthlyRent: freezed == monthlyRent
+            ? _value.monthlyRent
+            : monthlyRent // ignore: cast_nullable_to_non_nullable
+                  as double?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$UpdateTenantInfoImpl implements UpdateTenantInfo {
+  const _$UpdateTenantInfoImpl({
+    required this.unitId,
+    required this.tenantName,
+    required this.tenantPhone,
+    required this.tenantEmail,
+    required this.monthlyRent,
+  });
+
+  @override
+  final String unitId;
+  @override
+  final String tenantName;
+  @override
+  final String tenantPhone;
+  @override
+  final String? tenantEmail;
+  @override
+  final double? monthlyRent;
+
+  @override
+  String toString() {
+    return 'UnitEvent.updateUnitTenantInfo(unitId: $unitId, tenantName: $tenantName, tenantPhone: $tenantPhone, tenantEmail: $tenantEmail, monthlyRent: $monthlyRent)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateTenantInfoImpl &&
+            (identical(other.unitId, unitId) || other.unitId == unitId) &&
+            (identical(other.tenantName, tenantName) ||
+                other.tenantName == tenantName) &&
+            (identical(other.tenantPhone, tenantPhone) ||
+                other.tenantPhone == tenantPhone) &&
+            (identical(other.tenantEmail, tenantEmail) ||
+                other.tenantEmail == tenantEmail) &&
+            (identical(other.monthlyRent, monthlyRent) ||
+                other.monthlyRent == monthlyRent));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    unitId,
+    tenantName,
+    tenantPhone,
+    tenantEmail,
+    monthlyRent,
+  );
+
+  /// Create a copy of UnitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateTenantInfoImplCopyWith<_$UpdateTenantInfoImpl> get copyWith =>
+      __$$UpdateTenantInfoImplCopyWithImpl<_$UpdateTenantInfoImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String ownerId) loadUnits,
+    required TResult Function(Unit unit) addUnit,
+    required TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )
+    updateUnitTenantInfo,
+    required TResult Function(String unitId) deleteUnit,
+    required TResult Function(List<Unit> units) unitsUpdated,
+  }) {
+    return updateUnitTenantInfo(
+      unitId,
+      tenantName,
+      tenantPhone,
+      tenantEmail,
+      monthlyRent,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String ownerId)? loadUnits,
+    TResult? Function(Unit unit)? addUnit,
+    TResult? Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
+    TResult? Function(String unitId)? deleteUnit,
+    TResult? Function(List<Unit> units)? unitsUpdated,
+  }) {
+    return updateUnitTenantInfo?.call(
+      unitId,
+      tenantName,
+      tenantPhone,
+      tenantEmail,
+      monthlyRent,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String ownerId)? loadUnits,
+    TResult Function(Unit unit)? addUnit,
+    TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
+    TResult Function(String unitId)? deleteUnit,
+    TResult Function(List<Unit> units)? unitsUpdated,
+    required TResult orElse(),
+  }) {
+    if (updateUnitTenantInfo != null) {
+      return updateUnitTenantInfo(
+        unitId,
+        tenantName,
+        tenantPhone,
+        tenantEmail,
+        monthlyRent,
+      );
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadUnits value) loadUnits,
+    required TResult Function(_AddUnit value) addUnit,
+    required TResult Function(UpdateTenantInfo value) updateUnitTenantInfo,
+    required TResult Function(_DeleteUnit value) deleteUnit,
+    required TResult Function(_UnitsUpdated value) unitsUpdated,
+  }) {
+    return updateUnitTenantInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadUnits value)? loadUnits,
+    TResult? Function(_AddUnit value)? addUnit,
+    TResult? Function(UpdateTenantInfo value)? updateUnitTenantInfo,
+    TResult? Function(_DeleteUnit value)? deleteUnit,
+    TResult? Function(_UnitsUpdated value)? unitsUpdated,
+  }) {
+    return updateUnitTenantInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadUnits value)? loadUnits,
+    TResult Function(_AddUnit value)? addUnit,
+    TResult Function(UpdateTenantInfo value)? updateUnitTenantInfo,
+    TResult Function(_DeleteUnit value)? deleteUnit,
+    TResult Function(_UnitsUpdated value)? unitsUpdated,
+    required TResult orElse(),
+  }) {
+    if (updateUnitTenantInfo != null) {
+      return updateUnitTenantInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateTenantInfo implements UnitEvent {
+  const factory UpdateTenantInfo({
+    required final String unitId,
+    required final String tenantName,
+    required final String tenantPhone,
+    required final String? tenantEmail,
+    required final double? monthlyRent,
+  }) = _$UpdateTenantInfoImpl;
+
+  String get unitId;
+  String get tenantName;
+  String get tenantPhone;
+  String? get tenantEmail;
+  double? get monthlyRent;
+
+  /// Create a copy of UnitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateTenantInfoImplCopyWith<_$UpdateTenantInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -475,6 +825,14 @@ class _$DeleteUnitImpl implements _DeleteUnit {
   TResult when<TResult extends Object?>({
     required TResult Function(String ownerId) loadUnits,
     required TResult Function(Unit unit) addUnit,
+    required TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )
+    updateUnitTenantInfo,
     required TResult Function(String unitId) deleteUnit,
     required TResult Function(List<Unit> units) unitsUpdated,
   }) {
@@ -486,6 +844,14 @@ class _$DeleteUnitImpl implements _DeleteUnit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String ownerId)? loadUnits,
     TResult? Function(Unit unit)? addUnit,
+    TResult? Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult? Function(String unitId)? deleteUnit,
     TResult? Function(List<Unit> units)? unitsUpdated,
   }) {
@@ -497,6 +863,14 @@ class _$DeleteUnitImpl implements _DeleteUnit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String ownerId)? loadUnits,
     TResult Function(Unit unit)? addUnit,
+    TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult Function(String unitId)? deleteUnit,
     TResult Function(List<Unit> units)? unitsUpdated,
     required TResult orElse(),
@@ -512,6 +886,7 @@ class _$DeleteUnitImpl implements _DeleteUnit {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUnits value) loadUnits,
     required TResult Function(_AddUnit value) addUnit,
+    required TResult Function(UpdateTenantInfo value) updateUnitTenantInfo,
     required TResult Function(_DeleteUnit value) deleteUnit,
     required TResult Function(_UnitsUpdated value) unitsUpdated,
   }) {
@@ -523,6 +898,7 @@ class _$DeleteUnitImpl implements _DeleteUnit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadUnits value)? loadUnits,
     TResult? Function(_AddUnit value)? addUnit,
+    TResult? Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult? Function(_DeleteUnit value)? deleteUnit,
     TResult? Function(_UnitsUpdated value)? unitsUpdated,
   }) {
@@ -534,6 +910,7 @@ class _$DeleteUnitImpl implements _DeleteUnit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUnits value)? loadUnits,
     TResult Function(_AddUnit value)? addUnit,
+    TResult Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult Function(_DeleteUnit value)? deleteUnit,
     TResult Function(_UnitsUpdated value)? unitsUpdated,
     required TResult orElse(),
@@ -635,6 +1012,14 @@ class _$UnitsUpdatedImpl implements _UnitsUpdated {
   TResult when<TResult extends Object?>({
     required TResult Function(String ownerId) loadUnits,
     required TResult Function(Unit unit) addUnit,
+    required TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )
+    updateUnitTenantInfo,
     required TResult Function(String unitId) deleteUnit,
     required TResult Function(List<Unit> units) unitsUpdated,
   }) {
@@ -646,6 +1031,14 @@ class _$UnitsUpdatedImpl implements _UnitsUpdated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String ownerId)? loadUnits,
     TResult? Function(Unit unit)? addUnit,
+    TResult? Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult? Function(String unitId)? deleteUnit,
     TResult? Function(List<Unit> units)? unitsUpdated,
   }) {
@@ -657,6 +1050,14 @@ class _$UnitsUpdatedImpl implements _UnitsUpdated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String ownerId)? loadUnits,
     TResult Function(Unit unit)? addUnit,
+    TResult Function(
+      String unitId,
+      String tenantName,
+      String tenantPhone,
+      String? tenantEmail,
+      double? monthlyRent,
+    )?
+    updateUnitTenantInfo,
     TResult Function(String unitId)? deleteUnit,
     TResult Function(List<Unit> units)? unitsUpdated,
     required TResult orElse(),
@@ -672,6 +1073,7 @@ class _$UnitsUpdatedImpl implements _UnitsUpdated {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadUnits value) loadUnits,
     required TResult Function(_AddUnit value) addUnit,
+    required TResult Function(UpdateTenantInfo value) updateUnitTenantInfo,
     required TResult Function(_DeleteUnit value) deleteUnit,
     required TResult Function(_UnitsUpdated value) unitsUpdated,
   }) {
@@ -683,6 +1085,7 @@ class _$UnitsUpdatedImpl implements _UnitsUpdated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadUnits value)? loadUnits,
     TResult? Function(_AddUnit value)? addUnit,
+    TResult? Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult? Function(_DeleteUnit value)? deleteUnit,
     TResult? Function(_UnitsUpdated value)? unitsUpdated,
   }) {
@@ -694,6 +1097,7 @@ class _$UnitsUpdatedImpl implements _UnitsUpdated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadUnits value)? loadUnits,
     TResult Function(_AddUnit value)? addUnit,
+    TResult Function(UpdateTenantInfo value)? updateUnitTenantInfo,
     TResult Function(_DeleteUnit value)? deleteUnit,
     TResult Function(_UnitsUpdated value)? unitsUpdated,
     required TResult orElse(),
@@ -724,6 +1128,7 @@ mixin _$UnitState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Unit> units) loaded,
+    required TResult Function() unitUpdateSuccess,
     required TResult Function(String message) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -731,6 +1136,7 @@ mixin _$UnitState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Unit> units)? loaded,
+    TResult? Function()? unitUpdateSuccess,
     TResult? Function(String message)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -738,6 +1144,7 @@ mixin _$UnitState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Unit> units)? loaded,
+    TResult Function()? unitUpdateSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -746,6 +1153,7 @@ mixin _$UnitState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_UnitUpdateSuccess value) unitUpdateSuccess,
     required TResult Function(_Error value) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -753,6 +1161,7 @@ mixin _$UnitState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult? Function(_Error value)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -760,6 +1169,7 @@ mixin _$UnitState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -831,6 +1241,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Unit> units) loaded,
+    required TResult Function() unitUpdateSuccess,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -842,6 +1253,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Unit> units)? loaded,
+    TResult? Function()? unitUpdateSuccess,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -853,6 +1265,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Unit> units)? loaded,
+    TResult Function()? unitUpdateSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -868,6 +1281,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_UnitUpdateSuccess value) unitUpdateSuccess,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -879,6 +1293,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -890,6 +1305,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -950,6 +1366,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Unit> units) loaded,
+    required TResult Function() unitUpdateSuccess,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -961,6 +1378,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Unit> units)? loaded,
+    TResult? Function()? unitUpdateSuccess,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -972,6 +1390,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Unit> units)? loaded,
+    TResult Function()? unitUpdateSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -987,6 +1406,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_UnitUpdateSuccess value) unitUpdateSuccess,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -998,6 +1418,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -1009,6 +1430,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1102,6 +1524,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Unit> units) loaded,
+    required TResult Function() unitUpdateSuccess,
     required TResult Function(String message) error,
   }) {
     return loaded(units);
@@ -1113,6 +1536,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Unit> units)? loaded,
+    TResult? Function()? unitUpdateSuccess,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(units);
@@ -1124,6 +1548,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Unit> units)? loaded,
+    TResult Function()? unitUpdateSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1139,6 +1564,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_UnitUpdateSuccess value) unitUpdateSuccess,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -1150,6 +1576,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult? Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -1161,6 +1588,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1181,6 +1609,131 @@ abstract class _Loaded implements UnitState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UnitUpdateSuccessImplCopyWith<$Res> {
+  factory _$$UnitUpdateSuccessImplCopyWith(
+    _$UnitUpdateSuccessImpl value,
+    $Res Function(_$UnitUpdateSuccessImpl) then,
+  ) = __$$UnitUpdateSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UnitUpdateSuccessImplCopyWithImpl<$Res>
+    extends _$UnitStateCopyWithImpl<$Res, _$UnitUpdateSuccessImpl>
+    implements _$$UnitUpdateSuccessImplCopyWith<$Res> {
+  __$$UnitUpdateSuccessImplCopyWithImpl(
+    _$UnitUpdateSuccessImpl _value,
+    $Res Function(_$UnitUpdateSuccessImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of UnitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UnitUpdateSuccessImpl implements _UnitUpdateSuccess {
+  const _$UnitUpdateSuccessImpl();
+
+  @override
+  String toString() {
+    return 'UnitState.unitUpdateSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UnitUpdateSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Unit> units) loaded,
+    required TResult Function() unitUpdateSuccess,
+    required TResult Function(String message) error,
+  }) {
+    return unitUpdateSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Unit> units)? loaded,
+    TResult? Function()? unitUpdateSuccess,
+    TResult? Function(String message)? error,
+  }) {
+    return unitUpdateSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Unit> units)? loaded,
+    TResult Function()? unitUpdateSuccess,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (unitUpdateSuccess != null) {
+      return unitUpdateSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_UnitUpdateSuccess value) unitUpdateSuccess,
+    required TResult Function(_Error value) error,
+  }) {
+    return unitUpdateSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
+    TResult? Function(_Error value)? error,
+  }) {
+    return unitUpdateSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (unitUpdateSuccess != null) {
+      return unitUpdateSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UnitUpdateSuccess implements UnitState {
+  const factory _UnitUpdateSuccess() = _$UnitUpdateSuccessImpl;
 }
 
 /// @nodoc
@@ -1256,6 +1809,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Unit> units) loaded,
+    required TResult Function() unitUpdateSuccess,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1267,6 +1821,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Unit> units)? loaded,
+    TResult? Function()? unitUpdateSuccess,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1278,6 +1833,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Unit> units)? loaded,
+    TResult Function()? unitUpdateSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1293,6 +1849,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_UnitUpdateSuccess value) unitUpdateSuccess,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1304,6 +1861,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1315,6 +1873,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_UnitUpdateSuccess value)? unitUpdateSuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

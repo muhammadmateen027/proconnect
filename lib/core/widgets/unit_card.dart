@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:proconnect/domain/models/unit.dart';
 
 class UnitCard extends StatelessWidget {
-
   const UnitCard({required this.unit, super.key, this.onTap, this.onDelete});
   final Unit unit;
   final VoidCallback? onTap;
@@ -11,7 +10,7 @@ class UnitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isVacant = unit.rentStatus == RentStatus.vacant;
+    final isVacant = unit.isVacant;
 
     return Card(
       elevation: 2,

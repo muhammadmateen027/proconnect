@@ -1,28 +1,32 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'unit.freezed.dart';
-part 'unit.g.dart';
 
-enum RentStatus { occupied, vacant }
+part 'unit.g.dart';
 
 enum FurnishingStatus { none, partial, full }
 
 @freezed
 class Unit with _$Unit {
+  const Unit._(); // Private constructor for getters
+
   const factory Unit({
     required String id,
     required String unitNo,
     required String condoName,
-    required RentStatus rentStatus,
     required String ownerId,
 
+    // Manual Tenant Tracking for MVP
+    String? tenantName,
+    String? tenantPhone,
+    String? tenantEmail, // Restored field
     // Rental Details
-    required double rentAmount,
-    required int rentDueDate,
-    required double securityDeposit,
-    required List<String> utilitiesIncluded,
+    double? monthlyRent,
     DateTime? leaseStartDate,
     DateTime? leaseEndDate,
+    int? rentDueDate,
+    double? securityDeposit,
+    @Default([]) List<String> utilitiesIncluded,
 
     // Parking Details
     @Default([]) List<String> allowedParkingSpaces,
@@ -36,4 +40,6 @@ class Unit with _$Unit {
   }) = _Unit;
 
   factory Unit.fromJson(Map<String, dynamic> json) => _$UnitFromJson(json);
+
+  bool get isVacant => tenantName == null || tenantName!.isEmpty;
 }

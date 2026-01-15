@@ -16,6 +16,7 @@ import 'package:proconnect/domain/unit/repository/unit_repository.dart';
 import 'package:proconnect/domain/unit/usecase/add_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
+import 'package:proconnect/domain/unit/usecase/update_unit_tenant_details_use_case.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 
@@ -54,56 +55,65 @@ class DependencyInjector {
         (c) => AuthRemoteDataSourceImpl(),
       )
       ..registerSingleton<AuthRepository>(
-        (c) => AuthRepositoryImpl(c.resolve()),
+        (c) => AuthRepositoryImpl(c.resolve<AuthRemoteDataSource>()),
       )
       ..registerSingleton<ThemeRepository>((c) => ThemeRepository())
       ..registerSingleton<UnitRemoteDataSource>(
         (c) => UnitRemoteDataSourceImpl(),
       )
       ..registerSingleton<UnitRepository>(
-        (c) => UnitRepositoryImpl(c.resolve()),
+        (c) => UnitRepositoryImpl(c.resolve<UnitRemoteDataSource>()),
       );
   }
 
   void _setupUseCases() {
     _container
       ..registerSingleton<SignInUseCase>(
-        (c) => SignInUseCase(c.resolve()),
+        (c) => SignInUseCase(c.resolve<AuthRepository>()),
       )
       ..registerSingleton<SignOutUseCase>(
-        (c) => SignOutUseCase(c.resolve()),
+        (c) => SignOutUseCase(c.resolve<AuthRepository>()),
       )
       ..registerSingleton<GetAuthStatusStreamUseCase>(
-        (c) => GetAuthStatusStreamUseCase(c.resolve()),
+        (c) => GetAuthStatusStreamUseCase(c.resolve<AuthRepository>()),
       )
       ..registerSingleton<SignUpUseCase>(
-        (c) => SignUpUseCase(c.resolve()),
+        (c) => SignUpUseCase(c.resolve<AuthRepository>()),
       )
       ..registerSingleton<GetUnitsUseCase>(
-        (c) => GetUnitsUseCase(c.resolve()),
+        (c) => GetUnitsUseCase(c.resolve<UnitRepository>()),
       )
       ..registerSingleton<AddUnitUseCase>(
-        (c) => AddUnitUseCase(c.resolve()),
+        (c) => AddUnitUseCase(c.resolve<UnitRepository>()),
       )
       ..registerSingleton<DeleteUnitUseCase>(
-        (c) => DeleteUnitUseCase(c.resolve()),
+        (c) => DeleteUnitUseCase(c.resolve<UnitRepository>()),
+      )
+      ..registerSingleton<UpdateUnitTenantDetailsUseCase>(
+        (c) => UpdateUnitTenantDetailsUseCase(c.resolve<UnitRepository>()),
       );
   }
 
   void _setupBlocs() {
-    _container.registerFactory<AuthBloc>(
-      (c) => AuthBloc(
-        signInUseCase: c.resolve(),
-        signOutUseCase: c.resolve(),
-        getAuthStatusStreamUseCase: c.resolve(),
-        signUpUseCase: c.resolve(),
-      ),
-    );
-    _container.registerFactory<ThemeBloc>(
-      (c) => ThemeBloc(c.resolve()),
-    );
-    _container.registerFactory<UnitBloc>(
-      (c) => UnitBloc(c.resolve(), c.resolve(), c.resolve()),
-    );
+    _container
+      ..registerFactory<AuthBloc>(
+        (c) => AuthBloc(
+          signInUseCase: c.resolve<SignInUseCase>(),
+          signOutUseCase: c.resolve<SignOutUseCase>(),
+          getAuthStatusStreamUseCase: c.resolve<GetAuthStatusStreamUseCase>(),
+          signUpUseCase: c.resolve<SignUpUseCase>(),
+        ),
+      )
+      ..registerFactory<ThemeBloc>(
+        (c) => ThemeBloc(c.resolve<ThemeRepository>()),
+      )
+      ..registerFactory<UnitBloc>(
+        (c) => UnitBloc(
+          c.resolve<GetUnitsUseCase>(),
+          c.resolve<AddUnitUseCase>(),
+          c.resolve<DeleteUnitUseCase>(),
+          c.resolve<UpdateUnitTenantDetailsUseCase>(),
+        ),
+      );
   }
 }

@@ -55,6 +55,8 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                   final unit = units[index];
                   return UnitCard(
                     unit: unit,
+                    onTap: () =>
+                        context.push(AppRoutes.unitDetail, extra: unit),
                     onDelete: () {
                       context.read<UnitBloc>().add(
                         UnitEvent.deleteUnit(unit.id),
@@ -64,6 +66,8 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                 },
               );
             },
+            unitUpdateSuccess: () =>
+                const Center(child: CircularProgressIndicator()),
             error: (message) =>
                 Center(child: Text('${l10n.errorPrefix}$message')),
           );

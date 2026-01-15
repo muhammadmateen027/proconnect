@@ -24,14 +24,19 @@ mixin _$Unit {
   String get id => throw _privateConstructorUsedError;
   String get unitNo => throw _privateConstructorUsedError;
   String get condoName => throw _privateConstructorUsedError;
-  RentStatus get rentStatus => throw _privateConstructorUsedError;
-  String get ownerId => throw _privateConstructorUsedError; // Rental Details
-  double get rentAmount => throw _privateConstructorUsedError;
-  int get rentDueDate => throw _privateConstructorUsedError;
-  double get securityDeposit => throw _privateConstructorUsedError;
-  List<String> get utilitiesIncluded => throw _privateConstructorUsedError;
+  String get ownerId =>
+      throw _privateConstructorUsedError; // Manual Tenant Tracking for MVP
+  String? get tenantName => throw _privateConstructorUsedError;
+  String? get tenantPhone => throw _privateConstructorUsedError;
+  String? get tenantEmail =>
+      throw _privateConstructorUsedError; // Restored field
+  // Rental Details
+  double? get monthlyRent => throw _privateConstructorUsedError;
   DateTime? get leaseStartDate => throw _privateConstructorUsedError;
-  DateTime? get leaseEndDate =>
+  DateTime? get leaseEndDate => throw _privateConstructorUsedError;
+  int? get rentDueDate => throw _privateConstructorUsedError;
+  double? get securityDeposit => throw _privateConstructorUsedError;
+  List<String> get utilitiesIncluded =>
       throw _privateConstructorUsedError; // Parking Details
   List<String> get allowedParkingSpaces =>
       throw _privateConstructorUsedError; // Unit Specifications
@@ -59,14 +64,16 @@ abstract class $UnitCopyWith<$Res> {
     String id,
     String unitNo,
     String condoName,
-    RentStatus rentStatus,
     String ownerId,
-    double rentAmount,
-    int rentDueDate,
-    double securityDeposit,
-    List<String> utilitiesIncluded,
+    String? tenantName,
+    String? tenantPhone,
+    String? tenantEmail,
+    double? monthlyRent,
     DateTime? leaseStartDate,
     DateTime? leaseEndDate,
+    int? rentDueDate,
+    double? securityDeposit,
+    List<String> utilitiesIncluded,
     List<String> allowedParkingSpaces,
     int bedrooms,
     int bathrooms,
@@ -94,14 +101,16 @@ class _$UnitCopyWithImpl<$Res, $Val extends Unit>
     Object? id = null,
     Object? unitNo = null,
     Object? condoName = null,
-    Object? rentStatus = null,
     Object? ownerId = null,
-    Object? rentAmount = null,
-    Object? rentDueDate = null,
-    Object? securityDeposit = null,
-    Object? utilitiesIncluded = null,
+    Object? tenantName = freezed,
+    Object? tenantPhone = freezed,
+    Object? tenantEmail = freezed,
+    Object? monthlyRent = freezed,
     Object? leaseStartDate = freezed,
     Object? leaseEndDate = freezed,
+    Object? rentDueDate = freezed,
+    Object? securityDeposit = freezed,
+    Object? utilitiesIncluded = null,
     Object? allowedParkingSpaces = null,
     Object? bedrooms = null,
     Object? bathrooms = null,
@@ -123,30 +132,26 @@ class _$UnitCopyWithImpl<$Res, $Val extends Unit>
                 ? _value.condoName
                 : condoName // ignore: cast_nullable_to_non_nullable
                       as String,
-            rentStatus: null == rentStatus
-                ? _value.rentStatus
-                : rentStatus // ignore: cast_nullable_to_non_nullable
-                      as RentStatus,
             ownerId: null == ownerId
                 ? _value.ownerId
                 : ownerId // ignore: cast_nullable_to_non_nullable
                       as String,
-            rentAmount: null == rentAmount
-                ? _value.rentAmount
-                : rentAmount // ignore: cast_nullable_to_non_nullable
-                      as double,
-            rentDueDate: null == rentDueDate
-                ? _value.rentDueDate
-                : rentDueDate // ignore: cast_nullable_to_non_nullable
-                      as int,
-            securityDeposit: null == securityDeposit
-                ? _value.securityDeposit
-                : securityDeposit // ignore: cast_nullable_to_non_nullable
-                      as double,
-            utilitiesIncluded: null == utilitiesIncluded
-                ? _value.utilitiesIncluded
-                : utilitiesIncluded // ignore: cast_nullable_to_non_nullable
-                      as List<String>,
+            tenantName: freezed == tenantName
+                ? _value.tenantName
+                : tenantName // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            tenantPhone: freezed == tenantPhone
+                ? _value.tenantPhone
+                : tenantPhone // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            tenantEmail: freezed == tenantEmail
+                ? _value.tenantEmail
+                : tenantEmail // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            monthlyRent: freezed == monthlyRent
+                ? _value.monthlyRent
+                : monthlyRent // ignore: cast_nullable_to_non_nullable
+                      as double?,
             leaseStartDate: freezed == leaseStartDate
                 ? _value.leaseStartDate
                 : leaseStartDate // ignore: cast_nullable_to_non_nullable
@@ -155,6 +160,18 @@ class _$UnitCopyWithImpl<$Res, $Val extends Unit>
                 ? _value.leaseEndDate
                 : leaseEndDate // ignore: cast_nullable_to_non_nullable
                       as DateTime?,
+            rentDueDate: freezed == rentDueDate
+                ? _value.rentDueDate
+                : rentDueDate // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            securityDeposit: freezed == securityDeposit
+                ? _value.securityDeposit
+                : securityDeposit // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            utilitiesIncluded: null == utilitiesIncluded
+                ? _value.utilitiesIncluded
+                : utilitiesIncluded // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
             allowedParkingSpaces: null == allowedParkingSpaces
                 ? _value.allowedParkingSpaces
                 : allowedParkingSpaces // ignore: cast_nullable_to_non_nullable
@@ -197,14 +214,16 @@ abstract class _$$UnitImplCopyWith<$Res> implements $UnitCopyWith<$Res> {
     String id,
     String unitNo,
     String condoName,
-    RentStatus rentStatus,
     String ownerId,
-    double rentAmount,
-    int rentDueDate,
-    double securityDeposit,
-    List<String> utilitiesIncluded,
+    String? tenantName,
+    String? tenantPhone,
+    String? tenantEmail,
+    double? monthlyRent,
     DateTime? leaseStartDate,
     DateTime? leaseEndDate,
+    int? rentDueDate,
+    double? securityDeposit,
+    List<String> utilitiesIncluded,
     List<String> allowedParkingSpaces,
     int bedrooms,
     int bathrooms,
@@ -229,14 +248,16 @@ class __$$UnitImplCopyWithImpl<$Res>
     Object? id = null,
     Object? unitNo = null,
     Object? condoName = null,
-    Object? rentStatus = null,
     Object? ownerId = null,
-    Object? rentAmount = null,
-    Object? rentDueDate = null,
-    Object? securityDeposit = null,
-    Object? utilitiesIncluded = null,
+    Object? tenantName = freezed,
+    Object? tenantPhone = freezed,
+    Object? tenantEmail = freezed,
+    Object? monthlyRent = freezed,
     Object? leaseStartDate = freezed,
     Object? leaseEndDate = freezed,
+    Object? rentDueDate = freezed,
+    Object? securityDeposit = freezed,
+    Object? utilitiesIncluded = null,
     Object? allowedParkingSpaces = null,
     Object? bedrooms = null,
     Object? bathrooms = null,
@@ -258,30 +279,26 @@ class __$$UnitImplCopyWithImpl<$Res>
             ? _value.condoName
             : condoName // ignore: cast_nullable_to_non_nullable
                   as String,
-        rentStatus: null == rentStatus
-            ? _value.rentStatus
-            : rentStatus // ignore: cast_nullable_to_non_nullable
-                  as RentStatus,
         ownerId: null == ownerId
             ? _value.ownerId
             : ownerId // ignore: cast_nullable_to_non_nullable
                   as String,
-        rentAmount: null == rentAmount
-            ? _value.rentAmount
-            : rentAmount // ignore: cast_nullable_to_non_nullable
-                  as double,
-        rentDueDate: null == rentDueDate
-            ? _value.rentDueDate
-            : rentDueDate // ignore: cast_nullable_to_non_nullable
-                  as int,
-        securityDeposit: null == securityDeposit
-            ? _value.securityDeposit
-            : securityDeposit // ignore: cast_nullable_to_non_nullable
-                  as double,
-        utilitiesIncluded: null == utilitiesIncluded
-            ? _value._utilitiesIncluded
-            : utilitiesIncluded // ignore: cast_nullable_to_non_nullable
-                  as List<String>,
+        tenantName: freezed == tenantName
+            ? _value.tenantName
+            : tenantName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        tenantPhone: freezed == tenantPhone
+            ? _value.tenantPhone
+            : tenantPhone // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        tenantEmail: freezed == tenantEmail
+            ? _value.tenantEmail
+            : tenantEmail // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        monthlyRent: freezed == monthlyRent
+            ? _value.monthlyRent
+            : monthlyRent // ignore: cast_nullable_to_non_nullable
+                  as double?,
         leaseStartDate: freezed == leaseStartDate
             ? _value.leaseStartDate
             : leaseStartDate // ignore: cast_nullable_to_non_nullable
@@ -290,6 +307,18 @@ class __$$UnitImplCopyWithImpl<$Res>
             ? _value.leaseEndDate
             : leaseEndDate // ignore: cast_nullable_to_non_nullable
                   as DateTime?,
+        rentDueDate: freezed == rentDueDate
+            ? _value.rentDueDate
+            : rentDueDate // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        securityDeposit: freezed == securityDeposit
+            ? _value.securityDeposit
+            : securityDeposit // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        utilitiesIncluded: null == utilitiesIncluded
+            ? _value._utilitiesIncluded
+            : utilitiesIncluded // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
         allowedParkingSpaces: null == allowedParkingSpaces
             ? _value._allowedParkingSpaces
             : allowedParkingSpaces // ignore: cast_nullable_to_non_nullable
@@ -321,19 +350,21 @@ class __$$UnitImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UnitImpl implements _Unit {
+class _$UnitImpl extends _Unit {
   const _$UnitImpl({
     required this.id,
     required this.unitNo,
     required this.condoName,
-    required this.rentStatus,
     required this.ownerId,
-    required this.rentAmount,
-    required this.rentDueDate,
-    required this.securityDeposit,
-    required final List<String> utilitiesIncluded,
+    this.tenantName,
+    this.tenantPhone,
+    this.tenantEmail,
+    this.monthlyRent,
     this.leaseStartDate,
     this.leaseEndDate,
+    this.rentDueDate,
+    this.securityDeposit,
+    final List<String> utilitiesIncluded = const [],
     final List<String> allowedParkingSpaces = const [],
     this.bedrooms = 0,
     this.bathrooms = 0,
@@ -341,7 +372,8 @@ class _$UnitImpl implements _Unit {
     this.floorLevel,
     this.furnishing = FurnishingStatus.none,
   }) : _utilitiesIncluded = utilitiesIncluded,
-       _allowedParkingSpaces = allowedParkingSpaces;
+       _allowedParkingSpaces = allowedParkingSpaces,
+       super._();
 
   factory _$UnitImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnitImplFromJson(json);
@@ -353,18 +385,29 @@ class _$UnitImpl implements _Unit {
   @override
   final String condoName;
   @override
-  final RentStatus rentStatus;
-  @override
   final String ownerId;
+  // Manual Tenant Tracking for MVP
+  @override
+  final String? tenantName;
+  @override
+  final String? tenantPhone;
+  @override
+  final String? tenantEmail;
+  // Restored field
   // Rental Details
   @override
-  final double rentAmount;
+  final double? monthlyRent;
   @override
-  final int rentDueDate;
+  final DateTime? leaseStartDate;
   @override
-  final double securityDeposit;
+  final DateTime? leaseEndDate;
+  @override
+  final int? rentDueDate;
+  @override
+  final double? securityDeposit;
   final List<String> _utilitiesIncluded;
   @override
+  @JsonKey()
   List<String> get utilitiesIncluded {
     if (_utilitiesIncluded is EqualUnmodifiableListView)
       return _utilitiesIncluded;
@@ -372,10 +415,6 @@ class _$UnitImpl implements _Unit {
     return EqualUnmodifiableListView(_utilitiesIncluded);
   }
 
-  @override
-  final DateTime? leaseStartDate;
-  @override
-  final DateTime? leaseEndDate;
   // Parking Details
   final List<String> _allowedParkingSpaces;
   // Parking Details
@@ -406,7 +445,7 @@ class _$UnitImpl implements _Unit {
 
   @override
   String toString() {
-    return 'Unit(id: $id, unitNo: $unitNo, condoName: $condoName, rentStatus: $rentStatus, ownerId: $ownerId, rentAmount: $rentAmount, rentDueDate: $rentDueDate, securityDeposit: $securityDeposit, utilitiesIncluded: $utilitiesIncluded, leaseStartDate: $leaseStartDate, leaseEndDate: $leaseEndDate, allowedParkingSpaces: $allowedParkingSpaces, bedrooms: $bedrooms, bathrooms: $bathrooms, squareFeet: $squareFeet, floorLevel: $floorLevel, furnishing: $furnishing)';
+    return 'Unit(id: $id, unitNo: $unitNo, condoName: $condoName, ownerId: $ownerId, tenantName: $tenantName, tenantPhone: $tenantPhone, tenantEmail: $tenantEmail, monthlyRent: $monthlyRent, leaseStartDate: $leaseStartDate, leaseEndDate: $leaseEndDate, rentDueDate: $rentDueDate, securityDeposit: $securityDeposit, utilitiesIncluded: $utilitiesIncluded, allowedParkingSpaces: $allowedParkingSpaces, bedrooms: $bedrooms, bathrooms: $bathrooms, squareFeet: $squareFeet, floorLevel: $floorLevel, furnishing: $furnishing)';
   }
 
   @override
@@ -418,11 +457,19 @@ class _$UnitImpl implements _Unit {
             (identical(other.unitNo, unitNo) || other.unitNo == unitNo) &&
             (identical(other.condoName, condoName) ||
                 other.condoName == condoName) &&
-            (identical(other.rentStatus, rentStatus) ||
-                other.rentStatus == rentStatus) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
-            (identical(other.rentAmount, rentAmount) ||
-                other.rentAmount == rentAmount) &&
+            (identical(other.tenantName, tenantName) ||
+                other.tenantName == tenantName) &&
+            (identical(other.tenantPhone, tenantPhone) ||
+                other.tenantPhone == tenantPhone) &&
+            (identical(other.tenantEmail, tenantEmail) ||
+                other.tenantEmail == tenantEmail) &&
+            (identical(other.monthlyRent, monthlyRent) ||
+                other.monthlyRent == monthlyRent) &&
+            (identical(other.leaseStartDate, leaseStartDate) ||
+                other.leaseStartDate == leaseStartDate) &&
+            (identical(other.leaseEndDate, leaseEndDate) ||
+                other.leaseEndDate == leaseEndDate) &&
             (identical(other.rentDueDate, rentDueDate) ||
                 other.rentDueDate == rentDueDate) &&
             (identical(other.securityDeposit, securityDeposit) ||
@@ -431,10 +478,6 @@ class _$UnitImpl implements _Unit {
               other._utilitiesIncluded,
               _utilitiesIncluded,
             ) &&
-            (identical(other.leaseStartDate, leaseStartDate) ||
-                other.leaseStartDate == leaseStartDate) &&
-            (identical(other.leaseEndDate, leaseEndDate) ||
-                other.leaseEndDate == leaseEndDate) &&
             const DeepCollectionEquality().equals(
               other._allowedParkingSpaces,
               _allowedParkingSpaces,
@@ -453,26 +496,28 @@ class _$UnitImpl implements _Unit {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     id,
     unitNo,
     condoName,
-    rentStatus,
     ownerId,
-    rentAmount,
+    tenantName,
+    tenantPhone,
+    tenantEmail,
+    monthlyRent,
+    leaseStartDate,
+    leaseEndDate,
     rentDueDate,
     securityDeposit,
     const DeepCollectionEquality().hash(_utilitiesIncluded),
-    leaseStartDate,
-    leaseEndDate,
     const DeepCollectionEquality().hash(_allowedParkingSpaces),
     bedrooms,
     bathrooms,
     squareFeet,
     floorLevel,
     furnishing,
-  );
+  ]);
 
   /// Create a copy of Unit
   /// with the given fields replaced by the non-null parameter values.
@@ -488,19 +533,21 @@ class _$UnitImpl implements _Unit {
   }
 }
 
-abstract class _Unit implements Unit {
+abstract class _Unit extends Unit {
   const factory _Unit({
     required final String id,
     required final String unitNo,
     required final String condoName,
-    required final RentStatus rentStatus,
     required final String ownerId,
-    required final double rentAmount,
-    required final int rentDueDate,
-    required final double securityDeposit,
-    required final List<String> utilitiesIncluded,
+    final String? tenantName,
+    final String? tenantPhone,
+    final String? tenantEmail,
+    final double? monthlyRent,
     final DateTime? leaseStartDate,
     final DateTime? leaseEndDate,
+    final int? rentDueDate,
+    final double? securityDeposit,
+    final List<String> utilitiesIncluded,
     final List<String> allowedParkingSpaces,
     final int bedrooms,
     final int bathrooms,
@@ -508,6 +555,7 @@ abstract class _Unit implements Unit {
     final String? floorLevel,
     final FurnishingStatus furnishing,
   }) = _$UnitImpl;
+  const _Unit._() : super._();
 
   factory _Unit.fromJson(Map<String, dynamic> json) = _$UnitImpl.fromJson;
 
@@ -518,21 +566,26 @@ abstract class _Unit implements Unit {
   @override
   String get condoName;
   @override
-  RentStatus get rentStatus;
+  String get ownerId; // Manual Tenant Tracking for MVP
   @override
-  String get ownerId; // Rental Details
+  String? get tenantName;
   @override
-  double get rentAmount;
+  String? get tenantPhone;
   @override
-  int get rentDueDate;
+  String? get tenantEmail; // Restored field
+  // Rental Details
   @override
-  double get securityDeposit;
-  @override
-  List<String> get utilitiesIncluded;
+  double? get monthlyRent;
   @override
   DateTime? get leaseStartDate;
   @override
-  DateTime? get leaseEndDate; // Parking Details
+  DateTime? get leaseEndDate;
+  @override
+  int? get rentDueDate;
+  @override
+  double? get securityDeposit;
+  @override
+  List<String> get utilitiesIncluded; // Parking Details
   @override
   List<String> get allowedParkingSpaces; // Unit Specifications
   @override

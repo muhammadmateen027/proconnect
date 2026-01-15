@@ -10,20 +10,24 @@ _$UnitImpl _$$UnitImplFromJson(Map<String, dynamic> json) => _$UnitImpl(
   id: json['id'] as String,
   unitNo: json['unitNo'] as String,
   condoName: json['condoName'] as String,
-  rentStatus: $enumDecode(_$RentStatusEnumMap, json['rentStatus']),
   ownerId: json['ownerId'] as String,
-  rentAmount: (json['rentAmount'] as num).toDouble(),
-  rentDueDate: (json['rentDueDate'] as num).toInt(),
-  securityDeposit: (json['securityDeposit'] as num).toDouble(),
-  utilitiesIncluded: (json['utilitiesIncluded'] as List<dynamic>)
-      .map((e) => e as String)
-      .toList(),
+  tenantName: json['tenantName'] as String?,
+  tenantPhone: json['tenantPhone'] as String?,
+  tenantEmail: json['tenantEmail'] as String?,
+  monthlyRent: (json['monthlyRent'] as num?)?.toDouble(),
   leaseStartDate: json['leaseStartDate'] == null
       ? null
       : DateTime.parse(json['leaseStartDate'] as String),
   leaseEndDate: json['leaseEndDate'] == null
       ? null
       : DateTime.parse(json['leaseEndDate'] as String),
+  rentDueDate: (json['rentDueDate'] as num?)?.toInt(),
+  securityDeposit: (json['securityDeposit'] as num?)?.toDouble(),
+  utilitiesIncluded:
+      (json['utilitiesIncluded'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
   allowedParkingSpaces:
       (json['allowedParkingSpaces'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -43,14 +47,16 @@ Map<String, dynamic> _$$UnitImplToJson(_$UnitImpl instance) =>
       'id': instance.id,
       'unitNo': instance.unitNo,
       'condoName': instance.condoName,
-      'rentStatus': _$RentStatusEnumMap[instance.rentStatus]!,
       'ownerId': instance.ownerId,
-      'rentAmount': instance.rentAmount,
+      'tenantName': instance.tenantName,
+      'tenantPhone': instance.tenantPhone,
+      'tenantEmail': instance.tenantEmail,
+      'monthlyRent': instance.monthlyRent,
+      'leaseStartDate': instance.leaseStartDate?.toIso8601String(),
+      'leaseEndDate': instance.leaseEndDate?.toIso8601String(),
       'rentDueDate': instance.rentDueDate,
       'securityDeposit': instance.securityDeposit,
       'utilitiesIncluded': instance.utilitiesIncluded,
-      'leaseStartDate': instance.leaseStartDate?.toIso8601String(),
-      'leaseEndDate': instance.leaseEndDate?.toIso8601String(),
       'allowedParkingSpaces': instance.allowedParkingSpaces,
       'bedrooms': instance.bedrooms,
       'bathrooms': instance.bathrooms,
@@ -58,11 +64,6 @@ Map<String, dynamic> _$$UnitImplToJson(_$UnitImpl instance) =>
       'floorLevel': instance.floorLevel,
       'furnishing': _$FurnishingStatusEnumMap[instance.furnishing]!,
     };
-
-const _$RentStatusEnumMap = {
-  RentStatus.occupied: 'occupied',
-  RentStatus.vacant: 'vacant',
-};
 
 const _$FurnishingStatusEnumMap = {
   FurnishingStatus.none: 'none',

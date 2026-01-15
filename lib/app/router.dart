@@ -6,10 +6,12 @@ import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/app/view/home_screen_wrapper.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
+import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/auth/view/login_screen.dart';
 import 'package:proconnect/pages/auth/view/registration_screen.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
+import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/settings_screen.dart';
 
 // A helper class to make GoRouter listen to a BLoC stream
@@ -50,12 +52,18 @@ GoRouter createRouter(BuildContext context) {
       ),
       GoRoute(
         path: AppRoutes.settings,
-        // Use push for this route in your UI
         builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: AppRoutes.addUnit,
         builder: (context, state) => const AddUnitPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.unitDetail,
+        builder: (context, state) {
+          final unit = state.extra as Unit;
+          return UnitDetailScreen(unit: unit);
+        },
       ),
       // A dedicated splash screen route
       GoRoute(

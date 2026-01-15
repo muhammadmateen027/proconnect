@@ -29,9 +29,11 @@ class _AddUnitPageState extends State<AddUnitPage> {
   final _rentAmountController = TextEditingController();
   final _securityDepositController = TextEditingController();
   final _rentDueDateController = TextEditingController();
+  final _tenantNameController = TextEditingController();
+  final _tenantPhoneController = TextEditingController();
+  final _tenantEmailController = TextEditingController();
 
   // State variables
-  RentStatus _selectedStatus = RentStatus.vacant;
   FurnishingStatus _furnishingStatus = FurnishingStatus.none;
   DateTime? _leaseStartDate;
   DateTime? _leaseEndDate;
@@ -50,6 +52,9 @@ class _AddUnitPageState extends State<AddUnitPage> {
     _rentAmountController.dispose();
     _securityDepositController.dispose();
     _rentDueDateController.dispose();
+    _tenantNameController.dispose();
+    _tenantPhoneController.dispose();
+    _tenantEmailController.dispose();
     super.dispose();
   }
 
@@ -82,7 +87,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16.0),
           children: [
             // --- Basic Unit Details ---
             Text(
@@ -100,15 +105,6 @@ class _AddUnitPageState extends State<AddUnitPage> {
               controller: _condoNameController,
               labelText: 'Condominium Name',
               validator: (v) => v!.isEmpty ? 'Condo name is required' : null,
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<RentStatus>(
-              initialValue: _selectedStatus,
-              onChanged: (status) => setState(() => _selectedStatus = status!),
-              items: RentStatus.values
-                  .map((s) => DropdownMenuItem(value: s, child: Text(s.name)))
-                  .toList(),
-              decoration: const InputDecoration(labelText: 'Rent Status'),
             ),
             const Divider(height: 32),
 
@@ -169,7 +165,31 @@ class _AddUnitPageState extends State<AddUnitPage> {
             ),
             const Divider(height: 32),
 
-            // --- Rental Details ---
+            // --- Tenant Details (MVP) ---
+            Text(
+              'Tenant Details (Optional)',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              controller: _tenantNameController,
+              labelText: 'Tenant Name',
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              controller: _tenantPhoneController,
+              labelText: 'Tenant Phone',
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              controller: _tenantEmailController,
+              labelText: 'Tenant Email',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const Divider(height: 32),
+
+            // --- Full Rental Details ---
             Text(
               'Rental Details',
               style: Theme.of(context).textTheme.titleLarge,
@@ -179,22 +199,18 @@ class _AddUnitPageState extends State<AddUnitPage> {
               controller: _rentAmountController,
               labelText: 'Monthly Rent Amount',
               keyboardType: TextInputType.number,
-              validator: (v) => v!.isEmpty ? 'Rent amount is required' : null,
             ),
             const SizedBox(height: 16),
             CustomTextField(
               controller: _securityDepositController,
               labelText: 'Security Deposit',
               keyboardType: TextInputType.number,
-              validator: (v) =>
-                  v!.isEmpty ? 'Security deposit is required' : null,
             ),
             const SizedBox(height: 16),
             CustomTextField(
               controller: _rentDueDateController,
               labelText: 'Rent Due Day of Month (e.g., 1)',
               keyboardType: TextInputType.number,
-              validator: (v) => v!.isEmpty ? 'Due date is required' : null,
             ),
             const SizedBox(height: 16),
             Row(
@@ -224,8 +240,6 @@ class _AddUnitPageState extends State<AddUnitPage> {
               ],
             ),
             const SizedBox(height: 16),
-
-            // --- Utilities Included ---
             Text(
               'Utilities Included',
               style: Theme.of(context).textTheme.titleSmall,
@@ -236,7 +250,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
                 value: _selectedUtilities.contains(utility),
                 onChanged: (bool? value) {
                   setState(() {
-                    if (value ?? false) {
+                    if (value == true) {
                       _selectedUtilities.add(utility);
                     } else {
                       _selectedUtilities.remove(utility);
@@ -244,7 +258,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
                   });
                 },
               );
-            }),
+            }).toList(),
 
             const SizedBox(height: 32),
             ElevatedButton(
@@ -262,16 +276,20 @@ class _AddUnitPageState extends State<AddUnitPage> {
                         id: const Uuid().v4(),
                         unitNo: _unitNoController.text,
                         condoName: _condoNameController.text,
-                        rentStatus: _selectedStatus,
                         ownerId: user.uid,
-                        rentAmount: double.parse(_rentAmountController.text),
-                        rentDueDate: int.parse(_rentDueDateController.text),
-                        securityDeposit: double.parse(
+                        tenantName: _tenantNameController.text,
+                        tenantPhone: _tenantPhoneController.text,
+                        tenantEmail: _tenantEmailController.text,
+                        monthlyRent: double.tryParse(
+                          _rentAmountController.text,
+                        ),
+                        leaseStartDate: _leaseStartDate,
+                        leaseEndDate: _leaseEndDate,
+                        rentDueDate: int.tryParse(_rentDueDateController.text),
+                        securityDeposit: double.tryParse(
                           _securityDepositController.text,
                         ),
                         utilitiesIncluded: _selectedUtilities,
-                        leaseStartDate: _leaseStartDate,
-                        leaseEndDate: _leaseEndDate,
                         allowedParkingSpaces: parkingSpaces,
                         bedrooms: int.tryParse(_bedroomsController.text) ?? 0,
                         bathrooms: int.tryParse(_bathroomsController.text) ?? 0,
