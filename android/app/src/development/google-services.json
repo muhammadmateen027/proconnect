@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "79685991906",
+    "project_id": "proconnectmala",
+    "storage_bucket": "proconnectmala.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79685991906:android:b65db5e37de24a4feacdbb",
+        "android_client_info": {
+          "package_name": "com.proconnect.proconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAiqusQWpKM9djPqJPnwriYDaprNxQBZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79685991906:android:659dad25d7eb7b74eacdbb",
+        "android_client_info": {
+          "package_name": "com.proconnect.proconnect.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAiqusQWpKM9djPqJPnwriYDaprNxQBZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,5 +3,113 @@
     "counterAppBarTitle": "Contador",
     "@counterAppBarTitle": {
         "description": "Texto mostrado en la AppBar de la página del contador"
+    },
+    "login": "Iniciar Sesión",
+    "@login": {
+        "description": "Texto del botón de inicio de sesión"
+    },
+    "signUp": "Regístrate",
+    "@signUp": {
+        "description": "Texto del botón de registro"
+    },
+    "welcomeBack": "Bienvenido de Nuevo",
+    "@welcomeBack": {
+        "description": "Título del encabezado en la pantalla de inicio de sesión"
+    },
+    "signInToContinue": "Inicia sesión para continuar a tu panel de ProConnect.",
+    "@signInToContinue": {
+        "description": "Subtítulo del encabezado en la pantalla de inicio de sesión"
+    },
+    "email": "Correo Electrónico",
+    "@email": {
+        "description": "Etiqueta para el campo de texto del correo electrónico"
+    },
+    "emailIsRequired": "El correo electrónico es obligatorio",
+    "@emailIsRequired": {
+        "description": "Error de validación para el campo de correo electrónico vacío"
+    },
+    "password": "Contraseña",
+    "@password": {
+        "description": "Etiqueta para el campo de texto de la contraseña"
+    },
+    "passwordIsRequired": "La contraseña es obligatoria",
+    "@passwordIsRequired": {
+        "description": "Error de validación para el campo de contraseña vacío"
+    },
+    "dontHaveAnAccount": "¿No tienes una cuenta?",
+    "@dontHaveAnAccount": {
+        "description": "Texto que incita al usuario a registrarse"
+    },
+    "createAccount": "Crear Cuenta",
+    "@createAccount": {
+        "description": "Título del encabezado en la pantalla de registro"
+    },
+    "getStarted": "Comienza con tu nueva cuenta de ProConnect.",
+    "@getStarted": {
+        "description": "Subtítulo del encabezado en la pantalla de registro"
+    },
+    "fullName": "Nombre Completo",
+    "@fullName": {
+        "description": "Etiqueta para el campo de texto del nombre completo"
+    },
+    "fullNameIsRequired": "El nombre completo es obligatorio",
+    "@fullNameIsRequired": {
+        "description": "Error de validación para el campo de nombre completo vacío"
+    },
+    "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+    "@passwordMinLength": {
+        "description": "Error de validación para contraseña corta"
+    },
+    "iAmA": "Soy un...",
+    "@iAmA": {
+        "description": "Etiqueta para el menú desplegable de roles de usuario"
+    },
+    "alreadyHaveAnAccount": "¿Ya tienes una cuenta?",
+    "@alreadyHaveAnAccount": {
+        "description": "Texto que incita al usuario a iniciar sesión"
+    },
+    "guardDashboard": "Panel de Guardia",
+    "@guardDashboard": {
+        "description": "Título del Panel de Guardia"
+    },
+    "ownerDashboard": "Panel de Propietario",
+    "@ownerDashboard": {
+        "description": "Título del Panel de Propietario"
+    },
+    "tenantDashboard": "Panel de Inquilino",
+    "@tenantDashboard": {
+        "description": "Título del Panel de Inquilino"
+    },
+    "settings": "Configuración",
+    "@settings": {
+        "description": "Título de la página de configuración"
+    },
+    "logout": "Cerrar Sesión",
+    "@logout": {
+        "description": "Texto del botón de cerrar sesión"
+    },
+    "loginFailed": "Error de inicio de sesión. Por favor, verifica tus credenciales.",
+    "@loginFailed": {
+        "description": "Mensaje de error para inicio de sesión fallido"
+    },
+    "signUpFailed": "Error de registro. Por favor, inténtalo de nuevo.",
+    "@signUpFailed": {
+        "description": "Mensaje de error para registro fallido"
+    },
+    "unknownError": "Ocurrió un error desconocido.",
+    "@unknownError": {
+        "description": "Mensaje de error genérico"
+    },
+    "ownerDashboardEmpty": "No tienes unidades. ¡Añade una!",
+    "@ownerDashboardEmpty": {
+        "description": "Texto que se muestra cuando el propietario no tiene unidades"
+    },
+    "errorPrefix": "Error: ",
+    "@errorPrefix": {
+        "description": "Prefijo para los mensajes de error"
+    },
+    "inviteGuest": "Invitar Huésped",
+    "@inviteGuest": {
+        "description": "Texto del botón de acción flotante para invitar a un huésped"
     }
 }

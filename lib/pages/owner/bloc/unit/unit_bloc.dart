@@ -1,0 +1,88 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:proconnect/domain/models/unit.dart';
+import 'package:proconnect/domain/unit/usecase/add_unit_use_case.dart';
+import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
+import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
+import 'package:proconnect/domain/unit/usecase/update_unit_tenant_details_use_case.dart';
+
+part 'unit_event.dart';
+part 'unit_state.dart';
+part 'unit_bloc.freezed.dart';
+
+class UnitBloc extends Bloc<UnitEvent, UnitState> {
+  final GetUnitsUseCase _getUnitsUseCase;
+  final AddUnitUseCase _addUnitUseCase;
+  final DeleteUnitUseCase _deleteUnitUseCase;
+  final UpdateUnitTenantDetailsUseCase _updateUnitTenantDetailsUseCase;
+  StreamSubscription<List<Unit>>? _unitSubscription;
+
+  UnitBloc(
+    this._getUnitsUseCase,
+    this._addUnitUseCase,
+    this._deleteUnitUseCase,
+    this._updateUnitTenantDetailsUseCase,
+  ) : super(const UnitState.initial()) {
+    on<_LoadUnits>(_onLoadUnits);
+    on<_AddUnit>(_onAddUnit);
+    on<UpdateTenantInfo>(_onUpdateTenantInfo);
+    on<_DeleteUnit>(_onDeleteUnit);
+    on<_UnitsUpdated>(_onUnitsUpdated);
+  }
+
+  void _onLoadUnits(_LoadUnits event, Emitter<UnitState> emit) {
+    emit(const UnitState.loading());
+    _unitSubscription?.cancel();
+    _unitSubscription = _getUnitsUseCase(event.ownerId).listen(
+      (units) => add(UnitEvent.unitsUpdated(units)),
+      onError: (dynamic error) => emit(UnitState.error(error.toString())),
+    );
+  }
+
+  void _onAddUnit(_AddUnit event, Emitter<UnitState> emit) async {
+    try {
+      await _addUnitUseCase(event.unit);
+    } catch (e) {
+      emit(UnitState.error(e.toString()));
+    }
+  }
+
+  void _onUpdateTenantInfo(
+    UpdateTenantInfo event,
+    Emitter<UnitState> emit,
+  ) async {
+    emit(const UnitState.loading());
+    try {
+      await _updateUnitTenantDetailsUseCase(
+        unitId: event.unitId,
+        tenantName: event.tenantName,
+        tenantPhone: event.tenantPhone,
+        tenantEmail: event.tenantEmail,
+        monthlyRent: event.monthlyRent,
+      );
+      emit(const UnitState.unitUpdateSuccess());
+    } catch (e) {
+      emit(UnitState.error(e.toString()));
+    }
+  }
+
+  void _onDeleteUnit(_DeleteUnit event, Emitter<UnitState> emit) async {
+    try {
+      await _deleteUnitUseCase(event.unitId);
+    } catch (e) {
+      emit(UnitState.error(e.toString()));
+    }
+  }
+
+  void _onUnitsUpdated(_UnitsUpdated event, Emitter<UnitState> emit) {
+    emit(UnitState.loaded(event.units));
+  }
+
+  @override
+  Future<void> close() {
+    _unitSubscription?.cancel();
+    return super.close();
+  }
+}
