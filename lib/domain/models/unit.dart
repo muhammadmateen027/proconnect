@@ -7,8 +7,7 @@ part 'unit.g.dart';
 enum FurnishingStatus { none, partial, full }
 
 @freezed
-class Unit with _$Unit {
-  const Unit._(); // Private constructor for getters
+class Unit with _$Unit { // Private constructor for getters
 
   const factory Unit({
     required String id,
@@ -38,6 +37,7 @@ class Unit with _$Unit {
     String? floorLevel,
     @Default(FurnishingStatus.none) FurnishingStatus furnishing,
   }) = _Unit;
+  const Unit._();
 
   factory Unit.fromJson(Map<String, dynamic> json) => _$UnitFromJson(json);
 

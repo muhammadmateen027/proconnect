@@ -30,6 +30,7 @@ mixin _$UserManagementEvent {
     adminCreateUser,
     required TResult Function(AppUser user) adminUpdateUser,
     required TResult Function(String uid) adminDeleteUser,
+    required TResult Function() loadUsers,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -44,6 +45,7 @@ mixin _$UserManagementEvent {
     adminCreateUser,
     TResult? Function(AppUser user)? adminUpdateUser,
     TResult? Function(String uid)? adminDeleteUser,
+    TResult? Function()? loadUsers,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -58,6 +60,7 @@ mixin _$UserManagementEvent {
     adminCreateUser,
     TResult Function(AppUser user)? adminUpdateUser,
     TResult Function(String uid)? adminDeleteUser,
+    TResult Function()? loadUsers,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,18 +68,21 @@ mixin _$UserManagementEvent {
     required TResult Function(_AdminCreateUser value) adminCreateUser,
     required TResult Function(_AdminUpdateUser value) adminUpdateUser,
     required TResult Function(_AdminDeleteUser value) adminDeleteUser,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AdminCreateUser value)? adminCreateUser,
     TResult? Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult? Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult? Function(_LoadUsers value)? loadUsers,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AdminCreateUser value)? adminCreateUser,
     TResult Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -255,6 +261,7 @@ class _$AdminCreateUserImpl implements _AdminCreateUser {
     adminCreateUser,
     required TResult Function(AppUser user) adminUpdateUser,
     required TResult Function(String uid) adminDeleteUser,
+    required TResult Function() loadUsers,
   }) {
     return adminCreateUser(
       email,
@@ -280,6 +287,7 @@ class _$AdminCreateUserImpl implements _AdminCreateUser {
     adminCreateUser,
     TResult? Function(AppUser user)? adminUpdateUser,
     TResult? Function(String uid)? adminDeleteUser,
+    TResult? Function()? loadUsers,
   }) {
     return adminCreateUser?.call(
       email,
@@ -305,6 +313,7 @@ class _$AdminCreateUserImpl implements _AdminCreateUser {
     adminCreateUser,
     TResult Function(AppUser user)? adminUpdateUser,
     TResult Function(String uid)? adminDeleteUser,
+    TResult Function()? loadUsers,
     required TResult orElse(),
   }) {
     if (adminCreateUser != null) {
@@ -326,6 +335,7 @@ class _$AdminCreateUserImpl implements _AdminCreateUser {
     required TResult Function(_AdminCreateUser value) adminCreateUser,
     required TResult Function(_AdminUpdateUser value) adminUpdateUser,
     required TResult Function(_AdminDeleteUser value) adminDeleteUser,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) {
     return adminCreateUser(this);
   }
@@ -336,6 +346,7 @@ class _$AdminCreateUserImpl implements _AdminCreateUser {
     TResult? Function(_AdminCreateUser value)? adminCreateUser,
     TResult? Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult? Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult? Function(_LoadUsers value)? loadUsers,
   }) {
     return adminCreateUser?.call(this);
   }
@@ -346,6 +357,7 @@ class _$AdminCreateUserImpl implements _AdminCreateUser {
     TResult Function(_AdminCreateUser value)? adminCreateUser,
     TResult Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) {
     if (adminCreateUser != null) {
@@ -475,6 +487,7 @@ class _$AdminUpdateUserImpl implements _AdminUpdateUser {
     adminCreateUser,
     required TResult Function(AppUser user) adminUpdateUser,
     required TResult Function(String uid) adminDeleteUser,
+    required TResult Function() loadUsers,
   }) {
     return adminUpdateUser(user);
   }
@@ -493,6 +506,7 @@ class _$AdminUpdateUserImpl implements _AdminUpdateUser {
     adminCreateUser,
     TResult? Function(AppUser user)? adminUpdateUser,
     TResult? Function(String uid)? adminDeleteUser,
+    TResult? Function()? loadUsers,
   }) {
     return adminUpdateUser?.call(user);
   }
@@ -511,6 +525,7 @@ class _$AdminUpdateUserImpl implements _AdminUpdateUser {
     adminCreateUser,
     TResult Function(AppUser user)? adminUpdateUser,
     TResult Function(String uid)? adminDeleteUser,
+    TResult Function()? loadUsers,
     required TResult orElse(),
   }) {
     if (adminUpdateUser != null) {
@@ -525,6 +540,7 @@ class _$AdminUpdateUserImpl implements _AdminUpdateUser {
     required TResult Function(_AdminCreateUser value) adminCreateUser,
     required TResult Function(_AdminUpdateUser value) adminUpdateUser,
     required TResult Function(_AdminDeleteUser value) adminDeleteUser,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) {
     return adminUpdateUser(this);
   }
@@ -535,6 +551,7 @@ class _$AdminUpdateUserImpl implements _AdminUpdateUser {
     TResult? Function(_AdminCreateUser value)? adminCreateUser,
     TResult? Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult? Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult? Function(_LoadUsers value)? loadUsers,
   }) {
     return adminUpdateUser?.call(this);
   }
@@ -545,6 +562,7 @@ class _$AdminUpdateUserImpl implements _AdminUpdateUser {
     TResult Function(_AdminCreateUser value)? adminCreateUser,
     TResult Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) {
     if (adminUpdateUser != null) {
@@ -651,6 +669,7 @@ class _$AdminDeleteUserImpl implements _AdminDeleteUser {
     adminCreateUser,
     required TResult Function(AppUser user) adminUpdateUser,
     required TResult Function(String uid) adminDeleteUser,
+    required TResult Function() loadUsers,
   }) {
     return adminDeleteUser(uid);
   }
@@ -669,6 +688,7 @@ class _$AdminDeleteUserImpl implements _AdminDeleteUser {
     adminCreateUser,
     TResult? Function(AppUser user)? adminUpdateUser,
     TResult? Function(String uid)? adminDeleteUser,
+    TResult? Function()? loadUsers,
   }) {
     return adminDeleteUser?.call(uid);
   }
@@ -687,6 +707,7 @@ class _$AdminDeleteUserImpl implements _AdminDeleteUser {
     adminCreateUser,
     TResult Function(AppUser user)? adminUpdateUser,
     TResult Function(String uid)? adminDeleteUser,
+    TResult Function()? loadUsers,
     required TResult orElse(),
   }) {
     if (adminDeleteUser != null) {
@@ -701,6 +722,7 @@ class _$AdminDeleteUserImpl implements _AdminDeleteUser {
     required TResult Function(_AdminCreateUser value) adminCreateUser,
     required TResult Function(_AdminUpdateUser value) adminUpdateUser,
     required TResult Function(_AdminDeleteUser value) adminDeleteUser,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) {
     return adminDeleteUser(this);
   }
@@ -711,6 +733,7 @@ class _$AdminDeleteUserImpl implements _AdminDeleteUser {
     TResult? Function(_AdminCreateUser value)? adminCreateUser,
     TResult? Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult? Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult? Function(_LoadUsers value)? loadUsers,
   }) {
     return adminDeleteUser?.call(this);
   }
@@ -721,6 +744,7 @@ class _$AdminDeleteUserImpl implements _AdminDeleteUser {
     TResult Function(_AdminCreateUser value)? adminCreateUser,
     TResult Function(_AdminUpdateUser value)? adminUpdateUser,
     TResult Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) {
     if (adminDeleteUser != null) {
@@ -744,12 +768,156 @@ abstract class _AdminDeleteUser implements UserManagementEvent {
 }
 
 /// @nodoc
+abstract class _$$LoadUsersImplCopyWith<$Res> {
+  factory _$$LoadUsersImplCopyWith(
+    _$LoadUsersImpl value,
+    $Res Function(_$LoadUsersImpl) then,
+  ) = __$$LoadUsersImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadUsersImplCopyWithImpl<$Res>
+    extends _$UserManagementEventCopyWithImpl<$Res, _$LoadUsersImpl>
+    implements _$$LoadUsersImplCopyWith<$Res> {
+  __$$LoadUsersImplCopyWithImpl(
+    _$LoadUsersImpl _value,
+    $Res Function(_$LoadUsersImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of UserManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadUsersImpl implements _LoadUsers {
+  const _$LoadUsersImpl();
+
+  @override
+  String toString() {
+    return 'UserManagementEvent.loadUsers()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadUsersImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+      String email,
+      String fullName,
+      UserRole role,
+      String password,
+      String? condominiumId,
+      String? agencyId,
+    )
+    adminCreateUser,
+    required TResult Function(AppUser user) adminUpdateUser,
+    required TResult Function(String uid) adminDeleteUser,
+    required TResult Function() loadUsers,
+  }) {
+    return loadUsers();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+      String email,
+      String fullName,
+      UserRole role,
+      String password,
+      String? condominiumId,
+      String? agencyId,
+    )?
+    adminCreateUser,
+    TResult? Function(AppUser user)? adminUpdateUser,
+    TResult? Function(String uid)? adminDeleteUser,
+    TResult? Function()? loadUsers,
+  }) {
+    return loadUsers?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+      String email,
+      String fullName,
+      UserRole role,
+      String password,
+      String? condominiumId,
+      String? agencyId,
+    )?
+    adminCreateUser,
+    TResult Function(AppUser user)? adminUpdateUser,
+    TResult Function(String uid)? adminDeleteUser,
+    TResult Function()? loadUsers,
+    required TResult orElse(),
+  }) {
+    if (loadUsers != null) {
+      return loadUsers();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AdminCreateUser value) adminCreateUser,
+    required TResult Function(_AdminUpdateUser value) adminUpdateUser,
+    required TResult Function(_AdminDeleteUser value) adminDeleteUser,
+    required TResult Function(_LoadUsers value) loadUsers,
+  }) {
+    return loadUsers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AdminCreateUser value)? adminCreateUser,
+    TResult? Function(_AdminUpdateUser value)? adminUpdateUser,
+    TResult? Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult? Function(_LoadUsers value)? loadUsers,
+  }) {
+    return loadUsers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AdminCreateUser value)? adminCreateUser,
+    TResult Function(_AdminUpdateUser value)? adminUpdateUser,
+    TResult Function(_AdminDeleteUser value)? adminDeleteUser,
+    TResult Function(_LoadUsers value)? loadUsers,
+    required TResult orElse(),
+  }) {
+    if (loadUsers != null) {
+      return loadUsers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadUsers implements UserManagementEvent {
+  const factory _LoadUsers() = _$LoadUsersImpl;
+}
+
+/// @nodoc
 mixin _$UserManagementState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<AppUser> users) loaded,
     required TResult Function(String errorKey) failure,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -757,6 +925,7 @@ mixin _$UserManagementState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<AppUser> users)? loaded,
     TResult? Function(String errorKey)? failure,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -764,6 +933,7 @@ mixin _$UserManagementState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<AppUser> users)? loaded,
     TResult Function(String errorKey)? failure,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -772,6 +942,7 @@ mixin _$UserManagementState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Failure value) failure,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -779,6 +950,7 @@ mixin _$UserManagementState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Failure value)? failure,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -786,6 +958,7 @@ mixin _$UserManagementState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -859,6 +1032,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<AppUser> users) loaded,
     required TResult Function(String errorKey) failure,
   }) {
     return initial();
@@ -870,6 +1044,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<AppUser> users)? loaded,
     TResult? Function(String errorKey)? failure,
   }) {
     return initial?.call();
@@ -881,6 +1056,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<AppUser> users)? loaded,
     TResult Function(String errorKey)? failure,
     required TResult orElse(),
   }) {
@@ -896,6 +1072,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Failure value) failure,
   }) {
     return initial(this);
@@ -907,6 +1084,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Failure value)? failure,
   }) {
     return initial?.call(this);
@@ -918,6 +1096,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -978,6 +1157,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<AppUser> users) loaded,
     required TResult Function(String errorKey) failure,
   }) {
     return loading();
@@ -989,6 +1169,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<AppUser> users)? loaded,
     TResult? Function(String errorKey)? failure,
   }) {
     return loading?.call();
@@ -1000,6 +1181,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<AppUser> users)? loaded,
     TResult Function(String errorKey)? failure,
     required TResult orElse(),
   }) {
@@ -1015,6 +1197,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Failure value) failure,
   }) {
     return loading(this);
@@ -1026,6 +1209,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Failure value)? failure,
   }) {
     return loading?.call(this);
@@ -1037,6 +1221,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -1097,6 +1282,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<AppUser> users) loaded,
     required TResult Function(String errorKey) failure,
   }) {
     return success();
@@ -1108,6 +1294,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<AppUser> users)? loaded,
     TResult? Function(String errorKey)? failure,
   }) {
     return success?.call();
@@ -1119,6 +1306,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<AppUser> users)? loaded,
     TResult Function(String errorKey)? failure,
     required TResult orElse(),
   }) {
@@ -1134,6 +1322,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Failure value) failure,
   }) {
     return success(this);
@@ -1145,6 +1334,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Failure value)? failure,
   }) {
     return success?.call(this);
@@ -1156,6 +1346,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -1168,6 +1359,172 @@ class _$SuccessImpl implements _Success {
 
 abstract class _Success implements UserManagementState {
   const factory _Success() = _$SuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+    _$LoadedImpl value,
+    $Res Function(_$LoadedImpl) then,
+  ) = __$$LoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<AppUser> users});
+}
+
+/// @nodoc
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$UserManagementStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+    _$LoadedImpl _value,
+    $Res Function(_$LoadedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of UserManagementState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? users = null}) {
+    return _then(
+      _$LoadedImpl(
+        users: null == users
+            ? _value._users
+            : users // ignore: cast_nullable_to_non_nullable
+                  as List<AppUser>,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$LoadedImpl implements _Loaded {
+  const _$LoadedImpl({required final List<AppUser> users}) : _users = users;
+
+  final List<AppUser> _users;
+  @override
+  List<AppUser> get users {
+    if (_users is EqualUnmodifiableListView) return _users;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_users);
+  }
+
+  @override
+  String toString() {
+    return 'UserManagementState.loaded(users: $users)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadedImpl &&
+            const DeepCollectionEquality().equals(other._users, _users));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_users));
+
+  /// Create a copy of UserManagementState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function(List<AppUser> users) loaded,
+    required TResult Function(String errorKey) failure,
+  }) {
+    return loaded(users);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function(List<AppUser> users)? loaded,
+    TResult? Function(String errorKey)? failure,
+  }) {
+    return loaded?.call(users);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function(List<AppUser> users)? loaded,
+    TResult Function(String errorKey)? failure,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(users);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loaded implements UserManagementState {
+  const factory _Loaded({required final List<AppUser> users}) = _$LoadedImpl;
+
+  List<AppUser> get users;
+
+  /// Create a copy of UserManagementState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1244,6 +1601,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function(List<AppUser> users) loaded,
     required TResult Function(String errorKey) failure,
   }) {
     return failure(errorKey);
@@ -1255,6 +1613,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function(List<AppUser> users)? loaded,
     TResult? Function(String errorKey)? failure,
   }) {
     return failure?.call(errorKey);
@@ -1266,6 +1625,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function(List<AppUser> users)? loaded,
     TResult Function(String errorKey)? failure,
     required TResult orElse(),
   }) {
@@ -1281,6 +1641,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
@@ -1292,6 +1653,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Failure value)? failure,
   }) {
     return failure?.call(this);
@@ -1303,6 +1665,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {

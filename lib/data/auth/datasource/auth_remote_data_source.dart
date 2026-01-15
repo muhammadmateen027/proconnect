@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 
 abstract class AuthRemoteDataSource {
@@ -31,6 +32,8 @@ abstract class AuthRemoteDataSource {
   Future<void> deleteUser(String uid);
 
   Future<void> updateUser(AppUser user);
+
+  Future<List<AppUser>> getUsers();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -108,27 +111,42 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required AppUser user,
     required String password,
   }) async {
-    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-      email: user.email,
-      password: password,
+    final appName = DateTime.now().millisecondsSinceEpoch.toString();
+    final secondaryApp = await Firebase.initializeApp(
+      name: appName,
+      options: Firebase.app().options,
     );
-    final newUser = userCredential.user;
-    if (newUser == null) {
-      throw Exception('User creation failed.');
+    final secondaryAuth = FirebaseAuth.instanceFor(app: secondaryApp);
+
+    try {
+      final userCredential = await secondaryAuth.createUserWithEmailAndPassword(
+        email: user.email,
+        password: password,
+      );
+      final newUser = userCredential.user;
+      if (newUser == null) {
+        throw Exception('User creation failed.');
+      }
+
+      final appUser = AppUser(
+        uid: newUser.uid,
+        email: user.email,
+        fullName: user.fullName,
+        role: user.role,
+        condominiumId: user.condominiumId,
+        agencyId: user.agencyId,
+      );
+
+      await _firestore
+          .collection('users')
+          .doc(newUser.uid)
+          .set(appUser.toJson());
+
+      return appUser;
+    } finally {
+      await secondaryAuth.signOut();
+      await secondaryApp.delete();
     }
-
-    final appUser = AppUser(
-      uid: newUser.uid,
-      email: user.email,
-      fullName: user.fullName,
-      role: user.role,
-      condominiumId: user.condominiumId,
-      agencyId: user.agencyId,
-    );
-
-    await _firestore.collection('users').doc(newUser.uid).set(appUser.toJson());
-
-    return appUser;
   }
 
   @override
@@ -139,5 +157,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> updateUser(AppUser user) {
     return _firestore.collection('users').doc(user.uid).update(user.toJson());
+  }
+
+  @override
+  Future<List<AppUser>> getUsers() async {
+    final snapshot = await _firestore.collection('users').get();
+    return snapshot.docs.map((doc) => AppUser.fromJson(doc.data())).toList();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proconnect/domain/models/app_user.dart';
+import 'package:proconnect/pages/agency_admin/view/agency_admin_dashboard.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/guard/view/guard_dashboard.dart';
 import 'package:proconnect/pages/owner/view/owner_dashboard.dart';
@@ -28,11 +29,7 @@ class HomeScreenWrapper extends StatelessWidget {
               case UserRole.super_admin:
                 return const SuperAdminDashboard();
               case UserRole.agency_admin:
-                return const Scaffold(
-                  body: Center(
-                    child: Text('Agency Admin Dashboard'),
-                  ),
-                );
+                return const AgencyAdminDashboard();
             }
           },
           unauthenticated: (message) {

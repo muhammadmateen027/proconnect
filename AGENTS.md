@@ -32,7 +32,7 @@ Every feature must be contained within `lib/pages/[feature_name]/` and follow th
 
 ## 6. Dependency Injection
 - Use `Kiwi` for service location.
-- Register all DataSources, Repositories, and UseCases in `lib/core/service/dependency_injector.dart`.
+- Register all DataSources, Repositories, and UseCases in `lib/core/services/dependency_injector.dart`.
 
 ## 7. Multi-Tenant Role Logic
 - User roles: `super_admin`, `agency_admin`, `guard`, `owner`, `tenant`.

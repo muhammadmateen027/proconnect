@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/l10n/l10n.dart';
-import 'package:proconnect/pages/admin/bloc/user_management/user_management_bloc.dart';
-import 'package:proconnect/core/widgets/custom_text_field.dart';
-import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 
 class CreateUserPage extends StatefulWidget {
   const CreateUserPage({super.key});
@@ -55,7 +55,7 @@ class _CreateUserPageState extends State<CreateUserPage> {
           );
         },
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: _formKey,
             child: Column(
@@ -84,7 +84,7 @@ class _CreateUserPageState extends State<CreateUserPage> {
                 ),
                 AppSpacing.gapH16,
                 DropdownButtonFormField<UserRole>(
-                  value: _selectedRole,
+                  initialValue: _selectedRole,
                   decoration: InputDecoration(labelText: l10n.role),
                   items: UserRole.values.map((role) {
                     return DropdownMenuItem(
@@ -105,17 +105,17 @@ class _CreateUserPageState extends State<CreateUserPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       context.read<UserManagementBloc>().add(
-                            UserManagementEvent.adminCreateUser(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                              fullName: _fullNameController.text,
-                              role: _selectedRole,
-                            ),
-                          );
+                        UserManagementEvent.adminCreateUser(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          fullName: _fullNameController.text,
+                          role: _selectedRole,
+                        ),
+                      );
                     }
                   },
                   child: Text(l10n.createUser),
-                )
+                ),
               ],
             ),
           ),

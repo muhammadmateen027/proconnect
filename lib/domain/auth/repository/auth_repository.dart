@@ -24,4 +24,6 @@ abstract class AuthRepository {
   Future<void> deleteUser(String uid);
 
   Future<void> updateUser(AppUser user);
+
+  Future<List<AppUser>> getUsers();
 }

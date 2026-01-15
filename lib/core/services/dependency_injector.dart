@@ -5,13 +5,24 @@ import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/core/theme/repository/theme_repository.dart';
 import 'package:proconnect/data/auth/datasource/auth_remote_data_source.dart';
 import 'package:proconnect/data/auth/repository/auth_repository_impl.dart';
+import 'package:proconnect/data/condo/datasource/condo_remote_data_source.dart';
+import 'package:proconnect/data/condo/repository/condo_repository_impl.dart';
 import 'package:proconnect/data/unit/datasource/unit_remote_data_source.dart';
 import 'package:proconnect/data/unit/repository/unit_repository_impl.dart';
+import 'package:proconnect/domain/admin/usecase/admin_create_user_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/admin_delete_user_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/admin_update_user_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/create_condo_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/delete_condo_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/get_users_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/load_condos_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/update_condo_use_case.dart';
 import 'package:proconnect/domain/auth/repository/auth_repository.dart';
 import 'package:proconnect/domain/auth/usecase/get_auth_status_stream_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_out_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_up_use_case.dart';
+import 'package:proconnect/domain/condo/repository/condo_repository.dart';
 import 'package:proconnect/domain/unit/repository/unit_repository.dart';
 import 'package:proconnect/domain/unit/usecase/add_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
@@ -19,6 +30,8 @@ import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/update_unit_tenant_details_use_case.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
+import 'package:proconnect/pages/super_admin/bloc/condo_management/condo_management_bloc.dart';
+import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -63,6 +76,12 @@ class DependencyInjector {
       )
       ..registerSingleton<UnitRepository>(
         (c) => UnitRepositoryImpl(c.resolve<UnitRemoteDataSource>()),
+      )
+      ..registerSingleton<CondoRemoteDataSource>(
+        (c) => CondoRemoteDataSourceImpl(),
+      )
+      ..registerSingleton<CondoRepository>(
+        (c) => CondoRepositoryImpl(c.resolve<CondoRemoteDataSource>()),
       );
   }
 
@@ -91,6 +110,30 @@ class DependencyInjector {
       )
       ..registerSingleton<UpdateUnitTenantDetailsUseCase>(
         (c) => UpdateUnitTenantDetailsUseCase(c.resolve<UnitRepository>()),
+      )
+      ..registerSingleton<AdminCreateUserUseCase>(
+        (c) => AdminCreateUserUseCase(c.resolve<AuthRepository>()),
+      )
+      ..registerSingleton<AdminUpdateUserUseCase>(
+        (c) => AdminUpdateUserUseCase(c.resolve<AuthRepository>()),
+      )
+      ..registerSingleton<AdminDeleteUserUseCase>(
+        (c) => AdminDeleteUserUseCase(c.resolve<AuthRepository>()),
+      )
+      ..registerSingleton<LoadCondosUseCase>(
+        (c) => LoadCondosUseCase(c.resolve<CondoRepository>()),
+      )
+      ..registerSingleton<CreateCondoUseCase>(
+        (c) => CreateCondoUseCase(c.resolve<CondoRepository>()),
+      )
+      ..registerSingleton<UpdateCondoUseCase>(
+        (c) => UpdateCondoUseCase(c.resolve<CondoRepository>()),
+      )
+      ..registerSingleton<DeleteCondoUseCase>(
+        (c) => DeleteCondoUseCase(c.resolve<CondoRepository>()),
+      )
+      ..registerSingleton<GetUsersUseCase>(
+        (c) => GetUsersUseCase(c.resolve<AuthRepository>()),
       );
   }
 
@@ -113,6 +156,22 @@ class DependencyInjector {
           c.resolve<AddUnitUseCase>(),
           c.resolve<DeleteUnitUseCase>(),
           c.resolve<UpdateUnitTenantDetailsUseCase>(),
+        ),
+      )
+      ..registerFactory<UserManagementBloc>(
+        (c) => UserManagementBloc(
+          adminCreateUserUseCase: c.resolve<AdminCreateUserUseCase>(),
+          adminUpdateUserUseCase: c.resolve<AdminUpdateUserUseCase>(),
+          adminDeleteUserUseCase: c.resolve<AdminDeleteUserUseCase>(),
+          getUsersUseCase: c.resolve<GetUsersUseCase>(),
+        ),
+      )
+      ..registerFactory<CondoManagementBloc>(
+        (c) => CondoManagementBloc(
+          loadCondosUseCase: c.resolve<LoadCondosUseCase>(),
+          createCondoUseCase: c.resolve<CreateCondoUseCase>(),
+          updateCondoUseCase: c.resolve<UpdateCondoUseCase>(),
+          deleteCondoUseCase: c.resolve<DeleteCondoUseCase>(),
         ),
       );
   }

@@ -74,4 +74,9 @@ class AuthRepositoryImpl implements AuthRepository {
       agencyId: agencyId,
     );
   }
+
+  @override
+  Future<List<AppUser>> getUsers() {
+    return _authRemoteDataSource.getUsers();
+  }
 }

@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:proconnect/domain/admin/usecase/admin_create_user_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/admin_delete_user_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/admin_update_user_use_case.dart';
+import 'package:proconnect/domain/admin/usecase/get_users_use_case.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 
 part 'user_management_bloc.freezed.dart';
@@ -15,18 +16,37 @@ class UserManagementBloc
     required AdminCreateUserUseCase adminCreateUserUseCase,
     required AdminUpdateUserUseCase adminUpdateUserUseCase,
     required AdminDeleteUserUseCase adminDeleteUserUseCase,
+    required GetUsersUseCase getUsersUseCase,
   })  : _adminCreateUserUseCase = adminCreateUserUseCase,
         _adminUpdateUserUseCase = adminUpdateUserUseCase,
         _adminDeleteUserUseCase = adminDeleteUserUseCase,
+        _getUsersUseCase = getUsersUseCase,
         super(const UserManagementState.initial()) {
     on<_AdminCreateUser>(_onAdminCreateUser);
     on<_AdminUpdateUser>(_onAdminUpdateUser);
     on<_AdminDeleteUser>(_onAdminDeleteUser);
+    on<_LoadUsers>(_onLoadUsers);
   }
 
   final AdminCreateUserUseCase _adminCreateUserUseCase;
   final AdminUpdateUserUseCase _adminUpdateUserUseCase;
   final AdminDeleteUserUseCase _adminDeleteUserUseCase;
+  final GetUsersUseCase _getUsersUseCase;
+
+  Future<void> _onLoadUsers(
+    _LoadUsers event,
+    Emitter<UserManagementState> emit,
+  ) async {
+    emit(const UserManagementState.loading());
+    try {
+      final users = await _getUsersUseCase();
+      emit(UserManagementState.loaded(users: users));
+    } catch (e) {
+      emit(const UserManagementState.failure(
+        errorKey: 'loadUsersFailed',
+      ));
+    }
+  }
 
   Future<void> _onAdminCreateUser(
     _AdminCreateUser event,
@@ -42,7 +62,7 @@ class UserManagementBloc
         condominiumId: event.condominiumId,
         agencyId: event.agencyId,
       );
-      emit(const UserManagementState.success());
+      add(const UserManagementEvent.loadUsers());
     } catch (e) {
       emit(const UserManagementState.failure(
         errorKey: 'createUserFailed',
@@ -59,7 +79,7 @@ class UserManagementBloc
       await _adminUpdateUserUseCase(
         user: event.user,
       );
-      emit(const UserManagementState.success());
+      add(const UserManagementEvent.loadUsers());
     } catch (e) {
       emit(const UserManagementState.failure(
         errorKey: 'updateUserFailed',
@@ -76,7 +96,7 @@ class UserManagementBloc
       await _adminDeleteUserUseCase(
         uid: event.uid,
       );
-      emit(const UserManagementState.success());
+      add(const UserManagementEvent.loadUsers());
     } catch (e) {
       emit(const UserManagementState.failure(
         errorKey: 'deleteUserFailed',
@@ -84,3 +104,4 @@ class UserManagementBloc
     }
   }
 }
+

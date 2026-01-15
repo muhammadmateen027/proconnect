@@ -26,7 +26,6 @@ mixin _$AppUser {
   String get fullName => throw _privateConstructorUsedError;
   UserRole get role => throw _privateConstructorUsedError;
   String? get agencyId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'siteId')
   String? get condominiumId => throw _privateConstructorUsedError;
 
   /// Serializes this AppUser to a JSON map.
@@ -49,7 +48,7 @@ abstract class $AppUserCopyWith<$Res> {
     String fullName,
     UserRole role,
     String? agencyId,
-    @JsonKey(name: 'siteId') String? condominiumId,
+    String? condominiumId,
   });
 }
 
@@ -121,7 +120,7 @@ abstract class _$$AppUserImplCopyWith<$Res> implements $AppUserCopyWith<$Res> {
     String fullName,
     UserRole role,
     String? agencyId,
-    @JsonKey(name: 'siteId') String? condominiumId,
+    String? condominiumId,
   });
 }
 
@@ -186,7 +185,7 @@ class _$AppUserImpl implements _AppUser {
     required this.fullName,
     required this.role,
     this.agencyId,
-    @JsonKey(name: 'siteId') this.condominiumId,
+    this.condominiumId,
   });
 
   factory _$AppUserImpl.fromJson(Map<String, dynamic> json) =>
@@ -203,7 +202,6 @@ class _$AppUserImpl implements _AppUser {
   @override
   final String? agencyId;
   @override
-  @JsonKey(name: 'siteId')
   final String? condominiumId;
 
   @override
@@ -260,7 +258,7 @@ abstract class _AppUser implements AppUser {
     required final String fullName,
     required final UserRole role,
     final String? agencyId,
-    @JsonKey(name: 'siteId') final String? condominiumId,
+    final String? condominiumId,
   }) = _$AppUserImpl;
 
   factory _AppUser.fromJson(Map<String, dynamic> json) = _$AppUserImpl.fromJson;
@@ -276,7 +274,6 @@ abstract class _AppUser implements AppUser {
   @override
   String? get agencyId;
   @override
-  @JsonKey(name: 'siteId')
   String? get condominiumId;
 
   /// Create a copy of AppUser

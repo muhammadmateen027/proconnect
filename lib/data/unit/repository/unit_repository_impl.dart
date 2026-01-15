@@ -3,9 +3,9 @@ import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/domain/unit/repository/unit_repository.dart';
 
 class UnitRepositoryImpl implements UnitRepository {
-  final UnitRemoteDataSource _dataSource;
 
   UnitRepositoryImpl(this._dataSource);
+  final UnitRemoteDataSource _dataSource;
 
   @override
   Stream<List<Unit>> getUnits(String ownerId) => _dataSource.getUnits(ownerId);

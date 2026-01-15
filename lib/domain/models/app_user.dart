@@ -13,7 +13,7 @@ class AppUser with _$AppUser {
     required String fullName,
     required UserRole role,
     String? agencyId,
-    @JsonKey(name: 'siteId') String? condominiumId,
+    String? condominiumId,
   }) = _AppUser;
 
   factory AppUser.fromJson(Map<String, dynamic> json) =>

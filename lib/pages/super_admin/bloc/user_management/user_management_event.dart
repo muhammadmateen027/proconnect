@@ -18,4 +18,6 @@ abstract class UserManagementEvent with _$UserManagementEvent {
   const factory UserManagementEvent.adminDeleteUser({
     required String uid,
   }) = _AdminDeleteUser;
+
+  const factory UserManagementEvent.loadUsers() = _LoadUsers;
 }

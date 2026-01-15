@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/app/view/home_screen_wrapper.dart';
+import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
 import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
@@ -13,7 +14,8 @@ import 'package:proconnect/pages/auth/view/registration_screen.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/settings_screen.dart';
-
+import 'package:proconnect/pages/super_admin/bloc/condo_management/condo_management_bloc.dart';
+import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 import 'package:proconnect/pages/super_admin/view/condo_management_page.dart';
 import 'package:proconnect/pages/super_admin/view/create_user_page.dart';
 import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
@@ -66,7 +68,7 @@ GoRouter createRouter(BuildContext context) {
       GoRoute(
         path: AppRoutes.unitDetail,
         builder: (context, state) {
-          final unit = state.extra as Unit;
+          final unit = state.extra! as Unit;
           return UnitDetailScreen(unit: unit);
         },
       ),
@@ -76,15 +78,27 @@ GoRouter createRouter(BuildContext context) {
       ),
       GoRoute(
         path: AppRoutes.userManagement,
-        builder: (context, state) => const UserManagementPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              DependencyInjector.instance.resolve<UserManagementBloc>(),
+          child: const UserManagementPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.createUser,
-        builder: (context, state) => const CreateUserPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              DependencyInjector.instance.resolve<UserManagementBloc>(),
+          child: const CreateUserPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.condoManagement,
-        builder: (context, state) => const CondoManagementPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              DependencyInjector.instance.resolve<CondoManagementBloc>(),
+          child: const CondoManagementPage(),
+        ),
       ),
       // A dedicated splash screen route
       GoRoute(

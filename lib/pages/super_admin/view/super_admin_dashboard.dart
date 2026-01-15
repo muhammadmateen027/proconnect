@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/l10n/l10n.dart';
-import 'package:go_router/go_router.dart';
 
 class SuperAdminDashboard extends StatelessWidget {
   const SuperAdminDashboard({super.key});
@@ -15,7 +15,7 @@ class SuperAdminDashboard extends StatelessWidget {
         title: Text(l10n.superAdminDashboard),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: GridView.count(
           crossAxisCount: 2,
           crossAxisSpacing: 16,
