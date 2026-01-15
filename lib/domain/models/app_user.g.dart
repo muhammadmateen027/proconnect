@@ -12,8 +12,8 @@ _$AppUserImpl _$$AppUserImplFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       fullName: json['fullName'] as String,
       role: $enumDecode(_$UserRoleEnumMap, json['role']),
-      siteId: json['siteId'] as String,
-      orgId: json['orgId'] as String,
+      agencyId: json['agencyId'] as String?,
+      condominiumId: json['siteId'] as String?,
     );
 
 Map<String, dynamic> _$$AppUserImplToJson(_$AppUserImpl instance) =>
@@ -22,11 +22,13 @@ Map<String, dynamic> _$$AppUserImplToJson(_$AppUserImpl instance) =>
       'email': instance.email,
       'fullName': instance.fullName,
       'role': _$UserRoleEnumMap[instance.role]!,
-      'siteId': instance.siteId,
-      'orgId': instance.orgId,
+      'agencyId': instance.agencyId,
+      'siteId': instance.condominiumId,
     };
 
 const _$UserRoleEnumMap = {
+  UserRole.super_admin: 'super_admin',
+  UserRole.agency_admin: 'agency_admin',
   UserRole.guard: 'guard',
   UserRole.owner: 'owner',
   UserRole.tenant: 'tenant',

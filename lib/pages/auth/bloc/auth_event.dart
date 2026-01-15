@@ -13,7 +13,7 @@ abstract class AuthEvent with _$AuthEvent {
     required String password,
     required String fullName,
     required UserRole role,
-    required String siteId,
-    required String orgId,
+    required String condominiumId,
+    required String agencyId,
   }) = _SignUp;
 }

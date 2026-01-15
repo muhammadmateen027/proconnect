@@ -3,8 +3,8 @@ import 'package:proconnect/domain/auth/repository/auth_repository.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-
   AuthRepositoryImpl(this._authRemoteDataSource);
+
   final AuthRemoteDataSource _authRemoteDataSource;
 
   @override
@@ -36,21 +36,42 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<AppUser> createUserWithRole({
+    required AppUser user,
+    required String password,
+  }) {
+    return _authRemoteDataSource.createUserWithRole(
+      user: user,
+      password: password,
+    );
+  }
+
+  @override
+  Future<void> deleteUser(String uid) {
+    return _authRemoteDataSource.deleteUser(uid);
+  }
+
+  @override
+  Future<void> updateUser(AppUser user) {
+    return _authRemoteDataSource.updateUser(user);
+  }
+
+  @override
   Future<AppUser> signUp({
     required String email,
     required String password,
     required String fullName,
     required UserRole role,
-    required String siteId,
-    required String orgId,
+    required String condominiumId,
+    required String agencyId,
   }) {
     return _authRemoteDataSource.signUp(
       email: email,
       password: password,
       fullName: fullName,
       role: role,
-      siteId: siteId,
-      orgId: orgId,
+      condominiumId: condominiumId,
+      agencyId: agencyId,
     );
   }
 }

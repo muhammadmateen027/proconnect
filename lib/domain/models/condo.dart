@@ -9,7 +9,6 @@ class Condo with _$Condo {
     required String id,
     required String name,
     required String address,
-    required String orgId,
   }) = _Condo;
 
   factory Condo.fromJson(Map<String, dynamic> json) => _$CondoFromJson(json);

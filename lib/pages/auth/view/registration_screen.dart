@@ -147,8 +147,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           password: _passwordController.text,
                           fullName: _fullNameController.text,
                           role: _selectedRole,
-                          siteId: 'default-site',
-                          orgId: 'default-org',
+                          condominiumId: 'default-site',
+                          agencyId: 'default-org',
                         ),
                       );
                     }

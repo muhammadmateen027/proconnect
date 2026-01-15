@@ -111,5 +111,69 @@
     "inviteGuest": "Invite Guest",
     "@inviteGuest": {
         "description": "Floating action button text to invite a guest"
+    },
+    "createUserFailed": "Failed to create user.",
+    "@createUserFailed": {
+        "description": "Error message for failed user creation"
+    },
+    "updateUserFailed": "Failed to update user.",
+    "@updateUserFailed": {
+        "description": "Error message for failed user update"
+    },
+    "deleteUserFailed": "Failed to delete user.",
+    "@deleteUserFailed": {
+        "description": "Error message for failed user deletion"
+    },
+    "loadCondosFailed": "Failed to load condos.",
+    "@loadCondosFailed": {
+        "description": "Error message for failed condo loading"
+    },
+    "createCondoFailed": "Failed to create condo.",
+    "@createCondoFailed": {
+        "description": "Error message for failed condo creation"
+    },
+    "updateCondoFailed": "Failed to update condo.",
+    "@updateCondoFailed": {
+        "description": "Error message for failed condo update"
+    },
+    "deleteCondoFailed": "Failed to delete condo.",
+    "@deleteCondoFailed": {
+        "description": "Error message for failed condo deletion"
+    },
+    "superAdminDashboard": "Super Admin Dashboard",
+    "@superAdminDashboard": {
+        "description": "Title for the Super Admin Dashboard"
+    },
+    "manageCondominiums": "Manage Condominiums",
+    "@manageCondominiums": {
+        "description": "Label for the manage condominiums card"
+    },
+    "manageAgenciesUsers": "Manage Agencies/Users",
+    "@manageAgenciesUsers": {
+        "description": "Label for the manage agencies/users card"
+    },
+    "createUser": "Create User",
+    "@createUser": {
+        "description": "Title for the create user page"
+    },
+    "role": "Role",
+    "@role": {
+        "description": "Label for the role dropdown"
+    },
+    "deleteUser": "Delete User",
+    "@deleteUser": {
+        "description": "Title for the delete user dialog"
+    },
+    "deleteUserConfirmation": "Are you sure you want to delete this user?",
+    "@deleteUserConfirmation": {
+        "description": "Content for the delete user dialog"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Cancel button text"
+    },
+    "delete": "Delete",
+    "@delete": {
+        "description": "Delete button text"
     }
 }

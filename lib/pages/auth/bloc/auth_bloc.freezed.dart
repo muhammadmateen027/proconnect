@@ -27,8 +27,8 @@ mixin _$AuthEvent {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )
     signUp,
   }) => throw _privateConstructorUsedError;
@@ -42,8 +42,8 @@ mixin _$AuthEvent {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
   }) => throw _privateConstructorUsedError;
@@ -57,8 +57,8 @@ mixin _$AuthEvent {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
     required TResult orElse(),
@@ -159,8 +159,8 @@ class _$CheckAuthenticationImpl implements _CheckAuthentication {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )
     signUp,
   }) {
@@ -178,8 +178,8 @@ class _$CheckAuthenticationImpl implements _CheckAuthentication {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
   }) {
@@ -197,8 +197,8 @@ class _$CheckAuthenticationImpl implements _CheckAuthentication {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
     required TResult orElse(),
@@ -337,8 +337,8 @@ class _$LoginImpl implements _Login {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )
     signUp,
   }) {
@@ -356,8 +356,8 @@ class _$LoginImpl implements _Login {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
   }) {
@@ -375,8 +375,8 @@ class _$LoginImpl implements _Login {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
     required TResult orElse(),
@@ -492,8 +492,8 @@ class _$LogoutImpl implements _Logout {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )
     signUp,
   }) {
@@ -511,8 +511,8 @@ class _$LogoutImpl implements _Logout {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
   }) {
@@ -530,8 +530,8 @@ class _$LogoutImpl implements _Logout {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
     required TResult orElse(),
@@ -596,8 +596,8 @@ abstract class _$$SignUpImplCopyWith<$Res> {
     String password,
     String fullName,
     UserRole role,
-    String siteId,
-    String orgId,
+    String condominiumId,
+    String agencyId,
   });
 }
 
@@ -619,8 +619,8 @@ class __$$SignUpImplCopyWithImpl<$Res>
     Object? password = null,
     Object? fullName = null,
     Object? role = null,
-    Object? siteId = null,
-    Object? orgId = null,
+    Object? condominiumId = null,
+    Object? agencyId = null,
   }) {
     return _then(
       _$SignUpImpl(
@@ -640,13 +640,13 @@ class __$$SignUpImplCopyWithImpl<$Res>
             ? _value.role
             : role // ignore: cast_nullable_to_non_nullable
                   as UserRole,
-        siteId: null == siteId
-            ? _value.siteId
-            : siteId // ignore: cast_nullable_to_non_nullable
+        condominiumId: null == condominiumId
+            ? _value.condominiumId
+            : condominiumId // ignore: cast_nullable_to_non_nullable
                   as String,
-        orgId: null == orgId
-            ? _value.orgId
-            : orgId // ignore: cast_nullable_to_non_nullable
+        agencyId: null == agencyId
+            ? _value.agencyId
+            : agencyId // ignore: cast_nullable_to_non_nullable
                   as String,
       ),
     );
@@ -661,8 +661,8 @@ class _$SignUpImpl implements _SignUp {
     required this.password,
     required this.fullName,
     required this.role,
-    required this.siteId,
-    required this.orgId,
+    required this.condominiumId,
+    required this.agencyId,
   });
 
   @override
@@ -674,13 +674,13 @@ class _$SignUpImpl implements _SignUp {
   @override
   final UserRole role;
   @override
-  final String siteId;
+  final String condominiumId;
   @override
-  final String orgId;
+  final String agencyId;
 
   @override
   String toString() {
-    return 'AuthEvent.signUp(email: $email, password: $password, fullName: $fullName, role: $role, siteId: $siteId, orgId: $orgId)';
+    return 'AuthEvent.signUp(email: $email, password: $password, fullName: $fullName, role: $role, condominiumId: $condominiumId, agencyId: $agencyId)';
   }
 
   @override
@@ -694,13 +694,22 @@ class _$SignUpImpl implements _SignUp {
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.siteId, siteId) || other.siteId == siteId) &&
-            (identical(other.orgId, orgId) || other.orgId == orgId));
+            (identical(other.condominiumId, condominiumId) ||
+                other.condominiumId == condominiumId) &&
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, email, password, fullName, role, siteId, orgId);
+  int get hashCode => Object.hash(
+    runtimeType,
+    email,
+    password,
+    fullName,
+    role,
+    condominiumId,
+    agencyId,
+  );
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -721,12 +730,12 @@ class _$SignUpImpl implements _SignUp {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )
     signUp,
   }) {
-    return signUp(email, password, fullName, role, siteId, orgId);
+    return signUp(email, password, fullName, role, condominiumId, agencyId);
   }
 
   @override
@@ -740,12 +749,19 @@ class _$SignUpImpl implements _SignUp {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
   }) {
-    return signUp?.call(email, password, fullName, role, siteId, orgId);
+    return signUp?.call(
+      email,
+      password,
+      fullName,
+      role,
+      condominiumId,
+      agencyId,
+    );
   }
 
   @override
@@ -759,14 +775,14 @@ class _$SignUpImpl implements _SignUp {
       String password,
       String fullName,
       UserRole role,
-      String siteId,
-      String orgId,
+      String condominiumId,
+      String agencyId,
     )?
     signUp,
     required TResult orElse(),
   }) {
     if (signUp != null) {
-      return signUp(email, password, fullName, role, siteId, orgId);
+      return signUp(email, password, fullName, role, condominiumId, agencyId);
     }
     return orElse();
   }
@@ -815,16 +831,16 @@ abstract class _SignUp implements AuthEvent {
     required final String password,
     required final String fullName,
     required final UserRole role,
-    required final String siteId,
-    required final String orgId,
+    required final String condominiumId,
+    required final String agencyId,
   }) = _$SignUpImpl;
 
   String get email;
   String get password;
   String get fullName;
   UserRole get role;
-  String get siteId;
-  String get orgId;
+  String get condominiumId;
+  String get agencyId;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.

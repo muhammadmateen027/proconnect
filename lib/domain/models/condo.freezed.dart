@@ -24,7 +24,6 @@ mixin _$Condo {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
-  String get orgId => throw _privateConstructorUsedError;
 
   /// Serializes this Condo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +39,7 @@ abstract class $CondoCopyWith<$Res> {
   factory $CondoCopyWith(Condo value, $Res Function(Condo) then) =
       _$CondoCopyWithImpl<$Res, Condo>;
   @useResult
-  $Res call({String id, String name, String address, String orgId});
+  $Res call({String id, String name, String address});
 }
 
 /// @nodoc
@@ -57,12 +56,7 @@ class _$CondoCopyWithImpl<$Res, $Val extends Condo>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? address = null,
-    Object? orgId = null,
-  }) {
+  $Res call({Object? id = null, Object? name = null, Object? address = null}) {
     return _then(
       _value.copyWith(
             id: null == id
@@ -76,10 +70,6 @@ class _$CondoCopyWithImpl<$Res, $Val extends Condo>
             address: null == address
                 ? _value.address
                 : address // ignore: cast_nullable_to_non_nullable
-                      as String,
-            orgId: null == orgId
-                ? _value.orgId
-                : orgId // ignore: cast_nullable_to_non_nullable
                       as String,
           )
           as $Val,
@@ -95,7 +85,7 @@ abstract class _$$CondoImplCopyWith<$Res> implements $CondoCopyWith<$Res> {
   ) = __$$CondoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String address, String orgId});
+  $Res call({String id, String name, String address});
 }
 
 /// @nodoc
@@ -111,12 +101,7 @@ class __$$CondoImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? address = null,
-    Object? orgId = null,
-  }) {
+  $Res call({Object? id = null, Object? name = null, Object? address = null}) {
     return _then(
       _$CondoImpl(
         id: null == id
@@ -131,10 +116,6 @@ class __$$CondoImplCopyWithImpl<$Res>
             ? _value.address
             : address // ignore: cast_nullable_to_non_nullable
                   as String,
-        orgId: null == orgId
-            ? _value.orgId
-            : orgId // ignore: cast_nullable_to_non_nullable
-                  as String,
       ),
     );
   }
@@ -147,7 +128,6 @@ class _$CondoImpl implements _Condo {
     required this.id,
     required this.name,
     required this.address,
-    required this.orgId,
   });
 
   factory _$CondoImpl.fromJson(Map<String, dynamic> json) =>
@@ -159,12 +139,10 @@ class _$CondoImpl implements _Condo {
   final String name;
   @override
   final String address;
-  @override
-  final String orgId;
 
   @override
   String toString() {
-    return 'Condo(id: $id, name: $name, address: $address, orgId: $orgId)';
+    return 'Condo(id: $id, name: $name, address: $address)';
   }
 
   @override
@@ -174,13 +152,12 @@ class _$CondoImpl implements _Condo {
             other is _$CondoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.orgId, orgId) || other.orgId == orgId));
+            (identical(other.address, address) || other.address == address));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, address, orgId);
+  int get hashCode => Object.hash(runtimeType, id, name, address);
 
   /// Create a copy of Condo
   /// with the given fields replaced by the non-null parameter values.
@@ -201,7 +178,6 @@ abstract class _Condo implements Condo {
     required final String id,
     required final String name,
     required final String address,
-    required final String orgId,
   }) = _$CondoImpl;
 
   factory _Condo.fromJson(Map<String, dynamic> json) = _$CondoImpl.fromJson;
@@ -212,8 +188,6 @@ abstract class _Condo implements Condo {
   String get name;
   @override
   String get address;
-  @override
-  String get orgId;
 
   /// Create a copy of Condo
   /// with the given fields replaced by the non-null parameter values.

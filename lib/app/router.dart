@@ -14,6 +14,11 @@ import 'package:proconnect/pages/owner/view/add_unit_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/settings_screen.dart';
 
+import 'package:proconnect/pages/super_admin/view/condo_management_page.dart';
+import 'package:proconnect/pages/super_admin/view/create_user_page.dart';
+import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
+import 'package:proconnect/pages/super_admin/view/user_management_page.dart';
+
 // A helper class to make GoRouter listen to a BLoC stream
 class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
@@ -64,6 +69,22 @@ GoRouter createRouter(BuildContext context) {
           final unit = state.extra as Unit;
           return UnitDetailScreen(unit: unit);
         },
+      ),
+      GoRoute(
+        path: AppRoutes.superAdminDashboard,
+        builder: (context, state) => const SuperAdminDashboard(),
+      ),
+      GoRoute(
+        path: AppRoutes.userManagement,
+        builder: (context, state) => const UserManagementPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.createUser,
+        builder: (context, state) => const CreateUserPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.condoManagement,
+        builder: (context, state) => const CondoManagementPage(),
       ),
       // A dedicated splash screen route
       GoRoute(

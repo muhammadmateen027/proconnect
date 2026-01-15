@@ -4,6 +4,7 @@ import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/guard/view/guard_dashboard.dart';
 import 'package:proconnect/pages/owner/view/owner_dashboard.dart';
+import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
 import 'package:proconnect/pages/tenant/view/tenant_dashboard.dart';
 
 class HomeScreenWrapper extends StatelessWidget {
@@ -24,6 +25,14 @@ class HomeScreenWrapper extends StatelessWidget {
                 return const OwnerDashboard();
               case UserRole.tenant:
                 return const TenantDashboard();
+              case UserRole.super_admin:
+                return const SuperAdminDashboard();
+              case UserRole.agency_admin:
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Agency Admin Dashboard'),
+                  ),
+                );
             }
           },
           unauthenticated: (message) {

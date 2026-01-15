@@ -25,8 +25,9 @@ mixin _$AppUser {
   String get email => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
   UserRole get role => throw _privateConstructorUsedError;
-  String get siteId => throw _privateConstructorUsedError;
-  String get orgId => throw _privateConstructorUsedError;
+  String? get agencyId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'siteId')
+  String? get condominiumId => throw _privateConstructorUsedError;
 
   /// Serializes this AppUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,8 +48,8 @@ abstract class $AppUserCopyWith<$Res> {
     String email,
     String fullName,
     UserRole role,
-    String siteId,
-    String orgId,
+    String? agencyId,
+    @JsonKey(name: 'siteId') String? condominiumId,
   });
 }
 
@@ -71,8 +72,8 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
     Object? email = null,
     Object? fullName = null,
     Object? role = null,
-    Object? siteId = null,
-    Object? orgId = null,
+    Object? agencyId = freezed,
+    Object? condominiumId = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -92,14 +93,14 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
                 ? _value.role
                 : role // ignore: cast_nullable_to_non_nullable
                       as UserRole,
-            siteId: null == siteId
-                ? _value.siteId
-                : siteId // ignore: cast_nullable_to_non_nullable
-                      as String,
-            orgId: null == orgId
-                ? _value.orgId
-                : orgId // ignore: cast_nullable_to_non_nullable
-                      as String,
+            agencyId: freezed == agencyId
+                ? _value.agencyId
+                : agencyId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            condominiumId: freezed == condominiumId
+                ? _value.condominiumId
+                : condominiumId // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -119,8 +120,8 @@ abstract class _$$AppUserImplCopyWith<$Res> implements $AppUserCopyWith<$Res> {
     String email,
     String fullName,
     UserRole role,
-    String siteId,
-    String orgId,
+    String? agencyId,
+    @JsonKey(name: 'siteId') String? condominiumId,
   });
 }
 
@@ -142,8 +143,8 @@ class __$$AppUserImplCopyWithImpl<$Res>
     Object? email = null,
     Object? fullName = null,
     Object? role = null,
-    Object? siteId = null,
-    Object? orgId = null,
+    Object? agencyId = freezed,
+    Object? condominiumId = freezed,
   }) {
     return _then(
       _$AppUserImpl(
@@ -163,14 +164,14 @@ class __$$AppUserImplCopyWithImpl<$Res>
             ? _value.role
             : role // ignore: cast_nullable_to_non_nullable
                   as UserRole,
-        siteId: null == siteId
-            ? _value.siteId
-            : siteId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        orgId: null == orgId
-            ? _value.orgId
-            : orgId // ignore: cast_nullable_to_non_nullable
-                  as String,
+        agencyId: freezed == agencyId
+            ? _value.agencyId
+            : agencyId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        condominiumId: freezed == condominiumId
+            ? _value.condominiumId
+            : condominiumId // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -184,8 +185,8 @@ class _$AppUserImpl implements _AppUser {
     required this.email,
     required this.fullName,
     required this.role,
-    required this.siteId,
-    required this.orgId,
+    this.agencyId,
+    @JsonKey(name: 'siteId') this.condominiumId,
   });
 
   factory _$AppUserImpl.fromJson(Map<String, dynamic> json) =>
@@ -200,13 +201,14 @@ class _$AppUserImpl implements _AppUser {
   @override
   final UserRole role;
   @override
-  final String siteId;
+  final String? agencyId;
   @override
-  final String orgId;
+  @JsonKey(name: 'siteId')
+  final String? condominiumId;
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, fullName: $fullName, role: $role, siteId: $siteId, orgId: $orgId)';
+    return 'AppUser(uid: $uid, email: $email, fullName: $fullName, role: $role, agencyId: $agencyId, condominiumId: $condominiumId)';
   }
 
   @override
@@ -219,14 +221,23 @@ class _$AppUserImpl implements _AppUser {
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.siteId, siteId) || other.siteId == siteId) &&
-            (identical(other.orgId, orgId) || other.orgId == orgId));
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId) &&
+            (identical(other.condominiumId, condominiumId) ||
+                other.condominiumId == condominiumId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, uid, email, fullName, role, siteId, orgId);
+  int get hashCode => Object.hash(
+    runtimeType,
+    uid,
+    email,
+    fullName,
+    role,
+    agencyId,
+    condominiumId,
+  );
 
   /// Create a copy of AppUser
   /// with the given fields replaced by the non-null parameter values.
@@ -248,8 +259,8 @@ abstract class _AppUser implements AppUser {
     required final String email,
     required final String fullName,
     required final UserRole role,
-    required final String siteId,
-    required final String orgId,
+    final String? agencyId,
+    @JsonKey(name: 'siteId') final String? condominiumId,
   }) = _$AppUserImpl;
 
   factory _AppUser.fromJson(Map<String, dynamic> json) = _$AppUserImpl.fromJson;
@@ -263,9 +274,10 @@ abstract class _AppUser implements AppUser {
   @override
   UserRole get role;
   @override
-  String get siteId;
+  String? get agencyId;
   @override
-  String get orgId;
+  @JsonKey(name: 'siteId')
+  String? get condominiumId;
 
   /// Create a copy of AppUser
   /// with the given fields replaced by the non-null parameter values.

@@ -111,5 +111,69 @@
     "inviteGuest": "Invitar Huésped",
     "@inviteGuest": {
         "description": "Texto del botón de acción flotante para invitar a un huésped"
+    },
+    "createUserFailed": "Error al crear el usuario.",
+    "@createUserFailed": {
+        "description": "Mensaje de error para la creación de usuario fallida"
+    },
+    "updateUserFailed": "Error al actualizar el usuario.",
+    "@updateUserFailed": {
+        "description": "Mensaje de error para la actualización de usuario fallida"
+    },
+    "deleteUserFailed": "Error al eliminar el usuario.",
+    "@deleteUserFailed": {
+        "description": "Mensaje de error para la eliminación de usuario fallida"
+    },
+    "loadCondosFailed": "Error al cargar los condominios.",
+    "@loadCondosFailed": {
+        "description": "Mensaje de error para la carga de condominios fallida"
+    },
+    "createCondoFailed": "Error al crear el condominio.",
+    "@createCondoFailed": {
+        "description": "Mensaje de error para la creación de condominio fallida"
+    },
+    "updateCondoFailed": "Error al actualizar el condominio.",
+    "@updateCondoFailed": {
+        "description": "Mensaje de error para la actualización de condominio fallida"
+    },
+    "deleteCondoFailed": "Error al eliminar el condominio.",
+    "@deleteCondoFailed": {
+        "description": "Mensaje de error para la eliminación de condominio fallida"
+    },
+    "superAdminDashboard": "Panel de Super Administrador",
+    "@superAdminDashboard": {
+        "description": "Título para el Panel de Super Administrador"
+    },
+    "manageCondominiums": "Administrar Condominios",
+    "@manageCondominiums": {
+        "description": "Etiqueta para la tarjeta de administrar condominios"
+    },
+    "manageAgenciesUsers": "Administrar Agencias/Usuarios",
+    "@manageAgenciesUsers": {
+        "description": "Etiqueta para la tarjeta de administrar agencias/usuarios"
+    },
+    "createUser": "Crear Usuario",
+    "@createUser": {
+        "description": "Título para la página de crear usuario"
+    },
+    "role": "Rol",
+    "@role": {
+        "description": "Etiqueta para el menú desplegable de roles"
+    },
+    "deleteUser": "Eliminar Usuario",
+    "@deleteUser": {
+        "description": "Título para el diálogo de eliminar usuario"
+    },
+    "deleteUserConfirmation": "¿Estás seguro de que quieres eliminar este usuario?",
+    "@deleteUserConfirmation": {
+        "description": "Contenido para el diálogo de eliminar usuario"
+    },
+    "cancel": "Cancelar",
+    "@cancel": {
+        "description": "Texto del botón de cancelar"
+    },
+    "delete": "Eliminar",
+    "@delete": {
+        "description": "Texto del botón de eliminar"
     }
 }

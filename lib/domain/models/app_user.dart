@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'app_user.freezed.dart';
 part 'app_user.g.dart';
 
-enum UserRole { guard, owner, tenant }
+enum UserRole { super_admin, agency_admin, guard, owner, tenant }
 
 @freezed
 class AppUser with _$AppUser {
@@ -12,8 +12,8 @@ class AppUser with _$AppUser {
     required String email,
     required String fullName,
     required UserRole role,
-    required String siteId,
-    required String orgId,
+    String? agencyId,
+    @JsonKey(name: 'siteId') String? condominiumId,
   }) = _AppUser;
 
   factory AppUser.fromJson(Map<String, dynamic> json) =>
