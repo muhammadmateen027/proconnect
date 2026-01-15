@@ -13,6 +13,12 @@ class SuperAdminDashboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.superAdminDashboard),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => context.push(AppRoutes.settings),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
