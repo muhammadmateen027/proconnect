@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/l10n/l10n.dart';
 
 class SuperAdminDashboard extends StatelessWidget {
@@ -27,14 +28,12 @@ class SuperAdminDashboard extends StatelessWidget {
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
           children: [
-            _buildDashboardCard(
-              context,
+            DashboardCard(
               title: l10n.manageCondominiums,
               icon: Icons.business,
               onTap: () => context.push(AppRoutes.condoManagement),
             ),
-            _buildDashboardCard(
-              context,
+            DashboardCard(
               title: l10n.manageAgenciesUsers,
               icon: Icons.people,
               onTap: () => context.push(AppRoutes.userManagement),
@@ -44,13 +43,22 @@ class SuperAdminDashboard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDashboardCard(
-    BuildContext context, {
-    required String title,
-    required IconData icon,
-    required VoidCallback onTap,
-  }) {
+class DashboardCard extends StatelessWidget {
+  const DashboardCard({
+    required this.title,
+    required this.icon,
+    required this.onTap,
+    super.key,
+  });
+
+  final String title;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
       elevation: 4,
@@ -68,11 +76,13 @@ class SuperAdminDashboard extends StatelessWidget {
               size: 48,
               color: theme.colorScheme.primary,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             Text(
               title,
               textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
             ),
           ],
         ),

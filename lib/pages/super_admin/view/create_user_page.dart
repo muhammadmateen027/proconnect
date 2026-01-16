@@ -86,6 +86,9 @@ class _CreateUserPageState extends State<CreateUserPage> {
                 DropdownButtonFormField<UserRole>(
                   initialValue: _selectedRole,
                   decoration: InputDecoration(labelText: l10n.role),
+                  style: TextStyle(color: theme.colorScheme.onSurface),
+                  iconEnabledColor: theme.colorScheme.onSurface,
+                  dropdownColor: theme.colorScheme.surface,
                   items: UserRole.values.map((role) {
                     return DropdownMenuItem(
                       value: role,

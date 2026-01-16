@@ -112,10 +112,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   decoration: InputDecoration(
                     labelText: l10n.iAmA,
                     labelStyle: GoogleFonts.poppins(
-                      color: Colors.grey.shade700,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -123,7 +125,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colors.blue.shade700,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 2,
                       ),
                     ),
@@ -132,8 +134,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       borderSide: BorderSide.none,
                     ),
                   ),
-                  style: GoogleFonts.poppins(color: Colors.black87),
-                  dropdownColor: Colors.white,
+                  style: GoogleFonts.poppins(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  iconEnabledColor: Theme.of(context).colorScheme.onSurface,
+                  dropdownColor: Theme.of(context).colorScheme.surface,
                 ),
                 AppSpacing.gapH32,
                 CustomAuthButton(

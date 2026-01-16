@@ -37,7 +37,12 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   RadioListTile<ThemeMode>(
-                    title: const Text('System Default'),
+                    title: Text(
+                      'System Default',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
                     value: ThemeMode.system,
                     groupValue: state.themeMode,
                     onChanged: (value) {
@@ -47,7 +52,12 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   RadioListTile<ThemeMode>(
-                    title: const Text('Light'),
+                    title: Text(
+                      'Light',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
                     value: ThemeMode.light,
                     groupValue: state.themeMode,
                     onChanged: (value) {
@@ -57,7 +67,12 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   RadioListTile<ThemeMode>(
-                    title: const Text('Dark'),
+                    title: Text(
+                      'Dark',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
                     value: ThemeMode.dark,
                     groupValue: state.themeMode,
                     onChanged: (value) {

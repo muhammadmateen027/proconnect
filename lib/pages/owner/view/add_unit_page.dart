@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
@@ -94,13 +95,13 @@ class _AddUnitPageState extends State<AddUnitPage> {
               'Unit Information',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _unitNoController,
               labelText: 'Unit Number (e.g., A-12-03)',
               validator: (v) => v!.isEmpty ? 'Unit number is required' : null,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _condoNameController,
               labelText: 'Condominium Name',
@@ -113,7 +114,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
               'Unit Specifications',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             Row(
               children: [
                 Expanded(
@@ -123,7 +124,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
                     keyboardType: TextInputType.number,
                   ),
                 ),
-                const SizedBox(width: 16),
+                AppSpacing.gapW16,
                 Expanded(
                   child: CustomTextField(
                     controller: _bathroomsController,
@@ -133,22 +134,25 @@ class _AddUnitPageState extends State<AddUnitPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _sqftController,
               labelText: 'Square Feet',
               keyboardType: TextInputType.number,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _floorLevelController,
               labelText: 'Floor Level',
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             DropdownButtonFormField<FurnishingStatus>(
               initialValue: _furnishingStatus,
               onChanged: (status) =>
                   setState(() => _furnishingStatus = status!),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              iconEnabledColor: Theme.of(context).colorScheme.onSurface,
+              dropdownColor: Theme.of(context).colorScheme.surface,
               items: FurnishingStatus.values
                   .map((s) => DropdownMenuItem(value: s, child: Text(s.name)))
                   .toList(),
@@ -158,7 +162,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
 
             // --- Parking Details ---
             Text('Parking', style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _parkingSpacesController,
               labelText: 'Allowed Parking Spaces (comma-separated)',
@@ -170,18 +174,18 @@ class _AddUnitPageState extends State<AddUnitPage> {
               'Tenant Details (Optional)',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _tenantNameController,
               labelText: 'Tenant Name',
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _tenantPhoneController,
               labelText: 'Tenant Phone',
               keyboardType: TextInputType.phone,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _tenantEmailController,
               labelText: 'Tenant Email',
@@ -194,25 +198,25 @@ class _AddUnitPageState extends State<AddUnitPage> {
               'Rental Details',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _rentAmountController,
               labelText: 'Monthly Rent Amount',
               keyboardType: TextInputType.number,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _securityDepositController,
               labelText: 'Security Deposit',
               keyboardType: TextInputType.number,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _rentDueDateController,
               labelText: 'Rent Due Day of Month (e.g., 1)',
               keyboardType: TextInputType.number,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             Row(
               children: [
                 Expanded(
@@ -239,7 +243,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             Text(
               'Utilities Included',
               style: Theme.of(context).textTheme.titleSmall,
@@ -260,7 +264,7 @@ class _AddUnitPageState extends State<AddUnitPage> {
               );
             }),
 
-            const SizedBox(height: 32),
+            AppSpacing.gapH32,
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

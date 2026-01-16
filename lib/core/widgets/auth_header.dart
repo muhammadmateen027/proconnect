@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 
 class AuthHeader extends StatelessWidget {
-
   const AuthHeader({required this.title, required this.subtitle, super.key});
   final String title;
   final String subtitle;
@@ -19,7 +19,7 @@ class AuthHeader extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 8),
+        AppSpacing.gapH8,
         Text(
           subtitle,
           style: theme.textTheme.titleMedium,

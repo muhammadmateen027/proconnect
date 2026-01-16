@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
@@ -58,33 +59,33 @@ class _TenantAssignmentSheetState extends State<TenantAssignmentSheet> {
               'Assign Tenant',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            const SizedBox(height: 24),
+            AppSpacing.gapH24,
             CustomTextField(
               controller: _nameController,
               labelText: 'Tenant Name',
               validator: (v) => v!.isEmpty ? 'Name cannot be empty' : null,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _phoneController,
               labelText: 'Tenant Phone',
               keyboardType: TextInputType.phone,
               validator: (v) => v!.isEmpty ? 'Phone cannot be empty' : null,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _emailController,
               labelText: 'Tenant Email',
               keyboardType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
             CustomTextField(
               controller: _rentController,
               labelText: 'Monthly Rent',
               keyboardType: TextInputType.number,
               validator: (v) => v!.isEmpty ? 'Rent cannot be empty' : null,
             ),
-            const SizedBox(height: 24),
+            AppSpacing.gapH24,
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -102,7 +103,7 @@ class _TenantAssignmentSheetState extends State<TenantAssignmentSheet> {
               },
               child: const Text('Save Details'),
             ),
-            const SizedBox(height: 16),
+            AppSpacing.gapH16,
           ],
         ),
       ),

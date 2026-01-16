@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/owner/view/widgets/tenant_assignment_sheet.dart';
@@ -45,8 +46,7 @@ class UnitDetailScreen extends StatelessWidget {
                       style: theme.textTheme.headlineSmall,
                     ),
                     const Divider(height: 24),
-                    _buildDetailRow(
-                      context,
+                    UnitDetailRow(
                       icon: Icons.attach_money,
                       label: 'Monthly Rent',
                       value: unit.monthlyRent != null
@@ -55,26 +55,22 @@ class UnitDetailScreen extends StatelessWidget {
                             ).format(unit.monthlyRent)
                           : 'Not set',
                     ),
-                    _buildDetailRow(
-                      context,
+                    UnitDetailRow(
                       icon: Icons.calendar_today,
                       label: 'Lease Period',
                       value: _formatLeasePeriod(unit),
                     ),
-                    _buildDetailRow(
-                      context,
+                    UnitDetailRow(
                       icon: Icons.person,
                       label: 'Tenant Name',
                       value: unit.tenantName ?? 'Not Occupied',
                     ),
-                    _buildDetailRow(
-                      context,
+                    UnitDetailRow(
                       icon: Icons.phone,
                       label: 'Tenant Phone',
                       value: unit.tenantPhone ?? 'Not set',
                     ),
-                    _buildDetailRow(
-                      context,
+                    UnitDetailRow(
                       icon: Icons.email,
                       label: 'Tenant Email',
                       value: unit.tenantEmail ?? 'Not set',
@@ -107,19 +103,36 @@ class UnitDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required IconData icon,
-    required String label,
-    required String value,
-  }) {
+  String _formatLeasePeriod(Unit unit) {
+    if (unit.leaseStartDate == null) return 'Not set';
+    final start = DateFormat.yMMMd().format(unit.leaseStartDate!);
+    if (unit.leaseEndDate == null) return start;
+    final end = DateFormat.yMMMd().format(unit.leaseEndDate!);
+    return '$start - $end';
+  }
+}
+
+class UnitDetailRow extends StatelessWidget {
+  const UnitDetailRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+    super.key,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Icon(icon, color: theme.colorScheme.primary, size: 20),
-          const SizedBox(width: 16),
+          AppSpacing.gapW16,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,13 +145,5 @@ class UnitDetailScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _formatLeasePeriod(Unit unit) {
-    if (unit.leaseStartDate == null) return 'Not set';
-    final start = DateFormat.yMMMd().format(unit.leaseStartDate!);
-    if (unit.leaseEndDate == null) return start;
-    final end = DateFormat.yMMMd().format(unit.leaseEndDate!);
-    return '$start - $end';
   }
 }
