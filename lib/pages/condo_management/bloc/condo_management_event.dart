@@ -1,4 +1,4 @@
-part of 'condo_management_bloc.dart';
+part of '../bloc/condo_management_bloc.dart';
 
 @freezed
 abstract class CondoManagementEvent with _$CondoManagementEvent {

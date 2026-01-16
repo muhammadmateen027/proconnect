@@ -7,8 +7,8 @@ import 'package:proconnect/domain/admin/usecase/update_condo_use_case.dart';
 import 'package:proconnect/domain/models/condo.dart';
 
 part 'condo_management_bloc.freezed.dart';
-part 'condo_management_event.dart';
 part 'condo_management_state.dart';
+part 'condo_management_event.dart';
 
 class CondoManagementBloc
     extends Bloc<CondoManagementEvent, CondoManagementState> {
@@ -17,11 +17,11 @@ class CondoManagementBloc
     required CreateCondoUseCase createCondoUseCase,
     required UpdateCondoUseCase updateCondoUseCase,
     required DeleteCondoUseCase deleteCondoUseCase,
-  })  : _loadCondosUseCase = loadCondosUseCase,
-        _createCondoUseCase = createCondoUseCase,
-        _updateCondoUseCase = updateCondoUseCase,
-        _deleteCondoUseCase = deleteCondoUseCase,
-        super(const CondoManagementState.initial()) {
+  }) : _loadCondosUseCase = loadCondosUseCase,
+       _createCondoUseCase = createCondoUseCase,
+       _updateCondoUseCase = updateCondoUseCase,
+       _deleteCondoUseCase = deleteCondoUseCase,
+       super(const CondoManagementState.initial()) {
     on<_LoadCondos>(_onLoadCondos);
     on<_CreateCondo>(_onCreateCondo);
     on<_UpdateCondo>(_onUpdateCondo);
@@ -42,9 +42,11 @@ class CondoManagementBloc
       final condos = await _loadCondosUseCase();
       emit(CondoManagementState.loaded(condos: condos));
     } catch (e) {
-      emit(const CondoManagementState.failure(
-        errorKey: 'loadCondosFailed',
-      ));
+      emit(
+        const CondoManagementState.failure(
+          errorKey: 'loadCondosFailed',
+        ),
+      );
     }
   }
 
@@ -60,9 +62,11 @@ class CondoManagementBloc
       );
       emit(const CondoManagementState.success());
     } catch (e) {
-      emit(const CondoManagementState.failure(
-        errorKey: 'createCondoFailed',
-      ));
+      emit(
+        const CondoManagementState.failure(
+          errorKey: 'createCondoFailed',
+        ),
+      );
     }
   }
 
@@ -77,9 +81,11 @@ class CondoManagementBloc
       );
       emit(const CondoManagementState.success());
     } catch (e) {
-      emit(const CondoManagementState.failure(
-        errorKey: 'updateCondoFailed',
-      ));
+      emit(
+        const CondoManagementState.failure(
+          errorKey: 'updateCondoFailed',
+        ),
+      );
     }
   }
 
@@ -94,9 +100,11 @@ class CondoManagementBloc
       );
       emit(const CondoManagementState.success());
     } catch (e) {
-      emit(const CondoManagementState.failure(
-        errorKey: 'deleteCondoFailed',
-      ));
+      emit(
+        const CondoManagementState.failure(
+          errorKey: 'deleteCondoFailed',
+        ),
+      );
     }
   }
 }

@@ -17,9 +17,9 @@ class _UserListPageState extends State<UserListPage> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<UserManagementBloc>()
-        .add(const UserManagementEvent.loadUsers());
+    context.read<UserManagementBloc>().add(
+      const UserManagementEvent.loadUsers(),
+    );
   }
 
   @override
@@ -29,7 +29,7 @@ class _UserListPageState extends State<UserListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.manageAgenciesUsers),
+        title: Text(l10n.userManagement),
       ),
       body: BlocBuilder<UserManagementBloc, UserManagementState>(
         builder: (context, state) {
@@ -39,12 +39,15 @@ class _UserListPageState extends State<UserListPage> {
             success: () {
               // This should not happen in this screen, but we can reload the users
               // just in case.
-              context
-                  .read<UserManagementBloc>()
-                  .add(const UserManagementEvent.loadUsers());
+              context.read<UserManagementBloc>().add(
+                const UserManagementEvent.loadUsers(),
+              );
               return const Center(child: CircularProgressIndicator());
             },
             loaded: (users) {
+              if (users.isEmpty) {
+                return Center(child: Text(l10n.noUsersFound));
+              }
               return ListView.builder(
                 itemCount: users.length,
                 itemBuilder: (context, index) {
@@ -56,16 +59,21 @@ class _UserListPageState extends State<UserListPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.edit,
-                              color: theme.colorScheme.primary),
+                          icon: Icon(
+                            Icons.edit,
+                            color: theme.colorScheme.primary,
+                          ),
                           onPressed: () {
                             // TODO: Navigate to edit user page
                           },
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete,
-                              color: theme.colorScheme.error),
-                          onPressed: () => _showDeleteConfirmation(context, user),
+                          icon: Icon(
+                            Icons.delete,
+                            color: theme.colorScheme.error,
+                          ),
+                          onPressed: () =>
+                              _showDeleteConfirmation(context, user),
                         ),
                       ],
                     ),
@@ -73,7 +81,8 @@ class _UserListPageState extends State<UserListPage> {
                 },
               );
             },
-            failure: (errorKey) => Center(child: Text(errorKey)),
+            failure: (message) =>
+                Center(child: Text(l10n.errorPrefix + message)),
           );
         },
       ),
@@ -103,8 +112,8 @@ class _UserListPageState extends State<UserListPage> {
               child: Text(l10n.delete),
               onPressed: () {
                 context.read<UserManagementBloc>().add(
-                      UserManagementEvent.adminDeleteUser(uid: user.uid),
-                    );
+                  UserManagementEvent.adminDeleteUser(uid: user.uid),
+                );
                 Navigator.of(dialogContext).pop();
               },
             ),

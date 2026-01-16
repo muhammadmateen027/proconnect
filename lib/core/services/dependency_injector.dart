@@ -29,8 +29,8 @@ import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/update_unit_tenant_details_use_case.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
-import 'package:proconnect/pages/super_admin/bloc/condo_management/condo_management_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 
 class DependencyInjector {

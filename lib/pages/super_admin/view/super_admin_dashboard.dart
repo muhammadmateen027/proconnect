@@ -29,12 +29,12 @@ class SuperAdminDashboard extends StatelessWidget {
           mainAxisSpacing: 16,
           children: [
             DashboardCard(
-              title: l10n.manageCondominiums,
+              title: l10n.condoManagement,
               icon: Icons.business,
               onTap: () => context.push(AppRoutes.condoManagement),
             ),
             DashboardCard(
-              title: l10n.manageAgenciesUsers,
+              title: l10n.userManagement,
               icon: Icons.people,
               onTap: () => context.push(AppRoutes.userManagement),
             ),
