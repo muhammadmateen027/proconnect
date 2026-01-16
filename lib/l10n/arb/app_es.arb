@@ -64,5 +64,17 @@
     "loadCondosFailed": "Error al cargar los condominios.",
     "createCondoFailed": "Error al crear el condominio.",
     "updateCondoFailed": "Error al actualizar el condominio.",
-    "deleteCondoFailed": "Error al eliminar el condominio."
+    "deleteCondoFailed": "Error al eliminar el condominio.",
+    "editCondo": "Editar Condominio",
+    "deleteCondo": "Eliminar Condominio",
+    "deleteCondoConfirmation": "¿Estás seguro de que quieres eliminar este condominio? Esta acción no se puede deshacer.",
+    "condoDetails": "Detalles del Condominio",
+    "enterCondoName": "Ingresa el nombre del condominio",
+    "enterCondoAddress": "Ingresa la dirección completa",
+    "saveChanges": "Guardar Cambios",
+    "createCondo": "Crear Condominio",
+    "operationSuccess": "¡Operación completada con éxito!",
+    "addCondoToGetStarted": "Añade tu primer condominio para comenzar",
+    "retry": "Reintentar",
+    "edit": "Editar"
 }

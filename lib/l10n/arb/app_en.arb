@@ -64,5 +64,17 @@
     "loadCondosFailed": "Failed to load condos.",
     "createCondoFailed": "Failed to create condo.",
     "updateCondoFailed": "Failed to update condo.",
-    "deleteCondoFailed": "Failed to delete condo."
+    "deleteCondoFailed": "Failed to delete condo.",
+    "editCondo": "Edit Condo",
+    "deleteCondo": "Delete Condo",
+    "deleteCondoConfirmation": "Are you sure you want to delete this condominium? This action cannot be undone.",
+    "condoDetails": "Condominium Details",
+    "enterCondoName": "Enter condominium name",
+    "enterCondoAddress": "Enter full address",
+    "saveChanges": "Save Changes",
+    "createCondo": "Create Condo",
+    "operationSuccess": "Operation completed successfully!",
+    "addCondoToGetStarted": "Add your first condominium to get started",
+    "retry": "Retry",
+    "edit": "Edit"
 }

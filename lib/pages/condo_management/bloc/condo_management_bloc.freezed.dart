@@ -16,683 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$CondoManagementEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
-    required TResult Function(Condo condo) updateCondo,
-    required TResult Function(String id) deleteCondo,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
-    TResult? Function(Condo condo)? updateCondo,
-    TResult? Function(String id)? deleteCondo,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
-    TResult Function(Condo condo)? updateCondo,
-    TResult Function(String id)? deleteCondo,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadCondos value) loadCondos,
-    required TResult Function(_CreateCondo value) createCondo,
-    required TResult Function(_UpdateCondo value) updateCondo,
-    required TResult Function(_DeleteCondo value) deleteCondo,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadCondos value)? loadCondos,
-    TResult? Function(_CreateCondo value)? createCondo,
-    TResult? Function(_UpdateCondo value)? updateCondo,
-    TResult? Function(_DeleteCondo value)? deleteCondo,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadCondos value)? loadCondos,
-    TResult Function(_CreateCondo value)? createCondo,
-    TResult Function(_UpdateCondo value)? updateCondo,
-    TResult Function(_DeleteCondo value)? deleteCondo,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CondoManagementEventCopyWith<$Res> {
-  factory $CondoManagementEventCopyWith(
-    CondoManagementEvent value,
-    $Res Function(CondoManagementEvent) then,
-  ) = _$CondoManagementEventCopyWithImpl<$Res, CondoManagementEvent>;
-}
-
-/// @nodoc
-class _$CondoManagementEventCopyWithImpl<
-  $Res,
-  $Val extends CondoManagementEvent
->
-    implements $CondoManagementEventCopyWith<$Res> {
-  _$CondoManagementEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$LoadCondosImplCopyWith<$Res> {
-  factory _$$LoadCondosImplCopyWith(
-    _$LoadCondosImpl value,
-    $Res Function(_$LoadCondosImpl) then,
-  ) = __$$LoadCondosImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadCondosImplCopyWithImpl<$Res>
-    extends _$CondoManagementEventCopyWithImpl<$Res, _$LoadCondosImpl>
-    implements _$$LoadCondosImplCopyWith<$Res> {
-  __$$LoadCondosImplCopyWithImpl(
-    _$LoadCondosImpl _value,
-    $Res Function(_$LoadCondosImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadCondosImpl implements _LoadCondos {
-  const _$LoadCondosImpl();
-
-  @override
-  String toString() {
-    return 'CondoManagementEvent.loadCondos()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadCondosImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
-    required TResult Function(Condo condo) updateCondo,
-    required TResult Function(String id) deleteCondo,
-  }) {
-    return loadCondos();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
-    TResult? Function(Condo condo)? updateCondo,
-    TResult? Function(String id)? deleteCondo,
-  }) {
-    return loadCondos?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
-    TResult Function(Condo condo)? updateCondo,
-    TResult Function(String id)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (loadCondos != null) {
-      return loadCondos();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadCondos value) loadCondos,
-    required TResult Function(_CreateCondo value) createCondo,
-    required TResult Function(_UpdateCondo value) updateCondo,
-    required TResult Function(_DeleteCondo value) deleteCondo,
-  }) {
-    return loadCondos(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadCondos value)? loadCondos,
-    TResult? Function(_CreateCondo value)? createCondo,
-    TResult? Function(_UpdateCondo value)? updateCondo,
-    TResult? Function(_DeleteCondo value)? deleteCondo,
-  }) {
-    return loadCondos?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadCondos value)? loadCondos,
-    TResult Function(_CreateCondo value)? createCondo,
-    TResult Function(_UpdateCondo value)? updateCondo,
-    TResult Function(_DeleteCondo value)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (loadCondos != null) {
-      return loadCondos(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadCondos implements CondoManagementEvent {
-  const factory _LoadCondos() = _$LoadCondosImpl;
-}
-
-/// @nodoc
-abstract class _$$CreateCondoImplCopyWith<$Res> {
-  factory _$$CreateCondoImplCopyWith(
-    _$CreateCondoImpl value,
-    $Res Function(_$CreateCondoImpl) then,
-  ) = __$$CreateCondoImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String name, String address});
-}
-
-/// @nodoc
-class __$$CreateCondoImplCopyWithImpl<$Res>
-    extends _$CondoManagementEventCopyWithImpl<$Res, _$CreateCondoImpl>
-    implements _$$CreateCondoImplCopyWith<$Res> {
-  __$$CreateCondoImplCopyWithImpl(
-    _$CreateCondoImpl _value,
-    $Res Function(_$CreateCondoImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? name = null, Object? address = null}) {
-    return _then(
-      _$CreateCondoImpl(
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        address: null == address
-            ? _value.address
-            : address // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$CreateCondoImpl implements _CreateCondo {
-  const _$CreateCondoImpl({required this.name, required this.address});
-
-  @override
-  final String name;
-  @override
-  final String address;
-
-  @override
-  String toString() {
-    return 'CondoManagementEvent.createCondo(name: $name, address: $address)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CreateCondoImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, name, address);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CreateCondoImplCopyWith<_$CreateCondoImpl> get copyWith =>
-      __$$CreateCondoImplCopyWithImpl<_$CreateCondoImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
-    required TResult Function(Condo condo) updateCondo,
-    required TResult Function(String id) deleteCondo,
-  }) {
-    return createCondo(name, address);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
-    TResult? Function(Condo condo)? updateCondo,
-    TResult? Function(String id)? deleteCondo,
-  }) {
-    return createCondo?.call(name, address);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
-    TResult Function(Condo condo)? updateCondo,
-    TResult Function(String id)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (createCondo != null) {
-      return createCondo(name, address);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadCondos value) loadCondos,
-    required TResult Function(_CreateCondo value) createCondo,
-    required TResult Function(_UpdateCondo value) updateCondo,
-    required TResult Function(_DeleteCondo value) deleteCondo,
-  }) {
-    return createCondo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadCondos value)? loadCondos,
-    TResult? Function(_CreateCondo value)? createCondo,
-    TResult? Function(_UpdateCondo value)? updateCondo,
-    TResult? Function(_DeleteCondo value)? deleteCondo,
-  }) {
-    return createCondo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadCondos value)? loadCondos,
-    TResult Function(_CreateCondo value)? createCondo,
-    TResult Function(_UpdateCondo value)? updateCondo,
-    TResult Function(_DeleteCondo value)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (createCondo != null) {
-      return createCondo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CreateCondo implements CondoManagementEvent {
-  const factory _CreateCondo({
-    required final String name,
-    required final String address,
-  }) = _$CreateCondoImpl;
-
-  String get name;
-  String get address;
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateCondoImplCopyWith<_$CreateCondoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateCondoImplCopyWith<$Res> {
-  factory _$$UpdateCondoImplCopyWith(
-    _$UpdateCondoImpl value,
-    $Res Function(_$UpdateCondoImpl) then,
-  ) = __$$UpdateCondoImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Condo condo});
-
-  $CondoCopyWith<$Res> get condo;
-}
-
-/// @nodoc
-class __$$UpdateCondoImplCopyWithImpl<$Res>
-    extends _$CondoManagementEventCopyWithImpl<$Res, _$UpdateCondoImpl>
-    implements _$$UpdateCondoImplCopyWith<$Res> {
-  __$$UpdateCondoImplCopyWithImpl(
-    _$UpdateCondoImpl _value,
-    $Res Function(_$UpdateCondoImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? condo = null}) {
-    return _then(
-      _$UpdateCondoImpl(
-        condo: null == condo
-            ? _value.condo
-            : condo // ignore: cast_nullable_to_non_nullable
-                  as Condo,
-      ),
-    );
-  }
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CondoCopyWith<$Res> get condo {
-    return $CondoCopyWith<$Res>(_value.condo, (value) {
-      return _then(_value.copyWith(condo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$UpdateCondoImpl implements _UpdateCondo {
-  const _$UpdateCondoImpl({required this.condo});
-
-  @override
-  final Condo condo;
-
-  @override
-  String toString() {
-    return 'CondoManagementEvent.updateCondo(condo: $condo)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateCondoImpl &&
-            (identical(other.condo, condo) || other.condo == condo));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, condo);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateCondoImplCopyWith<_$UpdateCondoImpl> get copyWith =>
-      __$$UpdateCondoImplCopyWithImpl<_$UpdateCondoImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
-    required TResult Function(Condo condo) updateCondo,
-    required TResult Function(String id) deleteCondo,
-  }) {
-    return updateCondo(condo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
-    TResult? Function(Condo condo)? updateCondo,
-    TResult? Function(String id)? deleteCondo,
-  }) {
-    return updateCondo?.call(condo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
-    TResult Function(Condo condo)? updateCondo,
-    TResult Function(String id)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (updateCondo != null) {
-      return updateCondo(condo);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadCondos value) loadCondos,
-    required TResult Function(_CreateCondo value) createCondo,
-    required TResult Function(_UpdateCondo value) updateCondo,
-    required TResult Function(_DeleteCondo value) deleteCondo,
-  }) {
-    return updateCondo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadCondos value)? loadCondos,
-    TResult? Function(_CreateCondo value)? createCondo,
-    TResult? Function(_UpdateCondo value)? updateCondo,
-    TResult? Function(_DeleteCondo value)? deleteCondo,
-  }) {
-    return updateCondo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadCondos value)? loadCondos,
-    TResult Function(_CreateCondo value)? createCondo,
-    TResult Function(_UpdateCondo value)? updateCondo,
-    TResult Function(_DeleteCondo value)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (updateCondo != null) {
-      return updateCondo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateCondo implements CondoManagementEvent {
-  const factory _UpdateCondo({required final Condo condo}) = _$UpdateCondoImpl;
-
-  Condo get condo;
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateCondoImplCopyWith<_$UpdateCondoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DeleteCondoImplCopyWith<$Res> {
-  factory _$$DeleteCondoImplCopyWith(
-    _$DeleteCondoImpl value,
-    $Res Function(_$DeleteCondoImpl) then,
-  ) = __$$DeleteCondoImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String id});
-}
-
-/// @nodoc
-class __$$DeleteCondoImplCopyWithImpl<$Res>
-    extends _$CondoManagementEventCopyWithImpl<$Res, _$DeleteCondoImpl>
-    implements _$$DeleteCondoImplCopyWith<$Res> {
-  __$$DeleteCondoImplCopyWithImpl(
-    _$DeleteCondoImpl _value,
-    $Res Function(_$DeleteCondoImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$DeleteCondoImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$DeleteCondoImpl implements _DeleteCondo {
-  const _$DeleteCondoImpl({required this.id});
-
-  @override
-  final String id;
-
-  @override
-  String toString() {
-    return 'CondoManagementEvent.deleteCondo(id: $id)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteCondoImpl &&
-            (identical(other.id, id) || other.id == id));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id);
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteCondoImplCopyWith<_$DeleteCondoImpl> get copyWith =>
-      __$$DeleteCondoImplCopyWithImpl<_$DeleteCondoImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
-    required TResult Function(Condo condo) updateCondo,
-    required TResult Function(String id) deleteCondo,
-  }) {
-    return deleteCondo(id);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
-    TResult? Function(Condo condo)? updateCondo,
-    TResult? Function(String id)? deleteCondo,
-  }) {
-    return deleteCondo?.call(id);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
-    TResult Function(Condo condo)? updateCondo,
-    TResult Function(String id)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (deleteCondo != null) {
-      return deleteCondo(id);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadCondos value) loadCondos,
-    required TResult Function(_CreateCondo value) createCondo,
-    required TResult Function(_UpdateCondo value) updateCondo,
-    required TResult Function(_DeleteCondo value) deleteCondo,
-  }) {
-    return deleteCondo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadCondos value)? loadCondos,
-    TResult? Function(_CreateCondo value)? createCondo,
-    TResult? Function(_UpdateCondo value)? updateCondo,
-    TResult? Function(_DeleteCondo value)? deleteCondo,
-  }) {
-    return deleteCondo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadCondos value)? loadCondos,
-    TResult Function(_CreateCondo value)? createCondo,
-    TResult Function(_UpdateCondo value)? updateCondo,
-    TResult Function(_DeleteCondo value)? deleteCondo,
-    required TResult orElse(),
-  }) {
-    if (deleteCondo != null) {
-      return deleteCondo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DeleteCondo implements CondoManagementEvent {
-  const factory _DeleteCondo({required final String id}) = _$DeleteCondoImpl;
-
-  String get id;
-
-  /// Create a copy of CondoManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteCondoImplCopyWith<_$DeleteCondoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$CondoManagementState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -1470,5 +793,682 @@ abstract class _Failure implements CondoManagementState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CondoManagementEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCondos,
+    required TResult Function(String name, String address) createCondo,
+    required TResult Function(Condo condo) updateCondo,
+    required TResult Function(String id) deleteCondo,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCondos,
+    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(Condo condo)? updateCondo,
+    TResult? Function(String id)? deleteCondo,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCondos,
+    TResult Function(String name, String address)? createCondo,
+    TResult Function(Condo condo)? updateCondo,
+    TResult Function(String id)? deleteCondo,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadCondos value) loadCondos,
+    required TResult Function(_CreateCondo value) createCondo,
+    required TResult Function(_UpdateCondo value) updateCondo,
+    required TResult Function(_DeleteCondo value) deleteCondo,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadCondos value)? loadCondos,
+    TResult? Function(_CreateCondo value)? createCondo,
+    TResult? Function(_UpdateCondo value)? updateCondo,
+    TResult? Function(_DeleteCondo value)? deleteCondo,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadCondos value)? loadCondos,
+    TResult Function(_CreateCondo value)? createCondo,
+    TResult Function(_UpdateCondo value)? updateCondo,
+    TResult Function(_DeleteCondo value)? deleteCondo,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CondoManagementEventCopyWith<$Res> {
+  factory $CondoManagementEventCopyWith(
+    CondoManagementEvent value,
+    $Res Function(CondoManagementEvent) then,
+  ) = _$CondoManagementEventCopyWithImpl<$Res, CondoManagementEvent>;
+}
+
+/// @nodoc
+class _$CondoManagementEventCopyWithImpl<
+  $Res,
+  $Val extends CondoManagementEvent
+>
+    implements $CondoManagementEventCopyWith<$Res> {
+  _$CondoManagementEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$LoadCondosImplCopyWith<$Res> {
+  factory _$$LoadCondosImplCopyWith(
+    _$LoadCondosImpl value,
+    $Res Function(_$LoadCondosImpl) then,
+  ) = __$$LoadCondosImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadCondosImplCopyWithImpl<$Res>
+    extends _$CondoManagementEventCopyWithImpl<$Res, _$LoadCondosImpl>
+    implements _$$LoadCondosImplCopyWith<$Res> {
+  __$$LoadCondosImplCopyWithImpl(
+    _$LoadCondosImpl _value,
+    $Res Function(_$LoadCondosImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadCondosImpl implements _LoadCondos {
+  const _$LoadCondosImpl();
+
+  @override
+  String toString() {
+    return 'CondoManagementEvent.loadCondos()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadCondosImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCondos,
+    required TResult Function(String name, String address) createCondo,
+    required TResult Function(Condo condo) updateCondo,
+    required TResult Function(String id) deleteCondo,
+  }) {
+    return loadCondos();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCondos,
+    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(Condo condo)? updateCondo,
+    TResult? Function(String id)? deleteCondo,
+  }) {
+    return loadCondos?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCondos,
+    TResult Function(String name, String address)? createCondo,
+    TResult Function(Condo condo)? updateCondo,
+    TResult Function(String id)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (loadCondos != null) {
+      return loadCondos();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadCondos value) loadCondos,
+    required TResult Function(_CreateCondo value) createCondo,
+    required TResult Function(_UpdateCondo value) updateCondo,
+    required TResult Function(_DeleteCondo value) deleteCondo,
+  }) {
+    return loadCondos(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadCondos value)? loadCondos,
+    TResult? Function(_CreateCondo value)? createCondo,
+    TResult? Function(_UpdateCondo value)? updateCondo,
+    TResult? Function(_DeleteCondo value)? deleteCondo,
+  }) {
+    return loadCondos?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadCondos value)? loadCondos,
+    TResult Function(_CreateCondo value)? createCondo,
+    TResult Function(_UpdateCondo value)? updateCondo,
+    TResult Function(_DeleteCondo value)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (loadCondos != null) {
+      return loadCondos(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadCondos implements CondoManagementEvent {
+  const factory _LoadCondos() = _$LoadCondosImpl;
+}
+
+/// @nodoc
+abstract class _$$CreateCondoImplCopyWith<$Res> {
+  factory _$$CreateCondoImplCopyWith(
+    _$CreateCondoImpl value,
+    $Res Function(_$CreateCondoImpl) then,
+  ) = __$$CreateCondoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name, String address});
+}
+
+/// @nodoc
+class __$$CreateCondoImplCopyWithImpl<$Res>
+    extends _$CondoManagementEventCopyWithImpl<$Res, _$CreateCondoImpl>
+    implements _$$CreateCondoImplCopyWith<$Res> {
+  __$$CreateCondoImplCopyWithImpl(
+    _$CreateCondoImpl _value,
+    $Res Function(_$CreateCondoImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? name = null, Object? address = null}) {
+    return _then(
+      _$CreateCondoImpl(
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        address: null == address
+            ? _value.address
+            : address // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$CreateCondoImpl implements _CreateCondo {
+  const _$CreateCondoImpl({required this.name, required this.address});
+
+  @override
+  final String name;
+  @override
+  final String address;
+
+  @override
+  String toString() {
+    return 'CondoManagementEvent.createCondo(name: $name, address: $address)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateCondoImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.address, address) || other.address == address));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, address);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateCondoImplCopyWith<_$CreateCondoImpl> get copyWith =>
+      __$$CreateCondoImplCopyWithImpl<_$CreateCondoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCondos,
+    required TResult Function(String name, String address) createCondo,
+    required TResult Function(Condo condo) updateCondo,
+    required TResult Function(String id) deleteCondo,
+  }) {
+    return createCondo(name, address);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCondos,
+    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(Condo condo)? updateCondo,
+    TResult? Function(String id)? deleteCondo,
+  }) {
+    return createCondo?.call(name, address);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCondos,
+    TResult Function(String name, String address)? createCondo,
+    TResult Function(Condo condo)? updateCondo,
+    TResult Function(String id)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (createCondo != null) {
+      return createCondo(name, address);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadCondos value) loadCondos,
+    required TResult Function(_CreateCondo value) createCondo,
+    required TResult Function(_UpdateCondo value) updateCondo,
+    required TResult Function(_DeleteCondo value) deleteCondo,
+  }) {
+    return createCondo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadCondos value)? loadCondos,
+    TResult? Function(_CreateCondo value)? createCondo,
+    TResult? Function(_UpdateCondo value)? updateCondo,
+    TResult? Function(_DeleteCondo value)? deleteCondo,
+  }) {
+    return createCondo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadCondos value)? loadCondos,
+    TResult Function(_CreateCondo value)? createCondo,
+    TResult Function(_UpdateCondo value)? updateCondo,
+    TResult Function(_DeleteCondo value)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (createCondo != null) {
+      return createCondo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateCondo implements CondoManagementEvent {
+  const factory _CreateCondo({
+    required final String name,
+    required final String address,
+  }) = _$CreateCondoImpl;
+
+  String get name;
+  String get address;
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateCondoImplCopyWith<_$CreateCondoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateCondoImplCopyWith<$Res> {
+  factory _$$UpdateCondoImplCopyWith(
+    _$UpdateCondoImpl value,
+    $Res Function(_$UpdateCondoImpl) then,
+  ) = __$$UpdateCondoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Condo condo});
+
+  $CondoCopyWith<$Res> get condo;
+}
+
+/// @nodoc
+class __$$UpdateCondoImplCopyWithImpl<$Res>
+    extends _$CondoManagementEventCopyWithImpl<$Res, _$UpdateCondoImpl>
+    implements _$$UpdateCondoImplCopyWith<$Res> {
+  __$$UpdateCondoImplCopyWithImpl(
+    _$UpdateCondoImpl _value,
+    $Res Function(_$UpdateCondoImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? condo = null}) {
+    return _then(
+      _$UpdateCondoImpl(
+        condo: null == condo
+            ? _value.condo
+            : condo // ignore: cast_nullable_to_non_nullable
+                  as Condo,
+      ),
+    );
+  }
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CondoCopyWith<$Res> get condo {
+    return $CondoCopyWith<$Res>(_value.condo, (value) {
+      return _then(_value.copyWith(condo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateCondoImpl implements _UpdateCondo {
+  const _$UpdateCondoImpl({required this.condo});
+
+  @override
+  final Condo condo;
+
+  @override
+  String toString() {
+    return 'CondoManagementEvent.updateCondo(condo: $condo)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateCondoImpl &&
+            (identical(other.condo, condo) || other.condo == condo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, condo);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateCondoImplCopyWith<_$UpdateCondoImpl> get copyWith =>
+      __$$UpdateCondoImplCopyWithImpl<_$UpdateCondoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCondos,
+    required TResult Function(String name, String address) createCondo,
+    required TResult Function(Condo condo) updateCondo,
+    required TResult Function(String id) deleteCondo,
+  }) {
+    return updateCondo(condo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCondos,
+    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(Condo condo)? updateCondo,
+    TResult? Function(String id)? deleteCondo,
+  }) {
+    return updateCondo?.call(condo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCondos,
+    TResult Function(String name, String address)? createCondo,
+    TResult Function(Condo condo)? updateCondo,
+    TResult Function(String id)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (updateCondo != null) {
+      return updateCondo(condo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadCondos value) loadCondos,
+    required TResult Function(_CreateCondo value) createCondo,
+    required TResult Function(_UpdateCondo value) updateCondo,
+    required TResult Function(_DeleteCondo value) deleteCondo,
+  }) {
+    return updateCondo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadCondos value)? loadCondos,
+    TResult? Function(_CreateCondo value)? createCondo,
+    TResult? Function(_UpdateCondo value)? updateCondo,
+    TResult? Function(_DeleteCondo value)? deleteCondo,
+  }) {
+    return updateCondo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadCondos value)? loadCondos,
+    TResult Function(_CreateCondo value)? createCondo,
+    TResult Function(_UpdateCondo value)? updateCondo,
+    TResult Function(_DeleteCondo value)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (updateCondo != null) {
+      return updateCondo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateCondo implements CondoManagementEvent {
+  const factory _UpdateCondo({required final Condo condo}) = _$UpdateCondoImpl;
+
+  Condo get condo;
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateCondoImplCopyWith<_$UpdateCondoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteCondoImplCopyWith<$Res> {
+  factory _$$DeleteCondoImplCopyWith(
+    _$DeleteCondoImpl value,
+    $Res Function(_$DeleteCondoImpl) then,
+  ) = __$$DeleteCondoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$DeleteCondoImplCopyWithImpl<$Res>
+    extends _$CondoManagementEventCopyWithImpl<$Res, _$DeleteCondoImpl>
+    implements _$$DeleteCondoImplCopyWith<$Res> {
+  __$$DeleteCondoImplCopyWithImpl(
+    _$DeleteCondoImpl _value,
+    $Res Function(_$DeleteCondoImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? id = null}) {
+    return _then(
+      _$DeleteCondoImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$DeleteCondoImpl implements _DeleteCondo {
+  const _$DeleteCondoImpl({required this.id});
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'CondoManagementEvent.deleteCondo(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteCondoImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteCondoImplCopyWith<_$DeleteCondoImpl> get copyWith =>
+      __$$DeleteCondoImplCopyWithImpl<_$DeleteCondoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCondos,
+    required TResult Function(String name, String address) createCondo,
+    required TResult Function(Condo condo) updateCondo,
+    required TResult Function(String id) deleteCondo,
+  }) {
+    return deleteCondo(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCondos,
+    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(Condo condo)? updateCondo,
+    TResult? Function(String id)? deleteCondo,
+  }) {
+    return deleteCondo?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCondos,
+    TResult Function(String name, String address)? createCondo,
+    TResult Function(Condo condo)? updateCondo,
+    TResult Function(String id)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (deleteCondo != null) {
+      return deleteCondo(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadCondos value) loadCondos,
+    required TResult Function(_CreateCondo value) createCondo,
+    required TResult Function(_UpdateCondo value) updateCondo,
+    required TResult Function(_DeleteCondo value) deleteCondo,
+  }) {
+    return deleteCondo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadCondos value)? loadCondos,
+    TResult? Function(_CreateCondo value)? createCondo,
+    TResult? Function(_UpdateCondo value)? updateCondo,
+    TResult? Function(_DeleteCondo value)? deleteCondo,
+  }) {
+    return deleteCondo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadCondos value)? loadCondos,
+    TResult Function(_CreateCondo value)? createCondo,
+    TResult Function(_UpdateCondo value)? updateCondo,
+    TResult Function(_DeleteCondo value)? deleteCondo,
+    required TResult orElse(),
+  }) {
+    if (deleteCondo != null) {
+      return deleteCondo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteCondo implements CondoManagementEvent {
+  const factory _DeleteCondo({required final String id}) = _$DeleteCondoImpl;
+
+  String get id;
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteCondoImplCopyWith<_$DeleteCondoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

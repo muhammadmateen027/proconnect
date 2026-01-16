@@ -10,4 +10,6 @@ class AppRoutes {
   static const String userManagement = '/user_management';
   static const String createUser = '/create_user';
   static const String condoManagement = '/condo_management';
+  static const String createCondo = '/create_condo';
+  static const String editCondo = '/edit_condo';
 }

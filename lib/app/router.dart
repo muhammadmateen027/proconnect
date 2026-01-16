@@ -13,6 +13,7 @@ import 'package:proconnect/pages/auth/view/login_screen.dart';
 import 'package:proconnect/pages/auth/view/registration_screen.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/condo_management/view/condo_management_page.dart';
+import 'package:proconnect/pages/condo_management/view/create_edit_condo_page.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/settings_screen.dart';
@@ -99,6 +100,29 @@ GoRouter createRouter(BuildContext context) {
               DependencyInjector.instance.resolve<CondoManagementBloc>(),
           child: const CondoManagementPage(),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.createCondo,
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              DependencyInjector.instance.resolve<CondoManagementBloc>(),
+          child: const CreateEditCondoPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.editCondo,
+        builder: (context, state) {
+          final params = state.extra! as Map<String, String>;
+          return BlocProvider(
+            create: (context) =>
+                DependencyInjector.instance.resolve<CondoManagementBloc>(),
+            child: CreateEditCondoPage(
+              condoId: params['id']!,
+              initialName: params['name']!,
+              initialAddress: params['address']!,
+            ),
+          );
+        },
       ),
       // A dedicated splash screen route
       GoRoute(
