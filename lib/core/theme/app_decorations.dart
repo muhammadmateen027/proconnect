@@ -163,7 +163,7 @@ class AppDecorations {
     required Color color,
     bool isOutlined = false,
   }) => BoxDecoration(
-    color: isOutlined ? Colors.transparent : color.withOpacity(0.1),
+    color: isOutlined ? Colors.transparent : color.withValues(alpha: 0.1),
     borderRadius: borderRadiusSmall,
     border: isOutlined ? Border.all(color: color, width: 1.5) : null,
   );

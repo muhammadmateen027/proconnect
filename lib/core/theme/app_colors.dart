@@ -67,12 +67,12 @@ class AppColors {
   );
 
   // Shadow colors
-  static Color shadowLight = Colors.black.withOpacity(0.1);
-  static Color shadowDark = Colors.black.withOpacity(0.3);
+  static Color shadowLight = Colors.black.withValues(alpha: 0.1);
+  static Color shadowDark = Colors.black.withValues(alpha: 0.3);
 
   // Overlay colors
-  static Color overlayLight = Colors.black.withOpacity(0.5);
-  static Color overlayDark = Colors.black.withOpacity(0.7);
+  static Color overlayLight = Colors.black.withValues(alpha: 0.5);
+  static Color overlayDark = Colors.black.withValues(alpha: 0.7);
 
   // Helper method to get status color
   static Color getStatusColor(String status) {

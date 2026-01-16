@@ -36,56 +36,64 @@ class SettingsScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
-                  RadioListTile<ThemeMode>(
-                    title: Text(
-                      'System Default',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    value: ThemeMode.system,
+                  RadioGroup<ThemeMode>(
                     groupValue: state.themeMode,
                     onChanged: (value) {
                       if (value != null) {
                         context.read<ThemeBloc>().add(ThemeChanged(value));
                       }
                     },
-                  ),
-                  RadioListTile<ThemeMode>(
-                    title: Text(
-                      'Light',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                    child: const Column(
+                      children: [
+                        _ThemeRadioTile(
+                          label: 'System Default',
+                          value: ThemeMode.system,
+                        ),
+                        _ThemeRadioTile(
+                          label: 'Light',
+                          value: ThemeMode.light,
+                        ),
+                        _ThemeRadioTile(
+                          label: 'Dark',
+                          value: ThemeMode.dark,
+                        ),
+                      ],
                     ),
-                    value: ThemeMode.light,
-                    groupValue: state.themeMode,
-                    onChanged: (value) {
-                      if (value != null) {
-                        context.read<ThemeBloc>().add(ThemeChanged(value));
-                      }
-                    },
-                  ),
-                  RadioListTile<ThemeMode>(
-                    title: Text(
-                      'Dark',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    value: ThemeMode.dark,
-                    groupValue: state.themeMode,
-                    onChanged: (value) {
-                      if (value != null) {
-                        context.read<ThemeBloc>().add(ThemeChanged(value));
-                      }
-                    },
                   ),
                 ],
               );
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// A reusable radio tile widget for theme selection.
+class _ThemeRadioTile extends StatelessWidget {
+  const _ThemeRadioTile({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final ThemeMode value;
+
+  @override
+  Widget build(BuildContext context) {
+    return RadioListTile<ThemeMode>(
+      title: Text(
+        label,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      ),
+      value: value,
+      visualDensity: VisualDensity.compact,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 0,
       ),
     );
   }

@@ -200,7 +200,7 @@ class AppTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.5,
-    color: color?.withOpacity(0.6),
+    color: color?.withValues(alpha: 0.6),
   );
 
   static TextStyle errorText({Color? color}) => GoogleFonts.poppins(
