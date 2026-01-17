@@ -18,6 +18,7 @@ import 'package:proconnect/pages/condo_management/view/create_edit_condo_page.da
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/settings_screen.dart';
+import 'package:proconnect/pages/settings/view/seeding_page.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 import 'package:proconnect/pages/super_admin/view/create_user_page.dart';
 import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
@@ -68,6 +69,15 @@ GoRouter createRouter(BuildContext context) {
       GoRoute(
         path: AppRoutes.settings,
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.seedData,
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              DependencyInjector.instance.resolve<CondoManagementBloc>()
+                ..add(const CondoManagementEvent.loadCondos()),
+          child: const SeedingPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.addUnit,

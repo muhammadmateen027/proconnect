@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
@@ -107,6 +109,18 @@ class SettingsScreen extends StatelessWidget {
                 ],
               );
             },
+          ),
+          AppSpacing.gapH24,
+          _SettingsSection(
+            title: 'Developer Tools',
+            children: [
+              ListTile(
+                leading: const Icon(Icons.auto_fix_high_rounded),
+                title: Text(l10n.seedData),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => context.push(AppRoutes.seedData),
+              ),
+            ],
           ),
           AppSpacing.gapH24,
           _SettingsSection(

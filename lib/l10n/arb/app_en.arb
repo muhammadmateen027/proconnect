@@ -176,5 +176,12 @@
     "pleaseAddFloorFirst": "Please add at least one floor before adding an apartment.",
     "floor": "Floor",
     "save": "Save",
-    "basicInformation": "Basic Information"
+    "basicInformation": "Basic Information",
+    "seedData": "Seed Data",
+    "seedFloorsAndApartments": "Seed Floors & Apartments",
+    "seedingDescription": "This will generate 20 floors and 5 apartments per floor for the selected condominium.",
+    "selectCondoToSeed": "Select a Condominium to seed",
+    "seedingInProgress": "Seeding data, please wait...",
+    "seedingSuccess": "Data seeded successfully!",
+    "seedingError": "An error occurred during seeding: {error}"
 }

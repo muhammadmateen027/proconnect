@@ -176,5 +176,12 @@
     "pleaseAddFloorFirst": "Por favor, añade al menos un piso antes de añadir un apartamento.",
     "floor": "Piso",
     "save": "Guardar",
-    "basicInformation": "Información Básica"
+    "basicInformation": "Información Básica",
+    "seedData": "Sembrar Datos",
+    "seedFloorsAndApartments": "Sembrar Pisos y Apartamentos",
+    "seedingDescription": "Esto generará 20 pisos y 5 apartamentos por piso para el condominio seleccionado.",
+    "selectCondoToSeed": "Seleccione un Condominio para sembrar",
+    "seedingInProgress": "Sembrando datos, por favor espere...",
+    "seedingSuccess": "¡Datos sembrados con éxito!",
+    "seedingError": "Ocurrió un error durante la siembra: {error}"
 }

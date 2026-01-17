@@ -43,6 +43,7 @@ import 'package:proconnect/data/apartment/repository/apartment_repository_impl.d
 import 'package:proconnect/domain/repositories/apartment_repository.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
+import 'package:proconnect/core/services/seeding_service.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -162,6 +163,12 @@ class DependencyInjector {
       )
       ..registerSingleton<GetUsersUseCase>(
         (c) => GetUsersUseCase(c.resolve<AuthRepository>()),
+      )
+      ..registerSingleton<SeedingService>(
+        (c) => SeedingService(
+          floorSource: c.resolve<FloorRemoteDataSource>(),
+          apartmentSource: c.resolve<ApartmentRemoteDataSource>(),
+        ),
       );
   }
 

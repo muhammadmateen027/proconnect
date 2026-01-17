@@ -23,8 +23,10 @@ service cloud.firestore {
 
     function isSameAgency(agencyId) {
       let userAgencyId = getUserData().agencyId;
-      // Allow if agencyId matches OR if the agencyId field is missing but the user is the one who created it (using uid as fallback for agency check)
-      return isSignedIn() && (userAgencyId == agencyId || (userAgencyId == null && request.auth.uid == agencyId));
+      return isSignedIn() && (
+        (userAgencyId != null && userAgencyId == agencyId) || 
+        (userAgencyId == null && request.auth.uid == agencyId)
+      );
     }
 
     function isSameCondominium(condoId) {
@@ -33,8 +35,8 @@ service cloud.firestore {
 
     // Check if a condo belongs to the same agency as the current user
     function isCondoOwnedByMyAgency(condoId) {
-      let condo = get(/databases/$(database)/documents/condos/$(condoId)).data;
-      return isSameAgency(condo.agencyId);
+      let condoDoc = get(/databases/$(database)/documents/condos/$(condoId));
+      return condoDoc != null && isSameAgency(condoDoc.data.agencyId);
     }
 
     // --- Collection Rules ---
@@ -60,7 +62,6 @@ service cloud.firestore {
 
     // Floors collection
     match /floors/{floorId} {
-      // ALLOW READ for agency admins if they manage the parent condo
       allow read: if isSignedIn() && (
         isSuperAdmin() ||
         isSameAgency(resource.data.agencyId) ||
@@ -72,14 +73,13 @@ service cloud.firestore {
         isCondoOwnedByMyAgency(request.resource.data.condominiumId)
       );
       allow update, delete: if isAgencyAdmin() && (
-        isSameAgency(resource.data.agencyId) ||
-        isCondoOwnedByMyAgency(resource.data.condominiumId)
+        (resource != null && isSameAgency(resource.data.agencyId)) ||
+        (resource != null && isCondoOwnedByMyAgency(resource.data.condominiumId))
       );
     }
 
     // Apartments collection
     match /apartments/{apartmentId} {
-      // ALLOW READ for agency admins if they manage the parent condo
       allow read: if isSignedIn() && (
         isSuperAdmin() ||
         isSameAgency(resource.data.agencyId) ||
@@ -93,8 +93,8 @@ service cloud.firestore {
         isCondoOwnedByMyAgency(request.resource.data.condominiumId)
       );
       allow update, delete: if isAgencyAdmin() && (
-        isSameAgency(resource.data.agencyId) ||
-        isCondoOwnedByMyAgency(resource.data.condominiumId)
+        (resource != null && isSameAgency(resource.data.agencyId)) ||
+        (resource != null && isCondoOwnedByMyAgency(resource.data.condominiumId))
       );
     }
   }

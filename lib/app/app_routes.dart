@@ -18,5 +18,5 @@ class AppRoutes {
   static const String editFloor = '/edit_floor';
   static const String createApartment = '/create_apartment';
   static const String editApartment = '/edit_apartment';
-  static const String apartmentDetail = '/apartment_detail';
+  static const String seedData = '/seed_data';
 }
