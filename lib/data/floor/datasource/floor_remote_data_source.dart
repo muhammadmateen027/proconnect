@@ -28,6 +28,9 @@ abstract class FloorRemoteDataSource {
 
   /// Get floors by agency ID
   Future<List<Floor>> getFloorsByAgency(String agencyId);
+
+  /// Delete all floors for a specific condominium
+  Future<void> deleteFloorsByCondominium(String condominiumId);
 }
 
 /// Implementation of FloorRemoteDataSource using Firestore
@@ -113,5 +116,21 @@ class FloorRemoteDataSourceImpl implements FloorRemoteDataSource {
         .collection(_collection)
         .doc(floor.id)
         .update(updatedFloor.toJson());
+  }
+
+  @override
+  Future<void> deleteFloorsByCondominium(String condominiumId) async {
+    final snapshot = await _firestore
+        .collection(_collection)
+        .where('condominiumId', isEqualTo: condominiumId)
+        .get();
+
+    if (snapshot.docs.isEmpty) return;
+
+    final batch = _firestore.batch();
+    for (final doc in snapshot.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
   }
 }

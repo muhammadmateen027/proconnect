@@ -13,6 +13,8 @@ _$ApartmentImpl _$$ApartmentImplFromJson(Map<String, dynamic> json) =>
       agencyId: json['agencyId'] as String,
       floorId: json['floorId'] as String,
       apartmentNumber: json['apartmentNumber'] as String,
+      totalSizeSquareFeet: (json['totalSizeSquareFeet'] as num).toDouble(),
+      condoName: json['condoName'] as String?,
       ownerId: json['ownerId'] as String?,
       ownerName: json['ownerName'] as String?,
       ownerEmail: json['ownerEmail'] as String?,
@@ -21,7 +23,6 @@ _$ApartmentImpl _$$ApartmentImplFromJson(Map<String, dynamic> json) =>
       tenantName: json['tenantName'] as String?,
       tenantEmail: json['tenantEmail'] as String?,
       tenantPhone: json['tenantPhone'] as String?,
-      totalSizeSquareFeet: (json['totalSizeSquareFeet'] as num).toDouble(),
       rooms:
           (json['rooms'] as List<dynamic>?)
               ?.map((e) => Room.fromJson(e as Map<String, dynamic>))
@@ -82,6 +83,8 @@ Map<String, dynamic> _$$ApartmentImplToJson(_$ApartmentImpl instance) =>
       'agencyId': instance.agencyId,
       'floorId': instance.floorId,
       'apartmentNumber': instance.apartmentNumber,
+      'totalSizeSquareFeet': instance.totalSizeSquareFeet,
+      'condoName': instance.condoName,
       'ownerId': instance.ownerId,
       'ownerName': instance.ownerName,
       'ownerEmail': instance.ownerEmail,
@@ -90,7 +93,6 @@ Map<String, dynamic> _$$ApartmentImplToJson(_$ApartmentImpl instance) =>
       'tenantName': instance.tenantName,
       'tenantEmail': instance.tenantEmail,
       'tenantPhone': instance.tenantPhone,
-      'totalSizeSquareFeet': instance.totalSizeSquareFeet,
       'rooms': instance.rooms,
       'totalBedrooms': instance.totalBedrooms,
       'totalBathrooms': instance.totalBathrooms,

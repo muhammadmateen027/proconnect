@@ -21,6 +21,9 @@ abstract class ApartmentRemoteDataSource {
   /// Get all apartments owned by a specific owner
   Future<List<Apartment>> getApartmentsByOwner(String ownerId);
 
+  /// Watch all apartments owned by a specific owner (real-time)
+  Stream<List<Apartment>> watchApartmentsByOwner(String ownerId);
+
   /// Get a specific apartment by ID
   Future<Apartment?> getApartmentById(String apartmentId);
 
@@ -58,6 +61,9 @@ abstract class ApartmentRemoteDataSource {
 
   /// Get available apartments (vacant and ready to move in)
   Future<List<Apartment>> getAvailableApartments(String condominiumId);
+
+  /// Delete all apartments for a specific condominium
+  Future<void> deleteApartmentsByCondominium(String condominiumId);
 }
 
 /// Implementation of ApartmentRemoteDataSource using Firestore
@@ -144,7 +150,7 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
     String floorId, {
     String? condominiumId,
   }) async {
-    Query<Map<String, dynamic>> query = _firestore
+    var query = _firestore
         .collection(_collection)
         .where('floorId', isEqualTo: floorId);
 
@@ -166,6 +172,19 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
         .get();
 
     return snapshot.docs.map((doc) => Apartment.fromJson(doc.data())).toList();
+  }
+
+  @override
+  Stream<List<Apartment>> watchApartmentsByOwner(String ownerId) {
+    return _firestore
+        .collection(_collection)
+        .where('ownerId', isEqualTo: ownerId)
+        .snapshots()
+        .map((snapshot) {
+          return snapshot.docs
+              .map((doc) => Apartment.fromJson(doc.data()))
+              .toList();
+        });
   }
 
   @override
@@ -224,7 +243,7 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
     DateTime? vacantFrom,
     DateTime? availableFrom,
   }) async {
-    final Map<String, dynamic> updates = {
+    final updates = <String, dynamic>{
       'status': status.name,
       'updatedAt': FieldValue.serverTimestamp(),
     };
@@ -245,7 +264,7 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
     String floorId, {
     String? condominiumId,
   }) async {
-    Query<Map<String, dynamic>> query = _firestore
+    var query = _firestore
         .collection(_collection)
         .where('floorId', isEqualTo: floorId);
 
@@ -254,6 +273,22 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
     }
 
     final snapshot = await query.get();
+    if (snapshot.docs.isEmpty) return;
+
+    final batch = _firestore.batch();
+    for (final doc in snapshot.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
+  }
+
+  @override
+  Future<void> deleteApartmentsByCondominium(String condominiumId) async {
+    final snapshot = await _firestore
+        .collection(_collection)
+        .where('condominiumId', isEqualTo: condominiumId)
+        .get();
+
     if (snapshot.docs.isEmpty) return;
 
     final batch = _firestore.batch();

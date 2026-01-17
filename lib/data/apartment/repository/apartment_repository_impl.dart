@@ -39,19 +39,19 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
 
   @override
   Future<Apartment?> getApartmentById(String apartmentId) async {
-    return await _remoteDataSource.getApartmentById(apartmentId);
+    return _remoteDataSource.getApartmentById(apartmentId);
   }
 
   @override
   Future<List<Apartment>> getApartmentsByAgency(String agencyId) async {
-    return await _remoteDataSource.getApartmentsByAgency(agencyId);
+    return _remoteDataSource.getApartmentsByAgency(agencyId);
   }
 
   @override
   Future<List<Apartment>> getApartmentsByCondominium(
     String condominiumId,
   ) async {
-    return await _remoteDataSource.getApartmentsByCondominium(condominiumId);
+    return _remoteDataSource.getApartmentsByCondominium(condominiumId);
   }
 
   @override
@@ -59,7 +59,7 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
     String floorId, {
     String? condominiumId,
   }) async {
-    return await _remoteDataSource.getApartmentsByFloor(
+    return _remoteDataSource.getApartmentsByFloor(
       floorId,
       condominiumId: condominiumId,
     );
@@ -67,17 +67,22 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
 
   @override
   Future<List<Apartment>> getApartmentsByOwner(String ownerId) async {
-    return await _remoteDataSource.getApartmentsByOwner(ownerId);
+    return _remoteDataSource.getApartmentsByOwner(ownerId);
+  }
+
+  @override
+  Stream<List<Apartment>> watchApartmentsByOwner(String ownerId) {
+    return _remoteDataSource.watchApartmentsByOwner(ownerId);
   }
 
   @override
   Future<List<Apartment>> getAvailableApartments(String condominiumId) async {
-    return await _remoteDataSource.getAvailableApartments(condominiumId);
+    return _remoteDataSource.getAvailableApartments(condominiumId);
   }
 
   @override
   Future<List<Apartment>> getVacantApartments(String condominiumId) async {
-    return await _remoteDataSource.getVacantApartments(condominiumId);
+    return _remoteDataSource.getVacantApartments(condominiumId);
   }
 
   @override

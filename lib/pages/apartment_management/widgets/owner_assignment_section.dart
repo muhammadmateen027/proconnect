@@ -85,7 +85,6 @@ class OwnerAssignmentSection extends StatelessWidget {
                   itemHeight: 64, // Height for the menu items
                   items: [
                     DropdownMenuItem<String>(
-                      value: null,
                       child: Text(l10n.noOwner),
                     ),
                     ...owners.map((owner) {

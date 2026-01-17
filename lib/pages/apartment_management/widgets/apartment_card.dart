@@ -15,11 +15,13 @@ class ApartmentCard extends StatelessWidget {
   const ApartmentCard({
     required this.apartment,
     required this.condo,
+    this.showCondoName = false,
     super.key,
   });
 
   final Apartment apartment;
-  final Condo condo;
+  final Condo? condo;
+  final bool showCondoName;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +101,9 @@ class ApartmentCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _StatusChip(status: apartment.status),
+
+                            AppSpacing.gapH4,
+
                             if (apartment.ownerName != null) ...[
                               AppSpacing.gapH4,
                               Text(
@@ -111,9 +116,22 @@ class ApartmentCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      _ActionMenu(apartment: apartment, condo: condo),
+                      if (condo != null)
+                        _ActionMenu(apartment: apartment, condo: condo!),
                     ],
                   ),
+
+                  if (showCondoName && apartment.condoName != null) ...[
+                    AppSpacing.gapH4,
+                    Text(
+                      apartment.condoName!,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                  ],
+
                   AppSpacing.gapH16,
                   Row(
                     children: [
@@ -287,7 +305,7 @@ class _StatusChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: color, width: 1),
+        border: Border.all(color: color),
       ),
       child: Text(
         getStatusLabel(),
@@ -320,7 +338,7 @@ class _InfoChip extends StatelessWidget {
         vertical: AppSpacing.p4,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant,
+        color: theme.colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(

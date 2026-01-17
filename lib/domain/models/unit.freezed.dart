@@ -45,6 +45,7 @@ mixin _$Unit {
   int get squareFeet => throw _privateConstructorUsedError;
   String? get floorLevel => throw _privateConstructorUsedError;
   FurnishingStatus get furnishing => throw _privateConstructorUsedError;
+  bool get isAssigned => throw _privateConstructorUsedError;
 
   /// Serializes this Unit to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -80,6 +81,7 @@ abstract class $UnitCopyWith<$Res> {
     int squareFeet,
     String? floorLevel,
     FurnishingStatus furnishing,
+    bool isAssigned,
   });
 }
 
@@ -117,6 +119,7 @@ class _$UnitCopyWithImpl<$Res, $Val extends Unit>
     Object? squareFeet = null,
     Object? floorLevel = freezed,
     Object? furnishing = null,
+    Object? isAssigned = null,
   }) {
     return _then(
       _value.copyWith(
@@ -196,6 +199,10 @@ class _$UnitCopyWithImpl<$Res, $Val extends Unit>
                 ? _value.furnishing
                 : furnishing // ignore: cast_nullable_to_non_nullable
                       as FurnishingStatus,
+            isAssigned: null == isAssigned
+                ? _value.isAssigned
+                : isAssigned // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -230,6 +237,7 @@ abstract class _$$UnitImplCopyWith<$Res> implements $UnitCopyWith<$Res> {
     int squareFeet,
     String? floorLevel,
     FurnishingStatus furnishing,
+    bool isAssigned,
   });
 }
 
@@ -264,6 +272,7 @@ class __$$UnitImplCopyWithImpl<$Res>
     Object? squareFeet = null,
     Object? floorLevel = freezed,
     Object? furnishing = null,
+    Object? isAssigned = null,
   }) {
     return _then(
       _$UnitImpl(
@@ -343,6 +352,10 @@ class __$$UnitImplCopyWithImpl<$Res>
             ? _value.furnishing
             : furnishing // ignore: cast_nullable_to_non_nullable
                   as FurnishingStatus,
+        isAssigned: null == isAssigned
+            ? _value.isAssigned
+            : isAssigned // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -371,6 +384,7 @@ class _$UnitImpl extends _Unit {
     this.squareFeet = 0,
     this.floorLevel,
     this.furnishing = FurnishingStatus.none,
+    this.isAssigned = false,
   }) : _utilitiesIncluded = utilitiesIncluded,
        _allowedParkingSpaces = allowedParkingSpaces,
        super._();
@@ -442,10 +456,13 @@ class _$UnitImpl extends _Unit {
   @override
   @JsonKey()
   final FurnishingStatus furnishing;
+  @override
+  @JsonKey()
+  final bool isAssigned;
 
   @override
   String toString() {
-    return 'Unit(id: $id, unitNo: $unitNo, condoName: $condoName, ownerId: $ownerId, tenantName: $tenantName, tenantPhone: $tenantPhone, tenantEmail: $tenantEmail, monthlyRent: $monthlyRent, leaseStartDate: $leaseStartDate, leaseEndDate: $leaseEndDate, rentDueDate: $rentDueDate, securityDeposit: $securityDeposit, utilitiesIncluded: $utilitiesIncluded, allowedParkingSpaces: $allowedParkingSpaces, bedrooms: $bedrooms, bathrooms: $bathrooms, squareFeet: $squareFeet, floorLevel: $floorLevel, furnishing: $furnishing)';
+    return 'Unit(id: $id, unitNo: $unitNo, condoName: $condoName, ownerId: $ownerId, tenantName: $tenantName, tenantPhone: $tenantPhone, tenantEmail: $tenantEmail, monthlyRent: $monthlyRent, leaseStartDate: $leaseStartDate, leaseEndDate: $leaseEndDate, rentDueDate: $rentDueDate, securityDeposit: $securityDeposit, utilitiesIncluded: $utilitiesIncluded, allowedParkingSpaces: $allowedParkingSpaces, bedrooms: $bedrooms, bathrooms: $bathrooms, squareFeet: $squareFeet, floorLevel: $floorLevel, furnishing: $furnishing, isAssigned: $isAssigned)';
   }
 
   @override
@@ -491,7 +508,9 @@ class _$UnitImpl extends _Unit {
             (identical(other.floorLevel, floorLevel) ||
                 other.floorLevel == floorLevel) &&
             (identical(other.furnishing, furnishing) ||
-                other.furnishing == furnishing));
+                other.furnishing == furnishing) &&
+            (identical(other.isAssigned, isAssigned) ||
+                other.isAssigned == isAssigned));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -517,6 +536,7 @@ class _$UnitImpl extends _Unit {
     squareFeet,
     floorLevel,
     furnishing,
+    isAssigned,
   ]);
 
   /// Create a copy of Unit
@@ -554,6 +574,7 @@ abstract class _Unit extends Unit {
     final int squareFeet,
     final String? floorLevel,
     final FurnishingStatus furnishing,
+    final bool isAssigned,
   }) = _$UnitImpl;
   const _Unit._() : super._();
 
@@ -598,6 +619,8 @@ abstract class _Unit extends Unit {
   String? get floorLevel;
   @override
   FurnishingStatus get furnishing;
+  @override
+  bool get isAssigned;
 
   /// Create a copy of Unit
   /// with the given fields replaced by the non-null parameter values.

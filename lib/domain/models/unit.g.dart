@@ -40,6 +40,7 @@ _$UnitImpl _$$UnitImplFromJson(Map<String, dynamic> json) => _$UnitImpl(
   furnishing:
       $enumDecodeNullable(_$FurnishingStatusEnumMap, json['furnishing']) ??
       FurnishingStatus.none,
+  isAssigned: json['isAssigned'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$$UnitImplToJson(_$UnitImpl instance) =>
@@ -63,6 +64,7 @@ Map<String, dynamic> _$$UnitImplToJson(_$UnitImpl instance) =>
       'squareFeet': instance.squareFeet,
       'floorLevel': instance.floorLevel,
       'furnishing': _$FurnishingStatusEnumMap[instance.furnishing]!,
+      'isAssigned': instance.isAssigned,
     };
 
 const _$FurnishingStatusEnumMap = {

@@ -7,7 +7,8 @@ part 'unit.g.dart';
 enum FurnishingStatus { none, partial, full }
 
 @freezed
-class Unit with _$Unit { // Private constructor for getters
+class Unit with _$Unit {
+  // Private constructor for getters
 
   const factory Unit({
     required String id,
@@ -36,6 +37,7 @@ class Unit with _$Unit { // Private constructor for getters
     @Default(0) int squareFeet,
     String? floorLevel,
     @Default(FurnishingStatus.none) FurnishingStatus furnishing,
+    @Default(false) bool isAssigned,
   }) = _Unit;
   const Unit._();
 

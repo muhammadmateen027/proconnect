@@ -37,7 +37,7 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
 
     await emit.forEach<List<Unit>>(
       _getUnitsUseCase(event.ownerId),
-      onData: (units) => UnitState.loaded(units),
+      onData: UnitState.loaded,
       onError: (error, stackTrace) => UnitState.error(error.toString()),
     );
   }

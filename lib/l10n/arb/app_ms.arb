@@ -125,5 +125,8 @@
     "english": "Inggeris",
     "spanish": "Sepanyol",
     "malay": "Melayu",
-    "agencyAdminDashboard": "Papan Pemuka Pentadbir Agensi"
+    "agencyAdminDashboard": "Papan Pemuka Pentadbir Agensi",
+    "clearData": "Padam Data",
+    "clearDataConfirmation": "Adakah anda pasti mahu memadam semua tingkat dan apartmen untuk kondominium ini? Tindakan ini tidak boleh dibatalkan.",
+    "clearDataSuccess": "Data berjaya dipadam!"
 }

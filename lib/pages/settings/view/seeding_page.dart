@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
+import 'package:proconnect/core/services/seeding_service.dart';
 import 'package:proconnect/core/theme/theme.dart';
 import 'package:proconnect/core/widgets/app_button.dart';
 import 'package:proconnect/core/widgets/custom_dropdown_field.dart';
@@ -9,7 +10,6 @@ import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
-import 'package:proconnect/core/services/seeding_service.dart';
 
 class SeedingPage extends StatefulWidget {
   const SeedingPage({super.key});
@@ -66,14 +66,69 @@ class _SeedingPageState extends State<SeedingPage> {
     }
   }
 
+  Future<void> _handleClear() async {
+    if (_selectedCondo == null) return;
+
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(context.l10n.clearData),
+        content: Text(context.l10n.clearDataConfirmation),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(context.l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.error,
+            ),
+            child: Text(context.l10n.delete),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm != true) return;
+
+    setState(() => _isSeeding = true);
+
+    try {
+      final seedingService = DependencyInjector.instance
+          .resolve<SeedingService>();
+      await seedingService.deleteCondoData(_selectedCondo!.id);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.clearDataSuccess),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.seedingError(e.toString())),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isSeeding = false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
 
     return ProConnectLayout(
-      useGlass: true,
-      centerContent: false,
       appBar: AppBar(
         title: Text(l10n.seedData),
       ),
@@ -122,6 +177,17 @@ class _SeedingPageState extends State<SeedingPage> {
                     icon: Icons.auto_fix_high_rounded,
                     isLoading: _isSeeding,
                     expand: true,
+                  ),
+                  AppSpacing.gapH16,
+                  AppButton(
+                    onPressed: _selectedCondo == null || _isSeeding
+                        ? null
+                        : _handleClear,
+                    label: l10n.clearData,
+                    icon: Icons.delete_sweep_rounded,
+                    isLoading: _isSeeding,
+                    expand: true,
+                    type: AppButtonType.outlined,
                   ),
                 ],
               );

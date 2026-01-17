@@ -3,15 +3,21 @@ import 'package:kiwi/kiwi.dart';
 import 'package:proconnect/core/config/environment.dart';
 import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/core/l10n/repository/l10n_repository.dart';
+import 'package:proconnect/core/services/seeding_service.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/core/theme/repository/theme_repository.dart';
+import 'package:proconnect/data/apartment/datasource/apartment_remote_data_source.dart';
+import 'package:proconnect/data/apartment/repository/apartment_repository_impl.dart';
 import 'package:proconnect/data/auth/datasource/auth_remote_data_source.dart';
 import 'package:proconnect/data/auth/repository/auth_repository_impl.dart';
 import 'package:proconnect/data/condo/datasource/condo_remote_data_source.dart';
 import 'package:proconnect/data/condo/repository/condo_repository_impl.dart';
+import 'package:proconnect/data/floor/datasource/floor_remote_data_source.dart';
+import 'package:proconnect/data/floor/repository/floor_repository_impl.dart';
 import 'package:proconnect/data/unit/datasource/unit_remote_data_source.dart';
 import 'package:proconnect/data/unit/repository/unit_repository_impl.dart';
 import 'package:proconnect/domain/admin/usecase/admin_create_user_use_case.dart';
+import 'package:proconnect/domain/apartment/usecase/get_apartments_by_owner_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/admin_delete_user_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/admin_update_user_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/create_condo_use_case.dart';
@@ -25,26 +31,22 @@ import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_out_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_up_use_case.dart';
 import 'package:proconnect/domain/condo/repository/condo_repository.dart';
+import 'package:proconnect/domain/repositories/apartment_repository.dart';
+import 'package:proconnect/domain/repositories/floor_repository.dart';
 import 'package:proconnect/domain/unit/repository/unit_repository.dart';
 import 'package:proconnect/domain/unit/usecase/add_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/update_unit_tenant_details_use_case.dart';
+import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_bloc.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
-import 'package:proconnect/data/floor/datasource/floor_remote_data_source.dart';
-import 'package:proconnect/data/floor/repository/floor_repository_impl.dart';
-import 'package:proconnect/domain/repositories/floor_repository.dart';
-import 'package:proconnect/data/apartment/datasource/apartment_remote_data_source.dart';
-import 'package:proconnect/data/apartment/repository/apartment_repository_impl.dart';
-import 'package:proconnect/domain/repositories/apartment_repository.dart';
-import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
-import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
-import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_bloc.dart';
-import 'package:proconnect/core/services/seeding_service.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -130,7 +132,13 @@ class DependencyInjector {
         (c) => SignUpUseCase(c.resolve<AuthRepository>()),
       )
       ..registerSingleton<GetUnitsUseCase>(
-        (c) => GetUnitsUseCase(c.resolve<UnitRepository>()),
+        (c) => GetUnitsUseCase(
+          c.resolve<UnitRepository>(),
+          c.resolve<ApartmentRepository>(),
+        ),
+      )
+      ..registerSingleton<GetApartmentsByOwnerUseCase>(
+        (c) => GetApartmentsByOwnerUseCase(c.resolve<ApartmentRepository>()),
       )
       ..registerSingleton<AddUnitUseCase>(
         (c) => AddUnitUseCase(c.resolve<UnitRepository>()),
@@ -233,6 +241,11 @@ class DependencyInjector {
       ..registerFactory<OwnerSelectionBloc>(
         (c) => OwnerSelectionBloc(
           getUsersUseCase: c.resolve<GetUsersUseCase>(),
+        ),
+      )
+      ..registerFactory<OwnerApartmentBloc>(
+        (c) => OwnerApartmentBloc(
+          c.resolve<GetApartmentsByOwnerUseCase>(),
         ),
       );
   }

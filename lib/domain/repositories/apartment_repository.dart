@@ -17,6 +17,9 @@ abstract class ApartmentRepository {
   /// Get all apartments owned by a specific owner
   Future<List<Apartment>> getApartmentsByOwner(String ownerId);
 
+  /// Watch all apartments owned by a specific owner (real-time)
+  Stream<List<Apartment>> watchApartmentsByOwner(String ownerId);
+
   /// Get a specific apartment by ID
   Future<Apartment?> getApartmentById(String apartmentId);
 

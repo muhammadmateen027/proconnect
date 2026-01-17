@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
-import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
-import 'package:proconnect/core/theme/theme.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_event.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
-import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/pages/apartment_management/widgets/apartment_list_tab.dart';
 import 'package:proconnect/pages/apartment_management/widgets/floor_list_tab.dart';
 

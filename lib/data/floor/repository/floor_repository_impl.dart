@@ -30,17 +30,17 @@ class FloorRepositoryImpl implements FloorRepository {
 
   @override
   Future<Floor?> getFloorById(String floorId) async {
-    return await _remoteDataSource.getFloorById(floorId);
+    return _remoteDataSource.getFloorById(floorId);
   }
 
   @override
   Future<List<Floor>> getFloorsByAgency(String agencyId) async {
-    return await _remoteDataSource.getFloorsByAgency(agencyId);
+    return _remoteDataSource.getFloorsByAgency(agencyId);
   }
 
   @override
   Future<List<Floor>> getFloorsByCondominium(String condominiumId) async {
-    return await _remoteDataSource.getFloorsByCondominium(condominiumId);
+    return _remoteDataSource.getFloorsByCondominium(condominiumId);
   }
 
   @override

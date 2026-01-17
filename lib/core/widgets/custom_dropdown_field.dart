@@ -47,7 +47,7 @@ class CustomDropdownField<T> extends StatelessWidget {
         Opacity(
           opacity: enabled ? 1.0 : 0.6,
           child: DropdownButtonFormField<T>(
-            value: value,
+            initialValue: value,
             onChanged: enabled ? onChanged : null,
             validator: validator,
             style: theme.textTheme.bodyLarge?.copyWith(

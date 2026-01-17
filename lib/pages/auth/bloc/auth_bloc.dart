@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:proconnect/domain/auth/usecase/get_auth_status_stream_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';

@@ -7,6 +7,7 @@ import 'package:proconnect/core/widgets/custom_dropdown_field.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/apartment.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
@@ -15,7 +16,6 @@ import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_s
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_state.dart'
     as floor_state;
-import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/pages/apartment_management/widgets/owner_assignment_section.dart';
 
 class CreateEditApartmentPage extends StatefulWidget {
@@ -107,6 +107,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
       final now = DateTime.now();
       final apartment =
           widget.apartment?.copyWith(
+            condoName: widget.condo.name,
             floorId: _selectedFloorId!,
             apartmentNumber: _numberController.text,
             totalSizeSquareFeet: double.tryParse(_sizeController.text) ?? 0.0,
@@ -131,6 +132,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
           Apartment(
             id: '',
             condominiumId: widget.condo.id,
+            condoName: widget.condo.name,
             agencyId: widget.condo.agencyId ?? '',
             floorId: _selectedFloorId!,
             apartmentNumber: _numberController.text,
@@ -187,8 +189,6 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
       },
       child: ProConnectLayout(
         useGlass: false,
-        useScrolling: true,
-        centerContent: false,
         appBar: AppBar(
           title: Text(
             widget.isEditing ? l10n.editApartment : l10n.addApartment,
@@ -303,13 +303,10 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                             switch (s) {
                               case FurnishingStatus.unfurnished:
                                 label = l10n.unfurnished;
-                                break;
                               case FurnishingStatus.partiallyFurnished:
                                 label = l10n.partiallyFurnished;
-                                break;
                               case FurnishingStatus.fullyFurnished:
                                 label = l10n.fullyFurnished;
-                                break;
                             }
                             return DropdownMenuItem(
                               value: s,
@@ -331,16 +328,12 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                             switch (s) {
                               case ApartmentStatus.vacant:
                                 label = l10n.vacant;
-                                break;
                               case ApartmentStatus.occupied:
                                 label = l10n.occupied;
-                                break;
                               case ApartmentStatus.maintenance:
                                 label = l10n.maintenance;
-                                break;
                               case ApartmentStatus.reserved:
                                 label = l10n.reserved;
-                                break;
                             }
                             return DropdownMenuItem(
                               value: s,

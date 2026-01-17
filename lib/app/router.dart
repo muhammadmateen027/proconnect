@@ -7,8 +7,16 @@ import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/app/view/home_screen_wrapper.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/widgets/pro_connect_layout.dart';
+import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/domain/models/unit.dart';
+import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
+import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_event.dart';
+import 'package:proconnect/pages/apartment_management/view/apartment_management_page.dart';
+import 'package:proconnect/pages/apartment_management/view/create_edit_apartment_page.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/auth/view/login_screen.dart';
 import 'package:proconnect/pages/auth/view/registration_screen.dart';
@@ -17,20 +25,12 @@ import 'package:proconnect/pages/condo_management/view/condo_management_page.dar
 import 'package:proconnect/pages/condo_management/view/create_edit_condo_page.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
-import 'package:proconnect/pages/settings/view/settings_screen.dart';
 import 'package:proconnect/pages/settings/view/seeding_page.dart';
+import 'package:proconnect/pages/settings/view/settings_screen.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 import 'package:proconnect/pages/super_admin/view/create_user_page.dart';
 import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
 import 'package:proconnect/pages/super_admin/view/user_management_page.dart';
-import 'package:proconnect/pages/apartment_management/view/apartment_management_page.dart';
-import 'package:proconnect/pages/apartment_management/view/create_edit_apartment_page.dart';
-import 'package:proconnect/domain/models/apartment.dart';
-import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
-import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
-import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
-import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_bloc.dart';
-import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_event.dart';
 
 // A helper class to make GoRouter listen to a BLoC stream
 class GoRouterRefreshStream extends ChangeNotifier {

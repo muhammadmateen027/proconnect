@@ -188,5 +188,10 @@
     "selectCondoToSeed": "Seleccione un Condominio para sembrar",
     "seedingInProgress": "Sembrando datos, por favor espere...",
     "seedingSuccess": "¡Datos sembrados con éxito!",
-    "seedingError": "Ocurrió un error durante la siembra: {error}"
+    "seedingError": "Ocurrió un error durante la siembra: {error}",
+    "unit": "Unidad",
+    "clearData": "Borrar Datos",
+    "clearDataConfirmation": "¿Estás seguro de que quieres eliminar todos los pisos y apartamentos de este condominio? Esta acción no se puede deshacer.",
+    "clearingData": "Borrando datos, por favor espere...",
+    "clearDataSuccess": "¡Datos borrados con éxito!"
 }

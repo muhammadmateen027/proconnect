@@ -1,9 +1,17 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:proconnect/core/theme/theme.dart';
 import 'package:proconnect/domain/models/unit.dart';
+import 'package:proconnect/l10n/l10n.dart';
 
 class UnitCard extends StatelessWidget {
-  const UnitCard({required this.unit, super.key, this.onTap, this.onDelete});
+  const UnitCard({
+    required this.unit,
+    super.key,
+    this.onTap,
+    this.onDelete,
+  });
+
   final Unit unit;
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
@@ -11,6 +19,7 @@ class UnitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
     final isDark = theme.brightness == Brightness.dark;
     final isVacant = unit.isVacant;
 
@@ -45,8 +54,9 @@ class UnitCard extends StatelessWidget {
             ),
             child: ListTile(
               contentPadding: const EdgeInsets.all(20),
+              onTap: onTap,
               title: Text(
-                'Unit ${unit.unitNo}',
+                '${l10n.unit} ${unit.unitNo}',
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   letterSpacing: -0.5,
@@ -68,31 +78,31 @@ class UnitCard extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: isVacant
-                          ? Colors.green.withValues(alpha: isDark ? 0.2 : 0.1)
-                          : Colors.orange.withValues(alpha: isDark ? 0.2 : 0.1),
+                          ? AppColors.success.withValues(alpha: 0.1)
+                          : AppColors.info.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: isVacant
-                            ? Colors.green.withValues(alpha: 0.3)
-                            : Colors.orange.withValues(alpha: 0.3),
+                            ? AppColors.success.withValues(alpha: 0.3)
+                            : AppColors.info.withValues(alpha: 0.3),
                       ),
                     ),
                     child: Text(
-                      isVacant ? 'Vacant' : 'Occupied',
+                      isVacant ? l10n.vacant : l10n.occupied,
                       style: TextStyle(
                         color: isVacant
                             ? (isDark
                                   ? Colors.greenAccent
                                   : Colors.green.shade800)
                             : (isDark
-                                  ? Colors.orangeAccent
-                                  : Colors.orange.shade800),
+                                  ? Colors.lightBlueAccent
+                                  : Colors.blue.shade800),
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
                       ),
                     ),
                   ),
-                  if (onDelete != null) ...[
+                  if (onDelete != null && !unit.isAssigned) ...[
                     const SizedBox(width: 8),
                     IconButton(
                       icon: Icon(
@@ -104,7 +114,6 @@ class UnitCard extends StatelessWidget {
                   ],
                 ],
               ),
-              onTap: onTap,
             ),
           ),
         ),

@@ -188,5 +188,9 @@
     "selectCondoToSeed": "Select a Condominium to seed",
     "seedingInProgress": "Seeding data, please wait...",
     "seedingSuccess": "Data seeded successfully!",
-    "seedingError": "An error occurred during seeding: {error}"
+    "seedingError": "An error occurred during seeding: {error}",
+    "unit": "Unit",
+    "clearData": "Clear Data",
+    "clearDataConfirmation": "Are you sure you want to delete all floors and apartments for this condominium? This action cannot be undone.",
+    "clearDataSuccess": "Data cleared successfully!"
 }

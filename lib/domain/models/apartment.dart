@@ -25,9 +25,8 @@ class Apartment with _$Apartment {
   const factory Apartment({
     required String id,
     required String condominiumId,
-    required String agencyId,
-    required String floorId,
-    required String apartmentNumber, // e.g., "A-12-03", "101", "2B"
+    required String agencyId, required String floorId, required String apartmentNumber, // e.g., "A-12-03", "101", "2B", // Apartment Details
+    required double totalSizeSquareFeet, String? condoName,
     // Ownership
     String? ownerId, // Owner who manages this apartment
     String? ownerName,
@@ -39,9 +38,6 @@ class Apartment with _$Apartment {
     String? tenantName,
     String? tenantEmail,
     String? tenantPhone,
-
-    // Apartment Details
-    required double totalSizeSquareFeet,
     @Default([]) List<Room> rooms,
     @Default(0) int totalBedrooms,
     @Default(0) int totalBathrooms,

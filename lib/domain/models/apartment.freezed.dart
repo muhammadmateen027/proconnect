@@ -26,8 +26,9 @@ mixin _$Apartment {
   String get agencyId => throw _privateConstructorUsedError;
   String get floorId => throw _privateConstructorUsedError;
   String get apartmentNumber =>
-      throw _privateConstructorUsedError; // e.g., "A-12-03", "101", "2B"
-  // Ownership
+      throw _privateConstructorUsedError; // e.g., "A-12-03", "101", "2B", // Apartment Details
+  double get totalSizeSquareFeet => throw _privateConstructorUsedError;
+  String? get condoName => throw _privateConstructorUsedError; // Ownership
   String? get ownerId =>
       throw _privateConstructorUsedError; // Owner who manages this apartment
   String? get ownerName => throw _privateConstructorUsedError;
@@ -37,9 +38,7 @@ mixin _$Apartment {
   String? get tenantId => throw _privateConstructorUsedError;
   String? get tenantName => throw _privateConstructorUsedError;
   String? get tenantEmail => throw _privateConstructorUsedError;
-  String? get tenantPhone =>
-      throw _privateConstructorUsedError; // Apartment Details
-  double get totalSizeSquareFeet => throw _privateConstructorUsedError;
+  String? get tenantPhone => throw _privateConstructorUsedError;
   List<Room> get rooms => throw _privateConstructorUsedError;
   int get totalBedrooms => throw _privateConstructorUsedError;
   int get totalBathrooms => throw _privateConstructorUsedError;
@@ -91,6 +90,8 @@ abstract class $ApartmentCopyWith<$Res> {
     String agencyId,
     String floorId,
     String apartmentNumber,
+    double totalSizeSquareFeet,
+    String? condoName,
     String? ownerId,
     String? ownerName,
     String? ownerEmail,
@@ -99,7 +100,6 @@ abstract class $ApartmentCopyWith<$Res> {
     String? tenantName,
     String? tenantEmail,
     String? tenantPhone,
-    double totalSizeSquareFeet,
     List<Room> rooms,
     int totalBedrooms,
     int totalBathrooms,
@@ -142,6 +142,8 @@ class _$ApartmentCopyWithImpl<$Res, $Val extends Apartment>
     Object? agencyId = null,
     Object? floorId = null,
     Object? apartmentNumber = null,
+    Object? totalSizeSquareFeet = null,
+    Object? condoName = freezed,
     Object? ownerId = freezed,
     Object? ownerName = freezed,
     Object? ownerEmail = freezed,
@@ -150,7 +152,6 @@ class _$ApartmentCopyWithImpl<$Res, $Val extends Apartment>
     Object? tenantName = freezed,
     Object? tenantEmail = freezed,
     Object? tenantPhone = freezed,
-    Object? totalSizeSquareFeet = null,
     Object? rooms = null,
     Object? totalBedrooms = null,
     Object? totalBathrooms = null,
@@ -193,6 +194,14 @@ class _$ApartmentCopyWithImpl<$Res, $Val extends Apartment>
                 ? _value.apartmentNumber
                 : apartmentNumber // ignore: cast_nullable_to_non_nullable
                       as String,
+            totalSizeSquareFeet: null == totalSizeSquareFeet
+                ? _value.totalSizeSquareFeet
+                : totalSizeSquareFeet // ignore: cast_nullable_to_non_nullable
+                      as double,
+            condoName: freezed == condoName
+                ? _value.condoName
+                : condoName // ignore: cast_nullable_to_non_nullable
+                      as String?,
             ownerId: freezed == ownerId
                 ? _value.ownerId
                 : ownerId // ignore: cast_nullable_to_non_nullable
@@ -225,10 +234,6 @@ class _$ApartmentCopyWithImpl<$Res, $Val extends Apartment>
                 ? _value.tenantPhone
                 : tenantPhone // ignore: cast_nullable_to_non_nullable
                       as String?,
-            totalSizeSquareFeet: null == totalSizeSquareFeet
-                ? _value.totalSizeSquareFeet
-                : totalSizeSquareFeet // ignore: cast_nullable_to_non_nullable
-                      as double,
             rooms: null == rooms
                 ? _value.rooms
                 : rooms // ignore: cast_nullable_to_non_nullable
@@ -326,6 +331,8 @@ abstract class _$$ApartmentImplCopyWith<$Res>
     String agencyId,
     String floorId,
     String apartmentNumber,
+    double totalSizeSquareFeet,
+    String? condoName,
     String? ownerId,
     String? ownerName,
     String? ownerEmail,
@@ -334,7 +341,6 @@ abstract class _$$ApartmentImplCopyWith<$Res>
     String? tenantName,
     String? tenantEmail,
     String? tenantPhone,
-    double totalSizeSquareFeet,
     List<Room> rooms,
     int totalBedrooms,
     int totalBathrooms,
@@ -376,6 +382,8 @@ class __$$ApartmentImplCopyWithImpl<$Res>
     Object? agencyId = null,
     Object? floorId = null,
     Object? apartmentNumber = null,
+    Object? totalSizeSquareFeet = null,
+    Object? condoName = freezed,
     Object? ownerId = freezed,
     Object? ownerName = freezed,
     Object? ownerEmail = freezed,
@@ -384,7 +392,6 @@ class __$$ApartmentImplCopyWithImpl<$Res>
     Object? tenantName = freezed,
     Object? tenantEmail = freezed,
     Object? tenantPhone = freezed,
-    Object? totalSizeSquareFeet = null,
     Object? rooms = null,
     Object? totalBedrooms = null,
     Object? totalBathrooms = null,
@@ -427,6 +434,14 @@ class __$$ApartmentImplCopyWithImpl<$Res>
             ? _value.apartmentNumber
             : apartmentNumber // ignore: cast_nullable_to_non_nullable
                   as String,
+        totalSizeSquareFeet: null == totalSizeSquareFeet
+            ? _value.totalSizeSquareFeet
+            : totalSizeSquareFeet // ignore: cast_nullable_to_non_nullable
+                  as double,
+        condoName: freezed == condoName
+            ? _value.condoName
+            : condoName // ignore: cast_nullable_to_non_nullable
+                  as String?,
         ownerId: freezed == ownerId
             ? _value.ownerId
             : ownerId // ignore: cast_nullable_to_non_nullable
@@ -459,10 +474,6 @@ class __$$ApartmentImplCopyWithImpl<$Res>
             ? _value.tenantPhone
             : tenantPhone // ignore: cast_nullable_to_non_nullable
                   as String?,
-        totalSizeSquareFeet: null == totalSizeSquareFeet
-            ? _value.totalSizeSquareFeet
-            : totalSizeSquareFeet // ignore: cast_nullable_to_non_nullable
-                  as double,
         rooms: null == rooms
             ? _value._rooms
             : rooms // ignore: cast_nullable_to_non_nullable
@@ -553,6 +564,8 @@ class _$ApartmentImpl extends _Apartment {
     required this.agencyId,
     required this.floorId,
     required this.apartmentNumber,
+    required this.totalSizeSquareFeet,
+    this.condoName,
     this.ownerId,
     this.ownerName,
     this.ownerEmail,
@@ -561,7 +574,6 @@ class _$ApartmentImpl extends _Apartment {
     this.tenantName,
     this.tenantEmail,
     this.tenantPhone,
-    required this.totalSizeSquareFeet,
     final List<Room> rooms = const [],
     this.totalBedrooms = 0,
     this.totalBathrooms = 0,
@@ -600,7 +612,11 @@ class _$ApartmentImpl extends _Apartment {
   final String floorId;
   @override
   final String apartmentNumber;
-  // e.g., "A-12-03", "101", "2B"
+  // e.g., "A-12-03", "101", "2B", // Apartment Details
+  @override
+  final double totalSizeSquareFeet;
+  @override
+  final String? condoName;
   // Ownership
   @override
   final String? ownerId;
@@ -620,9 +636,6 @@ class _$ApartmentImpl extends _Apartment {
   final String? tenantEmail;
   @override
   final String? tenantPhone;
-  // Apartment Details
-  @override
-  final double totalSizeSquareFeet;
   final List<Room> _rooms;
   @override
   @JsonKey()
@@ -712,7 +725,7 @@ class _$ApartmentImpl extends _Apartment {
 
   @override
   String toString() {
-    return 'Apartment(id: $id, condominiumId: $condominiumId, agencyId: $agencyId, floorId: $floorId, apartmentNumber: $apartmentNumber, ownerId: $ownerId, ownerName: $ownerName, ownerEmail: $ownerEmail, ownerPhone: $ownerPhone, tenantId: $tenantId, tenantName: $tenantName, tenantEmail: $tenantEmail, tenantPhone: $tenantPhone, totalSizeSquareFeet: $totalSizeSquareFeet, rooms: $rooms, totalBedrooms: $totalBedrooms, totalBathrooms: $totalBathrooms, furnishing: $furnishing, status: $status, vacantFrom: $vacantFrom, availableFrom: $availableFrom, monthlyRent: $monthlyRent, securityDeposit: $securityDeposit, utilitiesIncluded: $utilitiesIncluded, leaseStartDate: $leaseStartDate, leaseEndDate: $leaseEndDate, rentDueDay: $rentDueDay, parkingSpaces: $parkingSpaces, amenities: $amenities, description: $description, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Apartment(id: $id, condominiumId: $condominiumId, agencyId: $agencyId, floorId: $floorId, apartmentNumber: $apartmentNumber, totalSizeSquareFeet: $totalSizeSquareFeet, condoName: $condoName, ownerId: $ownerId, ownerName: $ownerName, ownerEmail: $ownerEmail, ownerPhone: $ownerPhone, tenantId: $tenantId, tenantName: $tenantName, tenantEmail: $tenantEmail, tenantPhone: $tenantPhone, rooms: $rooms, totalBedrooms: $totalBedrooms, totalBathrooms: $totalBathrooms, furnishing: $furnishing, status: $status, vacantFrom: $vacantFrom, availableFrom: $availableFrom, monthlyRent: $monthlyRent, securityDeposit: $securityDeposit, utilitiesIncluded: $utilitiesIncluded, leaseStartDate: $leaseStartDate, leaseEndDate: $leaseEndDate, rentDueDay: $rentDueDay, parkingSpaces: $parkingSpaces, amenities: $amenities, description: $description, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -728,6 +741,10 @@ class _$ApartmentImpl extends _Apartment {
             (identical(other.floorId, floorId) || other.floorId == floorId) &&
             (identical(other.apartmentNumber, apartmentNumber) ||
                 other.apartmentNumber == apartmentNumber) &&
+            (identical(other.totalSizeSquareFeet, totalSizeSquareFeet) ||
+                other.totalSizeSquareFeet == totalSizeSquareFeet) &&
+            (identical(other.condoName, condoName) ||
+                other.condoName == condoName) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.ownerName, ownerName) ||
                 other.ownerName == ownerName) &&
@@ -743,8 +760,6 @@ class _$ApartmentImpl extends _Apartment {
                 other.tenantEmail == tenantEmail) &&
             (identical(other.tenantPhone, tenantPhone) ||
                 other.tenantPhone == tenantPhone) &&
-            (identical(other.totalSizeSquareFeet, totalSizeSquareFeet) ||
-                other.totalSizeSquareFeet == totalSizeSquareFeet) &&
             const DeepCollectionEquality().equals(other._rooms, _rooms) &&
             (identical(other.totalBedrooms, totalBedrooms) ||
                 other.totalBedrooms == totalBedrooms) &&
@@ -797,6 +812,8 @@ class _$ApartmentImpl extends _Apartment {
     agencyId,
     floorId,
     apartmentNumber,
+    totalSizeSquareFeet,
+    condoName,
     ownerId,
     ownerName,
     ownerEmail,
@@ -805,7 +822,6 @@ class _$ApartmentImpl extends _Apartment {
     tenantName,
     tenantEmail,
     tenantPhone,
-    totalSizeSquareFeet,
     const DeepCollectionEquality().hash(_rooms),
     totalBedrooms,
     totalBathrooms,
@@ -848,6 +864,8 @@ abstract class _Apartment extends Apartment {
     required final String agencyId,
     required final String floorId,
     required final String apartmentNumber,
+    required final double totalSizeSquareFeet,
+    final String? condoName,
     final String? ownerId,
     final String? ownerName,
     final String? ownerEmail,
@@ -856,7 +874,6 @@ abstract class _Apartment extends Apartment {
     final String? tenantName,
     final String? tenantEmail,
     final String? tenantPhone,
-    required final double totalSizeSquareFeet,
     final List<Room> rooms,
     final int totalBedrooms,
     final int totalBathrooms,
@@ -891,8 +908,11 @@ abstract class _Apartment extends Apartment {
   @override
   String get floorId;
   @override
-  String get apartmentNumber; // e.g., "A-12-03", "101", "2B"
-  // Ownership
+  String get apartmentNumber; // e.g., "A-12-03", "101", "2B", // Apartment Details
+  @override
+  double get totalSizeSquareFeet;
+  @override
+  String? get condoName; // Ownership
   @override
   String? get ownerId; // Owner who manages this apartment
   @override
@@ -908,9 +928,7 @@ abstract class _Apartment extends Apartment {
   @override
   String? get tenantEmail;
   @override
-  String? get tenantPhone; // Apartment Details
-  @override
-  double get totalSizeSquareFeet;
+  String? get tenantPhone;
   @override
   List<Room> get rooms;
   @override
