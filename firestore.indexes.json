@@ -1,0 +1,93 @@
+{
+    "indexes": [
+        {
+            "collectionGroup": "floors",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "condominiumId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "floorNumber",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "floors",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "agencyId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "floorNumber",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "apartments",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "condominiumId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "apartmentNumber",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "apartments",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "agencyId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "apartmentNumber",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "apartments",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "floorId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "apartmentNumber",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "apartments",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "condominiumId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "status",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "apartmentNumber",
+                    "order": "ASCENDING"
+                }
+            ]
+        }
+    ],
+    "fieldOverrides": []
+}

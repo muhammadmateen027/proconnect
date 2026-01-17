@@ -1,5 +1,8 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proconnect/core/widgets/app_button.dart';
+import 'package:proconnect/core/widgets/custom_text_field.dart';
 
 import 'package:proconnect/core/theme/theme.dart';
 import 'package:proconnect/domain/models/condo.dart';
@@ -82,42 +85,101 @@ class FloorListTab extends StatelessWidget {
               separatorBuilder: (context, index) => AppSpacing.gapH12,
               itemBuilder: (context, index) {
                 final floor = floors[index];
-                return Card(
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: theme.colorScheme.primaryContainer,
-                      child: Text(
-                        floor.floorNumber.toString(),
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: theme.colorScheme.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: theme.brightness == Brightness.dark
+                                ? [
+                                    Colors.white.withValues(alpha: 0.1),
+                                    Colors.white.withValues(alpha: 0.05),
+                                  ]
+                                : [
+                                    Colors.white.withValues(alpha: 0.7),
+                                    Colors.white.withValues(alpha: 0.4),
+                                  ],
+                          ),
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(
+                            color: theme.brightness == Brightness.dark
+                                ? Colors.white.withValues(alpha: 0.1)
+                                : Colors.white.withValues(alpha: 0.4),
+                            width: 1.5,
+                          ),
+                        ),
+                        child: ListTile(
+                          leading: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  theme.colorScheme.primary,
+                                  theme.colorScheme.secondary,
+                                ],
+                              ),
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: theme.colorScheme.primary.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                floor.floorNumber.toString(),
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            floor.floorName ?? 'Floor ${floor.floorNumber}',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: floor.totalApartments != null
+                              ? Text('${floor.totalApartments} apartments')
+                              : null,
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.edit_rounded),
+                                color: theme.colorScheme.primary,
+                                onPressed: () {
+                                  // TODO: Navigate to edit floor
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete_rounded),
+                                color: theme.colorScheme.error,
+                                onPressed: () {
+                                  FloorListTab._showDeleteDialog(
+                                    context,
+                                    floor.id,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    title: Text(
-                      floor.floorName ?? 'Floor ${floor.floorNumber}',
-                      style: theme.textTheme.titleMedium,
-                    ),
-                    subtitle: floor.totalApartments != null
-                        ? Text('${floor.totalApartments} apartments')
-                        : null,
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit_rounded),
-                          onPressed: () {
-                            // TODO: Navigate to edit floor
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete_rounded),
-                          color: theme.colorScheme.error,
-                          onPressed: () {
-                            FloorListTab._showDeleteDialog(context, floor.id);
-                          },
-                        ),
-                      ],
                     ),
                   ),
                 );
@@ -167,33 +229,32 @@ class FloorListTab extends StatelessWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: Text(l10n.addFloor),
+        titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
+            CustomTextField(
               controller: floorNumberController,
-              decoration: InputDecoration(
-                labelText: l10n.floorNumber,
-                hintText: 'e.g., 1, 2, 3',
-              ),
+              labelText: l10n.floorNumber,
               keyboardType: TextInputType.number,
+              prefixIcon: const Icon(Icons.numbers_rounded),
             ),
             AppSpacing.gapH16,
-            TextField(
+            CustomTextField(
               controller: floorNameController,
-              decoration: InputDecoration(
-                labelText: '${l10n.floorName} (Optional)',
-                hintText: 'e.g., Ground Floor, Penthouse',
-              ),
+              labelText: l10n.floorName,
+              prefixIcon: const Icon(Icons.label_rounded),
             ),
           ],
         ),
         actions: [
-          TextButton(
+          AppButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(l10n.cancel),
+            label: l10n.cancel,
+            type: AppButtonType.text,
           ),
-          FilledButton(
+          AppButton(
             onPressed: () {
               final floorNumber = int.tryParse(floorNumberController.text);
               if (floorNumber != null) {
@@ -210,7 +271,7 @@ class FloorListTab extends StatelessWidget {
                 Navigator.of(dialogContext).pop();
               }
             },
-            child: Text(l10n.addFloor),
+            label: l10n.addFloor,
           ),
         ],
       ),
@@ -228,21 +289,20 @@ class FloorListTab extends StatelessWidget {
           'Are you sure you want to delete this floor? This action cannot be undone.',
         ),
         actions: [
-          TextButton(
+          AppButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(l10n.cancel),
+            label: l10n.cancel,
+            type: AppButtonType.text,
           ),
-          FilledButton(
+          AppButton(
             onPressed: () {
               context.read<FloorBloc>().add(
                 FloorEvent.deleteFloor(floorId: floorId),
               );
               Navigator.of(dialogContext).pop();
             },
-            style: FilledButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-            child: Text(l10n.delete),
+            label: l10n.delete,
+            // Custom red color for delete
           ),
         ],
       ),

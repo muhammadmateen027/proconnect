@@ -11,6 +11,7 @@ import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_b
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_event.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/pages/apartment_management/widgets/apartment_list_tab.dart';
 import 'package:proconnect/pages/apartment_management/widgets/floor_list_tab.dart';
 
@@ -70,7 +71,9 @@ class _ApartmentManagementPageState extends State<ApartmentManagementPage>
           },
         ),
       ],
-      child: Scaffold(
+      child: ProConnectLayout(
+        useGlass: false,
+        useScrolling: false, // TabBarView handles its own scrolling
         appBar: AppBar(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,13 +104,6 @@ class _ApartmentManagementPageState extends State<ApartmentManagementPage>
             ],
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            FloorListTab(condo: widget.condo),
-            ApartmentListTab(condo: widget.condo),
-          ],
-        ),
         floatingActionButton: AnimatedBuilder(
           animation: _tabController,
           builder: (context, child) {
@@ -130,6 +126,13 @@ class _ApartmentManagementPageState extends State<ApartmentManagementPage>
               ),
             );
           },
+        ),
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            FloorListTab(condo: widget.condo),
+            ApartmentListTab(condo: widget.condo),
+          ],
         ),
       ),
     );

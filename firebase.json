@@ -1,1 +1,45 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"proconnectmala","appId":"1:79685991906:android:b65db5e37de24a4feacdbb","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"proconnectmala","appId":"1:79685991906:ios:eda28e1746894983eacdbb","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"proconnectmala","appId":"1:79685991906:ios:516710c4649bb5c1eacdbb","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"proconnectmala","configurations":{"android":"1:79685991906:android:b65db5e37de24a4feacdbb","ios":"1:79685991906:ios:eda28e1746894983eacdbb","macos":"1:79685991906:ios:516710c4649bb5c1eacdbb","web":"1:79685991906:web:552ef9ce5507fa22eacdbb","windows":"1:79685991906:web:53e2296407d62388eacdbb"}}}}}}
+{
+    "firestore": {
+        "rules": "firestore.rules",
+        "indexes": "firestore.indexes.json"
+    },
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "proconnectmala",
+                    "appId": "1:79685991906:android:b65db5e37de24a4feacdbb",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "proconnectmala",
+                    "appId": "1:79685991906:ios:eda28e1746894983eacdbb",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "macos": {
+                "default": {
+                    "projectId": "proconnectmala",
+                    "appId": "1:79685991906:ios:516710c4649bb5c1eacdbb",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "macos/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "proconnectmala",
+                    "configurations": {
+                        "android": "1:79685991906:android:b65db5e37de24a4feacdbb",
+                        "ios": "1:79685991906:ios:eda28e1746894983eacdbb",
+                        "macos": "1:79685991906:ios:516710c4649bb5c1eacdbb",
+                        "web": "1:79685991906:web:552ef9ce5507fa22eacdbb",
+                        "windows": "1:79685991906:web:53e2296407d62388eacdbb"
+                    }
+                }
+            }
+        }
+    }
+}

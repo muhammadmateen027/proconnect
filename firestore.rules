@@ -1,0 +1,101 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Helper Functions ---
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      // Safely fetch user data, returning null if doesn't exist
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isSuperAdmin() {
+      return isSignedIn() && getUserData().role == 'super_admin';
+    }
+
+    function isAgencyAdmin() {
+      return isSignedIn() && getUserData().role == 'agency_admin';
+    }
+
+    function isSameAgency(agencyId) {
+      let userAgencyId = getUserData().agencyId;
+      // Allow if agencyId matches OR if the agencyId field is missing but the user is the one who created it (using uid as fallback for agency check)
+      return isSignedIn() && (userAgencyId == agencyId || (userAgencyId == null && request.auth.uid == agencyId));
+    }
+
+    function isSameCondominium(condoId) {
+      return isSignedIn() && getUserData().condominiumId == condoId;
+    }
+
+    // Check if a condo belongs to the same agency as the current user
+    function isCondoOwnedByMyAgency(condoId) {
+      let condo = get(/databases/$(database)/documents/condos/$(condoId)).data;
+      return isSameAgency(condo.agencyId);
+    }
+
+    // --- Collection Rules ---
+
+    // Global override for Super Admin
+    match /{document=**} {
+      allow read, write: if isSuperAdmin();
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isSuperAdmin() || isAgencyAdmin());
+      allow create: if isSignedIn(); 
+      allow update: if isSignedIn() && (request.auth.uid == userId || isSuperAdmin() || isAgencyAdmin());
+      allow delete: if isSuperAdmin();
+    }
+
+    // Condos collection
+    match /condos/{condoId} {
+      allow read: if isSignedIn();
+      allow write: if isSuperAdmin() || (isAgencyAdmin() && isSameAgency(resource.data.agencyId));
+    }
+
+    // Floors collection
+    match /floors/{floorId} {
+      // ALLOW READ for agency admins if they manage the parent condo
+      allow read: if isSignedIn() && (
+        isSuperAdmin() ||
+        isSameAgency(resource.data.agencyId) ||
+        isSameCondominium(resource.data.condominiumId) ||
+        isCondoOwnedByMyAgency(resource.data.condominiumId)
+      );
+      allow create: if isAgencyAdmin() && (
+        isSameAgency(request.resource.data.agencyId) ||
+        isCondoOwnedByMyAgency(request.resource.data.condominiumId)
+      );
+      allow update, delete: if isAgencyAdmin() && (
+        isSameAgency(resource.data.agencyId) ||
+        isCondoOwnedByMyAgency(resource.data.condominiumId)
+      );
+    }
+
+    // Apartments collection
+    match /apartments/{apartmentId} {
+      // ALLOW READ for agency admins if they manage the parent condo
+      allow read: if isSignedIn() && (
+        isSuperAdmin() ||
+        isSameAgency(resource.data.agencyId) ||
+        isSameCondominium(resource.data.condominiumId) ||
+        isCondoOwnedByMyAgency(resource.data.condominiumId) ||
+        request.auth.uid == resource.data.ownerId ||
+        request.auth.uid == resource.data.tenantId
+      );
+      allow create: if isAgencyAdmin() && (
+        isSameAgency(request.resource.data.agencyId) ||
+        isCondoOwnedByMyAgency(request.resource.data.condominiumId)
+      );
+      allow update, delete: if isAgencyAdmin() && (
+        isSameAgency(resource.data.agencyId) ||
+        isCondoOwnedByMyAgency(resource.data.condominiumId)
+      );
+    }
+  }
+}
