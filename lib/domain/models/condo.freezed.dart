@@ -24,6 +24,13 @@ mixin _$Condo {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  int? get totalUnits => throw _privateConstructorUsedError;
+  int? get totalFloors => throw _privateConstructorUsedError;
+  int? get yearBuilt => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get contactEmail => throw _privateConstructorUsedError;
+  String? get contactPhone => throw _privateConstructorUsedError;
+  List<String> get amenities => throw _privateConstructorUsedError;
 
   /// Serializes this Condo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +46,18 @@ abstract class $CondoCopyWith<$Res> {
   factory $CondoCopyWith(Condo value, $Res Function(Condo) then) =
       _$CondoCopyWithImpl<$Res, Condo>;
   @useResult
-  $Res call({String id, String name, String address});
+  $Res call({
+    String id,
+    String name,
+    String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    List<String> amenities,
+  });
 }
 
 /// @nodoc
@@ -56,7 +74,18 @@ class _$CondoCopyWithImpl<$Res, $Val extends Condo>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? name = null, Object? address = null}) {
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? address = null,
+    Object? totalUnits = freezed,
+    Object? totalFloors = freezed,
+    Object? yearBuilt = freezed,
+    Object? description = freezed,
+    Object? contactEmail = freezed,
+    Object? contactPhone = freezed,
+    Object? amenities = null,
+  }) {
     return _then(
       _value.copyWith(
             id: null == id
@@ -71,6 +100,34 @@ class _$CondoCopyWithImpl<$Res, $Val extends Condo>
                 ? _value.address
                 : address // ignore: cast_nullable_to_non_nullable
                       as String,
+            totalUnits: freezed == totalUnits
+                ? _value.totalUnits
+                : totalUnits // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            totalFloors: freezed == totalFloors
+                ? _value.totalFloors
+                : totalFloors // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            yearBuilt: freezed == yearBuilt
+                ? _value.yearBuilt
+                : yearBuilt // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            description: freezed == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            contactEmail: freezed == contactEmail
+                ? _value.contactEmail
+                : contactEmail // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            contactPhone: freezed == contactPhone
+                ? _value.contactPhone
+                : contactPhone // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            amenities: null == amenities
+                ? _value.amenities
+                : amenities // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
           )
           as $Val,
     );
@@ -85,7 +142,18 @@ abstract class _$$CondoImplCopyWith<$Res> implements $CondoCopyWith<$Res> {
   ) = __$$CondoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String address});
+  $Res call({
+    String id,
+    String name,
+    String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    List<String> amenities,
+  });
 }
 
 /// @nodoc
@@ -101,7 +169,18 @@ class __$$CondoImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? name = null, Object? address = null}) {
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? address = null,
+    Object? totalUnits = freezed,
+    Object? totalFloors = freezed,
+    Object? yearBuilt = freezed,
+    Object? description = freezed,
+    Object? contactEmail = freezed,
+    Object? contactPhone = freezed,
+    Object? amenities = null,
+  }) {
     return _then(
       _$CondoImpl(
         id: null == id
@@ -116,6 +195,34 @@ class __$$CondoImplCopyWithImpl<$Res>
             ? _value.address
             : address // ignore: cast_nullable_to_non_nullable
                   as String,
+        totalUnits: freezed == totalUnits
+            ? _value.totalUnits
+            : totalUnits // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        totalFloors: freezed == totalFloors
+            ? _value.totalFloors
+            : totalFloors // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        yearBuilt: freezed == yearBuilt
+            ? _value.yearBuilt
+            : yearBuilt // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        description: freezed == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        contactEmail: freezed == contactEmail
+            ? _value.contactEmail
+            : contactEmail // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        contactPhone: freezed == contactPhone
+            ? _value.contactPhone
+            : contactPhone // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        amenities: null == amenities
+            ? _value._amenities
+            : amenities // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
       ),
     );
   }
@@ -128,7 +235,14 @@ class _$CondoImpl implements _Condo {
     required this.id,
     required this.name,
     required this.address,
-  });
+    this.totalUnits,
+    this.totalFloors,
+    this.yearBuilt,
+    this.description,
+    this.contactEmail,
+    this.contactPhone,
+    final List<String> amenities = const [],
+  }) : _amenities = amenities;
 
   factory _$CondoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CondoImplFromJson(json);
@@ -139,10 +253,30 @@ class _$CondoImpl implements _Condo {
   final String name;
   @override
   final String address;
+  @override
+  final int? totalUnits;
+  @override
+  final int? totalFloors;
+  @override
+  final int? yearBuilt;
+  @override
+  final String? description;
+  @override
+  final String? contactEmail;
+  @override
+  final String? contactPhone;
+  final List<String> _amenities;
+  @override
+  @JsonKey()
+  List<String> get amenities {
+    if (_amenities is EqualUnmodifiableListView) return _amenities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_amenities);
+  }
 
   @override
   String toString() {
-    return 'Condo(id: $id, name: $name, address: $address)';
+    return 'Condo(id: $id, name: $name, address: $address, totalUnits: $totalUnits, totalFloors: $totalFloors, yearBuilt: $yearBuilt, description: $description, contactEmail: $contactEmail, contactPhone: $contactPhone, amenities: $amenities)';
   }
 
   @override
@@ -152,12 +286,40 @@ class _$CondoImpl implements _Condo {
             other is _$CondoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.totalUnits, totalUnits) ||
+                other.totalUnits == totalUnits) &&
+            (identical(other.totalFloors, totalFloors) ||
+                other.totalFloors == totalFloors) &&
+            (identical(other.yearBuilt, yearBuilt) ||
+                other.yearBuilt == yearBuilt) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.contactEmail, contactEmail) ||
+                other.contactEmail == contactEmail) &&
+            (identical(other.contactPhone, contactPhone) ||
+                other.contactPhone == contactPhone) &&
+            const DeepCollectionEquality().equals(
+              other._amenities,
+              _amenities,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, address);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    name,
+    address,
+    totalUnits,
+    totalFloors,
+    yearBuilt,
+    description,
+    contactEmail,
+    contactPhone,
+    const DeepCollectionEquality().hash(_amenities),
+  );
 
   /// Create a copy of Condo
   /// with the given fields replaced by the non-null parameter values.
@@ -178,6 +340,13 @@ abstract class _Condo implements Condo {
     required final String id,
     required final String name,
     required final String address,
+    final int? totalUnits,
+    final int? totalFloors,
+    final int? yearBuilt,
+    final String? description,
+    final String? contactEmail,
+    final String? contactPhone,
+    final List<String> amenities,
   }) = _$CondoImpl;
 
   factory _Condo.fromJson(Map<String, dynamic> json) = _$CondoImpl.fromJson;
@@ -188,6 +357,20 @@ abstract class _Condo implements Condo {
   String get name;
   @override
   String get address;
+  @override
+  int? get totalUnits;
+  @override
+  int? get totalFloors;
+  @override
+  int? get yearBuilt;
+  @override
+  String? get description;
+  @override
+  String? get contactEmail;
+  @override
+  String? get contactPhone;
+  @override
+  List<String> get amenities;
 
   /// Create a copy of Condo
   /// with the given fields replaced by the non-null parameter values.

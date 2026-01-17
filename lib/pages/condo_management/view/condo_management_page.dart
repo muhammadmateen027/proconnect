@@ -6,6 +6,7 @@ import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
+import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/pages/condo_management/widgets/condo_card_widget.dart';
 
 class CondoManagementPage extends StatefulWidget {
@@ -36,18 +37,10 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
     }
   }
 
-  Future<void> _navigateToEditCondo(
-    String id,
-    String name,
-    String address,
-  ) async {
+  Future<void> _navigateToEditCondo(Condo condo) async {
     final result = await context.push<bool>(
       AppRoutes.editCondo,
-      extra: {
-        'id': id,
-        'name': name,
-        'address': address,
-      },
+      extra: condo,
     );
 
     if ((result ?? false) && mounted) {
@@ -280,11 +273,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
                   final condo = condos[index];
                   return CondoCardWidget(
                     condo: condo,
-                    onEdit: () => _navigateToEditCondo(
-                      condo.id,
-                      condo.name,
-                      condo.address,
-                    ),
+                    onEdit: () => _navigateToEditCondo(condo),
                     onDelete: () => _deleteCondo(condo.id, condo.name),
                   );
                 },

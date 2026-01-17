@@ -8,6 +8,7 @@ import 'package:proconnect/app/view/home_screen_wrapper.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/widgets/auth_background.dart';
 import 'package:proconnect/domain/models/unit.dart';
+import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/auth/view/login_screen.dart';
 import 'package:proconnect/pages/auth/view/registration_screen.dart';
@@ -112,14 +113,12 @@ GoRouter createRouter(BuildContext context) {
       GoRoute(
         path: AppRoutes.editCondo,
         builder: (context, state) {
-          final params = state.extra! as Map<String, String>;
+          final condo = state.extra! as Condo;
           return BlocProvider(
             create: (context) =>
                 DependencyInjector.instance.resolve<CondoManagementBloc>(),
             child: CreateEditCondoPage(
-              condoId: params['id']!,
-              initialName: params['name']!,
-              initialAddress: params['address']!,
+              condo: condo,
             ),
           );
         },

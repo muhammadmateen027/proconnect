@@ -801,21 +801,54 @@ mixin _$CondoManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
+    required TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )
+    createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
+    TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
     required TResult orElse(),
@@ -913,7 +946,18 @@ class _$LoadCondosImpl implements _LoadCondos {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
+    required TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )
+    createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
   }) {
@@ -924,7 +968,18 @@ class _$LoadCondosImpl implements _LoadCondos {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
   }) {
@@ -935,7 +990,18 @@ class _$LoadCondosImpl implements _LoadCondos {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
+    TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
     required TResult orElse(),
@@ -995,7 +1061,17 @@ abstract class _$$CreateCondoImplCopyWith<$Res> {
     $Res Function(_$CreateCondoImpl) then,
   ) = __$$CreateCondoImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, String address});
+  $Res call({
+    String name,
+    String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    List<String> amenities,
+  });
 }
 
 /// @nodoc
@@ -1011,7 +1087,17 @@ class __$$CreateCondoImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? name = null, Object? address = null}) {
+  $Res call({
+    Object? name = null,
+    Object? address = null,
+    Object? totalUnits = freezed,
+    Object? totalFloors = freezed,
+    Object? yearBuilt = freezed,
+    Object? description = freezed,
+    Object? contactEmail = freezed,
+    Object? contactPhone = freezed,
+    Object? amenities = null,
+  }) {
     return _then(
       _$CreateCondoImpl(
         name: null == name
@@ -1022,6 +1108,34 @@ class __$$CreateCondoImplCopyWithImpl<$Res>
             ? _value.address
             : address // ignore: cast_nullable_to_non_nullable
                   as String,
+        totalUnits: freezed == totalUnits
+            ? _value.totalUnits
+            : totalUnits // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        totalFloors: freezed == totalFloors
+            ? _value.totalFloors
+            : totalFloors // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        yearBuilt: freezed == yearBuilt
+            ? _value.yearBuilt
+            : yearBuilt // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        description: freezed == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        contactEmail: freezed == contactEmail
+            ? _value.contactEmail
+            : contactEmail // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        contactPhone: freezed == contactPhone
+            ? _value.contactPhone
+            : contactPhone // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        amenities: null == amenities
+            ? _value._amenities
+            : amenities // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
       ),
     );
   }
@@ -1030,16 +1144,46 @@ class __$$CreateCondoImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateCondoImpl implements _CreateCondo {
-  const _$CreateCondoImpl({required this.name, required this.address});
+  const _$CreateCondoImpl({
+    required this.name,
+    required this.address,
+    this.totalUnits,
+    this.totalFloors,
+    this.yearBuilt,
+    this.description,
+    this.contactEmail,
+    this.contactPhone,
+    final List<String> amenities = const [],
+  }) : _amenities = amenities;
 
   @override
   final String name;
   @override
   final String address;
+  @override
+  final int? totalUnits;
+  @override
+  final int? totalFloors;
+  @override
+  final int? yearBuilt;
+  @override
+  final String? description;
+  @override
+  final String? contactEmail;
+  @override
+  final String? contactPhone;
+  final List<String> _amenities;
+  @override
+  @JsonKey()
+  List<String> get amenities {
+    if (_amenities is EqualUnmodifiableListView) return _amenities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_amenities);
+  }
 
   @override
   String toString() {
-    return 'CondoManagementEvent.createCondo(name: $name, address: $address)';
+    return 'CondoManagementEvent.createCondo(name: $name, address: $address, totalUnits: $totalUnits, totalFloors: $totalFloors, yearBuilt: $yearBuilt, description: $description, contactEmail: $contactEmail, contactPhone: $contactPhone, amenities: $amenities)';
   }
 
   @override
@@ -1048,11 +1192,38 @@ class _$CreateCondoImpl implements _CreateCondo {
         (other.runtimeType == runtimeType &&
             other is _$CreateCondoImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.totalUnits, totalUnits) ||
+                other.totalUnits == totalUnits) &&
+            (identical(other.totalFloors, totalFloors) ||
+                other.totalFloors == totalFloors) &&
+            (identical(other.yearBuilt, yearBuilt) ||
+                other.yearBuilt == yearBuilt) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.contactEmail, contactEmail) ||
+                other.contactEmail == contactEmail) &&
+            (identical(other.contactPhone, contactPhone) ||
+                other.contactPhone == contactPhone) &&
+            const DeepCollectionEquality().equals(
+              other._amenities,
+              _amenities,
+            ));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, address);
+  int get hashCode => Object.hash(
+    runtimeType,
+    name,
+    address,
+    totalUnits,
+    totalFloors,
+    yearBuilt,
+    description,
+    contactEmail,
+    contactPhone,
+    const DeepCollectionEquality().hash(_amenities),
+  );
 
   /// Create a copy of CondoManagementEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1066,35 +1237,98 @@ class _$CreateCondoImpl implements _CreateCondo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
+    required TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )
+    createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
   }) {
-    return createCondo(name, address);
+    return createCondo(
+      name,
+      address,
+      totalUnits,
+      totalFloors,
+      yearBuilt,
+      description,
+      contactEmail,
+      contactPhone,
+      amenities,
+    );
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
   }) {
-    return createCondo?.call(name, address);
+    return createCondo?.call(
+      name,
+      address,
+      totalUnits,
+      totalFloors,
+      yearBuilt,
+      description,
+      contactEmail,
+      contactPhone,
+      amenities,
+    );
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
+    TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
     required TResult orElse(),
   }) {
     if (createCondo != null) {
-      return createCondo(name, address);
+      return createCondo(
+        name,
+        address,
+        totalUnits,
+        totalFloors,
+        yearBuilt,
+        description,
+        contactEmail,
+        contactPhone,
+        amenities,
+      );
     }
     return orElse();
   }
@@ -1141,10 +1375,24 @@ abstract class _CreateCondo implements CondoManagementEvent {
   const factory _CreateCondo({
     required final String name,
     required final String address,
+    final int? totalUnits,
+    final int? totalFloors,
+    final int? yearBuilt,
+    final String? description,
+    final String? contactEmail,
+    final String? contactPhone,
+    final List<String> amenities,
   }) = _$CreateCondoImpl;
 
   String get name;
   String get address;
+  int? get totalUnits;
+  int? get totalFloors;
+  int? get yearBuilt;
+  String? get description;
+  String? get contactEmail;
+  String? get contactPhone;
+  List<String> get amenities;
 
   /// Create a copy of CondoManagementEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1236,7 +1484,18 @@ class _$UpdateCondoImpl implements _UpdateCondo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
+    required TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )
+    createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
   }) {
@@ -1247,7 +1506,18 @@ class _$UpdateCondoImpl implements _UpdateCondo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
   }) {
@@ -1258,7 +1528,18 @@ class _$UpdateCondoImpl implements _UpdateCondo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
+    TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
     required TResult orElse(),
@@ -1390,7 +1671,18 @@ class _$DeleteCondoImpl implements _DeleteCondo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCondos,
-    required TResult Function(String name, String address) createCondo,
+    required TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )
+    createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
   }) {
@@ -1401,7 +1693,18 @@ class _$DeleteCondoImpl implements _DeleteCondo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCondos,
-    TResult? Function(String name, String address)? createCondo,
+    TResult? Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
   }) {
@@ -1412,7 +1715,18 @@ class _$DeleteCondoImpl implements _DeleteCondo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCondos,
-    TResult Function(String name, String address)? createCondo,
+    TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
     required TResult orElse(),

@@ -8,8 +8,28 @@ class CondoRepositoryImpl implements CondoRepository {
   final CondoRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Condo> createCondo({required String name, required String address}) {
-    return _remoteDataSource.createCondo(name: name, address: address);
+  Future<Condo> createCondo({
+    required String name,
+    required String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    List<String>? amenities,
+  }) {
+    return _remoteDataSource.createCondo(
+      name: name,
+      address: address,
+      totalUnits: totalUnits,
+      totalFloors: totalFloors,
+      yearBuilt: yearBuilt,
+      description: description,
+      contactEmail: contactEmail,
+      contactPhone: contactPhone,
+      amenities: amenities,
+    );
   }
 
   @override

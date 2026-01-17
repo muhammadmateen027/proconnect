@@ -7,6 +7,13 @@ abstract class CondoManagementEvent with _$CondoManagementEvent {
   const factory CondoManagementEvent.createCondo({
     required String name,
     required String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    @Default([]) List<String> amenities,
   }) = _CreateCondo;
 
   const factory CondoManagementEvent.updateCondo({

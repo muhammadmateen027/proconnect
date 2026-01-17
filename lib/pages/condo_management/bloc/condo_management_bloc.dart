@@ -59,6 +59,13 @@ class CondoManagementBloc
       await _createCondoUseCase(
         name: event.name,
         address: event.address,
+        totalUnits: event.totalUnits,
+        totalFloors: event.totalFloors,
+        yearBuilt: event.yearBuilt,
+        description: event.description,
+        contactEmail: event.contactEmail,
+        contactPhone: event.contactPhone,
+        amenities: event.amenities,
       );
       emit(const CondoManagementState.success());
     } catch (e) {

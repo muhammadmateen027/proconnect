@@ -3,7 +3,17 @@ import 'package:proconnect/domain/models/condo.dart';
 
 abstract class CondoRemoteDataSource {
   Future<List<Condo>> getCondos();
-  Future<Condo> createCondo({required String name, required String address});
+  Future<Condo> createCondo({
+    required String name,
+    required String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    List<String>? amenities,
+  });
   Future<void> updateCondo({required Condo condo});
   Future<void> deleteCondo({required String id});
 }
@@ -16,9 +26,30 @@ class CondoRemoteDataSourceImpl implements CondoRemoteDataSource {
   final FirebaseFirestore _firestore;
 
   @override
-  Future<Condo> createCondo({required String name, required String address}) async {
+  Future<Condo> createCondo({
+    required String name,
+    required String address,
+    int? totalUnits,
+    int? totalFloors,
+    int? yearBuilt,
+    String? description,
+    String? contactEmail,
+    String? contactPhone,
+    List<String>? amenities,
+  }) async {
     final doc = _firestore.collection('condos').doc();
-    final condo = Condo(id: doc.id, name: name, address: address);
+    final condo = Condo(
+      id: doc.id,
+      name: name,
+      address: address,
+      totalUnits: totalUnits,
+      totalFloors: totalFloors,
+      yearBuilt: yearBuilt,
+      description: description,
+      contactEmail: contactEmail,
+      contactPhone: contactPhone,
+      amenities: amenities ?? [],
+    );
     await doc.set(condo.toJson());
     return condo;
   }
