@@ -29,6 +29,7 @@ class FloorEvent with _$FloorEvent {
 
   /// Delete a floor
   const factory FloorEvent.deleteFloor({
+    required String condominiumId,
     required String floorId,
   }) = DeleteFloor;
 }

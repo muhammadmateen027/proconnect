@@ -6,7 +6,10 @@ abstract class ApartmentRepository {
   Future<List<Apartment>> getApartmentsByCondominium(String condominiumId);
 
   /// Get all apartments on a specific floor
-  Future<List<Apartment>> getApartmentsByFloor(String floorId);
+  Future<List<Apartment>> getApartmentsByFloor(
+    String floorId, {
+    String? condominiumId,
+  });
 
   /// Get all apartments managed by an agency
   Future<List<Apartment>> getApartmentsByAgency(String agencyId);
@@ -51,4 +54,10 @@ abstract class ApartmentRepository {
 
   /// Get available apartments (vacant and ready to move in)
   Future<List<Apartment>> getAvailableApartments(String condominiumId);
+
+  /// Delete all apartments on a specific floor
+  Future<void> deleteApartmentsByFloor(
+    String floorId, {
+    required String condominiumId,
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proconnect/domain/models/floor.dart';
+import 'package:proconnect/domain/repositories/apartment_repository.dart';
 import 'package:proconnect/domain/repositories/floor_repository.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_state.dart';
@@ -8,7 +9,9 @@ import 'package:proconnect/pages/apartment_management/bloc/floor/floor_state.dar
 class FloorBloc extends Bloc<FloorEvent, FloorState> {
   FloorBloc({
     required FloorRepository floorRepository,
+    required ApartmentRepository apartmentRepository,
   }) : _floorRepository = floorRepository,
+       _apartmentRepository = apartmentRepository,
        super(const FloorState.initial()) {
     on<LoadFloors>(_onLoadFloors);
     on<CreateFloor>(_onCreateFloor);
@@ -17,6 +20,7 @@ class FloorBloc extends Bloc<FloorEvent, FloorState> {
   }
 
   final FloorRepository _floorRepository;
+  final ApartmentRepository _apartmentRepository;
 
   Future<void> _onLoadFloors(
     LoadFloors event,
@@ -82,8 +86,23 @@ class FloorBloc extends Bloc<FloorEvent, FloorState> {
   ) async {
     emit(const FloorState.loading());
     try {
+      // 1. Delete all apartments on this floor (cascade delete using batch)
+      await _apartmentRepository.deleteApartmentsByFloor(
+        event.floorId,
+        condominiumId: event.condominiumId,
+      );
+
+      // 2. Delete the floor itself
       await _floorRepository.deleteFloor(event.floorId);
-      emit(const FloorState.success(message: 'Floor deleted successfully'));
+
+      emit(
+        const FloorState.success(
+          message: 'Floor and its apartments deleted successfully',
+        ),
+      );
+
+      // 4. Reload floors
+      add(LoadFloors(condominiumId: event.condominiumId));
     } catch (e) {
       emit(FloorState.failure(message: 'Failed to delete floor: $e'));
     }

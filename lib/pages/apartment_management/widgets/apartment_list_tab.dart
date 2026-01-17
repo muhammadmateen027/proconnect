@@ -89,7 +89,7 @@ class ApartmentListTab extends StatelessWidget {
               },
             );
           },
-          success: (_) => const Center(child: CircularProgressIndicator()),
+          success: (_) => const SizedBox.shrink(),
           failure: (message) => Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

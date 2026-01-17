@@ -28,6 +28,7 @@ class ApartmentEvent with _$ApartmentEvent {
 
   /// Delete an apartment
   const factory ApartmentEvent.deleteApartment({
+    required String condominiumId,
     required String apartmentId,
   }) = DeleteApartment;
 

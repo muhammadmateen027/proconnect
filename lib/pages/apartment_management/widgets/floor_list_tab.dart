@@ -170,7 +170,7 @@ class FloorListTab extends StatelessWidget {
                                 icon: const Icon(Icons.delete_rounded),
                                 color: theme.colorScheme.error,
                                 onPressed: () {
-                                  FloorListTab._showDeleteDialog(
+                                  _showDeleteDialog(
                                     context,
                                     floor.id,
                                   );
@@ -186,7 +186,7 @@ class FloorListTab extends StatelessWidget {
               },
             );
           },
-          success: (_) => const Center(child: CircularProgressIndicator()),
+          success: (_) => const SizedBox.shrink(),
           failure: (message) => Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -278,7 +278,7 @@ class FloorListTab extends StatelessWidget {
     );
   }
 
-  static void _showDeleteDialog(BuildContext context, String floorId) {
+  void _showDeleteDialog(BuildContext context, String floorId) {
     final l10n = context.l10n;
 
     showDialog(
@@ -297,7 +297,10 @@ class FloorListTab extends StatelessWidget {
           AppButton(
             onPressed: () {
               context.read<FloorBloc>().add(
-                FloorEvent.deleteFloor(floorId: floorId),
+                FloorEvent.deleteFloor(
+                  condominiumId: condo.id,
+                  floorId: floorId,
+                ),
               );
               Navigator.of(dialogContext).pop();
             },

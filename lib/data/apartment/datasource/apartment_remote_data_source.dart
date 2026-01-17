@@ -7,7 +7,13 @@ abstract class ApartmentRemoteDataSource {
   Future<List<Apartment>> getApartmentsByCondominium(String condominiumId);
 
   /// Get all apartments on a specific floor
-  Future<List<Apartment>> getApartmentsByFloor(String floorId);
+  Future<List<Apartment>> getApartmentsByFloor(
+    String floorId, {
+    String? condominiumId,
+  });
+
+  /// Delete all apartments on a specific floor
+  Future<void> deleteApartmentsByFloor(String floorId, {String? condominiumId});
 
   /// Get all apartments managed by an agency
   Future<List<Apartment>> getApartmentsByAgency(String agencyId);
@@ -134,12 +140,19 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
   }
 
   @override
-  Future<List<Apartment>> getApartmentsByFloor(String floorId) async {
-    final snapshot = await _firestore
+  Future<List<Apartment>> getApartmentsByFloor(
+    String floorId, {
+    String? condominiumId,
+  }) async {
+    Query<Map<String, dynamic>> query = _firestore
         .collection(_collection)
-        .where('floorId', isEqualTo: floorId)
-        .orderBy('apartmentNumber')
-        .get();
+        .where('floorId', isEqualTo: floorId);
+
+    if (condominiumId != null) {
+      query = query.where('condominiumId', isEqualTo: condominiumId);
+    }
+
+    final snapshot = await query.get();
 
     return snapshot.docs.map((doc) => Apartment.fromJson(doc.data())).toList();
   }
@@ -225,5 +238,28 @@ class ApartmentRemoteDataSourceImpl implements ApartmentRemoteDataSource {
     }
 
     await _firestore.collection(_collection).doc(apartmentId).update(updates);
+  }
+
+  @override
+  Future<void> deleteApartmentsByFloor(
+    String floorId, {
+    String? condominiumId,
+  }) async {
+    Query<Map<String, dynamic>> query = _firestore
+        .collection(_collection)
+        .where('floorId', isEqualTo: floorId);
+
+    if (condominiumId != null) {
+      query = query.where('condominiumId', isEqualTo: condominiumId);
+    }
+
+    final snapshot = await query.get();
+    if (snapshot.docs.isEmpty) return;
+
+    final batch = _firestore.batch();
+    for (final doc in snapshot.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
   }
 }

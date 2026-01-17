@@ -8,10 +8,12 @@ import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_e
 /// Delete Apartment Dialog Widget
 class DeleteApartmentDialog extends StatelessWidget {
   const DeleteApartmentDialog({
+    required this.condominiumId,
     required this.apartmentId,
     super.key,
   });
 
+  final String condominiumId;
   final String apartmentId;
 
   @override
@@ -30,7 +32,10 @@ class DeleteApartmentDialog extends StatelessWidget {
         AppButton(
           onPressed: () {
             context.read<ApartmentBloc>().add(
-              ApartmentEvent.deleteApartment(apartmentId: apartmentId),
+              ApartmentEvent.deleteApartment(
+                condominiumId: condominiumId,
+                apartmentId: apartmentId,
+              ),
             );
             Navigator.of(context).pop();
           },

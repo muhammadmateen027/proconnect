@@ -31,7 +31,7 @@ mixin _$FloorEvent {
     )
     createFloor,
     required TResult Function(Floor floor) updateFloor,
-    required TResult Function(String floorId) deleteFloor,
+    required TResult Function(String condominiumId, String floorId) deleteFloor,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -47,7 +47,7 @@ mixin _$FloorEvent {
     )?
     createFloor,
     TResult? Function(Floor floor)? updateFloor,
-    TResult? Function(String floorId)? deleteFloor,
+    TResult? Function(String condominiumId, String floorId)? deleteFloor,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -63,7 +63,7 @@ mixin _$FloorEvent {
     )?
     createFloor,
     TResult Function(Floor floor)? updateFloor,
-    TResult Function(String floorId)? deleteFloor,
+    TResult Function(String condominiumId, String floorId)? deleteFloor,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -195,7 +195,7 @@ class _$LoadFloorsImpl implements LoadFloors {
     )
     createFloor,
     required TResult Function(Floor floor) updateFloor,
-    required TResult Function(String floorId) deleteFloor,
+    required TResult Function(String condominiumId, String floorId) deleteFloor,
   }) {
     return loadFloors(condominiumId);
   }
@@ -215,7 +215,7 @@ class _$LoadFloorsImpl implements LoadFloors {
     )?
     createFloor,
     TResult? Function(Floor floor)? updateFloor,
-    TResult? Function(String floorId)? deleteFloor,
+    TResult? Function(String condominiumId, String floorId)? deleteFloor,
   }) {
     return loadFloors?.call(condominiumId);
   }
@@ -235,7 +235,7 @@ class _$LoadFloorsImpl implements LoadFloors {
     )?
     createFloor,
     TResult Function(Floor floor)? updateFloor,
-    TResult Function(String floorId)? deleteFloor,
+    TResult Function(String condominiumId, String floorId)? deleteFloor,
     required TResult orElse(),
   }) {
     if (loadFloors != null) {
@@ -468,7 +468,7 @@ class _$CreateFloorImpl implements CreateFloor {
     )
     createFloor,
     required TResult Function(Floor floor) updateFloor,
-    required TResult Function(String floorId) deleteFloor,
+    required TResult Function(String condominiumId, String floorId) deleteFloor,
   }) {
     return createFloor(
       condominiumId,
@@ -496,7 +496,7 @@ class _$CreateFloorImpl implements CreateFloor {
     )?
     createFloor,
     TResult? Function(Floor floor)? updateFloor,
-    TResult? Function(String floorId)? deleteFloor,
+    TResult? Function(String condominiumId, String floorId)? deleteFloor,
   }) {
     return createFloor?.call(
       condominiumId,
@@ -524,7 +524,7 @@ class _$CreateFloorImpl implements CreateFloor {
     )?
     createFloor,
     TResult Function(Floor floor)? updateFloor,
-    TResult Function(String floorId)? deleteFloor,
+    TResult Function(String condominiumId, String floorId)? deleteFloor,
     required TResult orElse(),
   }) {
     if (createFloor != null) {
@@ -699,7 +699,7 @@ class _$UpdateFloorImpl implements UpdateFloor {
     )
     createFloor,
     required TResult Function(Floor floor) updateFloor,
-    required TResult Function(String floorId) deleteFloor,
+    required TResult Function(String condominiumId, String floorId) deleteFloor,
   }) {
     return updateFloor(floor);
   }
@@ -719,7 +719,7 @@ class _$UpdateFloorImpl implements UpdateFloor {
     )?
     createFloor,
     TResult? Function(Floor floor)? updateFloor,
-    TResult? Function(String floorId)? deleteFloor,
+    TResult? Function(String condominiumId, String floorId)? deleteFloor,
   }) {
     return updateFloor?.call(floor);
   }
@@ -739,7 +739,7 @@ class _$UpdateFloorImpl implements UpdateFloor {
     )?
     createFloor,
     TResult Function(Floor floor)? updateFloor,
-    TResult Function(String floorId)? deleteFloor,
+    TResult Function(String condominiumId, String floorId)? deleteFloor,
     required TResult orElse(),
   }) {
     if (updateFloor != null) {
@@ -805,7 +805,7 @@ abstract class _$$DeleteFloorImplCopyWith<$Res> {
     $Res Function(_$DeleteFloorImpl) then,
   ) = __$$DeleteFloorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String floorId});
+  $Res call({String condominiumId, String floorId});
 }
 
 /// @nodoc
@@ -821,9 +821,13 @@ class __$$DeleteFloorImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? floorId = null}) {
+  $Res call({Object? condominiumId = null, Object? floorId = null}) {
     return _then(
       _$DeleteFloorImpl(
+        condominiumId: null == condominiumId
+            ? _value.condominiumId
+            : condominiumId // ignore: cast_nullable_to_non_nullable
+                  as String,
         floorId: null == floorId
             ? _value.floorId
             : floorId // ignore: cast_nullable_to_non_nullable
@@ -836,14 +840,16 @@ class __$$DeleteFloorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteFloorImpl implements DeleteFloor {
-  const _$DeleteFloorImpl({required this.floorId});
+  const _$DeleteFloorImpl({required this.condominiumId, required this.floorId});
 
+  @override
+  final String condominiumId;
   @override
   final String floorId;
 
   @override
   String toString() {
-    return 'FloorEvent.deleteFloor(floorId: $floorId)';
+    return 'FloorEvent.deleteFloor(condominiumId: $condominiumId, floorId: $floorId)';
   }
 
   @override
@@ -851,11 +857,13 @@ class _$DeleteFloorImpl implements DeleteFloor {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteFloorImpl &&
+            (identical(other.condominiumId, condominiumId) ||
+                other.condominiumId == condominiumId) &&
             (identical(other.floorId, floorId) || other.floorId == floorId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, floorId);
+  int get hashCode => Object.hash(runtimeType, condominiumId, floorId);
 
   /// Create a copy of FloorEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -880,9 +888,9 @@ class _$DeleteFloorImpl implements DeleteFloor {
     )
     createFloor,
     required TResult Function(Floor floor) updateFloor,
-    required TResult Function(String floorId) deleteFloor,
+    required TResult Function(String condominiumId, String floorId) deleteFloor,
   }) {
-    return deleteFloor(floorId);
+    return deleteFloor(condominiumId, floorId);
   }
 
   @override
@@ -900,9 +908,9 @@ class _$DeleteFloorImpl implements DeleteFloor {
     )?
     createFloor,
     TResult? Function(Floor floor)? updateFloor,
-    TResult? Function(String floorId)? deleteFloor,
+    TResult? Function(String condominiumId, String floorId)? deleteFloor,
   }) {
-    return deleteFloor?.call(floorId);
+    return deleteFloor?.call(condominiumId, floorId);
   }
 
   @override
@@ -920,11 +928,11 @@ class _$DeleteFloorImpl implements DeleteFloor {
     )?
     createFloor,
     TResult Function(Floor floor)? updateFloor,
-    TResult Function(String floorId)? deleteFloor,
+    TResult Function(String condominiumId, String floorId)? deleteFloor,
     required TResult orElse(),
   }) {
     if (deleteFloor != null) {
-      return deleteFloor(floorId);
+      return deleteFloor(condominiumId, floorId);
     }
     return orElse();
   }
@@ -968,9 +976,12 @@ class _$DeleteFloorImpl implements DeleteFloor {
 }
 
 abstract class DeleteFloor implements FloorEvent {
-  const factory DeleteFloor({required final String floorId}) =
-      _$DeleteFloorImpl;
+  const factory DeleteFloor({
+    required final String condominiumId,
+    required final String floorId,
+  }) = _$DeleteFloorImpl;
 
+  String get condominiumId;
   String get floorId;
 
   /// Create a copy of FloorEvent

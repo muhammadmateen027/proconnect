@@ -23,7 +23,8 @@ mixin _$ApartmentEvent {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -46,7 +47,8 @@ mixin _$ApartmentEvent {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -69,7 +71,7 @@ mixin _$ApartmentEvent {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -221,7 +223,8 @@ class _$LoadApartmentsImpl implements LoadApartments {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -248,7 +251,8 @@ class _$LoadApartmentsImpl implements LoadApartments {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -275,7 +279,7 @@ class _$LoadApartmentsImpl implements LoadApartments {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -438,7 +442,8 @@ class _$LoadApartmentsByFloorImpl implements LoadApartmentsByFloor {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -465,7 +470,8 @@ class _$LoadApartmentsByFloorImpl implements LoadApartmentsByFloor {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -492,7 +498,7 @@ class _$LoadApartmentsByFloorImpl implements LoadApartmentsByFloor {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -667,7 +673,8 @@ class _$CreateApartmentImpl implements CreateApartment {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -694,7 +701,8 @@ class _$CreateApartmentImpl implements CreateApartment {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -721,7 +729,7 @@ class _$CreateApartmentImpl implements CreateApartment {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -896,7 +904,8 @@ class _$UpdateApartmentImpl implements UpdateApartment {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -923,7 +932,8 @@ class _$UpdateApartmentImpl implements UpdateApartment {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -950,7 +960,7 @@ class _$UpdateApartmentImpl implements UpdateApartment {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -1042,7 +1052,7 @@ abstract class _$$DeleteApartmentImplCopyWith<$Res> {
     $Res Function(_$DeleteApartmentImpl) then,
   ) = __$$DeleteApartmentImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String apartmentId});
+  $Res call({String condominiumId, String apartmentId});
 }
 
 /// @nodoc
@@ -1058,9 +1068,13 @@ class __$$DeleteApartmentImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? apartmentId = null}) {
+  $Res call({Object? condominiumId = null, Object? apartmentId = null}) {
     return _then(
       _$DeleteApartmentImpl(
+        condominiumId: null == condominiumId
+            ? _value.condominiumId
+            : condominiumId // ignore: cast_nullable_to_non_nullable
+                  as String,
         apartmentId: null == apartmentId
             ? _value.apartmentId
             : apartmentId // ignore: cast_nullable_to_non_nullable
@@ -1073,14 +1087,19 @@ class __$$DeleteApartmentImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteApartmentImpl implements DeleteApartment {
-  const _$DeleteApartmentImpl({required this.apartmentId});
+  const _$DeleteApartmentImpl({
+    required this.condominiumId,
+    required this.apartmentId,
+  });
 
+  @override
+  final String condominiumId;
   @override
   final String apartmentId;
 
   @override
   String toString() {
-    return 'ApartmentEvent.deleteApartment(apartmentId: $apartmentId)';
+    return 'ApartmentEvent.deleteApartment(condominiumId: $condominiumId, apartmentId: $apartmentId)';
   }
 
   @override
@@ -1088,12 +1107,14 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteApartmentImpl &&
+            (identical(other.condominiumId, condominiumId) ||
+                other.condominiumId == condominiumId) &&
             (identical(other.apartmentId, apartmentId) ||
                 other.apartmentId == apartmentId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, apartmentId);
+  int get hashCode => Object.hash(runtimeType, condominiumId, apartmentId);
 
   /// Create a copy of ApartmentEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1113,7 +1134,8 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -1130,7 +1152,7 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     )
     updateStatus,
   }) {
-    return deleteApartment(apartmentId);
+    return deleteApartment(condominiumId, apartmentId);
   }
 
   @override
@@ -1140,7 +1162,8 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -1157,7 +1180,7 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     )?
     updateStatus,
   }) {
-    return deleteApartment?.call(apartmentId);
+    return deleteApartment?.call(condominiumId, apartmentId);
   }
 
   @override
@@ -1167,7 +1190,7 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -1186,7 +1209,7 @@ class _$DeleteApartmentImpl implements DeleteApartment {
     required TResult orElse(),
   }) {
     if (deleteApartment != null) {
-      return deleteApartment(apartmentId);
+      return deleteApartment(condominiumId, apartmentId);
     }
     return orElse();
   }
@@ -1240,9 +1263,12 @@ class _$DeleteApartmentImpl implements DeleteApartment {
 }
 
 abstract class DeleteApartment implements ApartmentEvent {
-  const factory DeleteApartment({required final String apartmentId}) =
-      _$DeleteApartmentImpl;
+  const factory DeleteApartment({
+    required final String condominiumId,
+    required final String apartmentId,
+  }) = _$DeleteApartmentImpl;
 
+  String get condominiumId;
   String get apartmentId;
 
   /// Create a copy of ApartmentEvent
@@ -1383,7 +1409,8 @@ class _$AssignOwnerImpl implements AssignOwner {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -1410,7 +1437,8 @@ class _$AssignOwnerImpl implements AssignOwner {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -1443,7 +1471,7 @@ class _$AssignOwnerImpl implements AssignOwner {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,
@@ -1657,7 +1685,8 @@ class _$UpdateStatusImpl implements UpdateStatus {
     required TResult Function(String floorId) loadApartmentsByFloor,
     required TResult Function(Apartment apartment) createApartment,
     required TResult Function(Apartment apartment) updateApartment,
-    required TResult Function(String apartmentId) deleteApartment,
+    required TResult Function(String condominiumId, String apartmentId)
+    deleteApartment,
     required TResult Function(
       String apartmentId,
       String ownerId,
@@ -1684,7 +1713,8 @@ class _$UpdateStatusImpl implements UpdateStatus {
     TResult? Function(String floorId)? loadApartmentsByFloor,
     TResult? Function(Apartment apartment)? createApartment,
     TResult? Function(Apartment apartment)? updateApartment,
-    TResult? Function(String apartmentId)? deleteApartment,
+    TResult? Function(String condominiumId, String apartmentId)?
+    deleteApartment,
     TResult? Function(
       String apartmentId,
       String ownerId,
@@ -1711,7 +1741,7 @@ class _$UpdateStatusImpl implements UpdateStatus {
     TResult Function(String floorId)? loadApartmentsByFloor,
     TResult Function(Apartment apartment)? createApartment,
     TResult Function(Apartment apartment)? updateApartment,
-    TResult Function(String apartmentId)? deleteApartment,
+    TResult Function(String condominiumId, String apartmentId)? deleteApartment,
     TResult Function(
       String apartmentId,
       String ownerId,

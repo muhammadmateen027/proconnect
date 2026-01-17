@@ -221,6 +221,7 @@ class DependencyInjector {
       ..registerFactory<FloorBloc>(
         (c) => FloorBloc(
           floorRepository: c.resolve<FloorRepository>(),
+          apartmentRepository: c.resolve<ApartmentRepository>(),
         ),
       )
       ..registerFactory<ApartmentBloc>(

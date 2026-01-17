@@ -96,6 +96,9 @@ class ApartmentBloc extends Bloc<ApartmentEvent, ApartmentState> {
       emit(
         const ApartmentState.success(message: 'Apartment deleted successfully'),
       );
+
+      // Reload apartments
+      add(LoadApartments(condominiumId: event.condominiumId));
     } catch (e) {
       emit(ApartmentState.failure(message: 'Failed to delete apartment: $e'));
     }

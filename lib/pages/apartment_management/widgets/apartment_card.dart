@@ -197,7 +197,10 @@ class _ActionMenu extends StatelessWidget {
             context: context,
             builder: (dialogContext) => BlocProvider.value(
               value: context.read<ApartmentBloc>(),
-              child: DeleteApartmentDialog(apartmentId: apartment.id),
+              child: DeleteApartmentDialog(
+                condominiumId: condo.id,
+                apartmentId: apartment.id,
+              ),
             ),
           );
         }

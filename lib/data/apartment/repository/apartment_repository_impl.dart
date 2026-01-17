@@ -55,8 +55,14 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
   }
 
   @override
-  Future<List<Apartment>> getApartmentsByFloor(String floorId) async {
-    return await _remoteDataSource.getApartmentsByFloor(floorId);
+  Future<List<Apartment>> getApartmentsByFloor(
+    String floorId, {
+    String? condominiumId,
+  }) async {
+    return await _remoteDataSource.getApartmentsByFloor(
+      floorId,
+      condominiumId: condominiumId,
+    );
   }
 
   @override
@@ -96,6 +102,17 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
       status: status,
       vacantFrom: vacantFrom,
       availableFrom: availableFrom,
+    );
+  }
+
+  @override
+  Future<void> deleteApartmentsByFloor(
+    String floorId, {
+    required String condominiumId,
+  }) async {
+    await _remoteDataSource.deleteApartmentsByFloor(
+      floorId,
+      condominiumId: condominiumId,
     );
   }
 }
