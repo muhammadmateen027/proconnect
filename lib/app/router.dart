@@ -23,7 +23,9 @@ import 'package:proconnect/pages/auth/view/registration_screen.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/condo_management/view/condo_management_page.dart';
 import 'package:proconnect/pages/condo_management/view/create_edit_condo_page.dart';
+import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
+import 'package:proconnect/pages/owner/view/owner_apartment_detail_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/seeding_page.dart';
 import 'package:proconnect/pages/settings/view/settings_screen.dart';
@@ -198,6 +200,18 @@ GoRouter createRouter(BuildContext context) {
               ),
             ],
             child: CreateEditApartmentPage(condo: condo, apartment: apartment),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.ownerApartmentDetail,
+        builder: (context, state) {
+          final apartment = state.extra! as Apartment;
+          return BlocProvider(
+            create: (context) =>
+                DependencyInjector.instance.resolve<OwnerApartmentDetailBloc>()
+                  ..add(OwnerApartmentDetailEvent.loadApartment(apartment.id)),
+            child: OwnerApartmentDetailPage(apartment: apartment),
           );
         },
       ),

@@ -19,4 +19,5 @@ class AppRoutes {
   static const String createApartment = '/create_apartment';
   static const String editApartment = '/edit_apartment';
   static const String seedData = '/seed_data';
+  static const String ownerApartmentDetail = '/owner_apartment_detail';
 }

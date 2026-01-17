@@ -92,11 +92,24 @@ service cloud.firestore {
         isSameAgency(request.resource.data.agencyId) ||
         isCondoOwnedByMyAgency(request.resource.data.condominiumId)
       );
+      // Allow agency admins to update/delete apartments
       allow update, delete: if isAgencyAdmin() && (
         (resource != null && isSameAgency(resource.data.agencyId)) ||
         (resource != null && isCondoOwnedByMyAgency(resource.data.condominiumId))
       );
+      // Allow owners to update their apartments (tenant, lease, rental info)
+      // but prevent them from changing structural data
+      allow update: if isSignedIn() && 
+        request.auth.uid == resource.data.ownerId &&
+        // Ensure owners can't change these critical fields
+        request.resource.data.id == resource.data.id &&
+        request.resource.data.condominiumId == resource.data.condominiumId &&
+        request.resource.data.agencyId == resource.data.agencyId &&
+        request.resource.data.floorId == resource.data.floorId &&
+        request.resource.data.apartmentNumber == resource.data.apartmentNumber &&
+        request.resource.data.ownerId == resource.data.ownerId;
     }
+
 
     // Units collection (Owner direct management)
     match /units/{unitId} {

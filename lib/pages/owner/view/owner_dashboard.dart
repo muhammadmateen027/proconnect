@@ -125,14 +125,18 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                       itemCount: apartments.length,
                       itemBuilder: (context, index) {
                         final apartment = apartments[index];
-                        // Get the condo from the apartment's condominiumId
-                        // For now, we'll create a minimal Condo object
-                        // In a production app, you'd fetch this from the repository
-                        return ApartmentCard(
-                          apartment: apartment,
-                          condo:
-                              null, // We'll pass null since we have condoName in apartment
-                          showCondoName: true,
+                        return GestureDetector(
+                          onTap: () {
+                            context.push(
+                              AppRoutes.ownerApartmentDetail,
+                              extra: apartment,
+                            );
+                          },
+                          child: ApartmentCard(
+                            apartment: apartment,
+                            condo: null,
+                            showCondoName: true,
+                          ),
                         );
                       },
                     );

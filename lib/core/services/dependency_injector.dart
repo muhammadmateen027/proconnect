@@ -45,6 +45,7 @@ import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 
@@ -246,6 +247,11 @@ class DependencyInjector {
       ..registerFactory<OwnerApartmentBloc>(
         (c) => OwnerApartmentBloc(
           c.resolve<GetApartmentsByOwnerUseCase>(),
+        ),
+      )
+      ..registerFactory<OwnerApartmentDetailBloc>(
+        (c) => OwnerApartmentDetailBloc(
+          c.resolve<ApartmentRepository>(),
         ),
       );
   }
