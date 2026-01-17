@@ -65,7 +65,7 @@ class ProConnectLayout extends StatelessWidget {
   Widget _buildBody(BuildContext context, bool isDark) {
     final mediaQuery = MediaQuery.of(context);
     final statusBarHeight = mediaQuery.padding.top;
-    final appBarHeight = appBar != null ? kToolbarHeight : 0.0;
+    final appBarHeight = appBar != null ? appBar!.preferredSize.height : 0.0;
     final topOffset = statusBarHeight + appBarHeight;
 
     var content = child;
@@ -188,7 +188,9 @@ class _MeshBackground extends StatelessWidget {
           left: -50,
           child: _Blob(
             size: 400,
-            color: const Color(0xFF6366F1).withValues(alpha: isDark ? 0.3 : 0.2),
+            color: const Color(
+              0xFF6366F1,
+            ).withValues(alpha: isDark ? 0.3 : 0.2),
           ),
         ),
         Positioned(
@@ -196,7 +198,9 @@ class _MeshBackground extends StatelessWidget {
           right: -100,
           child: _Blob(
             size: 500,
-            color: const Color(0xFF8B5CF6).withValues(alpha: isDark ? 0.25 : 0.15),
+            color: const Color(
+              0xFF8B5CF6,
+            ).withValues(alpha: isDark ? 0.25 : 0.15),
           ),
         ),
         Positioned(
@@ -204,7 +208,9 @@ class _MeshBackground extends StatelessWidget {
           right: -50,
           child: _Blob(
             size: 300,
-            color: const Color(0xFFEC4899).withValues(alpha: isDark ? 0.15 : 0.1),
+            color: const Color(
+              0xFFEC4899,
+            ).withValues(alpha: isDark ? 0.15 : 0.1),
           ),
         ),
       ],
