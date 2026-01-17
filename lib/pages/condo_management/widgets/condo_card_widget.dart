@@ -7,13 +7,13 @@ class CondoCardWidget extends StatelessWidget {
   const CondoCardWidget({
     required this.condo,
     required this.onEdit,
-    required this.onDelete,
+    this.onDelete,
     super.key,
   });
 
   final Condo condo;
   final VoidCallback onEdit;
-  final VoidCallback onDelete;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -92,15 +92,17 @@ class CondoCardWidget extends StatelessWidget {
                     icon: const Icon(Icons.edit_outlined),
                     label: Text(l10n.edit),
                   ),
-                  AppSpacing.gapW8,
-                  TextButton.icon(
-                    onPressed: onDelete,
-                    icon: const Icon(Icons.delete_outline),
-                    label: Text(l10n.delete),
-                    style: TextButton.styleFrom(
-                      foregroundColor: theme.colorScheme.error,
+                  if (onDelete != null) ...[
+                    AppSpacing.gapW8,
+                    TextButton.icon(
+                      onPressed: onDelete,
+                      icon: const Icon(Icons.delete_outline),
+                      label: Text(l10n.delete),
+                      style: TextButton.styleFrom(
+                        foregroundColor: theme.colorScheme.error,
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
             ],

@@ -9,11 +9,13 @@ class BasicInformationSection extends StatelessWidget {
   const BasicInformationSection({
     required this.nameController,
     required this.addressController,
+    this.isEnabled = true,
     super.key,
   });
 
   final TextEditingController nameController;
   final TextEditingController addressController;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class BasicInformationSection extends StatelessWidget {
       children: [
         TextFormField(
           controller: nameController,
+          enabled: isEnabled,
           decoration: InputDecoration(
             labelText: l10n.condoName,
             hintText: l10n.enterCondoName,
@@ -41,6 +44,7 @@ class BasicInformationSection extends StatelessWidget {
         AppSpacing.gapH16,
         TextFormField(
           controller: addressController,
+          enabled: isEnabled,
           decoration: InputDecoration(
             labelText: l10n.condoAddress,
             hintText: l10n.enterCondoAddress,

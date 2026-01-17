@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:proconnect/domain/models/condo.dart';
 
 abstract class CondoRemoteDataSource {
-  Future<List<Condo>> getCondos();
+  Future<List<Condo>> getCondos({String? agencyId});
   Future<Condo> createCondo({
     required String name,
     required String address,
@@ -65,8 +65,12 @@ class CondoRemoteDataSourceImpl implements CondoRemoteDataSource {
   }
 
   @override
-  Future<List<Condo>> getCondos() async {
-    final snapshot = await _firestore.collection('condos').get();
+  Future<List<Condo>> getCondos({String? agencyId}) async {
+    Query<Map<String, dynamic>> query = _firestore.collection('condos');
+    if (agencyId != null) {
+      query = query.where('agencyId', isEqualTo: agencyId);
+    }
+    final snapshot = await query.get();
     return snapshot.docs.map((doc) => Condo.fromJson(doc.data())).toList();
   }
 

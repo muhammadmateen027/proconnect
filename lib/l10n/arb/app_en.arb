@@ -127,5 +127,6 @@
     "language": "Language",
     "english": "English",
     "spanish": "Spanish",
-    "malay": "Malay"
+    "malay": "Malay",
+    "agencyAdminDashboard": "Agency Admin Dashboard"
 }

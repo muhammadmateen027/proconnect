@@ -44,9 +44,11 @@ class CondoManagementBloc
   ) async {
     emit(const CondoManagementState.loading());
     try {
-      final condos = await _loadCondosUseCase();
+      final condos = await _loadCondosUseCase(agencyId: event.agencyId);
       emit(CondoManagementState.loaded(condos: condos));
-    } catch (e) {
+    } catch (e, stack) {
+      print('DEBUG: Error loading condos: $e');
+      print('DEBUG: Stack trace: $stack');
       emit(
         const CondoManagementState.failure(
           errorKey: 'loadCondosFailed',

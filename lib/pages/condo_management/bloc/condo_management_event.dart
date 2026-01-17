@@ -2,7 +2,8 @@ part of '../bloc/condo_management_bloc.dart';
 
 @freezed
 abstract class CondoManagementEvent with _$CondoManagementEvent {
-  const factory CondoManagementEvent.loadCondos() = _LoadCondos;
+  const factory CondoManagementEvent.loadCondos({String? agencyId}) =
+      _LoadCondos;
 
   const factory CondoManagementEvent.createCondo({
     required String name,

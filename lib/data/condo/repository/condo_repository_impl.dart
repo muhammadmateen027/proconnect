@@ -38,8 +38,8 @@ class CondoRepositoryImpl implements CondoRepository {
   }
 
   @override
-  Future<List<Condo>> getCondos() {
-    return _remoteDataSource.getCondos();
+  Future<List<Condo>> getCondos({String? agencyId}) {
+    return _remoteDataSource.getCondos(agencyId: agencyId);
   }
 
   @override

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/l10n/l10n.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
 class SuperAdminDashboard extends StatelessWidget {
   const SuperAdminDashboard({super.key});
@@ -10,37 +12,58 @@ class SuperAdminDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.superAdminDashboard),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () => context.push(AppRoutes.settings),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        final fullName = state.maybeWhen(
+          authenticated: (user) => user.fullName,
+          orElse: () => '',
+        );
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.superAdminDashboard,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                Text(fullName),
+              ],
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () => context.push(AppRoutes.settings),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          children: [
-            DashboardCard(
-              title: l10n.condoManagement,
-              icon: Icons.business,
-              onTap: () => context.push(AppRoutes.condoManagement),
+          body: Padding(
+            padding: const EdgeInsets.all(16),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              children: [
+                DashboardCard(
+                  title: l10n.condoManagement,
+                  icon: Icons.business,
+                  onTap: () => context.push(AppRoutes.condoManagement),
+                ),
+                DashboardCard(
+                  title: l10n.userManagement,
+                  icon: Icons.people,
+                  onTap: () => context.push(AppRoutes.userManagement),
+                ),
+              ],
             ),
-            DashboardCard(
-              title: l10n.userManagement,
-              icon: Icons.people,
-              onTap: () => context.push(AppRoutes.userManagement),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

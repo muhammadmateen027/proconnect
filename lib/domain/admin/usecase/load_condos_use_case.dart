@@ -5,7 +5,7 @@ class LoadCondosUseCase {
   LoadCondosUseCase(this._repository);
   final CondoRepository _repository;
 
-  Future<List<Condo>> call() {
-    return _repository.getCondos();
+  Future<List<Condo>> call({String? agencyId}) {
+    return _repository.getCondos(agencyId: agencyId);
   }
 }

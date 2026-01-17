@@ -7,10 +7,12 @@ import 'package:proconnect/pages/condo_management/widgets/form_section_card.dart
 class DescriptionSection extends StatelessWidget {
   const DescriptionSection({
     required this.descriptionController,
+    this.isEnabled = true,
     super.key,
   });
 
   final TextEditingController descriptionController;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class DescriptionSection extends StatelessWidget {
       children: [
         TextFormField(
           controller: descriptionController,
+          enabled: isEnabled,
           decoration: InputDecoration(
             labelText: l10n.description,
             hintText: l10n.descriptionHint,

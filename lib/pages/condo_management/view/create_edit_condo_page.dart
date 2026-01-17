@@ -7,6 +7,7 @@ import 'package:proconnect/core/widgets/app_button.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/condo_management/widgets/agency_assignment_section.dart';
@@ -185,77 +186,92 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
           widget.isEditing ? l10n.editCondo : l10n.addCondo,
         ),
       ),
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          padding: const EdgeInsets.all(AppSpacing.p16),
-          children: [
-            // Basic Information
-            BasicInformationSection(
-              nameController: _nameController,
-              addressController: _addressController,
-            ),
-            AppSpacing.gapH16,
+      body: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, authState) {
+          final currentUser = authState.maybeWhen(
+            authenticated: (user) => user,
+            orElse: () => null,
+          );
+          final isSuperAdmin = currentUser?.role == UserRole.super_admin;
 
-            // Building Specifications
-            BuildingSpecificationsSection(
-              totalUnitsController: _totalUnitsController,
-              totalFloorsController: _totalFloorsController,
-              yearBuiltController: _yearBuiltController,
-            ),
-            AppSpacing.gapH16,
+          return Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.all(AppSpacing.p16),
+              children: [
+                // Basic Information
+                BasicInformationSection(
+                  nameController: _nameController,
+                  addressController: _addressController,
+                  isEnabled: isSuperAdmin,
+                ),
+                AppSpacing.gapH16,
 
-            // Description
-            DescriptionSection(
-              descriptionController: _descriptionController,
-            ),
-            AppSpacing.gapH16,
+                // Building Specifications
+                BuildingSpecificationsSection(
+                  totalUnitsController: _totalUnitsController,
+                  totalFloorsController: _totalFloorsController,
+                  yearBuiltController: _yearBuiltController,
+                ),
+                AppSpacing.gapH16,
 
-            // Contact Information
-            ContactInformationSection(
-              contactEmailController: _contactEmailController,
-              contactPhoneController: _contactPhoneController,
-            ),
-            AppSpacing.gapH16,
+                // Description
+                DescriptionSection(
+                  descriptionController: _descriptionController,
+                  isEnabled: isSuperAdmin,
+                ),
+                AppSpacing.gapH16,
 
-            // Amenities
-            AmenitiesSelectionSection(
-              selectedAmenities: _selectedAmenities,
-              onAmenitiesChanged: (amenities) {
-                setState(() {
-                  _selectedAmenities = amenities;
-                });
-              },
-            ),
-            AppSpacing.gapH16,
+                // Contact Information
+                ContactInformationSection(
+                  contactEmailController: _contactEmailController,
+                  contactPhoneController: _contactPhoneController,
+                  isEnabled: isSuperAdmin,
+                ),
+                AppSpacing.gapH16,
 
-            // Agency Assignment (only for super_admin)
-            BlocProvider(
-              create: (context) =>
-                  DependencyInjector.instance.resolve<AgencySelectionBloc>()
-                    ..add(const AgencySelectionEvent.fetchAgencyAdmins()),
-              child: AgencyAssignmentSection(
-                selectedAgencyId: _selectedAgencyAdmin?.agencyId,
-                selectedAgencyName: _selectedAgencyAdmin?.fullName,
-                onAgencyChanged: (agencyAdmin) {
-                  setState(() {
-                    _selectedAgencyAdmin = agencyAdmin;
-                  });
-                },
-              ),
-            ),
-            AppSpacing.gapH24,
+                // Amenities
+                AmenitiesSelectionSection(
+                  selectedAmenities: _selectedAmenities,
+                  onAmenitiesChanged: (amenities) {
+                    setState(() {
+                      _selectedAmenities = amenities;
+                    });
+                  },
+                ),
+                AppSpacing.gapH16,
 
-            // Submit Button
-            AppButton(
-              onPressed: _handleSubmit,
-              label: widget.isEditing ? l10n.saveChanges : l10n.createCondo,
-              icon: widget.isEditing ? Icons.save : Icons.add,
-              isLoading: _isSubmitting,
-              expand: true,
+                // Agency Assignment (only for super_admin)
+                if (isSuperAdmin)
+                  BlocProvider(
+                    create: (context) =>
+                        DependencyInjector.instance
+                            .resolve<AgencySelectionBloc>()
+                          ..add(const AgencySelectionEvent.fetchAgencyAdmins()),
+                    child: AgencyAssignmentSection(
+                      selectedAgencyId: _selectedAgencyAdmin?.agencyId,
+                      selectedAgencyName: _selectedAgencyAdmin?.fullName,
+                      onAgencyChanged: (agencyAdmin) {
+                        setState(() {
+                          _selectedAgencyAdmin = agencyAdmin;
+                        });
+                      },
+                    ),
+                  ),
+                AppSpacing.gapH24,
+
+                // Submit Button
+                AppButton(
+                  onPressed: _handleSubmit,
+                  label: widget.isEditing ? l10n.saveChanges : l10n.createCondo,
+                  icon: widget.isEditing ? Icons.save : Icons.add,
+                  isLoading: _isSubmitting,
+                  expand: true,
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

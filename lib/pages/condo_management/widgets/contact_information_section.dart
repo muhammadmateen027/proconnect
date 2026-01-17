@@ -10,11 +10,13 @@ class ContactInformationSection extends StatelessWidget {
   const ContactInformationSection({
     required this.contactEmailController,
     required this.contactPhoneController,
+    this.isEnabled = true,
     super.key,
   });
 
   final TextEditingController contactEmailController;
   final TextEditingController contactPhoneController;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class ContactInformationSection extends StatelessWidget {
       children: [
         TextFormField(
           controller: contactEmailController,
+          enabled: isEnabled,
           decoration: InputDecoration(
             labelText: l10n.contactEmail,
             hintText: l10n.contactEmailHint,
@@ -43,6 +46,7 @@ class ContactInformationSection extends StatelessWidget {
         AppSpacing.gapH16,
         TextFormField(
           controller: contactPhoneController,
+          enabled: isEnabled,
           decoration: InputDecoration(
             labelText: l10n.contactPhone,
             hintText: l10n.contactPhoneHint,

@@ -800,7 +800,7 @@ abstract class _Failure implements CondoManagementState {
 mixin _$CondoManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
+    required TResult Function(String? agencyId) loadCondos,
     required TResult Function(
       String name,
       String address,
@@ -824,7 +824,7 @@ mixin _$CondoManagementEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
+    TResult? Function(String? agencyId)? loadCondos,
     TResult? Function(
       String name,
       String address,
@@ -844,7 +844,7 @@ mixin _$CondoManagementEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
+    TResult Function(String? agencyId)? loadCondos,
     TResult Function(
       String name,
       String address,
@@ -921,6 +921,8 @@ abstract class _$$LoadCondosImplCopyWith<$Res> {
     _$LoadCondosImpl value,
     $Res Function(_$LoadCondosImpl) then,
   ) = __$$LoadCondosImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? agencyId});
 }
 
 /// @nodoc
@@ -934,31 +936,57 @@ class __$$LoadCondosImplCopyWithImpl<$Res>
 
   /// Create a copy of CondoManagementEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? agencyId = freezed}) {
+    return _then(
+      _$LoadCondosImpl(
+        agencyId: freezed == agencyId
+            ? _value.agencyId
+            : agencyId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
 class _$LoadCondosImpl implements _LoadCondos {
-  const _$LoadCondosImpl();
+  const _$LoadCondosImpl({this.agencyId});
+
+  @override
+  final String? agencyId;
 
   @override
   String toString() {
-    return 'CondoManagementEvent.loadCondos()';
+    return 'CondoManagementEvent.loadCondos(agencyId: $agencyId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadCondosImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCondosImpl &&
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, agencyId);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCondosImplCopyWith<_$LoadCondosImpl> get copyWith =>
+      __$$LoadCondosImplCopyWithImpl<_$LoadCondosImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
+    required TResult Function(String? agencyId) loadCondos,
     required TResult Function(
       String name,
       String address,
@@ -980,13 +1008,13 @@ class _$LoadCondosImpl implements _LoadCondos {
     )
     assignAgency,
   }) {
-    return loadCondos();
+    return loadCondos(agencyId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
+    TResult? Function(String? agencyId)? loadCondos,
     TResult? Function(
       String name,
       String address,
@@ -1004,13 +1032,13 @@ class _$LoadCondosImpl implements _LoadCondos {
     TResult? Function(String condoId, String agencyId, String agencyName)?
     assignAgency,
   }) {
-    return loadCondos?.call();
+    return loadCondos?.call(agencyId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
+    TResult Function(String? agencyId)? loadCondos,
     TResult Function(
       String name,
       String address,
@@ -1030,7 +1058,7 @@ class _$LoadCondosImpl implements _LoadCondos {
     required TResult orElse(),
   }) {
     if (loadCondos != null) {
-      return loadCondos();
+      return loadCondos(agencyId);
     }
     return orElse();
   }
@@ -1077,7 +1105,15 @@ class _$LoadCondosImpl implements _LoadCondos {
 }
 
 abstract class _LoadCondos implements CondoManagementEvent {
-  const factory _LoadCondos() = _$LoadCondosImpl;
+  const factory _LoadCondos({final String? agencyId}) = _$LoadCondosImpl;
+
+  String? get agencyId;
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadCondosImplCopyWith<_$LoadCondosImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1262,7 +1298,7 @@ class _$CreateCondoImpl implements _CreateCondo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
+    required TResult Function(String? agencyId) loadCondos,
     required TResult Function(
       String name,
       String address,
@@ -1300,7 +1336,7 @@ class _$CreateCondoImpl implements _CreateCondo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
+    TResult? Function(String? agencyId)? loadCondos,
     TResult? Function(
       String name,
       String address,
@@ -1334,7 +1370,7 @@ class _$CreateCondoImpl implements _CreateCondo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
+    TResult Function(String? agencyId)? loadCondos,
     TResult Function(
       String name,
       String address,
@@ -1522,7 +1558,7 @@ class _$UpdateCondoImpl implements _UpdateCondo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
+    required TResult Function(String? agencyId) loadCondos,
     required TResult Function(
       String name,
       String address,
@@ -1550,7 +1586,7 @@ class _$UpdateCondoImpl implements _UpdateCondo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
+    TResult? Function(String? agencyId)? loadCondos,
     TResult? Function(
       String name,
       String address,
@@ -1574,7 +1610,7 @@ class _$UpdateCondoImpl implements _UpdateCondo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
+    TResult Function(String? agencyId)? loadCondos,
     TResult Function(
       String name,
       String address,
@@ -1722,7 +1758,7 @@ class _$DeleteCondoImpl implements _DeleteCondo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
+    required TResult Function(String? agencyId) loadCondos,
     required TResult Function(
       String name,
       String address,
@@ -1750,7 +1786,7 @@ class _$DeleteCondoImpl implements _DeleteCondo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
+    TResult? Function(String? agencyId)? loadCondos,
     TResult? Function(
       String name,
       String address,
@@ -1774,7 +1810,7 @@ class _$DeleteCondoImpl implements _DeleteCondo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
+    TResult Function(String? agencyId)? loadCondos,
     TResult Function(
       String name,
       String address,
@@ -1946,7 +1982,7 @@ class _$AssignAgencyImpl implements _AssignAgency {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCondos,
+    required TResult Function(String? agencyId) loadCondos,
     required TResult Function(
       String name,
       String address,
@@ -1974,7 +2010,7 @@ class _$AssignAgencyImpl implements _AssignAgency {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCondos,
+    TResult? Function(String? agencyId)? loadCondos,
     TResult? Function(
       String name,
       String address,
@@ -1998,7 +2034,7 @@ class _$AssignAgencyImpl implements _AssignAgency {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCondos,
+    TResult Function(String? agencyId)? loadCondos,
     TResult Function(
       String name,
       String address,

@@ -1,7 +1,7 @@
 import 'package:proconnect/domain/models/condo.dart';
 
 abstract class CondoRepository {
-  Future<List<Condo>> getCondos();
+  Future<List<Condo>> getCondos({String? agencyId});
   Future<Condo> createCondo({
     required String name,
     required String address,

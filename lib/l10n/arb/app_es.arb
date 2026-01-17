@@ -127,5 +127,6 @@
     "language": "Idioma",
     "english": "Inglés",
     "spanish": "Español",
-    "malay": "Malayo"
+    "malay": "Malayo",
+    "agencyAdminDashboard": "Panel de Administración de la Agencia"
 }

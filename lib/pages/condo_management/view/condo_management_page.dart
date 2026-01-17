@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/l10n/l10n.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/pages/condo_management/widgets/condo_card_widget.dart';
@@ -207,122 +208,144 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
     final l10n = context.l10n;
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.condoManagement),
-        actions: [
-          // Debug only: Seed button
-          if (kDebugMode)
-            IconButton(
-              icon: const Icon(Icons.science),
-              tooltip: l10n.seedSampleData,
-              onPressed: _seedSampleCondos,
-            ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _navigateToCreateCondo,
-        icon: const Icon(Icons.add),
-        label: Text(l10n.addCondo),
-      ),
-      body: BlocConsumer<CondoManagementBloc, CondoManagementState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            success: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(l10n.operationSuccess),
-                  backgroundColor: theme.colorScheme.primary,
-                ),
-              );
-              _loadCondos();
-            },
-            failure: (errorKey) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(l10n.errorPrefix + _getErrorMessage(errorKey)),
-                  backgroundColor: theme.colorScheme.error,
-                ),
-              );
-            },
-          );
-        },
-        builder: (context, state) {
-          return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            success: () => const Center(child: CircularProgressIndicator()),
-            loaded: (condos) {
-              if (condos.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.apartment_outlined,
-                        size: 64,
-                        color: theme.colorScheme.outline,
-                      ),
-                      AppSpacing.gapH16,
-                      Text(
-                        l10n.noCondosFound,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      AppSpacing.gapH8,
-                      Text(
-                        l10n.addCondoToGetStarted,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.outline,
-                        ),
-                      ),
-                    ],
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, authState) {
+        final fullName = authState.maybeWhen(
+          authenticated: (user) => user.fullName,
+          orElse: () => '',
+        );
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.condoManagement,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
                   ),
-                );
-              }
-              return ListView.separated(
-                padding: const EdgeInsets.all(AppSpacing.p16),
-                itemCount: condos.length,
-                separatorBuilder: (context, index) => AppSpacing.gapH12,
-                itemBuilder: (context, index) {
-                  final condo = condos[index];
-                  return CondoCardWidget(
-                    condo: condo,
-                    onEdit: () => _navigateToEditCondo(condo),
-                    onDelete: () => _deleteCondo(condo.id, condo.name),
+                ),
+                Text(fullName),
+              ],
+            ),
+            actions: [
+              // Debug only: Seed button
+              if (kDebugMode)
+                IconButton(
+                  icon: const Icon(Icons.science),
+                  tooltip: l10n.seedSampleData,
+                  onPressed: _seedSampleCondos,
+                ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: _navigateToCreateCondo,
+            icon: const Icon(Icons.add),
+            label: Text(l10n.addCondo),
+          ),
+          body: BlocConsumer<CondoManagementBloc, CondoManagementState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                success: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(l10n.operationSuccess),
+                      backgroundColor: theme.colorScheme.primary,
+                    ),
+                  );
+                  _loadCondos();
+                },
+                failure: (errorKey) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        l10n.errorPrefix + _getErrorMessage(errorKey),
+                      ),
+                      backgroundColor: theme.colorScheme.error,
+                    ),
                   );
                 },
               );
             },
-            failure: (errorKey) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.error_outline,
-                    size: 64,
-                    color: theme.colorScheme.error,
+            builder: (context, state) {
+              return state.when(
+                initial: () => const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                success: () => const Center(child: CircularProgressIndicator()),
+                loaded: (condos) {
+                  if (condos.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.apartment_outlined,
+                            size: 64,
+                            color: theme.colorScheme.outline,
+                          ),
+                          AppSpacing.gapH16,
+                          Text(
+                            l10n.noCondosFound,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                          AppSpacing.gapH8,
+                          Text(
+                            l10n.addCondoToGetStarted,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: theme.colorScheme.outline,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(AppSpacing.p16),
+                    itemCount: condos.length,
+                    separatorBuilder: (context, index) => AppSpacing.gapH12,
+                    itemBuilder: (context, index) {
+                      final condo = condos[index];
+                      return CondoCardWidget(
+                        condo: condo,
+                        onEdit: () => _navigateToEditCondo(condo),
+                        onDelete: () => _deleteCondo(condo.id, condo.name),
+                      );
+                    },
+                  );
+                },
+                failure: (errorKey) => Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.error_outline,
+                        size: 64,
+                        color: theme.colorScheme.error,
+                      ),
+                      AppSpacing.gapH16,
+                      Text(
+                        l10n.errorPrefix + _getErrorMessage(errorKey),
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          color: theme.colorScheme.error,
+                        ),
+                      ),
+                      AppSpacing.gapH16,
+                      AppButton(
+                        onPressed: _loadCondos,
+                        icon: Icons.refresh,
+                        label: l10n.retry,
+                      ),
+                    ],
                   ),
-                  AppSpacing.gapH16,
-                  Text(
-                    l10n.errorPrefix + _getErrorMessage(errorKey),
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.error,
-                    ),
-                  ),
-                  AppSpacing.gapH16,
-                  AppButton(
-                    onPressed: _loadCondos,
-                    icon: Icons.refresh,
-                    label: l10n.retry,
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

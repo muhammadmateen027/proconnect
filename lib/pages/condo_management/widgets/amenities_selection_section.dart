@@ -73,8 +73,18 @@ class _AmenitiesSelectionSectionState extends State<AmenitiesSelectionSection> {
           children: _getAvailableAmenities(context).map((String amenity) {
             final isSelected = widget.selectedAmenities.contains(amenity);
             return FilterChip(
-              label: Text(amenity),
+              label: Text(
+                amenity,
+                style: TextStyle(
+                  color: isSelected
+                      ? theme.colorScheme.onPrimary
+                      : theme.colorScheme.onSurface,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
               selected: isSelected,
+              selectedColor: theme.colorScheme.primary,
+              checkmarkColor: theme.colorScheme.onPrimary,
               onSelected: (selected) => _toggleAmenity(amenity, selected),
             );
           }).toList(),
