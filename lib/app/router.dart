@@ -23,6 +23,11 @@ import 'package:proconnect/pages/super_admin/view/create_user_page.dart';
 import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
 import 'package:proconnect/pages/super_admin/view/user_management_page.dart';
 import 'package:proconnect/pages/apartment_management/view/apartment_management_page.dart';
+import 'package:proconnect/pages/apartment_management/view/create_edit_apartment_page.dart';
+import 'package:proconnect/domain/models/apartment.dart';
+import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
 
 // A helper class to make GoRouter listen to a BLoC stream
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -129,6 +134,49 @@ GoRouter createRouter(BuildContext context) {
         builder: (context, state) {
           final condo = state.extra! as Condo;
           return ApartmentManagementPage(condo: condo);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.createApartment,
+        builder: (context, state) {
+          final condo = state.extra! as Condo;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<ApartmentBloc>(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<FloorBloc>()
+                      ..add(FloorEvent.loadFloors(condominiumId: condo.id)),
+              ),
+            ],
+            child: CreateEditApartmentPage(condo: condo),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.editApartment,
+        builder: (context, state) {
+          final extras = state.extra! as Map<String, dynamic>;
+          final condo = extras['condo'] as Condo;
+          final apartment = extras['apartment'] as Apartment;
+
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<ApartmentBloc>(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<FloorBloc>()
+                      ..add(FloorEvent.loadFloors(condominiumId: condo.id)),
+              ),
+            ],
+            child: CreateEditApartmentPage(condo: condo, apartment: apartment),
+          );
         },
       ),
       // A dedicated splash screen route

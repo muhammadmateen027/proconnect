@@ -65,6 +65,10 @@ Every feature must be contained within `lib/pages/[feature_name]/` and follow th
   AppColors.error
   AppColors.getStatusColor('occupied')
   ```
+  
+- ✅ **INPUT FIELD OPACITY**: For readability against vibrant mesh backgrounds, use:
+  - **Light Mode**: `Colors.white.withValues(alpha: 0.8)`
+  - **Dark Mode**: `Colors.white.withValues(alpha: 0.1)`
 
 ### 5.3 Spacing - **MANDATORY**
 - ❌ **NEVER** use `SizedBox(height: X)` or `SizedBox(width: X)` for spacing
@@ -194,10 +198,15 @@ Every feature must be contained within `lib/pages/[feature_name]/` and follow th
   - Use appropriate button types: `filled` (primary), `outlined` (secondary), `text` (tertiary).
 
 ### 9.2 Form Components
-- **Form Sections**: Extract reusable form section widgets into `[feature]/widgets/` directory.
 - **Validation**: Use centralized validators from `core/utils/validators.dart`.
   - DO NOT create inline regex patterns or validation logic.
   - Reuse existing validators for email, phone, year, etc.
+- **Form Layout (Open vs Glass)**:
+  - **❌ DO NOT** use `useGlass: true` in `ProConnectLayout` for heavy full-page forms. It creates restrictive margins and "weird" double-scrolling feel.
+  - **✅ DO** use an **Open Layout** (`useGlass: false`) with consistent horizontal padding (e.g., `AppSpacing.p24`).
+- **Natural Scrolling**:
+  - **❌ DO NOT** use large trailing spacers (like `gapH48`) at the very bottom of forms.
+  - **✅ DO** use minimal gaps (like `gapH8`) so the scroll view stops naturally after the primary action button.
 
 ### 9.3 Custom Widgets
 - Create reusable widget classes in `core/widgets/` for app-wide components

@@ -66,7 +66,9 @@ class CustomDropdownField<T> extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: IconTheme(
                         data: IconThemeData(
-                          color: theme.colorScheme.primary.withValues(alpha: 0.7),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.7,
+                          ),
                           size: 20,
                         ),
                         child: prefixIcon!,
@@ -76,8 +78,8 @@ class CustomDropdownField<T> extends StatelessWidget {
               prefixIconConstraints: const BoxConstraints(minWidth: 40),
               filled: true,
               fillColor: theme.brightness == Brightness.dark
-                  ? Colors.white.withValues(alpha: 0.05)
-                  : Colors.black.withValues(alpha: 0.03),
+                  ? Colors.white.withValues(alpha: 0.1)
+                  : Colors.white.withValues(alpha: 0.8),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 12,
