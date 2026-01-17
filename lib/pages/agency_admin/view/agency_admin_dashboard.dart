@@ -119,6 +119,12 @@ class AgencyAdminDashboard extends StatelessWidget {
                         final condo = condos[index];
                         return CondoCardWidget(
                           condo: condo,
+                          onManageApartments: () {
+                            context.push(
+                              AppRoutes.apartmentManagement,
+                              extra: condo,
+                            );
+                          },
                           onEdit: () async {
                             final result = await context.push<bool>(
                               AppRoutes.editCondo,

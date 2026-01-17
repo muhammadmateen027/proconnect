@@ -22,6 +22,7 @@ import 'package:proconnect/pages/super_admin/bloc/user_management/user_managemen
 import 'package:proconnect/pages/super_admin/view/create_user_page.dart';
 import 'package:proconnect/pages/super_admin/view/super_admin_dashboard.dart';
 import 'package:proconnect/pages/super_admin/view/user_management_page.dart';
+import 'package:proconnect/pages/apartment_management/view/apartment_management_page.dart';
 
 // A helper class to make GoRouter listen to a BLoC stream
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -121,6 +122,13 @@ GoRouter createRouter(BuildContext context) {
               condo: condo,
             ),
           );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.apartmentManagement,
+        builder: (context, state) {
+          final condo = state.extra! as Condo;
+          return ApartmentManagementPage(condo: condo);
         },
       ),
       // A dedicated splash screen route

@@ -35,6 +35,14 @@ import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dar
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
+import 'package:proconnect/data/floor/datasource/floor_remote_data_source.dart';
+import 'package:proconnect/data/floor/repository/floor_repository_impl.dart';
+import 'package:proconnect/domain/repositories/floor_repository.dart';
+import 'package:proconnect/data/apartment/datasource/apartment_remote_data_source.dart';
+import 'package:proconnect/data/apartment/repository/apartment_repository_impl.dart';
+import 'package:proconnect/domain/repositories/apartment_repository.dart';
+import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -86,6 +94,22 @@ class DependencyInjector {
       )
       ..registerSingleton<CondoRepository>(
         (c) => CondoRepositoryImpl(c.resolve<CondoRemoteDataSource>()),
+      )
+      ..registerSingleton<FloorRemoteDataSource>(
+        (c) => FloorRemoteDataSourceImpl(),
+      )
+      ..registerSingleton<FloorRepository>(
+        (c) => FloorRepositoryImpl(
+          remoteDataSource: c.resolve<FloorRemoteDataSource>(),
+        ),
+      )
+      ..registerSingleton<ApartmentRemoteDataSource>(
+        (c) => ApartmentRemoteDataSourceImpl(),
+      )
+      ..registerSingleton<ApartmentRepository>(
+        (c) => ApartmentRepositoryImpl(
+          remoteDataSource: c.resolve<ApartmentRemoteDataSource>(),
+        ),
       );
   }
 
@@ -186,6 +210,16 @@ class DependencyInjector {
       )
       ..registerFactory<L10nBloc>(
         (c) => L10nBloc(c.resolve<L10nRepository>()),
+      )
+      ..registerFactory<FloorBloc>(
+        (c) => FloorBloc(
+          floorRepository: c.resolve<FloorRepository>(),
+        ),
+      )
+      ..registerFactory<ApartmentBloc>(
+        (c) => ApartmentBloc(
+          apartmentRepository: c.resolve<ApartmentRepository>(),
+        ),
       );
   }
 }

@@ -1,0 +1,101 @@
+import 'package:proconnect/data/apartment/datasource/apartment_remote_data_source.dart';
+import 'package:proconnect/domain/models/apartment.dart';
+import 'package:proconnect/domain/repositories/apartment_repository.dart';
+
+/// Implementation of ApartmentRepository
+class ApartmentRepositoryImpl implements ApartmentRepository {
+  ApartmentRepositoryImpl({
+    required ApartmentRemoteDataSource remoteDataSource,
+  }) : _remoteDataSource = remoteDataSource;
+
+  final ApartmentRemoteDataSource _remoteDataSource;
+
+  @override
+  Future<void> assignOwner({
+    required String apartmentId,
+    required String ownerId,
+    required String ownerName,
+    String? ownerEmail,
+    String? ownerPhone,
+  }) async {
+    await _remoteDataSource.assignOwner(
+      apartmentId: apartmentId,
+      ownerId: ownerId,
+      ownerName: ownerName,
+      ownerEmail: ownerEmail,
+      ownerPhone: ownerPhone,
+    );
+  }
+
+  @override
+  Future<void> createApartment(Apartment apartment) async {
+    await _remoteDataSource.createApartment(apartment);
+  }
+
+  @override
+  Future<void> deleteApartment(String apartmentId) async {
+    await _remoteDataSource.deleteApartment(apartmentId);
+  }
+
+  @override
+  Future<Apartment?> getApartmentById(String apartmentId) async {
+    return await _remoteDataSource.getApartmentById(apartmentId);
+  }
+
+  @override
+  Future<List<Apartment>> getApartmentsByAgency(String agencyId) async {
+    return await _remoteDataSource.getApartmentsByAgency(agencyId);
+  }
+
+  @override
+  Future<List<Apartment>> getApartmentsByCondominium(
+    String condominiumId,
+  ) async {
+    return await _remoteDataSource.getApartmentsByCondominium(condominiumId);
+  }
+
+  @override
+  Future<List<Apartment>> getApartmentsByFloor(String floorId) async {
+    return await _remoteDataSource.getApartmentsByFloor(floorId);
+  }
+
+  @override
+  Future<List<Apartment>> getApartmentsByOwner(String ownerId) async {
+    return await _remoteDataSource.getApartmentsByOwner(ownerId);
+  }
+
+  @override
+  Future<List<Apartment>> getAvailableApartments(String condominiumId) async {
+    return await _remoteDataSource.getAvailableApartments(condominiumId);
+  }
+
+  @override
+  Future<List<Apartment>> getVacantApartments(String condominiumId) async {
+    return await _remoteDataSource.getVacantApartments(condominiumId);
+  }
+
+  @override
+  Future<void> removeOwner(String apartmentId) async {
+    await _remoteDataSource.removeOwner(apartmentId);
+  }
+
+  @override
+  Future<void> updateApartment(Apartment apartment) async {
+    await _remoteDataSource.updateApartment(apartment);
+  }
+
+  @override
+  Future<void> updateApartmentStatus({
+    required String apartmentId,
+    required ApartmentStatus status,
+    DateTime? vacantFrom,
+    DateTime? availableFrom,
+  }) async {
+    await _remoteDataSource.updateApartmentStatus(
+      apartmentId: apartmentId,
+      status: status,
+      vacantFrom: vacantFrom,
+      availableFrom: availableFrom,
+    );
+  }
+}

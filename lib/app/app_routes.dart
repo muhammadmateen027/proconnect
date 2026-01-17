@@ -12,4 +12,11 @@ class AppRoutes {
   static const String condoManagement = '/condo_management';
   static const String createCondo = '/create_condo';
   static const String editCondo = '/edit_condo';
+  static const String apartmentManagement = '/apartment_management';
+  static const String floorManagement = '/floor_management';
+  static const String createFloor = '/create_floor';
+  static const String editFloor = '/edit_floor';
+  static const String createApartment = '/create_apartment';
+  static const String editApartment = '/edit_apartment';
+  static const String apartmentDetail = '/apartment_detail';
 }

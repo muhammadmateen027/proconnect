@@ -9,12 +9,14 @@ class CondoCardWidget extends StatelessWidget {
     required this.condo,
     required this.onEdit,
     this.onDelete,
+    this.onManageApartments,
     super.key,
   });
 
   final Condo condo;
   final VoidCallback onEdit;
   final VoidCallback? onDelete;
+  final VoidCallback? onManageApartments;
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +159,15 @@ class CondoCardWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        if (onManageApartments != null) ...[
+                          _ActionButton(
+                            icon: Icons.meeting_room_rounded,
+                            label: l10n.manageApartments,
+                            onPressed: onManageApartments!,
+                            color: theme.colorScheme.tertiary,
+                          ),
+                          AppSpacing.gapW12,
+                        ],
                         _ActionButton(
                           icon: Icons.edit_rounded,
                           label: l10n.edit,
