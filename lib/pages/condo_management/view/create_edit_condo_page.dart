@@ -5,6 +5,12 @@ import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
+import 'package:proconnect/pages/condo_management/widgets/amenities_selection_section.dart';
+import 'package:proconnect/pages/condo_management/widgets/basic_information_section.dart';
+import 'package:proconnect/pages/condo_management/widgets/building_specifications_section.dart';
+import 'package:proconnect/pages/condo_management/widgets/contact_information_section.dart';
+import 'package:proconnect/pages/condo_management/widgets/description_section.dart';
+import 'package:proconnect/core/widgets/app_button.dart';
 
 class CreateEditCondoPage extends StatefulWidget {
   const CreateEditCondoPage({
@@ -32,24 +38,6 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
   late final TextEditingController _contactPhoneController;
   late List<String> _selectedAmenities;
   bool _isSubmitting = false;
-
-  // Common amenities list
-  static const List<String> _availableAmenities = [
-    'Swimming Pool',
-    'Gym',
-    'Parking',
-    'Security',
-    'Playground',
-    'BBQ Area',
-    'Function Room',
-    'Sauna',
-    'Tennis Court',
-    'Basketball Court',
-    'Jogging Track',
-    'Mini Market',
-    'Cafe',
-    'Laundry',
-  ];
 
   @override
   void initState() {
@@ -160,7 +148,6 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -173,277 +160,52 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
         child: ListView(
           padding: const EdgeInsets.all(AppSpacing.p16),
           children: [
-            // Basic Information Card
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.p16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.condoDetails,
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppSpacing.gapH16,
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        labelText: l10n.condoName,
-                        hintText: l10n.enterCondoName,
-                        prefixIcon: const Icon(Icons.apartment),
-                        border: const OutlineInputBorder(),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return l10n.condoNameRequired;
-                        }
-                        return null;
-                      },
-                    ),
-                    AppSpacing.gapH16,
-                    TextFormField(
-                      controller: _addressController,
-                      decoration: InputDecoration(
-                        labelText: l10n.condoAddress,
-                        hintText: l10n.enterCondoAddress,
-                        prefixIcon: const Icon(Icons.location_on),
-                        border: const OutlineInputBorder(),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      maxLines: 3,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return l10n.condoAddressRequired;
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
+            // Basic Information
+            BasicInformationSection(
+              nameController: _nameController,
+              addressController: _addressController,
             ),
             AppSpacing.gapH16,
 
-            // Building Specifications Card
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.p16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Building Specifications',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppSpacing.gapH16,
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _totalUnitsController,
-                            decoration: const InputDecoration(
-                              labelText: 'Total Units',
-                              hintText: 'e.g., 150',
-                              prefixIcon: Icon(Icons.home_work),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                          ),
-                        ),
-                        AppSpacing.gapW16,
-                        Expanded(
-                          child: TextFormField(
-                            controller: _totalFloorsController,
-                            decoration: const InputDecoration(
-                              labelText: 'Total Floors',
-                              hintText: 'e.g., 25',
-                              prefixIcon: Icon(Icons.layers),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                          ),
-                        ),
-                      ],
-                    ),
-                    AppSpacing.gapH16,
-                    TextFormField(
-                      controller: _yearBuiltController,
-                      decoration: const InputDecoration(
-                        labelText: 'Year Built',
-                        hintText: 'e.g., 2020',
-                        prefixIcon: Icon(Icons.calendar_today),
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value != null && value.trim().isNotEmpty) {
-                          final year = int.tryParse(value.trim());
-                          if (year == null) {
-                            return 'Please enter a valid year';
-                          }
-                          if (year < 1900 || year > DateTime.now().year + 5) {
-                            return 'Please enter a valid year';
-                          }
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
+            // Building Specifications
+            BuildingSpecificationsSection(
+              totalUnitsController: _totalUnitsController,
+              totalFloorsController: _totalFloorsController,
+              yearBuiltController: _yearBuiltController,
             ),
             AppSpacing.gapH16,
 
-            // Description Card
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.p16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Description',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppSpacing.gapH16,
-                    TextFormField(
-                      controller: _descriptionController,
-                      decoration: const InputDecoration(
-                        labelText: 'Description',
-                        hintText:
-                            'Enter a detailed description of the condominium',
-                        border: OutlineInputBorder(),
-                      ),
-                      textInputAction: TextInputAction.next,
-                      maxLines: 5,
-                    ),
-                  ],
-                ),
-              ),
+            // Description
+            DescriptionSection(
+              descriptionController: _descriptionController,
             ),
             AppSpacing.gapH16,
 
-            // Contact Information Card
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.p16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Contact Information',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppSpacing.gapH16,
-                    TextFormField(
-                      controller: _contactEmailController,
-                      decoration: const InputDecoration(
-                        labelText: 'Contact Email',
-                        hintText: 'management@example.com',
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value != null && value.trim().isNotEmpty) {
-                          final emailRegex = RegExp(
-                            r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$',
-                          );
-                          if (!emailRegex.hasMatch(value.trim())) {
-                            return 'Please enter a valid email address';
-                          }
-                        }
-                        return null;
-                      },
-                    ),
-                    AppSpacing.gapH16,
-                    TextFormField(
-                      controller: _contactPhoneController,
-                      decoration: const InputDecoration(
-                        labelText: 'Contact Phone',
-                        hintText: '+60 12-345 6789',
-                        prefixIcon: Icon(Icons.phone),
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.phone,
-                      textInputAction: TextInputAction.next,
-                    ),
-                  ],
-                ),
-              ),
+            // Contact Information
+            ContactInformationSection(
+              contactEmailController: _contactEmailController,
+              contactPhoneController: _contactPhoneController,
             ),
             AppSpacing.gapH16,
 
-            // Amenities Card
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.p16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Amenities',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppSpacing.gapH8,
-                    Text(
-                      'Select all amenities available in this condominium',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    AppSpacing.gapH16,
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: _availableAmenities.map((amenity) {
-                        final isSelected = _selectedAmenities.contains(amenity);
-                        return FilterChip(
-                          label: Text(amenity),
-                          selected: isSelected,
-                          onSelected: (selected) {
-                            setState(() {
-                              if (selected) {
-                                _selectedAmenities.add(amenity);
-                              } else {
-                                _selectedAmenities.remove(amenity);
-                              }
-                            });
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ),
+            // Amenities
+            AmenitiesSelectionSection(
+              selectedAmenities: _selectedAmenities,
+              onAmenitiesChanged: (amenities) {
+                setState(() {
+                  _selectedAmenities = amenities;
+                });
+              },
             ),
             AppSpacing.gapH24,
 
             // Submit Button
-            FilledButton.icon(
-              onPressed: _isSubmitting ? null : _handleSubmit,
-              icon: _isSubmitting
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    )
-                  : Icon(widget.isEditing ? Icons.save : Icons.add),
-              label: Text(
-                widget.isEditing ? l10n.saveChanges : l10n.createCondo,
-              ),
-              style: FilledButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  vertical: AppSpacing.p16,
-                ),
-              ),
+            AppButton(
+              onPressed: _handleSubmit,
+              label: widget.isEditing ? l10n.saveChanges : l10n.createCondo,
+              icon: widget.isEditing ? Icons.save : Icons.add,
+              isLoading: _isSubmitting,
+              expand: true,
             ),
           ],
         ),

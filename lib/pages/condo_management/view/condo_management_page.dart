@@ -8,6 +8,7 @@ import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/pages/condo_management/widgets/condo_card_widget.dart';
+import 'package:proconnect/core/widgets/app_button.dart';
 
 class CondoManagementPage extends StatefulWidget {
   const CondoManagementPage({super.key});
@@ -296,10 +297,10 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
                     ),
                   ),
                   AppSpacing.gapH16,
-                  FilledButton.icon(
+                  AppButton(
                     onPressed: _loadCondos,
-                    icon: const Icon(Icons.refresh),
-                    label: Text(l10n.retry),
+                    icon: Icons.refresh,
+                    label: l10n.retry,
                   ),
                 ],
               ),
