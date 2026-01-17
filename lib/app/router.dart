@@ -6,9 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/app/view/home_screen_wrapper.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
-import 'package:proconnect/core/widgets/auth_background.dart';
-import 'package:proconnect/domain/models/unit.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/condo.dart';
+import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/auth/view/login_screen.dart';
 import 'package:proconnect/pages/auth/view/registration_screen.dart';
@@ -126,7 +126,8 @@ GoRouter createRouter(BuildContext context) {
       // A dedicated splash screen route
       GoRoute(
         path: AppRoutes.splash,
-        builder: (context, state) => const AuthBackground(
+        builder: (context, state) => const ProConnectLayout(
+          useGlass: false,
           child: Center(child: CircularProgressIndicator(color: Colors.white)),
         ),
       ),

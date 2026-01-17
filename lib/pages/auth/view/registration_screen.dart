@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
-import 'package:proconnect/core/widgets/auth_background.dart';
+import 'package:proconnect/core/utils/role_extensions.dart';
 import 'package:proconnect/core/widgets/auth_header.dart';
 import 'package:proconnect/core/widgets/auth_redirect.dart';
 import 'package:proconnect/core/widgets/custom_auth_button.dart';
+import 'package:proconnect/core/widgets/custom_dropdown_field.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
@@ -42,7 +43,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AuthBackground(
+    return ProConnectLayout(
+      centerContent: true,
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -97,48 +99,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   validator: (value) =>
                       value!.length < 6 ? l10n.passwordMinLength : null,
                 ),
-                AppSpacing.gapH16,
-                DropdownButtonFormField<UserRole>(
-                  initialValue: _selectedRole,
-                  onChanged: (role) => setState(() => _selectedRole = role!),
-                  items: UserRole.values
-                      .map(
-                        (role) => DropdownMenuItem(
-                          value: role,
-                          child: Text(role.name),
-                        ),
-                      )
-                      .toList(),
-                  decoration: InputDecoration(
-                    labelText: l10n.iAmA,
-                    labelStyle: GoogleFonts.poppins(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    filled: true,
-                    fillColor: Theme.of(
-                      context,
-                    ).colorScheme.surfaceContainerHighest,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 2,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  style: GoogleFonts.poppins(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                  iconEnabledColor: Theme.of(context).colorScheme.onSurface,
-                  dropdownColor: Theme.of(context).colorScheme.surface,
+                AppSpacing.gapH24,
+                CustomDropdownField<UserRole>(
+                  value: _selectedRole,
+                  labelText: l10n.iAmA,
+                  prefixIcon: const Icon(Icons.badge_rounded),
+                  items: UserRole.values.map((role) {
+                    return DropdownMenuItem(
+                      value: role,
+                      child: Text(role.localizedName(l10n)),
+                    );
+                  }).toList(),
+                  onChanged: (role) {
+                    if (role != null) {
+                      setState(() => _selectedRole = role);
+                    }
+                  },
                 ),
                 AppSpacing.gapH32,
                 CustomAuthButton(

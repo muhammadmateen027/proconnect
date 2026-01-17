@@ -3,18 +3,18 @@ import 'package:proconnect/domain/agency/repository/agency_repository.dart';
 import 'package:proconnect/domain/models/agency.dart';
 
 class AgencyRepositoryImpl implements AgencyRepository {
-  final AgencyRemoteDataSource _remoteDataSource;
 
   AgencyRepositoryImpl(this._remoteDataSource);
+  final AgencyRemoteDataSource _remoteDataSource;
 
   @override
   Future<List<Agency>> getAgencies() async {
-    return await _remoteDataSource.getAgencies();
+    return _remoteDataSource.getAgencies();
   }
 
   @override
   Future<Agency> getAgencyById(String id) async {
-    return await _remoteDataSource.getAgencyById(id);
+    return _remoteDataSource.getAgencyById(id);
   }
 
   @override
@@ -24,7 +24,7 @@ class AgencyRepositoryImpl implements AgencyRepository {
     String? contactPhone,
     String? address,
   }) async {
-    return await _remoteDataSource.createAgency(
+    return _remoteDataSource.createAgency(
       name: name,
       contactEmail: contactEmail,
       contactPhone: contactPhone,

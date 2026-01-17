@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/app_button.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
+import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
-import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/pages/condo_management/widgets/condo_card_widget.dart';
-import 'package:proconnect/core/widgets/app_button.dart';
 
 class CondoManagementPage extends StatefulWidget {
   const CondoManagementPage({super.key});
@@ -215,7 +216,9 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
           orElse: () => '',
         );
 
-        return Scaffold(
+        return ProConnectLayout(
+          useGlass: false,
+          useScrolling: false,
           appBar: AppBar(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +247,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
             icon: const Icon(Icons.add),
             label: Text(l10n.addCondo),
           ),
-          body: BlocConsumer<CondoManagementBloc, CondoManagementState>(
+          child: BlocConsumer<CondoManagementBloc, CondoManagementState>(
             listener: (context, state) {
               state.whenOrNull(
                 success: () {
@@ -281,21 +284,22 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
                         children: [
                           Icon(
                             Icons.apartment_outlined,
-                            size: 64,
-                            color: theme.colorScheme.outline,
+                            size: 80,
+                            color: theme.colorScheme.outline.withValues(alpha: 0.5),
                           ),
-                          AppSpacing.gapH16,
+                          AppSpacing.gapH24,
                           Text(
                             l10n.noCondosFound,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: theme.colorScheme.onSurfaceVariant,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: theme.colorScheme.onSurface,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          AppSpacing.gapH8,
+                          AppSpacing.gapH12,
                           Text(
                             l10n.addCondoToGetStarted,
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.outline,
+                              color: theme.colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -305,7 +309,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
                   return ListView.separated(
                     padding: const EdgeInsets.all(AppSpacing.p16),
                     itemCount: condos.length,
-                    separatorBuilder: (context, index) => AppSpacing.gapH12,
+                    separatorBuilder: (context, index) => AppSpacing.gapH4,
                     itemBuilder: (context, index) {
                       final condo = condos[index];
                       return CondoCardWidget(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/condo_management/widgets/form_section_card.dart';
 
@@ -24,15 +25,11 @@ class BasicInformationSection extends StatelessWidget {
     return FormSectionCard(
       title: l10n.condoDetails,
       children: [
-        TextFormField(
+        CustomTextField(
           controller: nameController,
+          labelText: l10n.condoName,
           enabled: isEnabled,
-          decoration: InputDecoration(
-            labelText: l10n.condoName,
-            hintText: l10n.enterCondoName,
-            prefixIcon: const Icon(Icons.apartment),
-            border: const OutlineInputBorder(),
-          ),
+          prefixIcon: const Icon(Icons.apartment_rounded),
           textInputAction: TextInputAction.next,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
@@ -41,18 +38,14 @@ class BasicInformationSection extends StatelessWidget {
             return null;
           },
         ),
-        AppSpacing.gapH16,
-        TextFormField(
+        AppSpacing.gapH20,
+        CustomTextField(
           controller: addressController,
+          labelText: l10n.condoAddress,
           enabled: isEnabled,
-          decoration: InputDecoration(
-            labelText: l10n.condoAddress,
-            hintText: l10n.enterCondoAddress,
-            prefixIcon: const Icon(Icons.location_on),
-            border: const OutlineInputBorder(),
-          ),
-          textInputAction: TextInputAction.next,
           maxLines: 3,
+          prefixIcon: const Icon(Icons.location_on_rounded),
+          textInputAction: TextInputAction.next,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
               return l10n.condoAddressRequired;

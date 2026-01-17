@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
-import 'package:proconnect/core/widgets/auth_background.dart';
 import 'package:proconnect/core/widgets/auth_header.dart';
 import 'package:proconnect/core/widgets/auth_redirect.dart';
 import 'package:proconnect/core/widgets/custom_auth_button.dart';
 import 'package:proconnect/core/widgets/custom_text_field.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
@@ -45,7 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AuthBackground(
+    return ProConnectLayout(
+      centerContent: true,
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           state.whenOrNull(

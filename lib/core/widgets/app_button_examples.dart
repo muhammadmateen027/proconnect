@@ -2,6 +2,7 @@
 ///
 /// This file demonstrates various ways to use the AppButton widget
 /// throughout the application.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:proconnect/core/widgets/app_button.dart';

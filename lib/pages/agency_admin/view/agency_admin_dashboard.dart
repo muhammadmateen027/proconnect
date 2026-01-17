@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
@@ -56,7 +57,9 @@ class AgencyAdminDashboard extends StatelessWidget {
             orElse: () => '',
           );
 
-          return Scaffold(
+          return ProConnectLayout(
+            useGlass: false,
+            useScrolling: false,
             appBar: AppBar(
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +80,7 @@ class AgencyAdminDashboard extends StatelessWidget {
                 ),
               ],
             ),
-            body: BlocBuilder<CondoManagementBloc, CondoManagementState>(
+            child: BlocBuilder<CondoManagementBloc, CondoManagementState>(
               builder: (context, state) {
                 return state.when(
                   initial: () =>
@@ -129,8 +132,6 @@ class AgencyAdminDashboard extends StatelessWidget {
                               );
                             }
                           },
-                          // Agencies cannot delete condos
-                          onDelete: null,
                         );
                       },
                     );

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/src/router.dart';
 import 'package:proconnect/app/router.dart';
+import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/core/theme/app_theme.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
-import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/l10n/gen/app_localizations.dart';
 
 class App extends StatefulWidget {
@@ -14,7 +15,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  late final _router = createRouter(context);
+  late final GoRouter _router = createRouter(context);
 
   @override
   Widget build(BuildContext context) {

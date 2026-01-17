@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
+import 'package:proconnect/core/widgets/user_card_widget.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
@@ -35,7 +38,9 @@ class _UserListPageState extends State<UserListPage> {
           orElse: () => '',
         );
 
-        return Scaffold(
+        return ProConnectLayout(
+          useGlass: false,
+          useScrolling: false,
           appBar: AppBar(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +55,11 @@ class _UserListPageState extends State<UserListPage> {
               ],
             ),
           ),
-          body: BlocBuilder<UserManagementBloc, UserManagementState>(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => context.push(AppRoutes.createUser),
+            child: const Icon(Icons.add),
+          ),
+          child: BlocBuilder<UserManagementBloc, UserManagementState>(
             builder: (context, state) {
               return state.when(
                 initial: () => const Center(child: CircularProgressIndicator()),
@@ -65,49 +74,38 @@ class _UserListPageState extends State<UserListPage> {
                 },
                 loaded: (users) {
                   if (users.isEmpty) {
-                    return Center(child: Text(l10n.noUsersFound));
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.people_outline_rounded,
+                            size: 80,
+                            color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                          ),
+                          AppSpacing.gapH24,
+                          Text(
+                            l10n.noUsersFound,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: theme.colorScheme.onSurface,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   }
                   return ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     itemCount: users.length,
                     itemBuilder: (context, index) {
                       final user = users[index];
-                      return ListTile(
-                        title: Text(user.fullName),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(user.email),
-                            Text(
-                              '${user.role.name}${user.agencyId != null ? ' | Agency: ${user.agencyId}' : ''}${user.condominiumId != null ? ' | Condo: ${user.condominiumId}' : ''}',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.secondary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.edit,
-                                color: theme.colorScheme.primary,
-                              ),
-                              onPressed: () {
-                                // TODO: Navigate to edit user page
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: theme.colorScheme.error,
-                              ),
-                              onPressed: () =>
-                                  _showDeleteConfirmation(context, user),
-                            ),
-                          ],
-                        ),
+                      return UserCardWidget(
+                        user: user,
+                        onEdit: () {
+                          // TODO: Navigate to edit user page
+                        },
+                        onDelete: () => _showDeleteConfirmation(context, user),
                       );
                     },
                   );
@@ -116,10 +114,6 @@ class _UserListPageState extends State<UserListPage> {
                     Center(child: Text(l10n.errorPrefix + message)),
               );
             },
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => context.push(AppRoutes.createUser),
-            child: const Icon(Icons.add),
           ),
         );
       },

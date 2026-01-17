@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/custom_dropdown_field.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
@@ -52,7 +53,7 @@ class AgencyAssignmentSection extends StatelessWidget {
                       ),
                       failure: (errorKey) => ListTile(
                         leading: Icon(
-                          Icons.error_outline,
+                          Icons.error_outline_rounded,
                           color: theme.colorScheme.error,
                         ),
                         title: Text(
@@ -61,7 +62,7 @@ class AgencyAssignmentSection extends StatelessWidget {
                         ),
                         subtitle: const Text('Check internet connection'),
                         trailing: IconButton(
-                          icon: const Icon(Icons.refresh),
+                          icon: const Icon(Icons.refresh_rounded),
                           onPressed: () =>
                               context.read<AgencySelectionBloc>().add(
                                 const AgencySelectionEvent.fetchAgencyAdmins(),
@@ -87,25 +88,19 @@ class AgencyAssignmentSection extends StatelessWidget {
                                     context.read<AgencySelectionBloc>().add(
                                       const AgencySelectionEvent.fetchAgencyAdmins(),
                                     ),
-                                icon: const Icon(Icons.refresh),
+                                icon: const Icon(Icons.refresh_rounded),
                                 label: Text(l10n.retry),
                               ),
                             ],
                           );
                         }
 
-                        return DropdownButtonFormField<String>(
+                        return CustomDropdownField<String>(
                           value: selectedAgencyId,
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            labelText: l10n.selectAgency,
-                            hintText: l10n.noAgency,
-                            prefixIcon: const Icon(Icons.business),
-                            border: const OutlineInputBorder(),
-                          ),
+                          labelText: l10n.selectAgency,
+                          hintText: l10n.noAgency,
                           items: [
                             DropdownMenuItem<String>(
-                              value: null,
                               child: Text(l10n.noAgency),
                             ),
                             ...agencyAdmins.map((agencyAdmin) {
@@ -123,8 +118,7 @@ class AgencyAssignmentSection extends StatelessWidget {
                             } else {
                               final agencyAdmin = agencyAdmins.firstWhere(
                                 (user) =>
-                                    (user.agencyId == value ||
-                                    user.uid == value),
+                                    user.agencyId == value || user.uid == value,
                               );
                               onAgencyChanged(
                                 agencyAdmin.copyWith(

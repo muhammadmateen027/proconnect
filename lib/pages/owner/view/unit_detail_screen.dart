@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/owner/view/widgets/tenant_assignment_sheet.dart';
@@ -27,77 +30,124 @@ class UnitDetailScreen extends StatelessWidget {
           },
         );
       },
-      child: Scaffold(
+      child: ProConnectLayout(
+        useGlass: false,
+        useScrolling: false,
         appBar: AppBar(
           title: Text('Unit ${unit.unitNo}'),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Card(
-              elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Rental Summary', // Should be localized
-                      style: theme.textTheme.headlineSmall,
-                    ),
-                    const Divider(height: 24),
-                    UnitDetailRow(
-                      icon: Icons.attach_money,
-                      label: 'Monthly Rent',
-                      value: unit.monthlyRent != null
-                          ? NumberFormat.currency(
-                              symbol: 'RM ',
-                            ).format(unit.monthlyRent)
-                          : 'Not set',
-                    ),
-                    UnitDetailRow(
-                      icon: Icons.calendar_today,
-                      label: 'Lease Period',
-                      value: _formatLeasePeriod(unit),
-                    ),
-                    UnitDetailRow(
-                      icon: Icons.person,
-                      label: 'Tenant Name',
-                      value: unit.tenantName ?? 'Not Occupied',
-                    ),
-                    UnitDetailRow(
-                      icon: Icons.phone,
-                      label: 'Tenant Phone',
-                      value: unit.tenantPhone ?? 'Not set',
-                    ),
-                    UnitDetailRow(
-                      icon: Icons.email,
-                      label: 'Tenant Email',
-                      value: unit.tenantEmail ?? 'Not set',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             showModalBottomSheet<void>(
               context: context,
-              isScrollControlled:
-                  true, // Ensures the sheet is above the keyboard
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              ),
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
               builder: (_) => BlocProvider.value(
                 value: context.read<UnitBloc>(),
-                child: TenantAssignmentSheet(unit: unit),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.surface.withValues(alpha: 0.8),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(32),
+                      ),
+                    ),
+                    child: TenantAssignmentSheet(unit: unit),
+                  ),
+                ),
               ),
             );
           },
-          label: const Text('Assign Tenant'), // This should also be localized
-          icon: const Icon(Icons.person_add_alt_1),
+          label: const Text('Assign Tenant'),
+          icon: const Icon(Icons.person_add_alt_1_rounded),
+        ),
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(28),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                child: Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: theme.brightness == Brightness.dark
+                          ? [
+                              Colors.white.withValues(alpha: 0.12),
+                              Colors.white.withValues(alpha: 0.04),
+                            ]
+                          : [
+                              Colors.white.withValues(alpha: 0.7),
+                              Colors.white.withValues(alpha: 0.35),
+                            ],
+                    ),
+                    borderRadius: BorderRadius.circular(28),
+                    border: Border.all(
+                      color: theme.brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.15)
+                          : Colors.white.withValues(alpha: 0.5),
+                      width: 1.5,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Rental Summary',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Container(
+                        height: 2,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                          borderRadius: BorderRadius.circular(1),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      UnitDetailRow(
+                        icon: Icons.attach_money_rounded,
+                        label: 'Monthly Rent',
+                        value: unit.monthlyRent != null
+                            ? NumberFormat.currency(
+                                symbol: 'RM ',
+                              ).format(unit.monthlyRent)
+                            : 'Not set',
+                      ),
+                      UnitDetailRow(
+                        icon: Icons.calendar_today_rounded,
+                        label: 'Lease Period',
+                        value: _formatLeasePeriod(unit),
+                      ),
+                      UnitDetailRow(
+                        icon: Icons.person_rounded,
+                        label: 'Tenant Name',
+                        value: unit.tenantName ?? 'Not Occupied',
+                      ),
+                      UnitDetailRow(
+                        icon: Icons.phone_rounded,
+                        label: 'Tenant Phone',
+                        value: unit.tenantPhone ?? 'Not set',
+                      ),
+                      UnitDetailRow(
+                        icon: Icons.email_rounded,
+                        label: 'Tenant Email',
+                        value: unit.tenantEmail ?? 'Not set',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -128,17 +178,35 @@ class UnitDetailRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          Icon(icon, color: theme.colorScheme.primary, size: 20),
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: theme.colorScheme.primary, size: 20),
+          ),
           AppSpacing.gapW16,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label, style: theme.textTheme.bodySmall),
-                Text(value, style: theme.textTheme.titleMedium),
+                Text(
+                  label,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    letterSpacing: 0.2,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),

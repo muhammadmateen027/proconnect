@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/utils/validators.dart';
+import 'package:proconnect/core/widgets/custom_text_field.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/condo_management/widgets/form_section_card.dart';
 
@@ -26,45 +27,34 @@ class BuildingSpecificationsSection extends StatelessWidget {
       title: l10n.buildingSpecifications,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: TextFormField(
+              child: CustomTextField(
                 controller: totalUnitsController,
-                decoration: InputDecoration(
-                  labelText: l10n.totalUnits,
-                  hintText: l10n.totalUnitsHint,
-                  prefixIcon: const Icon(Icons.home_work),
-                  border: const OutlineInputBorder(),
-                ),
+                labelText: l10n.totalUnits,
+                prefixIcon: const Icon(Icons.home_work_rounded),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
               ),
             ),
             AppSpacing.gapW16,
             Expanded(
-              child: TextFormField(
+              child: CustomTextField(
                 controller: totalFloorsController,
-                decoration: InputDecoration(
-                  labelText: l10n.totalFloors,
-                  hintText: l10n.totalFloorsHint,
-                  prefixIcon: const Icon(Icons.layers),
-                  border: const OutlineInputBorder(),
-                ),
+                labelText: l10n.totalFloors,
+                prefixIcon: const Icon(Icons.layers_rounded),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
               ),
             ),
           ],
         ),
-        AppSpacing.gapH16,
-        TextFormField(
+        AppSpacing.gapH20,
+        CustomTextField(
           controller: yearBuiltController,
-          decoration: InputDecoration(
-            labelText: l10n.yearBuilt,
-            hintText: l10n.yearBuiltHint,
-            prefixIcon: const Icon(Icons.calendar_today),
-            border: const OutlineInputBorder(),
-          ),
+          labelText: l10n.yearBuilt,
+          prefixIcon: const Icon(Icons.calendar_today_rounded),
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.next,
           validator: (value) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
-import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 

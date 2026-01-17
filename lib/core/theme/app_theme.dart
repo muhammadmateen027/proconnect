@@ -1,17 +1,15 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:proconnect/core/theme/app_colors.dart';
-import 'package:proconnect/core/theme/app_decorations.dart';
-import 'package:proconnect/core/theme/app_text_styles.dart';
+import 'package:proconnect/core/theme/theme.dart';
 
 /// Application theme configuration using FlexColorScheme for Material 3.
 /// Provides both light and dark themes with comprehensive customization.
 class AppTheme {
   AppTheme._();
 
-  // Common theme configurations (using AppDecorations for consistency)
-  static const double _borderRadius = AppDecorations.radiusMedium;
+  // Common theme configurations
+  static const double _borderRadius = 12;
   static const double _cardElevation = 2;
   static const double _buttonElevation = 1;
 
@@ -68,8 +66,13 @@ class AppTheme {
 
         // Chip theme
         chipRadius: _borderRadius,
-        chipSchemeColor: SchemeColor.primaryContainer,
+        chipSchemeColor: SchemeColor.tertiaryContainer,
         chipSelectedSchemeColor: SchemeColor.primary,
+        chipDeleteIconSchemeColor: SchemeColor.onTertiaryContainer,
+        chipLabelStyle: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
 
         // Dialog theme
         dialogRadius: _borderRadius,
@@ -92,7 +95,6 @@ class AppTheme {
         bottomSheetModalElevation: 8,
       ),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      useMaterial3: true,
       swapLegacyOnMaterial3: true,
       fontFamily: GoogleFonts.poppins().fontFamily,
     );
@@ -245,8 +247,13 @@ class AppTheme {
 
         // Chip theme
         chipRadius: _borderRadius,
-        chipSchemeColor: SchemeColor.primaryContainer,
+        chipSchemeColor: SchemeColor.tertiaryContainer,
         chipSelectedSchemeColor: SchemeColor.primary,
+        chipDeleteIconSchemeColor: SchemeColor.onTertiaryContainer,
+        chipLabelStyle: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
 
         // Dialog theme
         dialogRadius: _borderRadius,
@@ -269,7 +276,6 @@ class AppTheme {
         bottomSheetModalElevation: 8,
       ),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      useMaterial3: true,
       swapLegacyOnMaterial3: true,
       fontFamily: GoogleFonts.poppins().fontFamily,
     );

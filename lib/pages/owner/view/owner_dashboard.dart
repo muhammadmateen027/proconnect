@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proconnect/app/app_routes.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/core/widgets/unit_card.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
@@ -38,7 +39,9 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
           orElse: () => '',
         );
 
-        return Scaffold(
+        return ProConnectLayout(
+          useGlass: false,
+          useScrolling: false,
           appBar: AppBar(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +62,26 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
               ),
             ],
           ),
-          body: BlocBuilder<UnitBloc, UnitState>(
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FloatingActionButton.extended(
+                onPressed: () {
+                  // TODO: Implement guest invitation logic
+                },
+                label: Text(l10n.inviteGuest),
+                icon: const Icon(Icons.person_add),
+                heroTag: 'invite_guest',
+              ),
+              AppSpacing.gapH16,
+              FloatingActionButton(
+                onPressed: () => context.push(AppRoutes.addUnit),
+                heroTag: 'add_unit',
+                child: const Icon(Icons.add),
+              ),
+            ],
+          ),
+          child: BlocBuilder<UnitBloc, UnitState>(
             builder: (context, state) {
               return state.when(
                 initial: () => const Center(child: CircularProgressIndicator()),
@@ -91,25 +113,6 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                     Center(child: Text('${l10n.errorPrefix}$message')),
               );
             },
-          ),
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FloatingActionButton.extended(
-                onPressed: () {
-                  // TODO: Implement guest invitation logic
-                },
-                label: Text(l10n.inviteGuest),
-                icon: const Icon(Icons.person_add),
-                heroTag: 'invite_guest',
-              ),
-              AppSpacing.gapH16,
-              FloatingActionButton(
-                onPressed: () => context.push(AppRoutes.addUnit),
-                heroTag: 'add_unit',
-                child: const Icon(Icons.add),
-              ),
-            ],
           ),
         );
       },

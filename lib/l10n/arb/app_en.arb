@@ -128,5 +128,10 @@
     "english": "English",
     "spanish": "Spanish",
     "malay": "Malay",
-    "agencyAdminDashboard": "Agency Admin Dashboard"
+    "agencyAdminDashboard": "Agency Admin Dashboard",
+    "roleSuperAdmin": "Super Admin",
+    "roleAgencyAdmin": "Agency Admin",
+    "roleGuard": "Guard",
+    "roleOwner": "Owner",
+    "roleTenant": "Tenant"
 }

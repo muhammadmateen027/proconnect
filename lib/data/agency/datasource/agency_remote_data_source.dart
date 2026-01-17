@@ -15,9 +15,9 @@ abstract class AgencyRemoteDataSource {
 }
 
 class AgencyRemoteDataSourceImpl implements AgencyRemoteDataSource {
-  final FirebaseFirestore _firestore;
 
   AgencyRemoteDataSourceImpl(this._firestore);
+  final FirebaseFirestore _firestore;
 
   @override
   Future<List<Agency>> getAgencies() async {

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:proconnect/core/config/environment.dart';
-import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
-import 'package:proconnect/core/theme/repository/theme_repository.dart';
 import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
 import 'package:proconnect/core/l10n/repository/l10n_repository.dart';
+import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
+import 'package:proconnect/core/theme/repository/theme_repository.dart';
 import 'package:proconnect/data/auth/datasource/auth_remote_data_source.dart';
 import 'package:proconnect/data/auth/repository/auth_repository_impl.dart';
 import 'package:proconnect/data/condo/datasource/condo_remote_data_source.dart';
@@ -31,10 +31,10 @@ import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/get_units_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/update_unit_tenant_details_use_case.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
-import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 
 class DependencyInjector {
   DependencyInjector._();

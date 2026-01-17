@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
         button = icon != null
             ? FilledButton.icon(
                 onPressed: effectiveOnPressed,
-                icon: buttonChild.icon!,
+                icon: buttonChild.icon,
                 label: buttonChild.label,
                 style: FilledButton.styleFrom(padding: effectivePadding),
               )
@@ -63,13 +63,12 @@ class AppButton extends StatelessWidget {
                 style: FilledButton.styleFrom(padding: effectivePadding),
                 child: buttonChild.label,
               );
-        break;
 
       case AppButtonType.outlined:
         button = icon != null
             ? OutlinedButton.icon(
                 onPressed: effectiveOnPressed,
-                icon: buttonChild.icon!,
+                icon: buttonChild.icon,
                 label: buttonChild.label,
                 style: OutlinedButton.styleFrom(padding: effectivePadding),
               )
@@ -78,13 +77,12 @@ class AppButton extends StatelessWidget {
                 style: OutlinedButton.styleFrom(padding: effectivePadding),
                 child: buttonChild.label,
               );
-        break;
 
       case AppButtonType.text:
         button = icon != null
             ? TextButton.icon(
                 onPressed: effectiveOnPressed,
-                icon: buttonChild.icon!,
+                icon: buttonChild.icon,
                 label: buttonChild.label,
                 style: TextButton.styleFrom(padding: effectivePadding),
               )
@@ -93,13 +91,12 @@ class AppButton extends StatelessWidget {
                 style: TextButton.styleFrom(padding: effectivePadding),
                 child: buttonChild.label,
               );
-        break;
 
       case AppButtonType.elevated:
         button = icon != null
             ? ElevatedButton.icon(
                 onPressed: effectiveOnPressed,
-                icon: buttonChild.icon!,
+                icon: buttonChild.icon,
                 label: buttonChild.label,
                 style: ElevatedButton.styleFrom(padding: effectivePadding),
               )
@@ -108,7 +105,6 @@ class AppButton extends StatelessWidget {
                 style: ElevatedButton.styleFrom(padding: effectivePadding),
                 child: buttonChild.label,
               );
-        break;
     }
 
     return expand ? SizedBox(width: double.infinity, child: button) : button;

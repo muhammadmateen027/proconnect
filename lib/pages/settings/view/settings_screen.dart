@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
+import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
@@ -11,25 +15,21 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Scaffold(
+    final theme = Theme.of(context);
+
+    return ProConnectLayout(
+      useGlass: false,
       appBar: AppBar(
         title: Text(l10n.settings),
       ),
-      body: ListView(
+      child: Column(
         children: [
           // Theme selection
           BlocBuilder<ThemeBloc, ThemeState>(
             builder: (context, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return _SettingsSection(
+                title: l10n.theme,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      l10n.theme,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
                   _ThemeRadioTile(
                     label: l10n.themeSystem,
                     value: ThemeMode.system,
@@ -64,25 +64,16 @@ class SettingsScreen extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
+          AppSpacing.gapH24,
           // Language selection
           BlocBuilder<L10nBloc, L10nState>(
             builder: (context, state) {
-              // Current locale (might be null if it's the first time and not yet loaded)
-              // In that case, we can get it from the context or default to English.
               final currentLocale =
                   state.locale ?? Localizations.localeOf(context);
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return _SettingsSection(
+                title: l10n.language,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      l10n.language,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
                   _LanguageRadioTile(
                     label: l10n.english,
                     value: const Locale('en'),
@@ -117,13 +108,92 @@ class SettingsScreen extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: Text(l10n.logout),
-            onTap: () {
-              context.read<AuthBloc>().add(const AuthEvent.logout());
-            },
+          AppSpacing.gapH24,
+          _SettingsSection(
+            children: [
+              ListTile(
+                leading: Icon(
+                  Icons.logout_rounded,
+                  color: theme.colorScheme.error,
+                ),
+                title: Text(
+                  l10n.logout,
+                  style: TextStyle(
+                    color: theme.colorScheme.error,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () {
+                  context.read<AuthBloc>().add(const AuthEvent.logout());
+                },
+              ),
+            ],
+          ),
+          AppSpacing.gapH48,
+        ],
+      ),
+    );
+  }
+}
+
+class _SettingsSection extends StatelessWidget {
+  const _SettingsSection({required this.children, this.title});
+  final String? title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (title != null) ...[
+            Padding(
+              padding: const EdgeInsets.only(left: 8, bottom: 12),
+              child: Text(
+                title!,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onSurface,
+                  letterSpacing: -0.2,
+                ),
+              ),
+            ),
+          ],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: isDark
+                        ? [
+                            Colors.white.withValues(alpha: 0.12),
+                            Colors.white.withValues(alpha: 0.04),
+                          ]
+                        : [
+                            Colors.white.withValues(alpha: 0.7),
+                            Colors.white.withValues(alpha: 0.35),
+                          ],
+                  ),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.15)
+                        : Colors.white.withValues(alpha: 0.5),
+                    width: 1.5,
+                  ),
+                ),
+                child: Column(children: children),
+              ),
+            ),
           ),
         ],
       ),
@@ -146,12 +216,21 @@ class _ThemeRadioTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSelected = value == groupValue;
+    final theme = Theme.of(context);
+
     return RadioListTile<ThemeMode>(
-      title: Text(label),
+      title: Text(
+        label,
+        style: TextStyle(
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
       value: value,
       groupValue: groupValue,
       onChanged: onChanged,
-      visualDensity: VisualDensity.compact,
+      activeColor: theme.colorScheme.primary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
     );
   }
 }
@@ -171,12 +250,21 @@ class _LanguageRadioTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSelected = value == groupValue;
+    final theme = Theme.of(context);
+
     return RadioListTile<Locale>(
-      title: Text(label),
+      title: Text(
+        label,
+        style: TextStyle(
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
       value: value,
       groupValue: groupValue,
       onChanged: onChanged,
-      visualDensity: VisualDensity.compact,
+      activeColor: theme.colorScheme.primary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
     );
   }
 }

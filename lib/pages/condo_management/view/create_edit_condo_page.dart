@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
 import 'package:proconnect/core/widgets/app_button.dart';
+import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
@@ -180,13 +181,15 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return Scaffold(
+    return ProConnectLayout(
+      useGlass: false,
+      useScrolling: false, // Form has its own scrollable (ListView)
       appBar: AppBar(
         title: Text(
           widget.isEditing ? l10n.editCondo : l10n.addCondo,
         ),
       ),
-      body: BlocBuilder<AuthBloc, AuthState>(
+      child: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, authState) {
           final currentUser = authState.maybeWhen(
             authenticated: (user) => user,
@@ -197,7 +200,7 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
           return Form(
             key: _formKey,
             child: ListView(
-              padding: const EdgeInsets.all(AppSpacing.p16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
                 // Basic Information
                 BasicInformationSection(
@@ -205,7 +208,6 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                   addressController: _addressController,
                   isEnabled: isSuperAdmin,
                 ),
-                AppSpacing.gapH16,
 
                 // Building Specifications
                 BuildingSpecificationsSection(
@@ -213,14 +215,12 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                   totalFloorsController: _totalFloorsController,
                   yearBuiltController: _yearBuiltController,
                 ),
-                AppSpacing.gapH16,
 
                 // Description
                 DescriptionSection(
                   descriptionController: _descriptionController,
                   isEnabled: isSuperAdmin,
                 ),
-                AppSpacing.gapH16,
 
                 // Contact Information
                 ContactInformationSection(
@@ -228,7 +228,6 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                   contactPhoneController: _contactPhoneController,
                   isEnabled: isSuperAdmin,
                 ),
-                AppSpacing.gapH16,
 
                 // Amenities
                 AmenitiesSelectionSection(
@@ -239,7 +238,6 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                     });
                   },
                 ),
-                AppSpacing.gapH16,
 
                 // Agency Assignment (only for super_admin)
                 if (isSuperAdmin)
@@ -261,13 +259,19 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                 AppSpacing.gapH24,
 
                 // Submit Button
-                AppButton(
-                  onPressed: _handleSubmit,
-                  label: widget.isEditing ? l10n.saveChanges : l10n.createCondo,
-                  icon: widget.isEditing ? Icons.save : Icons.add,
-                  isLoading: _isSubmitting,
-                  expand: true,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: AppButton(
+                    onPressed: _handleSubmit,
+                    label: widget.isEditing
+                        ? l10n.saveChanges
+                        : l10n.createCondo,
+                    icon: widget.isEditing ? Icons.save : Icons.add,
+                    isLoading: _isSubmitting,
+                    expand: true,
+                  ),
                 ),
+                AppSpacing.gapH48,
               ],
             ),
           );
