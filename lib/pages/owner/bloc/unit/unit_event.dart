@@ -13,4 +13,5 @@ abstract class UnitEvent with _$UnitEvent {
   }) = UpdateTenantInfo;
   const factory UnitEvent.deleteUnit(String unitId) = _DeleteUnit;
   const factory UnitEvent.unitsUpdated(List<Unit> units) = _UnitsUpdated;
+  const factory UnitEvent.clear() = _Clear;
 }

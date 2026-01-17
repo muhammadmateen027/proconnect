@@ -13,7 +13,6 @@ part 'unit_state.dart';
 part 'unit_bloc.freezed.dart';
 
 class UnitBloc extends Bloc<UnitEvent, UnitState> {
-
   UnitBloc(
     this._getUnitsUseCase,
     this._addUnitUseCase,
@@ -25,6 +24,7 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
     on<UpdateTenantInfo>(_onUpdateTenantInfo);
     on<_DeleteUnit>(_onDeleteUnit);
     on<_UnitsUpdated>(_onUnitsUpdated);
+    on<_Clear>(_onClear);
   }
   final GetUnitsUseCase _getUnitsUseCase;
   final AddUnitUseCase _addUnitUseCase;
@@ -32,12 +32,13 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
   final UpdateUnitTenantDetailsUseCase _updateUnitTenantDetailsUseCase;
   StreamSubscription<List<Unit>>? _unitSubscription;
 
-  void _onLoadUnits(_LoadUnits event, Emitter<UnitState> emit) {
+  Future<void> _onLoadUnits(_LoadUnits event, Emitter<UnitState> emit) async {
     emit(const UnitState.loading());
-    _unitSubscription?.cancel();
-    _unitSubscription = _getUnitsUseCase(event.ownerId).listen(
-      (units) => add(UnitEvent.unitsUpdated(units)),
-      onError: (dynamic error) => emit(UnitState.error(error.toString())),
+
+    await emit.forEach<List<Unit>>(
+      _getUnitsUseCase(event.ownerId),
+      onData: (units) => UnitState.loaded(units),
+      onError: (error, stackTrace) => UnitState.error(error.toString()),
     );
   }
 
@@ -78,6 +79,12 @@ class UnitBloc extends Bloc<UnitEvent, UnitState> {
 
   void _onUnitsUpdated(_UnitsUpdated event, Emitter<UnitState> emit) {
     emit(UnitState.loaded(event.units));
+  }
+
+  void _onClear(_Clear event, Emitter<UnitState> emit) {
+    _unitSubscription?.cancel();
+    _unitSubscription = null;
+    emit(const UnitState.initial());
   }
 
   @override

@@ -10,6 +10,8 @@ class CustomDropdownField<T> extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.enabled = true,
+    this.itemHeight = kMinInteractiveDimension,
+    this.selectedItemBuilder,
     super.key,
   });
 
@@ -21,6 +23,8 @@ class CustomDropdownField<T> extends StatelessWidget {
   final String? Function(T?)? validator;
   final Widget? prefixIcon;
   final bool enabled;
+  final double? itemHeight;
+  final DropdownButtonBuilder? selectedItemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class CustomDropdownField<T> extends StatelessWidget {
         Opacity(
           opacity: enabled ? 1.0 : 0.6,
           child: DropdownButtonFormField<T>(
-            initialValue: value,
+            value: value,
             onChanged: enabled ? onChanged : null,
             validator: validator,
             style: theme.textTheme.bodyLarge?.copyWith(
@@ -108,9 +112,10 @@ class CustomDropdownField<T> extends StatelessWidget {
                 ),
               ),
             ),
-            dropdownColor: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(16),
             items: items,
+            itemHeight: itemHeight,
+            selectedItemBuilder: selectedItemBuilder,
           ),
         ),
       ],

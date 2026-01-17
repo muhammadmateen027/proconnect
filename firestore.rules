@@ -97,5 +97,25 @@ service cloud.firestore {
         (resource != null && isCondoOwnedByMyAgency(resource.data.condominiumId))
       );
     }
+
+    // Units collection (Owner direct management)
+    match /units/{unitId} {
+      allow read: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == resource.data.ownerId
+      );
+      allow create: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == request.resource.data.ownerId
+      );
+      allow update: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == resource.data.ownerId
+      );
+      allow delete: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == resource.data.ownerId
+      );
+    }
   }
 }

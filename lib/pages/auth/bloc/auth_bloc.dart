@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -61,6 +62,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       );
       emit(AuthState.authenticated(user: user));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found' ||
+          e.code == 'wrong-password' ||
+          e.code == 'invalid-credential') {
+        emit(const AuthState.unauthenticated(errorKey: 'invalidCredentials'));
+      } else {
+        emit(const AuthState.unauthenticated(errorKey: 'loginFailed'));
+      }
     } catch (e) {
       emit(const AuthState.unauthenticated(errorKey: 'loginFailed'));
     }
@@ -93,6 +102,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         agencyId: event.agencyId,
       );
       emit(AuthState.authenticated(user: user));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        emit(const AuthState.unauthenticated(errorKey: 'emailAlreadyInUse'));
+      } else if (e.code == 'weak-password') {
+        emit(const AuthState.unauthenticated(errorKey: 'weakPassword'));
+      } else {
+        emit(const AuthState.unauthenticated(errorKey: 'signUpFailed'));
+      }
     } catch (e) {
       emit(const AuthState.unauthenticated(errorKey: 'signUpFailed'));
     }

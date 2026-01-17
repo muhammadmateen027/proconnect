@@ -29,6 +29,8 @@ import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_event.dart';
+import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_bloc.dart';
+import 'package:proconnect/pages/apartment_management/bloc/owner_selection/owner_selection_event.dart';
 
 // A helper class to make GoRouter listen to a BLoC stream
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -161,6 +163,11 @@ GoRouter createRouter(BuildContext context) {
                     DependencyInjector.instance.resolve<FloorBloc>()
                       ..add(FloorEvent.loadFloors(condominiumId: condo.id)),
               ),
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<OwnerSelectionBloc>()
+                      ..add(const OwnerSelectionEvent.fetchOwners()),
+              ),
             ],
             child: CreateEditApartmentPage(condo: condo),
           );
@@ -183,6 +190,11 @@ GoRouter createRouter(BuildContext context) {
                 create: (context) =>
                     DependencyInjector.instance.resolve<FloorBloc>()
                       ..add(FloorEvent.loadFloors(condominiumId: condo.id)),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<OwnerSelectionBloc>()
+                      ..add(const OwnerSelectionEvent.fetchOwners()),
               ),
             ],
             child: CreateEditApartmentPage(condo: condo, apartment: apartment),

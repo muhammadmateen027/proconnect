@@ -10,6 +10,7 @@ import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -138,6 +139,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
+                  context.read<UnitBloc>().add(const UnitEvent.clear());
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 },
               ),

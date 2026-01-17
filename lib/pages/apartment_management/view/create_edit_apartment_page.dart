@@ -15,6 +15,8 @@ import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_s
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_state.dart'
     as floor_state;
+import 'package:proconnect/domain/models/app_user.dart';
+import 'package:proconnect/pages/apartment_management/widgets/owner_assignment_section.dart';
 
 class CreateEditApartmentPage extends StatefulWidget {
   const CreateEditApartmentPage({
@@ -47,6 +49,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
   String? _selectedFloorId;
   ApartmentStatus _selectedStatus = ApartmentStatus.vacant;
   FurnishingStatus _selectedFurnishing = FurnishingStatus.unfurnished;
+  AppUser? _selectedOwner;
 
   @override
   void initState() {
@@ -72,6 +75,18 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
     _selectedFloorId = ap?.floorId;
     _selectedStatus = ap?.status ?? ApartmentStatus.vacant;
     _selectedFurnishing = ap?.furnishing ?? FurnishingStatus.unfurnished;
+    final ownerId = ap?.ownerId;
+    if (ownerId != null && ownerId.isNotEmpty) {
+      _selectedOwner = AppUser(
+        uid: ownerId,
+        fullName: ap?.ownerName ?? '',
+        email: ap?.ownerEmail ?? '',
+        role: UserRole.owner,
+        condominiumId: widget.condo.id,
+      );
+    } else {
+      _selectedOwner = null;
+    }
   }
 
   @override
@@ -105,6 +120,12 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
             notes: _notesController.text.isEmpty ? null : _notesController.text,
             status: _selectedStatus,
             furnishing: _selectedFurnishing,
+            ownerId: _selectedOwner?.uid,
+            ownerName: _selectedOwner?.fullName,
+            ownerEmail: _selectedOwner?.email,
+            ownerPhone: _selectedOwner?.uid == widget.apartment?.ownerId
+                ? widget.apartment?.ownerPhone
+                : null,
             updatedAt: now,
           ) ??
           Apartment(
@@ -124,6 +145,12 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
             notes: _notesController.text.isEmpty ? null : _notesController.text,
             status: _selectedStatus,
             furnishing: _selectedFurnishing,
+            ownerId: _selectedOwner?.uid,
+            ownerName: _selectedOwner?.fullName,
+            ownerEmail: _selectedOwner?.email,
+            ownerPhone: _selectedOwner?.uid == widget.apartment?.ownerId
+                ? widget.apartment?.ownerPhone
+                : null,
             createdAt: now,
             updatedAt: now,
           );
@@ -323,6 +350,15 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                           onChanged: (val) =>
                               setState(() => _selectedStatus = val!),
                           prefixIcon: const Icon(Icons.info_rounded),
+                        ),
+                        AppSpacing.gapH24,
+                        OwnerAssignmentSection(
+                          selectedOwnerId: _selectedOwner?.uid,
+                          onOwnerChanged: (owner) {
+                            setState(() {
+                              _selectedOwner = owner;
+                            });
+                          },
                         ),
                         AppSpacing.gapH24,
                         _buildSectionTitle(

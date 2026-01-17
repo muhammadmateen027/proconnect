@@ -36,6 +36,12 @@ class _LoginScreenState extends State<LoginScreen> {
         return l10n.loginFailed;
       case 'signUpFailed':
         return l10n.signUpFailed;
+      case 'invalidCredentials':
+        return l10n.invalidCredentials;
+      case 'emailAlreadyInUse':
+        return l10n.emailAlreadyInUse;
+      case 'weakPassword':
+        return l10n.weakPassword;
       default:
         return l10n.unknownError;
     }
