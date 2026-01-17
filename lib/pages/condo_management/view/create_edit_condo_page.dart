@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/theme/app_spacing.dart';
+import 'package:proconnect/core/widgets/app_button.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
+import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
+import 'package:proconnect/pages/condo_management/widgets/agency_assignment_section.dart';
 import 'package:proconnect/pages/condo_management/widgets/amenities_selection_section.dart';
 import 'package:proconnect/pages/condo_management/widgets/basic_information_section.dart';
 import 'package:proconnect/pages/condo_management/widgets/building_specifications_section.dart';
 import 'package:proconnect/pages/condo_management/widgets/contact_information_section.dart';
 import 'package:proconnect/pages/condo_management/widgets/description_section.dart';
-import 'package:proconnect/core/widgets/app_button.dart';
 
 class CreateEditCondoPage extends StatefulWidget {
   const CreateEditCondoPage({
@@ -37,6 +41,7 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
   late final TextEditingController _contactEmailController;
   late final TextEditingController _contactPhoneController;
   late List<String> _selectedAmenities;
+  AppUser? _selectedAgencyAdmin;
   bool _isSubmitting = false;
 
   @override
@@ -58,6 +63,16 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
     _contactEmailController = TextEditingController(text: condo?.contactEmail);
     _contactPhoneController = TextEditingController(text: condo?.contactPhone);
     _selectedAmenities = List.from(condo?.amenities ?? []);
+    // Initialize selected agency admin if editing
+    if (condo?.agencyId != null && condo?.agencyName != null) {
+      _selectedAgencyAdmin = AppUser(
+        uid: '', // Not needed for display
+        email: '', // Not needed for display
+        fullName: condo!.agencyName!,
+        role: UserRole.agency_admin,
+        agencyId: condo.agencyId,
+      );
+    }
   }
 
   @override
@@ -90,6 +105,7 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
     final yearBuilt = int.tryParse(_yearBuiltController.text.trim());
 
     if (widget.isEditing) {
+      // Update condo
       bloc.add(
         CondoManagementEvent.updateCondo(
           condo: Condo(
@@ -109,9 +125,23 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                 ? null
                 : _contactPhoneController.text.trim(),
             amenities: _selectedAmenities,
+            agencyId: _selectedAgencyAdmin?.agencyId,
+            agencyName: _selectedAgencyAdmin?.fullName,
           ),
         ),
       );
+
+      // If agency was changed, dispatch assign agency event
+      if (_selectedAgencyAdmin != null &&
+          (_selectedAgencyAdmin!.agencyId != widget.condo?.agencyId)) {
+        bloc.add(
+          CondoManagementEvent.assignAgency(
+            condoId: widget.condo!.id,
+            agencyId: _selectedAgencyAdmin!.agencyId!,
+            agencyName: _selectedAgencyAdmin!.fullName,
+          ),
+        );
+      }
     } else {
       bloc.add(
         CondoManagementEvent.createCondo(
@@ -196,6 +226,23 @@ class _CreateEditCondoPageState extends State<CreateEditCondoPage> {
                   _selectedAmenities = amenities;
                 });
               },
+            ),
+            AppSpacing.gapH16,
+
+            // Agency Assignment (only for super_admin)
+            BlocProvider(
+              create: (context) =>
+                  DependencyInjector.instance.resolve<AgencySelectionBloc>()
+                    ..add(const AgencySelectionEvent.fetchAgencyAdmins()),
+              child: AgencyAssignmentSection(
+                selectedAgencyId: _selectedAgencyAdmin?.agencyId,
+                selectedAgencyName: _selectedAgencyAdmin?.fullName,
+                onAgencyChanged: (agencyAdmin) {
+                  setState(() {
+                    _selectedAgencyAdmin = agencyAdmin;
+                  });
+                },
+              ),
             ),
             AppSpacing.gapH24,
 

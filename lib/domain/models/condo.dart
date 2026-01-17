@@ -16,6 +16,8 @@ class Condo with _$Condo {
     String? contactEmail,
     String? contactPhone,
     @Default([]) List<String> amenities,
+    String? agencyId,
+    String? agencyName,
   }) = _Condo;
 
   factory Condo.fromJson(Map<String, dynamic> json) => _$CondoFromJson(json);

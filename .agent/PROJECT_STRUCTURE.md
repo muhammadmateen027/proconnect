@@ -236,6 +236,7 @@ lib/pages/
 │       └── registration_screen.dart
 ├── condo_management/        # Condo CRUD
 │   ├── bloc/
+│   │   ├── agency_selection_bloc.dart
 │   │   ├── condo_management_bloc.dart
 │   │   ├── condo_management_event.dart
 │   │   └── condo_management_state.dart
@@ -243,6 +244,7 @@ lib/pages/
 │   │   ├── condo_management_page.dart
 │   │   └── create_edit_condo_page.dart
 │   └── widgets/
+│       ├── agency_assignment_section.dart
 │       ├── amenities_selection_section.dart
 │       ├── basic_information_section.dart
 │       ├── building_specifications_section.dart

@@ -31,6 +31,8 @@ mixin _$Condo {
   String? get contactEmail => throw _privateConstructorUsedError;
   String? get contactPhone => throw _privateConstructorUsedError;
   List<String> get amenities => throw _privateConstructorUsedError;
+  String? get agencyId => throw _privateConstructorUsedError;
+  String? get agencyName => throw _privateConstructorUsedError;
 
   /// Serializes this Condo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,6 +59,8 @@ abstract class $CondoCopyWith<$Res> {
     String? contactEmail,
     String? contactPhone,
     List<String> amenities,
+    String? agencyId,
+    String? agencyName,
   });
 }
 
@@ -85,6 +89,8 @@ class _$CondoCopyWithImpl<$Res, $Val extends Condo>
     Object? contactEmail = freezed,
     Object? contactPhone = freezed,
     Object? amenities = null,
+    Object? agencyId = freezed,
+    Object? agencyName = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -128,6 +134,14 @@ class _$CondoCopyWithImpl<$Res, $Val extends Condo>
                 ? _value.amenities
                 : amenities // ignore: cast_nullable_to_non_nullable
                       as List<String>,
+            agencyId: freezed == agencyId
+                ? _value.agencyId
+                : agencyId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            agencyName: freezed == agencyName
+                ? _value.agencyName
+                : agencyName // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -153,6 +167,8 @@ abstract class _$$CondoImplCopyWith<$Res> implements $CondoCopyWith<$Res> {
     String? contactEmail,
     String? contactPhone,
     List<String> amenities,
+    String? agencyId,
+    String? agencyName,
   });
 }
 
@@ -180,6 +196,8 @@ class __$$CondoImplCopyWithImpl<$Res>
     Object? contactEmail = freezed,
     Object? contactPhone = freezed,
     Object? amenities = null,
+    Object? agencyId = freezed,
+    Object? agencyName = freezed,
   }) {
     return _then(
       _$CondoImpl(
@@ -223,6 +241,14 @@ class __$$CondoImplCopyWithImpl<$Res>
             ? _value._amenities
             : amenities // ignore: cast_nullable_to_non_nullable
                   as List<String>,
+        agencyId: freezed == agencyId
+            ? _value.agencyId
+            : agencyId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        agencyName: freezed == agencyName
+            ? _value.agencyName
+            : agencyName // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -242,6 +268,8 @@ class _$CondoImpl implements _Condo {
     this.contactEmail,
     this.contactPhone,
     final List<String> amenities = const [],
+    this.agencyId,
+    this.agencyName,
   }) : _amenities = amenities;
 
   factory _$CondoImpl.fromJson(Map<String, dynamic> json) =>
@@ -275,8 +303,13 @@ class _$CondoImpl implements _Condo {
   }
 
   @override
+  final String? agencyId;
+  @override
+  final String? agencyName;
+
+  @override
   String toString() {
-    return 'Condo(id: $id, name: $name, address: $address, totalUnits: $totalUnits, totalFloors: $totalFloors, yearBuilt: $yearBuilt, description: $description, contactEmail: $contactEmail, contactPhone: $contactPhone, amenities: $amenities)';
+    return 'Condo(id: $id, name: $name, address: $address, totalUnits: $totalUnits, totalFloors: $totalFloors, yearBuilt: $yearBuilt, description: $description, contactEmail: $contactEmail, contactPhone: $contactPhone, amenities: $amenities, agencyId: $agencyId, agencyName: $agencyName)';
   }
 
   @override
@@ -302,7 +335,11 @@ class _$CondoImpl implements _Condo {
             const DeepCollectionEquality().equals(
               other._amenities,
               _amenities,
-            ));
+            ) &&
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId) &&
+            (identical(other.agencyName, agencyName) ||
+                other.agencyName == agencyName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -319,6 +356,8 @@ class _$CondoImpl implements _Condo {
     contactEmail,
     contactPhone,
     const DeepCollectionEquality().hash(_amenities),
+    agencyId,
+    agencyName,
   );
 
   /// Create a copy of Condo
@@ -347,6 +386,8 @@ abstract class _Condo implements Condo {
     final String? contactEmail,
     final String? contactPhone,
     final List<String> amenities,
+    final String? agencyId,
+    final String? agencyName,
   }) = _$CondoImpl;
 
   factory _Condo.fromJson(Map<String, dynamic> json) = _$CondoImpl.fromJson;
@@ -371,6 +412,10 @@ abstract class _Condo implements Condo {
   String? get contactPhone;
   @override
   List<String> get amenities;
+  @override
+  String? get agencyId;
+  @override
+  String? get agencyName;
 
   /// Create a copy of Condo
   /// with the given fields replaced by the non-null parameter values.

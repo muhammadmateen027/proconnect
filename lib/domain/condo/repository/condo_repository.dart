@@ -15,4 +15,11 @@ abstract class CondoRepository {
   });
   Future<void> updateCondo({required Condo condo});
   Future<void> deleteCondo({required String id});
+
+  /// Assign an agency to a condominium
+  Future<void> assignAgency({
+    required String condoId,
+    required String agencyId,
+    required String agencyName,
+  });
 }

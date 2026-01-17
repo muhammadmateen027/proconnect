@@ -54,7 +54,19 @@ class _UserListPageState extends State<UserListPage> {
                   final user = users[index];
                   return ListTile(
                     title: Text(user.fullName),
-                    subtitle: Text(user.email),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.email),
+                        Text(
+                          '${user.role.name}${user.agencyId != null ? ' | Agency: ${user.agencyId}' : ''}${user.condominiumId != null ? ' | Condo: ${user.condominiumId}' : ''}',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

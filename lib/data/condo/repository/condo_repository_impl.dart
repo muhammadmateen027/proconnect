@@ -46,4 +46,17 @@ class CondoRepositoryImpl implements CondoRepository {
   Future<void> updateCondo({required Condo condo}) {
     return _remoteDataSource.updateCondo(condo: condo);
   }
+
+  @override
+  Future<void> assignAgency({
+    required String condoId,
+    required String agencyId,
+    required String agencyName,
+  }) {
+    return _remoteDataSource.assignAgency(
+      condoId: condoId,
+      agencyId: agencyId,
+      agencyName: agencyName,
+    );
+  }
 }

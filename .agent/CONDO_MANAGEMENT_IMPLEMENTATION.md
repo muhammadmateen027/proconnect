@@ -11,6 +11,9 @@ Complete CRUD (Create, Read, Update, Delete) functionality has been implemented 
 3. **Centralized Validation** - Created validators utility for reusability
 4. **AppButton Component** - Unified button system across the app
 5. **Full Localization** - 33 new localized strings (EN + ES)
+6. **Agency Assignment** - New section for super_admin to link condos with agencies
+7. **Independent BLoC** - Created `AgencySelectionBloc` for better separation of concerns
+8. **UI Refactoring** - Removed repository/usecase access from UI components
 
 ## Data Model
 
@@ -97,7 +100,13 @@ class Condo {
 
 All located in `pages/condo_management/widgets/`:
 
-1. **`form_section_card.dart`**
+1. **`agency_assignment_section.dart`** ✨ NEW
+   - Only visible to super_admin users
+   - Fetches agency admins via `AgencySelectionBloc`
+   - Allows assigning a condo to an agency (using existing agency_admin users)
+   - Uses `BlocBuilder` for loading/success/error states
+
+2. **`form_section_card.dart`**
    - Generic card wrapper for form sections
    - Consistent styling and spacing
    - Reusable across features
@@ -144,8 +153,14 @@ All located in `pages/condo_management/widgets/`:
 - ✅ createCondo event accepts all new fields
 - ✅ updateCondo uses full Condo object
 
-#### **Bloc Handler** - `condo_management_bloc.dart` 🔄 UPDATED
-- ✅ Passes all fields to use case
+#### **Bloc Handlers** 🔄 UPDATED
+- **`condo_management_bloc.dart`**: Handles condo CRUD and agency assignment updates
+- **`agency_selection_bloc.dart`** ✨ NEW: Handles fetching of agency admin users for selection
+
+#### **Agency Assignment Logic**
+- Fetches all users with `UserRole.agency_admin`
+- Filters users based on role in the BLoC layer
+- Provides a searchable dropdown in the UI (wrapped in a dedicated `BlocProvider`)
 
 #### **Use Case** - `create_condo_use_case.dart` 🔄 UPDATED
 - ✅ Accepts and forwards all fields

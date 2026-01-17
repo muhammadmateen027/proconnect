@@ -815,6 +815,12 @@ mixin _$CondoManagementEvent {
     createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
+    required TResult Function(
+      String condoId,
+      String agencyId,
+      String agencyName,
+    )
+    assignAgency,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -833,6 +839,8 @@ mixin _$CondoManagementEvent {
     createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
+    TResult? Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -851,6 +859,8 @@ mixin _$CondoManagementEvent {
     createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
+    TResult Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -859,6 +869,7 @@ mixin _$CondoManagementEvent {
     required TResult Function(_CreateCondo value) createCondo,
     required TResult Function(_UpdateCondo value) updateCondo,
     required TResult Function(_DeleteCondo value) deleteCondo,
+    required TResult Function(_AssignAgency value) assignAgency,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -866,6 +877,7 @@ mixin _$CondoManagementEvent {
     TResult? Function(_CreateCondo value)? createCondo,
     TResult? Function(_UpdateCondo value)? updateCondo,
     TResult? Function(_DeleteCondo value)? deleteCondo,
+    TResult? Function(_AssignAgency value)? assignAgency,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -873,6 +885,7 @@ mixin _$CondoManagementEvent {
     TResult Function(_CreateCondo value)? createCondo,
     TResult Function(_UpdateCondo value)? updateCondo,
     TResult Function(_DeleteCondo value)? deleteCondo,
+    TResult Function(_AssignAgency value)? assignAgency,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -960,6 +973,12 @@ class _$LoadCondosImpl implements _LoadCondos {
     createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
+    required TResult Function(
+      String condoId,
+      String agencyId,
+      String agencyName,
+    )
+    assignAgency,
   }) {
     return loadCondos();
   }
@@ -982,6 +1001,8 @@ class _$LoadCondosImpl implements _LoadCondos {
     createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
+    TResult? Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
   }) {
     return loadCondos?.call();
   }
@@ -1004,6 +1025,8 @@ class _$LoadCondosImpl implements _LoadCondos {
     createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
+    TResult Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
     required TResult orElse(),
   }) {
     if (loadCondos != null) {
@@ -1019,6 +1042,7 @@ class _$LoadCondosImpl implements _LoadCondos {
     required TResult Function(_CreateCondo value) createCondo,
     required TResult Function(_UpdateCondo value) updateCondo,
     required TResult Function(_DeleteCondo value) deleteCondo,
+    required TResult Function(_AssignAgency value) assignAgency,
   }) {
     return loadCondos(this);
   }
@@ -1030,6 +1054,7 @@ class _$LoadCondosImpl implements _LoadCondos {
     TResult? Function(_CreateCondo value)? createCondo,
     TResult? Function(_UpdateCondo value)? updateCondo,
     TResult? Function(_DeleteCondo value)? deleteCondo,
+    TResult? Function(_AssignAgency value)? assignAgency,
   }) {
     return loadCondos?.call(this);
   }
@@ -1041,6 +1066,7 @@ class _$LoadCondosImpl implements _LoadCondos {
     TResult Function(_CreateCondo value)? createCondo,
     TResult Function(_UpdateCondo value)? updateCondo,
     TResult Function(_DeleteCondo value)? deleteCondo,
+    TResult Function(_AssignAgency value)? assignAgency,
     required TResult orElse(),
   }) {
     if (loadCondos != null) {
@@ -1251,6 +1277,12 @@ class _$CreateCondoImpl implements _CreateCondo {
     createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
+    required TResult Function(
+      String condoId,
+      String agencyId,
+      String agencyName,
+    )
+    assignAgency,
   }) {
     return createCondo(
       name,
@@ -1283,6 +1315,8 @@ class _$CreateCondoImpl implements _CreateCondo {
     createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
+    TResult? Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
   }) {
     return createCondo?.call(
       name,
@@ -1315,6 +1349,8 @@ class _$CreateCondoImpl implements _CreateCondo {
     createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
+    TResult Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
     required TResult orElse(),
   }) {
     if (createCondo != null) {
@@ -1340,6 +1376,7 @@ class _$CreateCondoImpl implements _CreateCondo {
     required TResult Function(_CreateCondo value) createCondo,
     required TResult Function(_UpdateCondo value) updateCondo,
     required TResult Function(_DeleteCondo value) deleteCondo,
+    required TResult Function(_AssignAgency value) assignAgency,
   }) {
     return createCondo(this);
   }
@@ -1351,6 +1388,7 @@ class _$CreateCondoImpl implements _CreateCondo {
     TResult? Function(_CreateCondo value)? createCondo,
     TResult? Function(_UpdateCondo value)? updateCondo,
     TResult? Function(_DeleteCondo value)? deleteCondo,
+    TResult? Function(_AssignAgency value)? assignAgency,
   }) {
     return createCondo?.call(this);
   }
@@ -1362,6 +1400,7 @@ class _$CreateCondoImpl implements _CreateCondo {
     TResult Function(_CreateCondo value)? createCondo,
     TResult Function(_UpdateCondo value)? updateCondo,
     TResult Function(_DeleteCondo value)? deleteCondo,
+    TResult Function(_AssignAgency value)? assignAgency,
     required TResult orElse(),
   }) {
     if (createCondo != null) {
@@ -1498,6 +1537,12 @@ class _$UpdateCondoImpl implements _UpdateCondo {
     createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
+    required TResult Function(
+      String condoId,
+      String agencyId,
+      String agencyName,
+    )
+    assignAgency,
   }) {
     return updateCondo(condo);
   }
@@ -1520,6 +1565,8 @@ class _$UpdateCondoImpl implements _UpdateCondo {
     createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
+    TResult? Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
   }) {
     return updateCondo?.call(condo);
   }
@@ -1542,6 +1589,8 @@ class _$UpdateCondoImpl implements _UpdateCondo {
     createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
+    TResult Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
     required TResult orElse(),
   }) {
     if (updateCondo != null) {
@@ -1557,6 +1606,7 @@ class _$UpdateCondoImpl implements _UpdateCondo {
     required TResult Function(_CreateCondo value) createCondo,
     required TResult Function(_UpdateCondo value) updateCondo,
     required TResult Function(_DeleteCondo value) deleteCondo,
+    required TResult Function(_AssignAgency value) assignAgency,
   }) {
     return updateCondo(this);
   }
@@ -1568,6 +1618,7 @@ class _$UpdateCondoImpl implements _UpdateCondo {
     TResult? Function(_CreateCondo value)? createCondo,
     TResult? Function(_UpdateCondo value)? updateCondo,
     TResult? Function(_DeleteCondo value)? deleteCondo,
+    TResult? Function(_AssignAgency value)? assignAgency,
   }) {
     return updateCondo?.call(this);
   }
@@ -1579,6 +1630,7 @@ class _$UpdateCondoImpl implements _UpdateCondo {
     TResult Function(_CreateCondo value)? createCondo,
     TResult Function(_UpdateCondo value)? updateCondo,
     TResult Function(_DeleteCondo value)? deleteCondo,
+    TResult Function(_AssignAgency value)? assignAgency,
     required TResult orElse(),
   }) {
     if (updateCondo != null) {
@@ -1685,6 +1737,12 @@ class _$DeleteCondoImpl implements _DeleteCondo {
     createCondo,
     required TResult Function(Condo condo) updateCondo,
     required TResult Function(String id) deleteCondo,
+    required TResult Function(
+      String condoId,
+      String agencyId,
+      String agencyName,
+    )
+    assignAgency,
   }) {
     return deleteCondo(id);
   }
@@ -1707,6 +1765,8 @@ class _$DeleteCondoImpl implements _DeleteCondo {
     createCondo,
     TResult? Function(Condo condo)? updateCondo,
     TResult? Function(String id)? deleteCondo,
+    TResult? Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
   }) {
     return deleteCondo?.call(id);
   }
@@ -1729,6 +1789,8 @@ class _$DeleteCondoImpl implements _DeleteCondo {
     createCondo,
     TResult Function(Condo condo)? updateCondo,
     TResult Function(String id)? deleteCondo,
+    TResult Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
     required TResult orElse(),
   }) {
     if (deleteCondo != null) {
@@ -1744,6 +1806,7 @@ class _$DeleteCondoImpl implements _DeleteCondo {
     required TResult Function(_CreateCondo value) createCondo,
     required TResult Function(_UpdateCondo value) updateCondo,
     required TResult Function(_DeleteCondo value) deleteCondo,
+    required TResult Function(_AssignAgency value) assignAgency,
   }) {
     return deleteCondo(this);
   }
@@ -1755,6 +1818,7 @@ class _$DeleteCondoImpl implements _DeleteCondo {
     TResult? Function(_CreateCondo value)? createCondo,
     TResult? Function(_UpdateCondo value)? updateCondo,
     TResult? Function(_DeleteCondo value)? deleteCondo,
+    TResult? Function(_AssignAgency value)? assignAgency,
   }) {
     return deleteCondo?.call(this);
   }
@@ -1766,6 +1830,7 @@ class _$DeleteCondoImpl implements _DeleteCondo {
     TResult Function(_CreateCondo value)? createCondo,
     TResult Function(_UpdateCondo value)? updateCondo,
     TResult Function(_DeleteCondo value)? deleteCondo,
+    TResult Function(_AssignAgency value)? assignAgency,
     required TResult orElse(),
   }) {
     if (deleteCondo != null) {
@@ -1784,5 +1849,235 @@ abstract class _DeleteCondo implements CondoManagementEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteCondoImplCopyWith<_$DeleteCondoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AssignAgencyImplCopyWith<$Res> {
+  factory _$$AssignAgencyImplCopyWith(
+    _$AssignAgencyImpl value,
+    $Res Function(_$AssignAgencyImpl) then,
+  ) = __$$AssignAgencyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String condoId, String agencyId, String agencyName});
+}
+
+/// @nodoc
+class __$$AssignAgencyImplCopyWithImpl<$Res>
+    extends _$CondoManagementEventCopyWithImpl<$Res, _$AssignAgencyImpl>
+    implements _$$AssignAgencyImplCopyWith<$Res> {
+  __$$AssignAgencyImplCopyWithImpl(
+    _$AssignAgencyImpl _value,
+    $Res Function(_$AssignAgencyImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? condoId = null,
+    Object? agencyId = null,
+    Object? agencyName = null,
+  }) {
+    return _then(
+      _$AssignAgencyImpl(
+        condoId: null == condoId
+            ? _value.condoId
+            : condoId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        agencyId: null == agencyId
+            ? _value.agencyId
+            : agencyId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        agencyName: null == agencyName
+            ? _value.agencyName
+            : agencyName // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$AssignAgencyImpl implements _AssignAgency {
+  const _$AssignAgencyImpl({
+    required this.condoId,
+    required this.agencyId,
+    required this.agencyName,
+  });
+
+  @override
+  final String condoId;
+  @override
+  final String agencyId;
+  @override
+  final String agencyName;
+
+  @override
+  String toString() {
+    return 'CondoManagementEvent.assignAgency(condoId: $condoId, agencyId: $agencyId, agencyName: $agencyName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AssignAgencyImpl &&
+            (identical(other.condoId, condoId) || other.condoId == condoId) &&
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId) &&
+            (identical(other.agencyName, agencyName) ||
+                other.agencyName == agencyName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, condoId, agencyId, agencyName);
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AssignAgencyImplCopyWith<_$AssignAgencyImpl> get copyWith =>
+      __$$AssignAgencyImplCopyWithImpl<_$AssignAgencyImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCondos,
+    required TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )
+    createCondo,
+    required TResult Function(Condo condo) updateCondo,
+    required TResult Function(String id) deleteCondo,
+    required TResult Function(
+      String condoId,
+      String agencyId,
+      String agencyName,
+    )
+    assignAgency,
+  }) {
+    return assignAgency(condoId, agencyId, agencyName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCondos,
+    TResult? Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
+    TResult? Function(Condo condo)? updateCondo,
+    TResult? Function(String id)? deleteCondo,
+    TResult? Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
+  }) {
+    return assignAgency?.call(condoId, agencyId, agencyName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCondos,
+    TResult Function(
+      String name,
+      String address,
+      int? totalUnits,
+      int? totalFloors,
+      int? yearBuilt,
+      String? description,
+      String? contactEmail,
+      String? contactPhone,
+      List<String> amenities,
+    )?
+    createCondo,
+    TResult Function(Condo condo)? updateCondo,
+    TResult Function(String id)? deleteCondo,
+    TResult Function(String condoId, String agencyId, String agencyName)?
+    assignAgency,
+    required TResult orElse(),
+  }) {
+    if (assignAgency != null) {
+      return assignAgency(condoId, agencyId, agencyName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadCondos value) loadCondos,
+    required TResult Function(_CreateCondo value) createCondo,
+    required TResult Function(_UpdateCondo value) updateCondo,
+    required TResult Function(_DeleteCondo value) deleteCondo,
+    required TResult Function(_AssignAgency value) assignAgency,
+  }) {
+    return assignAgency(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadCondos value)? loadCondos,
+    TResult? Function(_CreateCondo value)? createCondo,
+    TResult? Function(_UpdateCondo value)? updateCondo,
+    TResult? Function(_DeleteCondo value)? deleteCondo,
+    TResult? Function(_AssignAgency value)? assignAgency,
+  }) {
+    return assignAgency?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadCondos value)? loadCondos,
+    TResult Function(_CreateCondo value)? createCondo,
+    TResult Function(_UpdateCondo value)? updateCondo,
+    TResult Function(_DeleteCondo value)? deleteCondo,
+    TResult Function(_AssignAgency value)? assignAgency,
+    required TResult orElse(),
+  }) {
+    if (assignAgency != null) {
+      return assignAgency(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AssignAgency implements CondoManagementEvent {
+  const factory _AssignAgency({
+    required final String condoId,
+    required final String agencyId,
+    required final String agencyName,
+  }) = _$AssignAgencyImpl;
+
+  String get condoId;
+  String get agencyId;
+  String get agencyName;
+
+  /// Create a copy of CondoManagementEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AssignAgencyImplCopyWith<_$AssignAgencyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

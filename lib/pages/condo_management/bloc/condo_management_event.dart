@@ -23,4 +23,10 @@ abstract class CondoManagementEvent with _$CondoManagementEvent {
   const factory CondoManagementEvent.deleteCondo({
     required String id,
   }) = _DeleteCondo;
+
+  const factory CondoManagementEvent.assignAgency({
+    required String condoId,
+    required String agencyId,
+    required String agencyName,
+  }) = _AssignAgency;
 }

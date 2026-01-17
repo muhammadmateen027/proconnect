@@ -16,6 +16,11 @@ abstract class CondoRemoteDataSource {
   });
   Future<void> updateCondo({required Condo condo});
   Future<void> deleteCondo({required String id});
+  Future<void> assignAgency({
+    required String condoId,
+    required String agencyId,
+    required String agencyName,
+  });
 }
 
 class CondoRemoteDataSourceImpl implements CondoRemoteDataSource {
@@ -68,5 +73,22 @@ class CondoRemoteDataSourceImpl implements CondoRemoteDataSource {
   @override
   Future<void> updateCondo({required Condo condo}) {
     return _firestore.collection('condos').doc(condo.id).update(condo.toJson());
+  }
+
+  @override
+  Future<void> assignAgency({
+    required String condoId,
+    required String agencyId,
+    required String agencyName,
+  }) async {
+    try {
+      await _firestore.collection('condos').doc(condoId).update({
+        'agencyId': agencyId,
+        'agencyName': agencyName,
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      throw Exception('Failed to assign agency: $e');
+    }
   }
 }

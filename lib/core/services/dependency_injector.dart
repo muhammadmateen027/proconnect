@@ -3,6 +3,8 @@ import 'package:kiwi/kiwi.dart';
 import 'package:proconnect/core/config/environment.dart';
 import 'package:proconnect/core/theme/bloc/theme_bloc.dart';
 import 'package:proconnect/core/theme/repository/theme_repository.dart';
+import 'package:proconnect/core/l10n/bloc/l10n_bloc.dart';
+import 'package:proconnect/core/l10n/repository/l10n_repository.dart';
 import 'package:proconnect/data/auth/datasource/auth_remote_data_source.dart';
 import 'package:proconnect/data/auth/repository/auth_repository_impl.dart';
 import 'package:proconnect/data/condo/datasource/condo_remote_data_source.dart';
@@ -32,6 +34,7 @@ import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
+import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dart';
 
 class DependencyInjector {
   DependencyInjector._();
@@ -71,6 +74,7 @@ class DependencyInjector {
         (c) => AuthRepositoryImpl(c.resolve<AuthRemoteDataSource>()),
       )
       ..registerSingleton<ThemeRepository>((c) => ThemeRepository())
+      ..registerSingleton<L10nRepository>((c) => L10nRepository())
       ..registerSingleton<UnitRemoteDataSource>(
         (c) => UnitRemoteDataSourceImpl(),
       )
@@ -172,7 +176,16 @@ class DependencyInjector {
           createCondoUseCase: c.resolve<CreateCondoUseCase>(),
           updateCondoUseCase: c.resolve<UpdateCondoUseCase>(),
           deleteCondoUseCase: c.resolve<DeleteCondoUseCase>(),
+          condoRepository: c.resolve<CondoRepository>(),
         ),
+      )
+      ..registerFactory<AgencySelectionBloc>(
+        (c) => AgencySelectionBloc(
+          getUsersUseCase: c.resolve<GetUsersUseCase>(),
+        ),
+      )
+      ..registerFactory<L10nBloc>(
+        (c) => L10nBloc(c.resolve<L10nRepository>()),
       );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:proconnect/domain/models/app_user.dart';
 
 abstract class AuthRemoteDataSource {
@@ -134,7 +135,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         fullName: user.fullName,
         role: user.role,
         condominiumId: user.condominiumId,
-        agencyId: user.agencyId,
+        agencyId:
+            (user.role == UserRole.agency_admin &&
+                (user.agencyId == null || user.agencyId!.isEmpty))
+            ? newUser.uid
+            : user.agencyId,
       );
 
       await _firestore
@@ -162,6 +167,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<List<AppUser>> getUsers() async {
     final snapshot = await _firestore.collection('users').get();
-    return snapshot.docs.map((doc) => AppUser.fromJson(doc.data())).toList();
+    final users = <AppUser>[];
+    for (final doc in snapshot.docs) {
+      try {
+        users.add(AppUser.fromJson(doc.data()));
+      } catch (e) {
+        // Skip users that fail to parse and log it
+        debugPrint('Error parsing user ${doc.id}: $e');
+      }
+    }
+    return users;
   }
 }

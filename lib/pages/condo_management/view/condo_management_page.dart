@@ -85,11 +85,8 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Seed Sample Data'),
-        content: const Text(
-          'This will create 10 sample condominiums for testing.\n\n'
-          'This is a debug-only feature and should be removed before production.',
-        ),
+        title: Text(l10n.seedSampleData),
+        content: Text(l10n.seedSampleDataDescription),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -97,7 +94,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Seed Data'),
+            child: Text(l10n.seedData),
           ),
         ],
       ),
@@ -155,9 +152,9 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
     // Show progress
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Creating sample condominiums...'),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text(l10n.creatingSampleCondos),
+          duration: const Duration(seconds: 2),
         ),
       );
     }
@@ -180,10 +177,28 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
       _loadCondos();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Created ${sampleCondos.length} sample condominiums!'),
+          content: Text(l10n.createdSampleCondos(sampleCondos.length)),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
       );
+    }
+  }
+
+  String _getErrorMessage(String errorKey) {
+    final l10n = context.l10n;
+    switch (errorKey) {
+      case 'loadCondosFailed':
+        return l10n.loadCondosFailed;
+      case 'createCondoFailed':
+        return l10n.createCondoFailed;
+      case 'updateCondoFailed':
+        return l10n.updateCondoFailed;
+      case 'deleteCondoFailed':
+        return l10n.deleteCondoFailed;
+      case 'assignAgencyFailed':
+        return l10n.assignAgencyFailed;
+      default:
+        return l10n.unknownError;
     }
   }
 
@@ -200,7 +215,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
           if (kDebugMode)
             IconButton(
               icon: const Icon(Icons.science),
-              tooltip: 'Seed Sample Data (Debug Only)',
+              tooltip: l10n.seedSampleData,
               onPressed: _seedSampleCondos,
             ),
         ],
@@ -225,7 +240,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
             failure: (errorKey) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(l10n.errorPrefix + errorKey),
+                  content: Text(l10n.errorPrefix + _getErrorMessage(errorKey)),
                   backgroundColor: theme.colorScheme.error,
                 ),
               );
@@ -280,7 +295,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
                 },
               );
             },
-            failure: (message) => Center(
+            failure: (errorKey) => Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -291,7 +306,7 @@ class _CondoManagementPageState extends State<CondoManagementPage> {
                   ),
                   AppSpacing.gapH16,
                   Text(
-                    l10n.errorPrefix + message,
+                    l10n.errorPrefix + _getErrorMessage(errorKey),
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.error,
                     ),

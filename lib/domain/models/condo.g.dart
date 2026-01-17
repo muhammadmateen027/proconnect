@@ -19,6 +19,8 @@ _$CondoImpl _$$CondoImplFromJson(Map<String, dynamic> json) => _$CondoImpl(
   amenities:
       (json['amenities'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const [],
+  agencyId: json['agencyId'] as String?,
+  agencyName: json['agencyName'] as String?,
 );
 
 Map<String, dynamic> _$$CondoImplToJson(_$CondoImpl instance) =>
@@ -33,4 +35,6 @@ Map<String, dynamic> _$$CondoImplToJson(_$CondoImpl instance) =>
       'contactEmail': instance.contactEmail,
       'contactPhone': instance.contactPhone,
       'amenities': instance.amenities,
+      'agencyId': instance.agencyId,
+      'agencyName': instance.agencyName,
     };

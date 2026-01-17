@@ -4,6 +4,7 @@ import 'package:proconnect/domain/admin/usecase/create_condo_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/delete_condo_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/load_condos_use_case.dart';
 import 'package:proconnect/domain/admin/usecase/update_condo_use_case.dart';
+import 'package:proconnect/domain/condo/repository/condo_repository.dart';
 import 'package:proconnect/domain/models/condo.dart';
 
 part 'condo_management_bloc.freezed.dart';
@@ -17,21 +18,25 @@ class CondoManagementBloc
     required CreateCondoUseCase createCondoUseCase,
     required UpdateCondoUseCase updateCondoUseCase,
     required DeleteCondoUseCase deleteCondoUseCase,
+    required CondoRepository condoRepository,
   }) : _loadCondosUseCase = loadCondosUseCase,
        _createCondoUseCase = createCondoUseCase,
        _updateCondoUseCase = updateCondoUseCase,
        _deleteCondoUseCase = deleteCondoUseCase,
+       _condoRepository = condoRepository,
        super(const CondoManagementState.initial()) {
     on<_LoadCondos>(_onLoadCondos);
     on<_CreateCondo>(_onCreateCondo);
     on<_UpdateCondo>(_onUpdateCondo);
     on<_DeleteCondo>(_onDeleteCondo);
+    on<_AssignAgency>(_onAssignAgency);
   }
 
   final LoadCondosUseCase _loadCondosUseCase;
   final CreateCondoUseCase _createCondoUseCase;
   final UpdateCondoUseCase _updateCondoUseCase;
   final DeleteCondoUseCase _deleteCondoUseCase;
+  final CondoRepository _condoRepository;
 
   Future<void> _onLoadCondos(
     _LoadCondos event,
@@ -110,6 +115,28 @@ class CondoManagementBloc
       emit(
         const CondoManagementState.failure(
           errorKey: 'deleteCondoFailed',
+        ),
+      );
+    }
+  }
+
+  Future<void> _onAssignAgency(
+    _AssignAgency event,
+    Emitter<CondoManagementState> emit,
+  ) async {
+    try {
+      await _condoRepository.assignAgency(
+        condoId: event.condoId,
+        agencyId: event.agencyId,
+        agencyName: event.agencyName,
+      );
+      emit(const CondoManagementState.success());
+      // Reload condos to reflect the change
+      add(const CondoManagementEvent.loadCondos());
+    } catch (e) {
+      emit(
+        const CondoManagementState.failure(
+          errorKey: 'assignAgencyFailed',
         ),
       );
     }
