@@ -17,6 +17,7 @@ import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_state.dart'
     as floor_state;
 import 'package:proconnect/pages/apartment_management/widgets/owner_assignment_section.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
 
 class CreateEditApartmentPage extends StatefulWidget {
   const CreateEditApartmentPage({
@@ -59,9 +60,21 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
     _sizeController = TextEditingController(
       text: ap?.totalSizeSquareFeet.toString(),
     );
-    _rentController = TextEditingController(text: ap?.monthlyRent?.toString());
+    final userState = context.read<AuthBloc>().state;
+    final isAgencyAdmin = userState.maybeWhen(
+      authenticated: (u) => u.role == UserRole.agency_admin,
+      orElse: () => false,
+    );
+
+    _rentController = TextEditingController(
+      text: isAgencyAdmin && widget.isEditing
+          ? '***'
+          : ap?.monthlyRent?.toString(),
+    );
     _depositController = TextEditingController(
-      text: ap?.securityDeposit?.toString(),
+      text: isAgencyAdmin && widget.isEditing
+          ? '***'
+          : ap?.securityDeposit?.toString(),
     );
     _bedroomsController = TextEditingController(
       text: ap?.totalBedrooms.toString(),
@@ -105,6 +118,12 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
       final now = DateTime.now();
+      final userState = context.read<AuthBloc>().state;
+      final isAgencyAdmin = userState.maybeWhen(
+        authenticated: (u) => u.role == UserRole.agency_admin,
+        orElse: () => false,
+      );
+
       final apartment =
           widget.apartment?.copyWith(
             condoName: widget.condo.name,
@@ -113,8 +132,12 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
             totalSizeSquareFeet: double.tryParse(_sizeController.text) ?? 0.0,
             totalBedrooms: int.tryParse(_bedroomsController.text) ?? 0,
             totalBathrooms: int.tryParse(_bathroomsController.text) ?? 0,
-            monthlyRent: double.tryParse(_rentController.text),
-            securityDeposit: double.tryParse(_depositController.text),
+            monthlyRent: isAgencyAdmin && widget.isEditing
+                ? widget.apartment?.monthlyRent
+                : double.tryParse(_rentController.text),
+            securityDeposit: isAgencyAdmin && widget.isEditing
+                ? widget.apartment?.securityDeposit
+                : double.tryParse(_depositController.text),
             description: _descriptionController.text.isEmpty
                 ? null
                 : _descriptionController.text,
@@ -127,6 +150,10 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
             ownerPhone: _selectedOwner?.uid == widget.apartment?.ownerId
                 ? widget.apartment?.ownerPhone
                 : null,
+            tenantName: widget.apartment?.tenantName,
+            tenantEmail: widget.apartment?.tenantEmail,
+            tenantPhone: widget.apartment?.tenantPhone,
+            tenantId: widget.apartment?.tenantId,
             updatedAt: now,
           ) ??
           Apartment(
@@ -170,6 +197,12 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+
+    final userState = context.watch<AuthBloc>().state;
+    final isAgencyAdmin = userState.maybeWhen(
+      authenticated: (u) => u.role == UserRole.agency_admin,
+      orElse: () => false,
+    );
 
     return BlocListener<ApartmentBloc, ApartmentState>(
       listener: (context, state) {
@@ -240,6 +273,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                         _buildSectionTitle(theme, l10n.basicInformation),
                         AppSpacing.gapH16,
                         CustomDropdownField<String>(
+                          enabled: isAgencyAdmin || !widget.isEditing,
                           labelText: l10n.floor,
                           value: _selectedFloorId,
                           items: floors.map((f) {
@@ -250,13 +284,15 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                               ),
                             );
                           }).toList(),
-                          onChanged: (val) =>
-                              setState(() => _selectedFloorId = val),
+                          onChanged: isAgencyAdmin || !widget.isEditing
+                              ? (val) => setState(() => _selectedFloorId = val)
+                              : null,
                           validator: (val) => val == null ? 'Required' : null,
                           prefixIcon: const Icon(Icons.layers_rounded),
                         ),
                         AppSpacing.gapH16,
                         CustomTextField(
+                          enabled: isAgencyAdmin || !widget.isEditing,
                           controller: _numberController,
                           labelText: l10n.apartmentNumber,
                           prefixIcon: const Icon(Icons.numbers_rounded),
@@ -270,6 +306,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                           children: [
                             Expanded(
                               child: CustomTextField(
+                                enabled: isAgencyAdmin || !widget.isEditing,
                                 controller: _bedroomsController,
                                 labelText: l10n.bedrooms,
                                 keyboardType: TextInputType.number,
@@ -279,6 +316,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                             AppSpacing.gapW16,
                             Expanded(
                               child: CustomTextField(
+                                enabled: isAgencyAdmin || !widget.isEditing,
                                 controller: _bathroomsController,
                                 labelText: l10n.bathrooms,
                                 keyboardType: TextInputType.number,
@@ -289,6 +327,7 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                         ),
                         AppSpacing.gapH16,
                         CustomTextField(
+                          enabled: isAgencyAdmin || !widget.isEditing,
                           controller: _sizeController,
                           labelText: l10n.sizeSqft,
                           keyboardType: TextInputType.number,
@@ -321,6 +360,9 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                         _buildSectionTitle(theme, l10n.status),
                         AppSpacing.gapH16,
                         CustomDropdownField<ApartmentStatus>(
+                          enabled:
+                              !isAgencyAdmin && widget.isEditing == false ||
+                              (widget.isEditing == true && !isAgencyAdmin),
                           labelText: l10n.status,
                           value: _selectedStatus,
                           items: ApartmentStatus.values.map((s) {
@@ -354,36 +396,39 @@ class _CreateEditApartmentPageState extends State<CreateEditApartmentPage> {
                           },
                         ),
                         AppSpacing.gapH24,
-                        _buildSectionTitle(
-                          theme,
-                          '${l10n.monthlyRent} & ${l10n.securityDeposit}',
-                        ),
-                        AppSpacing.gapH16,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextField(
-                                controller: _rentController,
-                                labelText: l10n.monthlyRent,
-                                keyboardType: TextInputType.number,
-                                prefixIcon: const Icon(
-                                  Icons.attach_money_rounded,
+                        if (!isAgencyAdmin || !widget.isEditing) ...[
+                          AppSpacing.gapH24,
+                          _buildSectionTitle(
+                            theme,
+                            '${l10n.monthlyRent} & ${l10n.securityDeposit}',
+                          ),
+                          AppSpacing.gapH16,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: _rentController,
+                                  labelText: l10n.monthlyRent,
+                                  keyboardType: TextInputType.number,
+                                  prefixIcon: const Icon(
+                                    Icons.attach_money_rounded,
+                                  ),
                                 ),
                               ),
-                            ),
-                            AppSpacing.gapW16,
-                            Expanded(
-                              child: CustomTextField(
-                                controller: _depositController,
-                                labelText: l10n.securityDeposit,
-                                keyboardType: TextInputType.number,
-                                prefixIcon: const Icon(
-                                  Icons.account_balance_wallet_rounded,
+                              AppSpacing.gapW16,
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: _depositController,
+                                  labelText: l10n.securityDeposit,
+                                  keyboardType: TextInputType.number,
+                                  prefixIcon: const Icon(
+                                    Icons.account_balance_wallet_rounded,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                         AppSpacing.gapH24,
                         _buildSectionTitle(theme, l10n.description),
                         AppSpacing.gapH16,

@@ -9,6 +9,8 @@ import 'package:proconnect/domain/models/condo.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
 import 'package:proconnect/pages/apartment_management/widgets/apartment_dialogs.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 
 /// Apartment Card Widget
 class ApartmentCard extends StatelessWidget {
@@ -151,35 +153,51 @@ class ApartmentCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (apartment.monthlyRent != null) ...[
-                    AppSpacing.gapH16,
-                    Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            theme.colorScheme.outlineVariant.withValues(
-                              alpha: 0,
+                  if (apartment.monthlyRent != null)
+                    BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        final isAgencyAdmin = state.maybeWhen(
+                          authenticated: (user) =>
+                              user.role == UserRole.agency_admin,
+                          orElse: () => false,
+                        );
+
+                        if (isAgencyAdmin) return const SizedBox.shrink();
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppSpacing.gapH16,
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    theme.colorScheme.outlineVariant.withValues(
+                                      alpha: 0,
+                                    ),
+                                    theme.colorScheme.outlineVariant.withValues(
+                                      alpha: 0.5,
+                                    ),
+                                    theme.colorScheme.outlineVariant.withValues(
+                                      alpha: 0,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            theme.colorScheme.outlineVariant.withValues(
-                              alpha: 0.5,
-                            ),
-                            theme.colorScheme.outlineVariant.withValues(
-                              alpha: 0,
+                            AppSpacing.gapH12,
+                            Text(
+                              '${l10n.monthlyRent}: RM ${apartment.monthlyRent!.toStringAsFixed(2)}',
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
-                        ),
-                      ),
+                        );
+                      },
                     ),
-                    AppSpacing.gapH12,
-                    Text(
-                      '${l10n.monthlyRent}: RM ${apartment.monthlyRent!.toStringAsFixed(2)}',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
                 ],
               ),
             ),

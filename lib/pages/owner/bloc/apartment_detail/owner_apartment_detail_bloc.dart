@@ -95,6 +95,8 @@ class OwnerApartmentDetailBloc
         furnishing:
             updates['furnishing'] as FurnishingStatus? ??
             currentApartment.furnishing,
+        status:
+            updates['status'] as ApartmentStatus? ?? currentApartment.status,
         description:
             updates['description'] as String? ?? currentApartment.description,
         notes: updates['notes'] as String? ?? currentApartment.notes,

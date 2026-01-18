@@ -7,7 +7,10 @@ import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
+import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/pages/owner/widgets/assign_tenant_dialog.dart';
+import 'package:proconnect/pages/owner/widgets/edit_apartment_info_dialog.dart';
 import 'package:proconnect/pages/owner/widgets/lease_management_dialog.dart';
 import 'package:proconnect/pages/owner/widgets/rental_price_dialog.dart';
 
@@ -63,6 +66,12 @@ class OwnerApartmentDetailPage extends StatelessWidget {
             orElse: () => false,
           );
 
+          final userState = context.read<AuthBloc>().state;
+          final isAgencyAdmin = userState.maybeWhen(
+            authenticated: (user) => user.role == UserRole.agency_admin,
+            orElse: () => false,
+          );
+
           if (state.maybeWhen(loading: () => true, orElse: () => false)) {
             return const Center(
               child: Padding(
@@ -77,22 +86,27 @@ class OwnerApartmentDetailPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _ApartmentInfoSection(apartment: currentApartment),
-                AppSpacing.gapH16,
-                _TenantSection(
+                _ApartmentInfoSection(
                   apartment: currentApartment,
-                  isLoading: isLoading,
+                  isAgencyAdmin: isAgencyAdmin,
                 ),
-                AppSpacing.gapH16,
-                _LeaseSection(
-                  apartment: currentApartment,
-                  isLoading: isLoading,
-                ),
-                AppSpacing.gapH16,
-                _RentalSection(
-                  apartment: currentApartment,
-                  isLoading: isLoading,
-                ),
+                if (!isAgencyAdmin) ...[
+                  AppSpacing.gapH16,
+                  _TenantSection(
+                    apartment: currentApartment,
+                    isLoading: isLoading,
+                  ),
+                  AppSpacing.gapH16,
+                  _LeaseSection(
+                    apartment: currentApartment,
+                    isLoading: isLoading,
+                  ),
+                  AppSpacing.gapH16,
+                  _RentalSection(
+                    apartment: currentApartment,
+                    isLoading: isLoading,
+                  ),
+                ],
                 AppSpacing.gapH16,
               ],
             ),
@@ -104,9 +118,13 @@ class OwnerApartmentDetailPage extends StatelessWidget {
 }
 
 class _ApartmentInfoSection extends StatelessWidget {
-  const _ApartmentInfoSection({required this.apartment});
+  const _ApartmentInfoSection({
+    required this.apartment,
+    required this.isAgencyAdmin,
+  });
 
   final Apartment apartment;
+  final bool isAgencyAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +135,21 @@ class _ApartmentInfoSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.apartmentDetails,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                l10n.apartmentDetails,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (!isAgencyAdmin)
+                IconButton(
+                  icon: const Icon(Icons.edit_rounded, size: 20),
+                  onPressed: () => _showEditInfoDialog(context),
+                ),
+            ],
           ),
           AppSpacing.gapH16,
           _InfoRow(
@@ -155,9 +183,41 @@ class _ApartmentInfoSection extends StatelessWidget {
               value: apartment.condoName!,
             ),
           ],
+          AppSpacing.gapH12,
+          _InfoRow(
+            icon: Icons.info_rounded,
+            label: l10n.status,
+            value: _getStatusLabel(context, apartment.status),
+          ),
         ],
       ),
     );
+  }
+
+  void _showEditInfoDialog(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (bottomSheetContext) => BlocProvider.value(
+        value: context.read<OwnerApartmentDetailBloc>(),
+        child: EditApartmentInfoDialog(apartment: apartment),
+      ),
+    );
+  }
+
+  String _getStatusLabel(BuildContext context, ApartmentStatus status) {
+    final l10n = context.l10n;
+    switch (status) {
+      case ApartmentStatus.vacant:
+        return l10n.vacant;
+      case ApartmentStatus.occupied:
+        return l10n.occupied;
+      case ApartmentStatus.maintenance:
+        return l10n.maintenance;
+      case ApartmentStatus.reserved:
+        return l10n.reserved;
+    }
   }
 
   String _getFurnishingLabel(BuildContext context, FurnishingStatus status) {
