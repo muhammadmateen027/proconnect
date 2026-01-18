@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:proconnect/core/theme/theme.dart';
 import 'package:proconnect/core/widgets/app_button.dart';
+import 'package:proconnect/core/widgets/glass_card.dart';
 import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/l10n/l10n.dart';
@@ -10,7 +10,6 @@ import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_det
 import 'package:proconnect/pages/owner/widgets/assign_tenant_dialog.dart';
 import 'package:proconnect/pages/owner/widgets/lease_management_dialog.dart';
 import 'package:proconnect/pages/owner/widgets/rental_price_dialog.dart';
-import 'package:proconnect/core/widgets/glass_card.dart';
 
 class OwnerApartmentDetailPage extends StatelessWidget {
   const OwnerApartmentDetailPage({
@@ -293,7 +292,7 @@ class _TenantSection extends StatelessWidget {
         ],
       ),
     ).then((confirmed) {
-      if (confirmed == true) {
+      if (confirmed ?? false) {
         context.read<OwnerApartmentDetailBloc>().add(
           OwnerApartmentDetailEvent.removeTenant(apartment.id),
         );
@@ -428,7 +427,7 @@ class _LeaseSection extends StatelessWidget {
         ],
       ),
     ).then((confirmed) {
-      if (confirmed == true) {
+      if (confirmed ?? false) {
         context.read<OwnerApartmentDetailBloc>().add(
           OwnerApartmentDetailEvent.endLease(apartment.id),
         );

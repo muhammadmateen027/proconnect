@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.proconnect.proconnect.dev</string>
+	<string>com.proconnect.proconnect</string>
 	<key>PROJECT_ID</key>
 	<string>proconnectmala</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:79685991906:ios:b8c3761d169b5655eacdbb</string>
+	<string>1:79685991906:ios:eda28e1746894983eacdbb</string>
 </dict>
 </plist>

@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:proconnect/domain/apartment/usecase/get_apartments_by_owner_use_case.dart';
 import 'package:proconnect/domain/models/apartment.dart';
 
-import 'owner_apartment_event.dart';
-import 'owner_apartment_state.dart';
+import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_event.dart';
+import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_state.dart';
 
 export 'owner_apartment_event.dart';
 export 'owner_apartment_state.dart';

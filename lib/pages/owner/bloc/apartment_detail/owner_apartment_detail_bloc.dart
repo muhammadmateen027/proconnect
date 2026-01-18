@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/domain/repositories/apartment_repository.dart';
 
-import 'owner_apartment_detail_event.dart';
-import 'owner_apartment_detail_state.dart';
+import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_event.dart';
+import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_state.dart';
 
 export 'owner_apartment_detail_event.dart';
 export 'owner_apartment_detail_state.dart';
