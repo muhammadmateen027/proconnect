@@ -90,12 +90,12 @@ class _ApartmentManagementPageState extends State<ApartmentManagementPage>
             controller: _tabController,
             tabs: [
               Tab(
-                icon: const Icon(Icons.layers_rounded),
-                text: l10n.floors,
-              ),
-              Tab(
                 icon: const Icon(Icons.apartment_rounded),
                 text: l10n.apartments,
+              ),
+              Tab(
+                icon: const Icon(Icons.layers_rounded),
+                text: l10n.floors,
               ),
             ],
           ),
@@ -106,19 +106,19 @@ class _ApartmentManagementPageState extends State<ApartmentManagementPage>
             return FloatingActionButton.extended(
               onPressed: () {
                 if (_tabController.index == 0) {
-                  // Floors tab
-                  FloorListTab.showAddFloorDialog(context, widget.condo);
-                } else {
                   // Apartments tab
                   ApartmentListTab.showAddApartmentDialog(
                     context,
                     widget.condo,
                   );
+                } else {
+                  // Floors tab
+                  FloorListTab.showAddFloorDialog(context, widget.condo);
                 }
               },
               icon: const Icon(Icons.add),
               label: Text(
-                _tabController.index == 0 ? l10n.addFloor : l10n.addApartment,
+                _tabController.index == 0 ? l10n.addApartment : l10n.addFloor,
               ),
             );
           },
@@ -126,8 +126,8 @@ class _ApartmentManagementPageState extends State<ApartmentManagementPage>
         child: TabBarView(
           controller: _tabController,
           children: [
-            FloorListTab(condo: widget.condo),
             ApartmentListTab(condo: widget.condo),
+            FloorListTab(condo: widget.condo),
           ],
         ),
       ),
