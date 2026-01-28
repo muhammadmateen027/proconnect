@@ -9,6 +9,7 @@ import 'package:proconnect/core/services/dependency_injector.dart';
 import 'package:proconnect/core/widgets/pro_connect_layout.dart';
 import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/domain/models/condo.dart';
+import 'package:proconnect/domain/models/guest_invitation.dart';
 import 'package:proconnect/domain/models/unit.dart';
 import 'package:proconnect/pages/apartment_management/bloc/apartment/apartment_bloc.dart';
 import 'package:proconnect/pages/apartment_management/bloc/floor/floor_bloc.dart';
@@ -23,8 +24,13 @@ import 'package:proconnect/pages/auth/view/registration_screen.dart';
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/condo_management/view/condo_management_page.dart';
 import 'package:proconnect/pages/condo_management/view/create_edit_condo_page.dart';
+import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/guest/guest_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
+import 'package:proconnect/pages/owner/view/create_edit_guest_invitation_page.dart';
+import 'package:proconnect/pages/owner/view/guest_invitation_list_page.dart';
 import 'package:proconnect/pages/owner/view/owner_apartment_detail_page.dart';
 import 'package:proconnect/pages/owner/view/unit_detail_screen.dart';
 import 'package:proconnect/pages/settings/view/seeding_page.dart';
@@ -212,6 +218,48 @@ GoRouter createRouter(BuildContext context) {
                 DependencyInjector.instance.resolve<OwnerApartmentDetailBloc>()
                   ..add(OwnerApartmentDetailEvent.loadApartment(apartment.id)),
             child: OwnerApartmentDetailPage(apartment: apartment),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.guestInvitationList,
+        builder: (context, state) => BlocProvider(
+          create: (context) => DependencyInjector.instance.resolve<GuestBloc>(),
+          child: const GuestInvitationListPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.createGuestInvitation,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  DependencyInjector.instance.resolve<GuestBloc>(),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  DependencyInjector.instance.resolve<OwnerApartmentBloc>(),
+            ),
+          ],
+          child: const CreateEditGuestInvitationPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.editGuestInvitation,
+        builder: (context, state) {
+          final invitation = state.extra! as GuestInvitation;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<GuestBloc>(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<OwnerApartmentBloc>(),
+              ),
+            ],
+            child: CreateEditGuestInvitationPage(invitation: invitation),
           );
         },
       ),

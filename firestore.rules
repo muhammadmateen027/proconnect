@@ -130,5 +130,25 @@ service cloud.firestore {
         request.auth.uid == resource.data.ownerId
       );
     }
+
+    // Guest Invitations collection
+    match /guest_invitations/{invitationId} {
+      allow read: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == resource.data.ownerId
+      );
+      allow create: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == request.resource.data.ownerId
+      );
+      allow update: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == resource.data.ownerId
+      );
+      allow delete: if isSignedIn() && (
+        isSuperAdmin() ||
+        request.auth.uid == resource.data.ownerId
+      );
+    }
   }
 }

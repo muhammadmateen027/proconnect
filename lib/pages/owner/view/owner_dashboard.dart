@@ -71,15 +71,18 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
               ),
               actions: [
                 IconButton(
+                  icon: const Icon(Icons.history),
+                  tooltip: l10n.guestHistory,
+                  onPressed: () => context.push(AppRoutes.guestInvitationList),
+                ),
+                IconButton(
                   icon: const Icon(Icons.settings),
                   onPressed: () => context.push(AppRoutes.settings),
                 ),
               ],
             ),
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                // TODO: Implement guest invitation logic
-              },
+              onPressed: () => context.push(AppRoutes.createGuestInvitation),
               label: Text(l10n.inviteGuest),
               icon: const Icon(Icons.person_add),
             ),

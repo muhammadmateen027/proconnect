@@ -20,4 +20,7 @@ class AppRoutes {
   static const String editApartment = '/edit_apartment';
   static const String seedData = '/seed_data';
   static const String ownerApartmentDetail = '/owner_apartment_detail';
+  static const String guestInvitationList = '/guest_invitation_list';
+  static const String createGuestInvitation = '/create_guest_invitation';
+  static const String editGuestInvitation = '/edit_guest_invitation';
 }

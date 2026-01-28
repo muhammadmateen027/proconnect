@@ -14,6 +14,8 @@ import 'package:proconnect/data/condo/datasource/condo_remote_data_source.dart';
 import 'package:proconnect/data/condo/repository/condo_repository_impl.dart';
 import 'package:proconnect/data/floor/datasource/floor_remote_data_source.dart';
 import 'package:proconnect/data/floor/repository/floor_repository_impl.dart';
+import 'package:proconnect/data/guest/datasource/guest_invitation_remote_data_source.dart';
+import 'package:proconnect/data/guest/repository/guest_invitation_repository_impl.dart';
 import 'package:proconnect/data/unit/datasource/unit_remote_data_source.dart';
 import 'package:proconnect/data/unit/repository/unit_repository_impl.dart';
 import 'package:proconnect/domain/admin/usecase/admin_create_user_use_case.dart';
@@ -31,6 +33,10 @@ import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_out_use_case.dart';
 import 'package:proconnect/domain/auth/usecase/sign_up_use_case.dart';
 import 'package:proconnect/domain/condo/repository/condo_repository.dart';
+import 'package:proconnect/domain/guest/repository/guest_invitation_repository.dart';
+import 'package:proconnect/domain/guest/usecase/create_invitation_use_case.dart';
+import 'package:proconnect/domain/guest/usecase/get_invitations_by_owner_use_case.dart';
+import 'package:proconnect/domain/guest/usecase/update_invitation_use_case.dart';
 import 'package:proconnect/domain/repositories/apartment_repository.dart';
 import 'package:proconnect/domain/repositories/floor_repository.dart';
 import 'package:proconnect/domain/unit/repository/unit_repository.dart';
@@ -46,6 +52,7 @@ import 'package:proconnect/pages/condo_management/bloc/agency_selection_bloc.dar
 import 'package:proconnect/pages/condo_management/bloc/condo_management_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
+import 'package:proconnect/pages/owner/bloc/guest/guest_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 
@@ -115,6 +122,14 @@ class DependencyInjector {
         (c) => ApartmentRepositoryImpl(
           remoteDataSource: c.resolve<ApartmentRemoteDataSource>(),
         ),
+      )
+      ..registerSingleton<GuestInvitationRemoteDataSource>(
+        (c) => GuestInvitationRemoteDataSourceImpl(),
+      )
+      ..registerSingleton<GuestInvitationRepository>(
+        (c) => GuestInvitationRepositoryImpl(
+          remoteDataSource: c.resolve<GuestInvitationRemoteDataSource>(),
+        ),
       );
   }
 
@@ -173,6 +188,17 @@ class DependencyInjector {
       )
       ..registerSingleton<GetUsersUseCase>(
         (c) => GetUsersUseCase(c.resolve<AuthRepository>()),
+      )
+      ..registerSingleton<GetInvitationsByOwnerUseCase>(
+        (c) => GetInvitationsByOwnerUseCase(
+          c.resolve<GuestInvitationRepository>(),
+        ),
+      )
+      ..registerSingleton<CreateInvitationUseCase>(
+        (c) => CreateInvitationUseCase(c.resolve<GuestInvitationRepository>()),
+      )
+      ..registerSingleton<UpdateInvitationUseCase>(
+        (c) => UpdateInvitationUseCase(c.resolve<GuestInvitationRepository>()),
       )
       ..registerSingleton<SeedingService>(
         (c) => SeedingService(
@@ -252,6 +278,14 @@ class DependencyInjector {
       ..registerFactory<OwnerApartmentDetailBloc>(
         (c) => OwnerApartmentDetailBloc(
           c.resolve<ApartmentRepository>(),
+        ),
+      )
+      ..registerFactory<GuestBloc>(
+        (c) => GuestBloc(
+          getInvitationsByOwnerUseCase: c
+              .resolve<GetInvitationsByOwnerUseCase>(),
+          createInvitationUseCase: c.resolve<CreateInvitationUseCase>(),
+          updateInvitationUseCase: c.resolve<UpdateInvitationUseCase>(),
         ),
       );
   }
