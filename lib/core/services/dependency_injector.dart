@@ -39,6 +39,7 @@ import 'package:proconnect/domain/guest/usecase/get_invitations_by_owner_use_cas
 import 'package:proconnect/domain/guest/usecase/update_invitation_use_case.dart';
 import 'package:proconnect/domain/repositories/apartment_repository.dart';
 import 'package:proconnect/domain/repositories/floor_repository.dart';
+import 'package:proconnect/domain/tenant/usecase/get_tenant_apartments_use_case.dart';
 import 'package:proconnect/domain/unit/repository/unit_repository.dart';
 import 'package:proconnect/domain/unit/usecase/add_unit_use_case.dart';
 import 'package:proconnect/domain/unit/usecase/delete_unit_use_case.dart';
@@ -54,6 +55,7 @@ import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart'
 import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/guest/guest_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
+import 'package:proconnect/pages/tenant/bloc/apartment/tenant_apartment_bloc.dart';
 import 'package:proconnect/pages/super_admin/bloc/user_management/user_management_bloc.dart';
 
 class DependencyInjector {
@@ -200,6 +202,9 @@ class DependencyInjector {
       ..registerSingleton<UpdateInvitationUseCase>(
         (c) => UpdateInvitationUseCase(c.resolve<GuestInvitationRepository>()),
       )
+      ..registerSingleton<GetTenantApartmentsUseCase>(
+        (c) => GetTenantApartmentsUseCase(c.resolve<ApartmentRepository>()),
+      )
       ..registerSingleton<SeedingService>(
         (c) => SeedingService(
           floorSource: c.resolve<FloorRemoteDataSource>(),
@@ -286,6 +291,11 @@ class DependencyInjector {
               .resolve<GetInvitationsByOwnerUseCase>(),
           createInvitationUseCase: c.resolve<CreateInvitationUseCase>(),
           updateInvitationUseCase: c.resolve<UpdateInvitationUseCase>(),
+        ),
+      )
+      ..registerFactory<TenantApartmentBloc>(
+        (c) => TenantApartmentBloc(
+          c.resolve<GetTenantApartmentsUseCase>(),
         ),
       );
   }

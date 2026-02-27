@@ -28,6 +28,7 @@ import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart'
 import 'package:proconnect/pages/owner/bloc/apartment_detail/owner_apartment_detail_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/guest/guest_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/unit/unit_bloc.dart';
+import 'package:proconnect/pages/tenant/bloc/apartment/tenant_apartment_bloc.dart';
 import 'package:proconnect/pages/owner/view/add_unit_page.dart';
 import 'package:proconnect/pages/owner/view/create_edit_guest_invitation_page.dart';
 import 'package:proconnect/pages/owner/view/guest_invitation_list_page.dart';
@@ -240,6 +241,10 @@ GoRouter createRouter(BuildContext context) {
               create: (context) =>
                   DependencyInjector.instance.resolve<OwnerApartmentBloc>(),
             ),
+            BlocProvider(
+              create: (context) =>
+                  DependencyInjector.instance.resolve<TenantApartmentBloc>(),
+            ),
           ],
           child: const CreateEditGuestInvitationPage(),
         ),
@@ -257,6 +262,10 @@ GoRouter createRouter(BuildContext context) {
               BlocProvider(
                 create: (context) =>
                     DependencyInjector.instance.resolve<OwnerApartmentBloc>(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    DependencyInjector.instance.resolve<TenantApartmentBloc>(),
               ),
             ],
             child: CreateEditGuestInvitationPage(invitation: invitation),

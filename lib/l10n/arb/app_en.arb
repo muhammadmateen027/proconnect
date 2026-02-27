@@ -242,5 +242,8 @@
     "expired": "EXPIRED",
     "validUntil": "Valid until",
     "building": "Building",
-    "apartment": "Apartment"
+    "apartment": "Apartment",
+    "noApartments": "No apartments assigned",
+    "contactAdminToAssign": "Contact your agency admin to get apartments assigned to you",
+    "tenantDashboard": "Tenant Dashboard"
 }

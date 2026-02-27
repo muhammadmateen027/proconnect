@@ -120,4 +120,14 @@ class ApartmentRepositoryImpl implements ApartmentRepository {
       condominiumId: condominiumId,
     );
   }
+
+  @override
+  Future<List<Apartment>> getApartmentsByTenant(String tenantId) async {
+    return _remoteDataSource.getApartmentsByTenant(tenantId);
+  }
+
+  @override
+  Stream<List<Apartment>> watchApartmentsByTenant(String tenantId) {
+    return _remoteDataSource.watchApartmentsByTenant(tenantId);
+  }
 }

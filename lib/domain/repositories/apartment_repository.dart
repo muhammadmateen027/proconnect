@@ -14,11 +14,17 @@ abstract class ApartmentRepository {
   /// Get all apartments managed by an agency
   Future<List<Apartment>> getApartmentsByAgency(String agencyId);
 
+  /// Get all apartments where the user is a tenant
+  Future<List<Apartment>> getApartmentsByTenant(String tenantId);
+
   /// Get all apartments owned by a specific owner
   Future<List<Apartment>> getApartmentsByOwner(String ownerId);
 
   /// Watch all apartments owned by a specific owner (real-time)
   Stream<List<Apartment>> watchApartmentsByOwner(String ownerId);
+
+  /// Watch all apartments where the user is a tenant (real-time)
+  Stream<List<Apartment>> watchApartmentsByTenant(String tenantId);
 
   /// Get a specific apartment by ID
   Future<Apartment?> getApartmentById(String apartmentId);

@@ -14,11 +14,15 @@ import 'package:proconnect/domain/models/apartment.dart';
 import 'package:proconnect/domain/models/guest_invitation.dart';
 import 'package:proconnect/l10n/l10n.dart';
 import 'package:proconnect/pages/auth/bloc/auth_bloc.dart';
+import 'package:proconnect/domain/models/app_user.dart';
 import 'package:proconnect/pages/owner/bloc/apartment/owner_apartment_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/guest/guest_bloc.dart';
 import 'package:proconnect/pages/owner/bloc/guest/guest_event.dart';
 import 'package:proconnect/pages/owner/bloc/guest/guest_state.dart';
 import 'package:proconnect/pages/owner/widgets/guest_pass_card.dart';
+import 'package:proconnect/pages/tenant/bloc/apartment/tenant_apartment_bloc.dart';
+import 'package:proconnect/pages/tenant/bloc/apartment/tenant_apartment_event.dart';
+import 'package:proconnect/pages/tenant/bloc/apartment/tenant_apartment_state.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:uuid/uuid.dart';
@@ -65,9 +69,15 @@ class _CreateEditGuestInvitationPageState
     final authState = context.read<AuthBloc>().state;
     authState.whenOrNull(
       authenticated: (user) {
-        context.read<OwnerApartmentBloc>().add(
-          OwnerApartmentEvent.loadApartments(user.uid),
-        );
+        if (user.role == UserRole.owner) {
+          context.read<OwnerApartmentBloc>().add(
+            OwnerApartmentEvent.loadApartments(user.uid),
+          );
+        } else if (user.role == UserRole.tenant) {
+          context.read<TenantApartmentBloc>().add(
+            TenantApartmentEvent.load(user.uid),
+          );
+        }
       },
     );
   }
@@ -242,18 +252,16 @@ class _CreateEditGuestInvitationPageState
             listener: (context, state) {
               state.whenOrNull(
                 loaded: (apartments) {
-                  if (_selectedApartment == null && apartments.isNotEmpty) {
-                    setState(() {
-                      if (_currentInvitation != null) {
-                        _selectedApartment = apartments.firstWhere(
-                          (a) => a.id == _currentInvitation!.apartmentId,
-                          orElse: () => apartments.first,
-                        );
-                      } else {
-                        _selectedApartment = apartments.first;
-                      }
-                    });
-                  }
+                  _onApartmentsLoaded(apartments);
+                },
+              );
+            },
+          ),
+          BlocListener<TenantApartmentBloc, TenantApartmentState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                loaded: (apartments) {
+                  _onApartmentsLoaded(apartments);
                 },
               );
             },
@@ -305,33 +313,41 @@ class _CreateEditGuestInvitationPageState
                     ),
                     AppSpacing.gapH24,
                     if (_currentInvitation == null) ...[
-                      BlocBuilder<OwnerApartmentBloc, OwnerApartmentState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            loaded: (apartments) {
-                              return CustomDropdownField<Apartment>(
-                                labelText: l10n.selectApartment,
-                                value: _selectedApartment,
-                                items: apartments.map((a) {
-                                  return DropdownMenuItem(
-                                    value: a,
-                                    child: Text(
-                                      '${a.apartmentNumber} (${a.condoName ?? ''})',
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedApartment = value;
-                                  });
-                                },
-                                validator: (value) =>
-                                    value == null ? l10n.selectApartment : null,
-                                prefixIcon: const Icon(Icons.apartment_rounded),
-                              );
-                            },
-                            orElse: () => const LinearProgressIndicator(),
+                      BlocBuilder<AuthBloc, AuthState>(
+                        builder: (context, authState) {
+                          final role = authState.maybeWhen(
+                            authenticated: (user) => user.role,
+                            orElse: () => null,
                           );
+
+                          if (role == UserRole.owner) {
+                            return BlocBuilder<
+                              OwnerApartmentBloc,
+                              OwnerApartmentState
+                            >(
+                              builder: (context, state) {
+                                return state.maybeWhen(
+                                  loaded: (apartments) =>
+                                      _buildApartmentDropdown(apartments, l10n),
+                                  orElse: () => const LinearProgressIndicator(),
+                                );
+                              },
+                            );
+                          } else if (role == UserRole.tenant) {
+                            return BlocBuilder<
+                              TenantApartmentBloc,
+                              TenantApartmentState
+                            >(
+                              builder: (context, state) {
+                                return state.maybeWhen(
+                                  loaded: (apartments) =>
+                                      _buildApartmentDropdown(apartments, l10n),
+                                  orElse: () => const LinearProgressIndicator(),
+                                );
+                              },
+                            );
+                          }
+                          return const SizedBox.shrink();
                         },
                       ),
                       AppSpacing.gapH16,
@@ -411,6 +427,46 @@ class _CreateEditGuestInvitationPageState
           ),
         ),
       ),
+    );
+  }
+
+  void _onApartmentsLoaded(List<Apartment> apartments) {
+    if (_selectedApartment == null && apartments.isNotEmpty) {
+      setState(() {
+        if (_currentInvitation != null) {
+          _selectedApartment = apartments.firstWhere(
+            (a) => a.id == _currentInvitation!.apartmentId,
+            orElse: () => apartments.first,
+          );
+        } else {
+          _selectedApartment = apartments.first;
+        }
+      });
+    }
+  }
+
+  Widget _buildApartmentDropdown(
+    List<Apartment> apartments,
+    AppLocalizations l10n,
+  ) {
+    return CustomDropdownField<Apartment>(
+      labelText: l10n.selectApartment,
+      value: _selectedApartment,
+      items: apartments.map((a) {
+        return DropdownMenuItem(
+          value: a,
+          child: Text(
+            '${a.apartmentNumber} (${a.condoName ?? ''})',
+          ),
+        );
+      }).toList(),
+      onChanged: (value) {
+        setState(() {
+          _selectedApartment = value;
+        });
+      },
+      validator: (value) => value == null ? l10n.selectApartment : null,
+      prefixIcon: const Icon(Icons.apartment_rounded),
     );
   }
 }
