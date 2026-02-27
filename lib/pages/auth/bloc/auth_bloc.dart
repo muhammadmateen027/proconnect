@@ -1,0 +1,117 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:proconnect/domain/auth/usecase/get_auth_status_stream_use_case.dart';
+import 'package:proconnect/domain/auth/usecase/sign_in_use_case.dart';
+import 'package:proconnect/domain/auth/usecase/sign_out_use_case.dart';
+import 'package:proconnect/domain/auth/usecase/sign_up_use_case.dart';
+import 'package:proconnect/domain/models/app_user.dart';
+
+part 'auth_bloc.freezed.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
+
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc({
+    required SignInUseCase signInUseCase,
+    required SignOutUseCase signOutUseCase,
+    required GetAuthStatusStreamUseCase getAuthStatusStreamUseCase,
+    required SignUpUseCase signUpUseCase,
+  }) : _signInUseCase = signInUseCase,
+       _signOutUseCase = signOutUseCase,
+       _getAuthStatusStreamUseCase = getAuthStatusStreamUseCase,
+       _signUpUseCase = signUpUseCase,
+       super(const AuthState.initial()) {
+    on<_CheckAuthentication>(_onCheckAuthentication);
+    on<_Login>(_onLogin);
+    on<_Logout>(_onLogout);
+    on<_SignUp>(_onSignUp);
+  }
+
+  final SignInUseCase _signInUseCase;
+  final SignOutUseCase _signOutUseCase;
+  final GetAuthStatusStreamUseCase _getAuthStatusStreamUseCase;
+  final SignUpUseCase _signUpUseCase;
+
+  Future<void> _onCheckAuthentication(
+    _CheckAuthentication event,
+    Emitter<AuthState> emit,
+  ) async {
+    await emit.forEach<AppUser?>(
+      _getAuthStatusStreamUseCase(),
+      onData: (user) {
+        if (user != null) {
+          return AuthState.authenticated(user: user);
+        } else {
+          return const AuthState.unauthenticated();
+        }
+      },
+    );
+  }
+
+  Future<void> _onLogin(
+    _Login event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthState.loading());
+    try {
+      final user = await _signInUseCase(
+        email: event.email,
+        password: event.password,
+      );
+      emit(AuthState.authenticated(user: user));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found' ||
+          e.code == 'wrong-password' ||
+          e.code == 'invalid-credential') {
+        emit(const AuthState.unauthenticated(errorKey: 'invalidCredentials'));
+      } else {
+        emit(const AuthState.unauthenticated(errorKey: 'loginFailed'));
+      }
+    } catch (e) {
+      emit(const AuthState.unauthenticated(errorKey: 'loginFailed'));
+    }
+  }
+
+  Future<void> _onLogout(
+    _Logout event,
+    Emitter<AuthState> emit,
+  ) async {
+    try {
+      await _signOutUseCase();
+      emit(const AuthState.unauthenticated());
+    } catch (e) {
+      emit(const AuthState.unauthenticated(errorKey: 'unknownError'));
+    }
+  }
+
+  Future<void> _onSignUp(
+    _SignUp event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthState.loading());
+    try {
+      final user = await _signUpUseCase(
+        email: event.email,
+        password: event.password,
+        fullName: event.fullName,
+        role: event.role,
+        condominiumId: event.condominiumId,
+        agencyId: event.agencyId,
+      );
+      emit(AuthState.authenticated(user: user));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        emit(const AuthState.unauthenticated(errorKey: 'emailAlreadyInUse'));
+      } else if (e.code == 'weak-password') {
+        emit(const AuthState.unauthenticated(errorKey: 'weakPassword'));
+      } else {
+        emit(const AuthState.unauthenticated(errorKey: 'signUpFailed'));
+      }
+    } catch (e) {
+      emit(const AuthState.unauthenticated(errorKey: 'signUpFailed'));
+    }
+  }
+}
